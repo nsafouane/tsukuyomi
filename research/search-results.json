@@ -1,0 +1,74 @@
+[
+  {
+    "query": "episodic memory architecture for game AI NPCs",
+    "title": "A Narrative Episodic Memory Framework for Generative AI NPCs in ...",
+    "url": "https://www.researchgate.net/publication/389418767_Who_What_When_Where_Why_A_Narrative_Episodic_Memory_Framework_for_Generative_AI_NPCs_in_Games",
+    "content": "This research proposes a narrative episodic memory framework for generative AI-based NPCs in games, structured around the \"Who, What, When, Where,"
+  },
+  {
+    "query": "episodic memory architecture for game AI NPCs",
+    "title": "[PDF] Episodic Memory: A Final Frontier (Abbreviated Version)",
+    "url": "https://www.qrg.northwestern.edu/papers/Files/QRG_Dist_Files/QRG_2007/AIIDE03ForbusK.pdf",
+    "content": "Could NPCs based on the Listener architecture ever be used in commercially viable computer games? We examine three factors: CPU time, memory, and content."
+  },
+  {
+    "query": "episodic memory architecture for game AI NPCs",
+    "title": "Cognitively-Inspired Episodic Memory Architectures for Accurate ...",
+    "url": "https://arxiv.org/abs/2511.10652",
+    "content": "Cognitively-Inspired Episodic Memory Architectures for Accurate and Efficient Character AI. Authors:Rafael Arias Gonzalez, Steve DiPaola."
+  },
+  {
+    "query": "knowledge graphs for NPC behavior and beliefs in games",
+    "title": "Video: Real-Time Knowledge Graphs for NPC Gaming AI - Neo4j",
+    "url": "https://neo4j.com/videos/018-towards-real-time-knowledge-graphs-for-non-player-characters-in-games-nodes2022-owen-brierle/",
+    "content": "This session discusses the development of a Neo4j plugin for Epic Game's Unreal Engine to allow for communications between a game"
+  },
+  {
+    "query": "knowledge graphs for NPC behavior and beliefs in games",
+    "title": "[PDF] Simulating Character Knowledge Phenomena in Talk of the Town",
+    "url": "http://www.gameaipro.com/GameAIPro3/GameAIPro3_Chapter37_Simulating_Character_Knowledge_Phenomena_in_Talk_of_the_Town.pdf",
+    "content": "433 37 Simulating Character Knowledge Phenomena in Talk of the Town James Ryan and Michael Mateas 37.1 Introduction There are many examples of stealth and action games that use complicated knowledge, perception, and alertness models to produce short-term NPC beliefs that are a core part of gameplay (Diller et al. do world generation // See Section 37.2.2 do belief implantation // See Listing 1 while central character still alive // One week of game time advance one timestep for resident in town enact resident routine // Put somewhere in the town for resident in town for nearby character at same place as resident if characters will interact // See Section 37.2.2 do knowledge exchange // See Section 37.3.7 for resident in town do simulation of fallibility phenomena // See Section 37.3.8 Copyright Material \u2013 Provided by Taylor & Francis 446 37."
+  },
+  {
+    "query": "knowledge graphs for NPC behavior and beliefs in games",
+    "title": "[PDF] GENERATING DYNAMIC AND LIFELIKE NPC DIALOGS IN ROLE ...",
+    "url": "https://lutpub.lut.fi/bitstream/handle/10024/167809/bachelorthesis_Huang_Junyang.pdf?sequence=1&isAllowed=y",
+    "content": "The report reveals that 84% of players believe that NPCs have a critical impact on gameplay, 79% of players are actively engaged in in-game NPC"
+  },
+  {
+    "query": "semantic memory vs episodic memory game agents",
+    "title": "Significance of Procedural, Semantic, and Episodic Memory for LLM ...",
+    "url": "https://www.linkedin.com/pulse/significance-procedural-semantic-episodic-memory-llm-hatalis-ph-d--ezate",
+    "content": "In the context of an LLM Agent, we can analogize these memory types to different ways the agent can retain and use information. Definition (LLM Agent) For an LLM Agent, semantic memory refers to the factual and conceptual knowledge embedded within its training (and/or knowledge base). Definition (Human Analogy) Episodic memory is the memory of personal experiences, events, and the specific contexts in which they occurred (e.g., remembering what you did last weekend or where and when you learned a particular piece of information). Definition (LLM Agent) For an LLM Agent, episodic memory relates to the agent\u2019s ability to retain and recall specific interactions, events, or \u201cexperiences\u201d in a conversational or operational context. * Episodic Memory enables the agent to keep track of context over time, adapt to user-specific histories, and reference past interactions for continuity. By organizing an LLM Agent\u2019s \u201cknowledge\u201d and \u201cskills\u201d into these three types of memory, we can more closely m"
+  },
+  {
+    "query": "semantic memory vs episodic memory game agents",
+    "title": "Memory Systems in AI Agents: Episodic vs. Semantic",
+    "url": "https://ctoi.substack.com/p/memory-systems-in-ai-agents-episodic",
+    "content": "The difference between episodic and semantic memory isn't just a design choice; it's the foundation of intelligent behavior that scales."
+  },
+  {
+    "query": "semantic memory vs episodic memory game agents",
+    "title": "Semantic vs Episodic vs Procedural Memory in AI Agents - Medium",
+    "url": "https://medium.com/womenintechnology/semantic-vs-episodic-vs-procedural-memory-in-ai-agents-and-why-you-need-all-three-8479cd1c7ba6",
+    "content": "## Women in Technology. Women in Tech is a publication to highlight women in STEM, their accomplishments, career lessons, and stories. # Semantic vs Episodic vs Procedural Memory in AI Agents. ## Memory is the Missing Link in AI Agent Design. To get there, we need memory. Just like humans use different types of memory to reason, reflect, and improve, intelligent agents need layered memory architectures. * **Semantic Memory**: stores facts and knowledge. * **Episodic Memory**: remembers events and interactions. * **Procedural Memory**: encodes learned skills and adaptations. In this post, we\u2019ll unpack all three types rooted in cognitive science and show how to implement them in real AI agents. * Real-world analogies and technical blueprints for each memory type. * A speculative but practical implementation of procedural memory. ## Published in Women in Technology. Women in Tech is a publication to highlight women in STEM, their accomplishments, career lessons, and stories."
+  },
+  {
+    "query": "Dwarf Fortress AI memory system architecture",
+    "title": "Dwarf Fortress: The Nexus of Emergent Complexity, AI Agents, and ...",
+    "url": "https://research.genezi.io/p/dwarf-fortress-the-nexus-of-emergent",
+    "content": "# Dwarf Fortress: The Nexus of Emergent Complexity, AI Agents, and Blockchain Worlds. *Dwarf Fortress* revolutionized procedural storytelling through its agent-based simulation engine, where each dwarf operates via deterministic state machines governed by over 500 interlocking needs, skills, and memories. In contrast to Stanford\u2019s *Generative Agents*\u2014which simulate human-like behavior via LLM-driven memory streams\u2014*Dwarf Fortress* agents derive their complexity from the emergent interactions of rigid systems. Whereas *Generative Agents* post-hoc rationalize behavior (e.g., planning a Valentine\u2019s Day party through synthetic social calculus), *Dwarf Fortress* yields drama organically through environmental pressure and systemic interdependence\u2014like magma floods disrupting workshops and cascading into social unrest. * **Generative Agents** are *proactive*, using LLMs to simulate introspection and long-term planning\u2014but without the tactile, cause-and-effect granularity of *Dwarf Fortress\u2019* "
+  },
+  {
+    "query": "Dwarf Fortress AI memory system architecture",
+    "title": "v0.34:Memory (computing) - Dwarf Fortress Wiki",
+    "url": "https://dwarffortresswiki.org/index.php/v0.34:Memory_(computing)",
+    "content": "Memory systems in dwarf fortress, thankfully, are very good at maintaining their value (in the absence of any trolls), but they are still"
+  },
+  {
+    "query": "Dwarf Fortress AI memory system architecture",
+    "title": "kevshakes/dwarf-fortress-simulation - GitHub",
+    "url": "https://github.com/kevshakes/dwarf-fortress-simulation",
+    "content": "A comprehensive Dwarf Fortress-style simulation with procedural world generation, AI-driven dwarf agents, resource management, and multi-layer physics"
+  }
+]
