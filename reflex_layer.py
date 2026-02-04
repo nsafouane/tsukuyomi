@@ -46,15 +46,15 @@ class ReflexLayer:
 
     def _apply_reflexes(self, agent: Agent):
         # 1. Survival Reflexes (Internal Needs)
-        agent.hunger += 0.01
-        agent.energy -= 0.005
+        agent.hunger += 0.1 # Increased for faster demo
+        agent.energy -= 0.05
 
         # 2. Rule-based State Transitions
-        if agent.hunger > 80 and agent.state != AgentState.EATING:
+        if agent.hunger > 50 and agent.state != AgentState.EATING:
             agent.state = AgentState.WALKING
             agent.target_destination = self.world.locations["tavern"]
         
-        if agent.energy < 20 and agent.state != AgentState.SLEEPING:
+        if agent.energy < 40 and agent.state != AgentState.SLEEPING:
             agent.state = AgentState.WALKING
             agent.target_destination = self.world.locations["inn"]
 

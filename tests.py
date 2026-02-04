@@ -28,13 +28,13 @@ class TestTsukuyomiPhase1(unittest.TestCase):
 
     def test_agent_hunger_reflex(self):
         world = WorldState()
-        agent = Agent(name="TestAgent", hunger=79.9, position=(0,0))
+        agent = Agent(name="TestAgent", hunger=49.9, position=(0,0))
         world.add_agent(agent)
         reflex = ReflexLayer(world)
         
-        # Hunger increases by 0.01 per tick. 
-        # In 20 ticks, it should cross 80.
-        for _ in range(20):
+        # Hunger increases by 0.1 per tick. 
+        # In 2 ticks, it should cross 50.
+        for _ in range(2):
             asyncio.run(reflex.evaluate(0))
         
         self.assertEqual(agent.state, AgentState.WALKING)
