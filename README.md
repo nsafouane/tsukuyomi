@@ -52,17 +52,17 @@ tsukuyomi/
 |-------|--------|-------------|
 | Phase 1: Fate Engine | ✅ DONE | Deterministic tick loop, replay system |
 | Phase 2: Internal World | ✅ DONE | Environment physics, NPC behavior trees |
-| Phase 3: MVP Implementation | 🔄 IN PROGRESS | Complete MVP_SPEC.md & ship testable MVP |
+| Phase 3: MVP Implementation | ✅ DONE | Complete MVP_SPEC.md & ship testable MVP |
+| Phase 4: gRPC Server & Client | ✅ DONE | Remote agent interaction, streaming |
 
 ---
 
 ## 🎯 CURRENT PRIORITY
 
-**Complete MVP_SPEC.md entirely and ship testable MVP**
-1. Finalize all sections of MVP_SPEC.md
-2. Implement remaining components per spec
-3. Achieve test coverage target (85%+)
-4. Package for testing
+**Phase 5: Enhanced Simulation & Persistence**
+1. Expand world state with varied environmental objects
+2. Implement persistent storage for TickHistory
+3. Basic web-based visualizer for world state observation
 
 ---
 

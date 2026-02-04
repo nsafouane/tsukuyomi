@@ -1,0 +1,76 @@
+// tsukuyomi/proto/core.proto
+
+syntax = "proto3";
+
+package tsukuyomi.core;
+
+import "common.proto";
+
+// Enum for valid action types
+enum ActionType {
+  ACTION_TYPE_UNSPECIFIED = 0;
+  MOVE = 1;
+  INTERACT = 2;
+  IDLE = 3;
+  EMOTE = 4;
+}
+
+// Represents an actor in the simulation
+message Actor {
+  string id = 1; // UUID as string
+  string name = 2;
+  tsukuyomi.common.Vector2 position = 3;
+  string state = 4; // e.g., "IDLE", "WALKING", "INTERACTING"
+  string current_location = 5; // Name of the location (e.g., "tavern")
+  repeated Interaction interactions = 6;
+}
+
+// Represents an interaction event
+message Interaction {
+  string type = 1; // e.g., "talk", "trade"
+  string target_id = 2; // ID of the target actor or object
+  tsukuyomi.common.Timestamp tick_timestamp = 3;
+}
+
+// Represents a location in the world
+message Location {
+  string name = 1;
+  tsukuyomi.common.Vector2 position = 2;
+}
+
+// Represents a proposal from an actor to change the world state
+message Proposal {
+  string proposal_id = 1; // UUID as string
+  string actor_id = 2;    // UUID as string
+  ActionType action = 3;
+  map<string, string> parameters = 4; // Key-value parameters for the action
+  tsukuyomi.common.Timestamp timestamp = 5;
+}
+
+// Represents the result of fate resolution for a proposal
+message Resolution {
+  string proposal_id = 1; // UUID as string
+  string actor_id = 2;    // UUID as string
+  bool success = 3;
+  map<string, string> outcome = 4; // Key-value outcome details
+  string reason = 5;
+  map<string, string> modified_action = 6; // If the action was modified by fate
+}
+
+// A snapshot of the world state at a given tick
+message WorldState {
+  int64 tick_number = 1;
+  tsukuyomi.common.Timestamp timestamp = 2;
+  map<string, Actor> actors = 3; // actor_id to Actor object
+  map<string, Location> locations = 4; // location_name to Location object
+  repeated string global_events = 5; // List of global event strings
+}
+
+// A single tick's state, including proposals and resolutions
+message TickState {
+  int64 tick_number = 1;
+  tsukuyomi.common.Timestamp timestamp = 2;
+  WorldState world_state = 3;
+  repeated Proposal pending_proposals = 4;
+  repeated Resolution resolutions = 5;
+}

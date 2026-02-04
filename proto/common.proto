@@ -1,0 +1,25 @@
+// tsukuyomi/proto/common.proto
+
+syntax = "proto3";
+
+package tsukuyomi.common;
+
+// Represents a 2D vector for positions
+message Vector2 {
+  double x = 1;
+  double y = 2;
+}
+
+// Represents a 4D vector for quaternions (rotation)
+message Vector4 {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+  double w = 4;
+}
+
+// Standard timestamp message
+message Timestamp {
+  int64 seconds = 1;
+  int32 nanos = 2;
+}
