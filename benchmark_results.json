@@ -1,0 +1,12 @@
+{
+  "duration_seconds": 32.03,
+  "total_ticks": 629,
+  "target_tps": 20,
+  "actual_tps": 19.64,
+  "tps_efficiency_percent": 98.18,
+  "tps_variance": 0.0008,
+  "proposals_received": 7080,
+  "deliberations_completed": 0,
+  "errors_count": 0,
+  "errors": []
+}

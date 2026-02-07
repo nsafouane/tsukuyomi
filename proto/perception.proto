@@ -1,0 +1,82 @@
+// tsukuyomi/proto/perception.proto
+
+syntax = "proto3";
+
+package tsukuyomi.perception;
+
+import "common.proto";
+
+// Percept represents a single unit of sensory information
+message Percept {
+  string percept_id = 1;
+  int64 tick_observed = 2;
+  
+  enum Channel {
+    VISION = 0;
+    HEARING = 1;
+    PROPRIOCEPTION = 2;
+    MEMORY_ECHO = 3;
+  }
+  Channel channel = 3;
+  
+  oneof content {
+    ActorPercept actor = 4;
+    ObjectPercept object = 5;
+    EventPercept event = 6;
+    SpeechPercept speech = 7;
+  }
+  
+  float salience = 8;  // 0.0 - 1.0, affects attention priority
+  float certainty = 9; // 0.0 - 1.0, degrades with distance/occlusion
+}
+
+// Perception of another actor
+message ActorPercept {
+  string actor_id = 1;
+  string name = 2;
+  tsukuyomi.common.Vector2 approximate_position = 3;  // Blurred by distance
+  string visible_action_state = 4;    // "speaking", "idle", "moving"
+  string visible_emotional_cue = 5;   // "angry", "calm" (external reading)
+}
+
+// Perception of an environmental object
+message ObjectPercept {
+  string object_id = 1;
+  string apparent_type = 2;           // May differ from true type if obscured
+  tsukuyomi.common.Vector2 approximate_position = 3;
+  repeated string visible_affordances = 4;  // ["examine", "take", "use"]
+}
+
+// Perception of speech/sounds
+message SpeechPercept {
+  string speaker_id = 1;
+  string speaker_name = 2;
+  string content = 3;
+  float loudness = 4;                 // Affects hearing range
+  bool is_direct_address = 5;        // "Hey YOU" vs general speech
+}
+
+// Perception of world events
+message EventPercept {
+  string event_type = 1;             // "door_opened", "item_dropped"
+  map<string, string> details = 2;
+}
+
+// Sensory profile for an agent
+message SensoryProfile {
+  float vision_range = 1;            // Max vision distance (meters)
+  float vision_fov = 2;               // Field of view in degrees
+  float hearing_range = 3;           // Max hearing distance (meters)
+  float vision_certainty_decay = 4;  // How fast visual certainty decays
+  float hearing_certainty_decay = 5; // How fast auditory certainty decays
+}
+
+// Memory echo for tracking last-known positions
+message MemoryEcho {
+  string entity_id = 1;
+  string entity_type = 2;            // "actor", "object"
+  tsukuyomi.common.Vector2 last_position = 3;
+  int64 last_seen_tick = 4;
+  float decay_rate = 5;              // How fast the echo fades
+  float current_certainty = 6;       // 0.0 - 1.0, decays over time
+}

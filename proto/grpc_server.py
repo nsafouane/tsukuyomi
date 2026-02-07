@@ -30,7 +30,7 @@ from tsukuyomi.proto import fate_engine_service_pb2_grpc
 from tsukuyomi.proto.fate_engine import FateEngine, _to_pb_timestamp
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger("gRPC.Server")
@@ -83,6 +83,7 @@ class FateEngineServicer(fate_engine_service_pb2_grpc.FateEngineServiceServicer)
         request: core_pb2.Proposal,
         context: grpc.aio.ServicerContext
     ) -> fate_engine_service_pb2.SubmitProposalResponse:
+        logger.debug(f"Received proposal: {request.proposal_id} from {request.actor_id}")
         """
         Handle SubmitProposal RPC.
         
@@ -199,6 +200,29 @@ class FateEngineServicer(fate_engine_service_pb2_grpc.FateEngineServiceServicer)
                     self._tick_subscribers.remove(queue)
             logger.info(f"Tick stream subscriber disconnected (remaining: {len(self._tick_subscribers)})")
 
+    async def RegisterActor(
+        self,
+        request: fate_engine_service_pb2.RegisterActorRequest,
+        context: grpc.aio.ServicerContext
+    ) -> fate_engine_service_pb2.RegisterActorResponse:
+        """Handle RegisterActor RPC."""
+        try:
+            self.engine.register_actor(
+                request.actor_id,
+                request.name,
+                (request.x, request.y)
+            )
+            return fate_engine_service_pb2.RegisterActorResponse(
+                success=True,
+                message=f"Actor {request.name} registered"
+            )
+        except Exception as e:
+            logger.error(f"Error registering actor: {e}")
+            return fate_engine_service_pb2.RegisterActorResponse(
+                success=False,
+                message=str(e)
+            )
+
 
 class GrpcServer:
     """
@@ -258,7 +282,8 @@ async def run_server(
     tick_rate: int = 20,
     seed: int = 42,
     host: str = "0.0.0.0",
-    port: int = 50051
+    port: int = 50051,
+    db_path: Optional[str] = "tsukuyomi_history.db"
 ):
     """
     Run the Fate Engine with gRPC server.
@@ -266,18 +291,13 @@ async def run_server(
     This is the main entry point for running a Tsukuyomi simulation server.
     """
     # Initialize Fate Engine
-    engine = FateEngine(tick_rate=tick_rate, seed=seed)
+    engine = FateEngine(tick_rate=tick_rate, seed=seed, db_path=db_path)
     
-    # Register some demo actors
-    alice_id = str(uuid.uuid4())
-    bob_id = str(uuid.uuid4())
-    charlie_id = str(uuid.uuid4())
-    
-    engine.register_actor(alice_id, "Alice", position=(0, 0))
-    engine.register_actor(bob_id, "Bob", position=(5, 5))
-    engine.register_actor(charlie_id, "Charlie", position=(10, 10))
-    
-    logger.info(f"Demo actors registered: Alice={alice_id}, Bob={bob_id}, Charlie={charlie_id}")
+    # Only register demo actors if the world is empty (new DB)
+    if not engine.world_state.actors:
+        logger.info("New world: No actors registered.")
+    else:
+        logger.info(f"Resumed world: {len(engine.world_state.actors)} actors found.")
     
     # Initialize gRPC server
     grpc_server = GrpcServer(engine, host=host, port=port)
@@ -304,6 +324,7 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=50051, help="Server port")
     parser.add_argument("--tick-rate", type=int, default=20, help="Ticks per second")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for determinism")
+    parser.add_argument("--db", default="tsukuyomi_history.db", help="Path to SQLite database")
     
     args = parser.parse_args()
     
@@ -311,5 +332,6 @@ if __name__ == "__main__":
         tick_rate=args.tick_rate,
         seed=args.seed,
         host=args.host,
-        port=args.port
+        port=args.port,
+        db_path=args.db
     ))

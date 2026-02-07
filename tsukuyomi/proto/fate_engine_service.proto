@@ -1,0 +1,53 @@
+// tsukuyomi/proto/fate_engine_service.proto
+
+syntax = "proto3";
+
+package tsukuyomi.service;
+
+import "core.proto";
+
+// Service for interacting with the Fate Engine
+service FateEngineService {
+  // Allows an actor to submit a proposal to the Fate Engine
+  rpc SubmitProposal (tsukuyomi.core.Proposal) returns (SubmitProposalResponse);
+
+  // Retrieves the current world state
+  rpc GetWorldState (GetWorldStateRequest) returns (tsukuyomi.core.WorldState);
+
+  // Streams real-time tick updates (e.g., for clients or observers)
+  rpc StreamTickUpdates (StreamTickUpdatesRequest) returns (stream tsukuyomi.core.TickState);
+
+  // Registers a new actor in the world state
+  rpc RegisterActor (RegisterActorRequest) returns (RegisterActorResponse);
+}
+
+// Request for RegisterActor RPC
+message RegisterActorRequest {
+  string actor_id = 1;
+  string name = 2;
+  float x = 3;
+  float y = 4;
+}
+
+// Response for RegisterActor RPC
+message RegisterActorResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Response for SubmitProposal RPC
+message SubmitProposalResponse {
+  bool accepted = 1;
+  string message = 2;
+  string proposal_id = 3;
+}
+
+// Request for GetWorldState RPC (currently empty, but good for future extensions)
+message GetWorldStateRequest {
+  // Add filters or specific query parameters here in future
+}
+
+// Request for StreamTickUpdates RPC (currently empty, but good for future extensions)
+message StreamTickUpdatesRequest {
+  // Add filters or specific query parameters here in future
+}

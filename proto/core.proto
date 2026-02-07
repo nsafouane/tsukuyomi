@@ -13,6 +13,12 @@ enum ActionType {
   INTERACT = 2;
   IDLE = 3;
   EMOTE = 4;
+  COLLECT = 5;
+  USE = 6;
+  EXAMINE = 7;
+  TAKE = 8;
+  DROP = 9;
+  REFLECT = 10;
 }
 
 // Represents an actor in the simulation
@@ -23,11 +29,33 @@ message Actor {
   string state = 4; // e.g., "IDLE", "WALKING", "INTERACTING"
   string current_location = 5; // Name of the location (e.g., "tavern")
   repeated Interaction interactions = 6;
+  repeated string inventory = 7; // List of item IDs
+}
+
+// Represents an environmental object
+message EnvironmentObject {
+  string id = 1;
+  string type = 2;
+  tsukuyomi.common.Vector2 position = 3;
+  bool interactive = 4;
+  map<string, string> properties = 5;
+  string display_name = 6;
+  repeated Affordance affordances = 7;
+  map<string, string> hidden_properties = 8;
+  string state = 9;
+  string owner_id = 10;
+}
+
+message Affordance {
+  string action_type = 1;
+  string precondition = 2;
+  string effect_description = 3;
+  repeated string semantic_tags = 4;
 }
 
 // Represents an interaction event
 message Interaction {
-  string type = 1; // e.g., "talk", "trade"
+  string type = 1; // e.g., "talk", "trade", "collect", "use"
   string target_id = 2; // ID of the target actor or object
   tsukuyomi.common.Timestamp tick_timestamp = 3;
 }
@@ -64,6 +92,7 @@ message WorldState {
   map<string, Actor> actors = 3; // actor_id to Actor object
   map<string, Location> locations = 4; // location_name to Location object
   repeated string global_events = 5; // List of global event strings
+  map<string, EnvironmentObject> objects = 6; // object_id to EnvironmentObject
 }
 
 // A single tick's state, including proposals and resolutions

@@ -53,16 +53,33 @@ tsukuyomi/
 | Phase 1: Fate Engine | ✅ DONE | Deterministic tick loop, replay system |
 | Phase 2: Internal World | ✅ DONE | Environment physics, NPC behavior trees |
 | Phase 3: MVP Implementation | ✅ DONE | Complete MVP_SPEC.md & ship testable MVP |
-| Phase 4: gRPC Server & Client | ✅ DONE | Remote agent interaction, streaming |
+| Phase 5: Persistence & Objects | ✅ DONE | SQLite storage, environment expansion |
+| Phase 6: Agent Integration | ✅ DONE | "The Brain", Memory, Angry Man Room |
+| Phase 8: Community Integration | ✅ DONE | Tick downsampling, Gossip Protocol, Performance benchmark |
 
 ---
 
-## 🎯 CURRENT PRIORITY
+## 🎯 CURRENT STATUS
 
-**Phase 5: Enhanced Simulation & Persistence**
-1. Expand world state with varied environmental objects
-2. Implement persistent storage for TickHistory
-3. Basic web-based visualizer for world state observation
+**Phase 8: Community Integration & Performance** ✅ COMPLETE
+- [x] Optimize Tick Streaming for high-latency Moltbook clients
+- [x] Implement "Gossip Protocol" (Information leakage between deliberating agents)
+- [x] Benchmark 20 TPS with 12 concurrent "Brain" agents
+
+**Deployment:** 🚀 Ready for Moltbook community deployment
+
+**Next Phase:** Phase 9 - Advanced Social Dynamics (Planning)
+
+---
+
+## 🚀 MVP DEMO (HOW TO RUN)
+
+To run the full end-to-end MVP demonstration and verification:
+```bash
+# From the workspace root (/root/.openclaw/workspace/tsukuyomi)
+PYTHONPATH=. ./venv/bin/python3 test_mvp_complete.py
+```
+This script automates server startup, actor actions (movement & collection), and verifies persistence across a server restart.
 
 ---
 

@@ -16,6 +16,23 @@ service FateEngineService {
 
   // Streams real-time tick updates (e.g., for clients or observers)
   rpc StreamTickUpdates (StreamTickUpdatesRequest) returns (stream tsukuyomi.core.TickState);
+
+  // Registers a new actor in the world state
+  rpc RegisterActor (RegisterActorRequest) returns (RegisterActorResponse);
+}
+
+// Request for RegisterActor RPC
+message RegisterActorRequest {
+  string actor_id = 1;
+  string name = 2;
+  float x = 3;
+  float y = 4;
+}
+
+// Response for RegisterActor RPC
+message RegisterActorResponse {
+  bool success = 1;
+  string message = 2;
 }
 
 // Response for SubmitProposal RPC
@@ -30,7 +47,10 @@ message GetWorldStateRequest {
   // Add filters or specific query parameters here in future
 }
 
-// Request for StreamTickUpdates RPC (currently empty, but good for future extensions)
+// Request for StreamTickUpdates RPC (allows configuring tick streaming behavior)
 message StreamTickUpdatesRequest {
-  // Add filters or specific query parameters here in future
+  // Downsample factor for tick rate (default: 1 = full 20 TPS)
+  // Example: 2 = 10 TPS, 4 = 5 TPS, 5 = 4 TPS
+  // Higher values reduce bandwidth and queue size for high-latency clients
+  int32 tick_downsample_factor = 1; // Optional, defaults to 1
 }

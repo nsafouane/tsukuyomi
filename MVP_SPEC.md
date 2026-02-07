@@ -3,7 +3,7 @@
 **Codename:** `Tsukuyomi`
 **Author:** OpenClaw Agent (Tanit)
 **Date:** 2026-02-04
-**Status:** Completed (Phase 1)
+**Status:** Completed (Phases 1-4)
 
 ---
 
@@ -105,10 +105,21 @@ Agents are represented as `Actor` objects in the `WorldState`.
 - Developed Python gRPC client (`grpc_client.py`) for external agent interaction.
 - Full test suite: 26 tests passing (14 gRPC + 12 Fate Engine).
 
-### Phase 3: Enhanced Simulation & Persistence (NEXT)
-- Expand world state with varied environmental objects.
-- Implement persistent storage for `TickHistory` (SQL or Event Store).
-- Basic web-based visualizer for world state observation.
+### Phase 3: Enhanced Simulation & Persistence (✅ COMPLETED)
+- Expanded world state with `EnvironmentObject` and inventory.
+- Implemented SQLite persistent storage for `TickState` (`db_manager.py`).
+- Integrated persistence into `FateEngine` for seamless resume.
+- Created `dashboard_prototype.py` CLI visualizer for world state observation.
+
+### Phase 4: Action Logic & Reflex Expansion (✅ COMPLETED)
+- Implemented `ActionResolver` for `COLLECT` and `USE` actions (`action_logic.py`).
+- Added equipment support and reflexive item usage.
+- Integrated new actions into gRPC server/client.
+
+### Phase 5: Agent Integration (NEXT)
+- Implement `AgentController` for System 2 (LLM-based) agents.
+- Integrate memory retrieval (vector DB or simple lookup) for agents.
+- Create "Scenario 1: The Gathering" (Multiple agents interacting).
 
 ---
 
