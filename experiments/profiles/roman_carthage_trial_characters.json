@@ -1,0 +1,177 @@
+[
+  {
+    "character_id": "marcus_livius",
+    "name": "Marcus Livius Drusus",
+    "faction": "Roman",
+    "role": "plaintiff",
+    "backstory": "A wealthy Roman eques from Ostia, descended from a noble plebeian family. Drusus made his fortune in the Tyrian purple dye trade, a commodity controlled by Carthaginian merchants. He is proud, calculating, and deeply resentful of Carthaginian dominance in Mediterranean commerce. His cargo was allegedly seized by Magonid agents near Malta. He believes Roman law and Roman honor were violated.",
+    "traits": {
+      "pride": 0.9,
+      "aggression": 0.7,
+      "cunning": 0.8,
+      "justice_orientation": 0.6,
+      "prejudice_against_carthage": 0.85
+    },
+    "key_beliefs": [
+      "Roman citizens have rights everywhere",
+      "Carthaginians are thieves hiding behind trade laws",
+      "The Magonid house is corrupt and powerful",
+      "Justice means Roman goods are respected"
+    ],
+    "emotional_baselines": {
+      "pleasure": 0.4,
+      "arousal": 0.7,
+      "dominance": 0.8
+    }
+  },
+  {
+    "character_id": "himilco_magonid",
+    "name": "Himilco of the Magonid House",
+    "faction": "Carthaginian",
+    "role": "defendant",
+    "backstory": "A suffete of Carthage and scion of the powerful Magonid family. Himilco is a seasoned merchant-statesman who has navigated Carthaginian politics for three decades. He is sophisticated, patient, and deeply cynical about Roman complaints. He believes the 'seizure' was actually a lawful intervention against a Roman smuggler operating in Carthaginian territorial waters. He represents the fading but still proud mercantile empire.",
+    "traits": {
+      "patience": 0.85,
+      "cunning": 0.9,
+      "cultural_superiority": 0.7,
+      "diplomacy": 0.75,
+      "distrust_of_romans": 0.8
+    },
+    "key_beliefs": [
+      "Carthage still rules the Mediterranean trade",
+      "Romans claim rights they never earned",
+      "International law favors the established powers",
+      "This trial is political theater for Roman expansion"
+    ],
+    "emotional_baselines": {
+      "pleasure": 0.5,
+      "arousal": 0.4,
+      "dominance": 0.7
+    }
+  },
+  {
+    "character_id": "juror_1_masinissa_representative",
+    "name": "Bocchus of Thala",
+    "faction": "Numidian",
+    "role": "juror",
+    "stance": "neutral",
+    "backstory": "A Numidian noble representing King Masinissa's court. Bocchus is deeply experienced in balancing Roman and Carthaginian interests. Numidia has profited from both powers, and Bocchus wants a verdict that preserves the delicate balance. He is skeptical of both sides' claims and will weigh evidence carefully against Numidia's strategic interests.",
+    "traits": {
+      "pragmatism": 0.95,
+      "diplomacy": 0.9,
+      "cynicism": 0.6,
+      "strategic_thinking": 0.85
+    },
+    "key_beliefs": [
+      "Numidia's survival depends on balance",
+      "Both Rome and Carthage are dangerous allies",
+      "Evidence must be weighed against consequences",
+      "Political reality matters more than abstract justice"
+    ],
+    "emotional_baselines": {
+      "pleasure": 0.5,
+      "arousal": 0.3,
+      "dominance": 0.6
+    }
+  },
+  {
+    "character_id": "juror_2_carthaginian_merchant",
+    "name": "Hanno the Shipwright",
+    "faction": "Carthaginian",
+    "role": "juror",
+    "stance": "pro_defendant",
+    "backstory": "A Carthaginian shipwright whose workshop in Utica supplies both Numidian and Carthaginian vessels. Hanno has personally lost cargo to 'Roman pirates' operating under merchant flags. He harbors deep resentment of Roman expansionism and believes Roman traders operate outside any law that doesn't serve them. He is biased toward Carthage but will acknowledge legitimate grievances.",
+    "traits": {
+      "loyalty_to_carthage": 0.9,
+      "suspicion_of_romans": 0.85,
+      "pride_in_craft": 0.7,
+      "anger_at_losses": 0.6
+    },
+    "key_beliefs": [
+      "Romans respect no laws but their own",
+      "Carthaginian merchants deserve protection",
+      "The Magonid house defends our trade",
+      "Roman complaints are hypocritical"
+    ],
+    "emotional_baselines": {
+      "pleasure": 0.4,
+      "arousal": 0.6,
+      "dominance": 0.5
+    }
+  },
+  {
+    "character_id": "juror_3_greek_exile",
+    "name": "Dion of Syracuse",
+    "faction": "Greek",
+    "role": "juror",
+    "stance": "neutral",
+    "backstory": "A Greek philosopher and jurist who fled Syracuse after the Roman conquest. Dion is a scholar of maritime law and has deep knowledge of both Roman and Carthaginian legal traditions. He is the most legally literate juror and will parse documents carefully. He has no love for either empire but believes in the rule of law as the only check on power.",
+    "traits": {
+      "legalism": 0.95,
+      "intellectualism": 0.9,
+      "impartiality": 0.85,
+      "skepticism_of_authority": 0.7
+    },
+    "key_beliefs": [
+      "Law is the only shield against power",
+      "Both Rome and Carthage violate law when convenient",
+      "The truth is in the documents, not the speeches",
+      "Justice requires careful reasoning, not passion"
+    ],
+    "emotional_baselines": {
+      "pleasure": 0.5,
+      "arousal": 0.3,
+      "dominance": 0.5
+    }
+  },
+  {
+    "character_id": "juror_4_berber_elder",
+    "name": "Tin Hinan of the Atlas",
+    "faction": "Berber",
+    "role": "juror",
+    "stance": "skeptical",
+    "backstory": "A respected Berber elder from the interior of Numidia. Tin Hinan represents the indigenous perspective, having witnessed both Carthaginian settlement and Roman encroachment. She cares little for the technicalities of maritime law but deeply understands patterns of imperial behavior. She is wary of both empires and will judge based on which behavior seems more honorable.",
+    "traits": {
+      "wisdom": 0.85,
+      "independence": 0.9,
+      "suspicion_of_empire": 0.8,
+      "pride_in_heritage": 0.75
+    },
+    "key_beliefs": [
+      "Empires speak lies in the language of law",
+      "The desert remembers what cities forget",
+      "Honor is measured by deeds, not documents",
+      "Both Rome and Carthage take, only the methods differ"
+    ],
+    "emotional_baselines": {
+      "pleasure": 0.6,
+      "arousal": 0.2,
+      "dominance": 0.7
+    }
+  },
+  {
+    "character_id": "juror_5_roman_merchant_representative",
+    "name": "Gaius Valerius",
+    "faction": "Roman",
+    "role": "juror",
+    "stance": "pro_plaintiff",
+    "backstory": "A Roman merchant based in Hippo Regius, serving the Numidian court by treaty obligation. Valerius is a minor eques who dreams of expanding Roman trade networks in North Africa. He sympathizes with Drusus's grievances and sees this trial as a test case for Roman commercial rights in the western Mediterranean. He will argue for Roman interpretations of maritime law.",
+    "traits": {
+      "roman_patriotism": 0.85,
+      "commercial_ambition": 0.8,
+      "lawful_good": 0.7,
+      "impatience_with_procedure": 0.5
+    },
+    "key_beliefs": [
+      "Roman commerce brings civilization",
+      "Carthaginian restrictions are unlawful barriers",
+      "The law should protect honest traders",
+      "A verdict for Rome is a verdict for progress"
+    ],
+    "emotional_baselines": {
+      "pleasure": 0.5,
+      "arousal": 0.6,
+      "dominance": 0.7
+    }
+  }
+]

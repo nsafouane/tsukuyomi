@@ -15,6 +15,10 @@ enum ActionType {
   EMOTE = 4;
   COLLECT = 5;
   USE = 6;
+  EXAMINE = 7;
+  TAKE = 8;
+  DROP = 9;
+  REFLECT = 10;
 }
 
 // Represents an actor in the simulation
@@ -31,10 +35,22 @@ message Actor {
 // Represents an environmental object
 message EnvironmentObject {
   string id = 1;
-  string type = 2; // e.g., "tree", "chest", "apple"
+  string type = 2;
   tsukuyomi.common.Vector2 position = 3;
   bool interactive = 4;
-  map<string, string> properties = 5; // Metadata (e.g., "health": "100")
+  map<string, string> properties = 5;
+  string display_name = 6;
+  repeated Affordance affordances = 7;
+  map<string, string> hidden_properties = 8;
+  string state = 9;
+  string owner_id = 10;
+}
+
+message Affordance {
+  string action_type = 1;
+  string precondition = 2;
+  string effect_description = 3;
+  repeated string semantic_tags = 4;
 }
 
 // Represents an interaction event

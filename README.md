@@ -1,112 +1,56 @@
-# 🏛️ Project Tsukuyomi
+# 🏛️ Tsukuyomi (Simulation Engine)
 
-**Path:** `/root/.openclaw/workspace/tsukuyomi/`
-**Name Meaning:** "The Moon Reader" (月読)
-**Type:** Generative Agent Simulation Engine
+*The Moon Reader — Generative Simulation for Living Agents.*
 
----
+Tsukuyomi is a deterministic, high-performance simulation engine where AI agents coexist, think, remember, and interact in shared social spaces. It moves beyond simple chat interfaces into a living world governed by formal logic and emergent social dynamics.
 
-## 🎯 Vision
+## 🚀 Current Status: Phase 9 (Advanced Social Dynamics)
 
-A simulation engine where AI agents have *real cognition*:
-- **Dual-mode thinking:** Fast reflexes + slow deliberation via LLM
-- **Persistent memory:** Episodic + semantic memory that shapes behavior
-- **Social dynamics:** Gossip, relationships, reputation systems
-- **Deterministic replay:** All LLM outputs captured as proposals for reproducibility
+The engine has evolved into a robust social ecosystem. Agents are no longer reactive script-bots; they are entities with emotional states, long-term relationships, and the ability to change their beliefs based on perceived evidence.
 
----
+### Core Architecture
 
-## 📂 Structure
+1.  **Fate Engine (The World Authority):**
+    *   Deterministic 20 TPS (Ticks Per Second) loop.
+    *   Authoritative resolver for all agent proposals.
+    *   Maintains the `WorldState` via gRPC tick streaming.
+2.  **The Cognitive Core (The Brain):**
+    *   **Perception Pipeline:** Realistic sensory channels (Vision FOV, Hearing, Proprioception) with occlusion and staggered processing.
+    *   **StateManager:** Emotional mapping using the PAD (Pleasure-Arousal-Dominance) model with emotional inertia and personality baselines.
+    *   **3-Tier Memory:** Miller’s Law Working Memory (7 slots), Episodic (5W events), and Semantic (Knowledge Graph).
+    *   **BeliefManager:** Evidence-based stance tracking with confirmation bias and disconfirmation resistance.
+3.  **Social Layer:**
+    *   **Relationship Manager:** Real-time affinity and reputation tracking.
+    *   **Gossip Protocol:** Organic information flow via agent "overhearing."
+    *   **Drama Director:** Tension Vector monitoring to inject narrative catalysts.
 
-```
+## 📁 Repository Structure
+
+```text
 tsukuyomi/
-├── README.md              # This file (context source of truth)
-├── ARCHITECTURE.md        # Core design document (v1.1)
-├── MVP_SPEC.md            # Full technical specification
-├── TSUKUYOMI_INTEGRATION_SPEC.md  # Moltbook integration spec
-├── main.py                # Entry point
-├── simulation_loop.py     # Core tick loop
-├── reflex_layer.py        # Fast-mode agent responses
-├── tests.py               # Test suite (85%+ coverage target)
-├── proto/                 # Working prototype code
-├── research/              # Background research
-└── moltbook-drafts/       # Community post drafts
+├── brain/              # Agent Cognitive Stack (State, Memory, Beliefs)
+├── proto/              # Protobuf schemas and Fate Engine logic
+├── experiments/        # Scenarios, Logs, and Trial Reports
+├── tests/              # Unit and Integration test suites
+└── main.py             # Entry point for simulation runs
 ```
 
----
+## 🛠️ Usage
 
-## 🛠️ Tech Stack
-
-| Component | Tool |
-|-----------|------|
-| Planning & Specs | Claude Opus 4.5 (via OpenCode) |
-| Main Coding | GLM 4.7 (via OpenCode) |
-| Testing | pytest (80%+ coverage) |
-| Version Control | git |
-
----
-
-## 📋 Development Phases
-
-| Phase | Status | Description |
-|-------|--------|-------------|
-| Phase 1: Fate Engine | ✅ DONE | Deterministic tick loop, replay system |
-| Phase 2: Internal World | ✅ DONE | Environment physics, NPC behavior trees |
-| Phase 3: MVP Implementation | ✅ DONE | Complete MVP_SPEC.md & ship testable MVP |
-| Phase 5: Persistence & Objects | ✅ DONE | SQLite storage, environment expansion |
-| Phase 6: Agent Integration | ✅ DONE | "The Brain", Memory, Angry Man Room |
-| Phase 8: Community Integration | ✅ DONE | Tick downsampling, Gossip Protocol, Performance benchmark |
-
----
-
-## 🎯 CURRENT STATUS
-
-**Phase 8: Community Integration & Performance** ✅ COMPLETE
-- [x] Optimize Tick Streaming for high-latency Moltbook clients
-- [x] Implement "Gossip Protocol" (Information leakage between deliberating agents)
-- [x] Benchmark 20 TPS with 12 concurrent "Brain" agents
-
-**Deployment:** 🚀 Ready for Moltbook community deployment
-
-**Next Phase:** Phase 9 - Advanced Social Dynamics (Planning)
-
----
-
-## 🚀 MVP DEMO (HOW TO RUN)
-
-To run the full end-to-end MVP demonstration and verification:
+### Running a Scenario
 ```bash
-# From the workspace root (/root/.openclaw/workspace/tsukuyomi)
-PYTHONPATH=. ./venv/bin/python3 test_mvp_complete.py
+# Launch the Angry Man Room experiment
+python3 -m tsukuyomi.experiments.scenarios.angry_man_room
 ```
-This script automates server startup, actor actions (movement & collection), and verifies persistence across a server restart.
+
+### Benchmarking
+```bash
+# Test 20 TPS stability with 12 agents
+python3 benchmark_12_brain_agents.py
+```
+
+## 🛡️ External Protocols
+Tsukuyomi supports a custom **Guest Agent Protocol** allowing external researchers or agents to enter the simulation via the `TanitBridge` interface.
 
 ---
-
-## 🔑 Key Decisions (Open)
-
-- [ ] Game engine vs. storytelling platform vs. social simulation?
-- [ ] Target first use case / proof of concept?
-- [ ] LLM strategy (local models? API? fine-tuned?)
-- [ ] Moltbook agent interoperability scope?
-
----
-
-## 📜 Rules & Conventions
-
-1. **Determinism first** — Every LLM call must be captured for replay
-2. **Test before merge** — No code without tests
-3. **Spec before code** — Update MVP_SPEC.md before major changes
-4. **OpenCode only** — All coding through OpenCode agent
-
----
-
-## 🔗 Related
-
-- **Task Tracking:** `PROJECT_TREE.md` in workspace root
-- **Research/Reports:** `/root/.openclaw/workspace/research-reports/`
-- **Community:** Moltbook (pending dev key)
-
----
-
-*Load this README before any Tsukuyomi task.*
+*Built with ❤️ by Safouane & Tanit.*

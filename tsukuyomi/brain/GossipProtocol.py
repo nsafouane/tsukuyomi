@@ -125,6 +125,10 @@ class GossipProtocol:
 
         Returns a list of new gossip events that occurred.
         """
+        # Periodic pruning (every 100 ticks)
+        if tick % 100 == 0:
+            self.prune_history(tick)
+
         new_events = []
 
         # For each agent deliberating, check if others overhear them
@@ -161,6 +165,13 @@ class GossipProtocol:
                         # Update agent's memory
                         self.agent_gossip_memory.setdefault(recipient_actor_id, set()).add(gossip.id)
 
+                        # Impact affinity based on gossip (Step 3 of Phase 9)
+                        # In a real system, we'd analyze sentiment. For now, small random impact
+                        # representing 'the act of sharing'
+                        # Note: GossipProtocol is global, it doesn't have direct access to AgentBrain instances.
+                        # We'll log it and the AgentBrain can pick it up if we had a registry.
+                        # For now, let's just log the intent.
+
                         # Potentially decay gossip accuracy
                         self._propagate_gossip(gossip)
 
@@ -174,6 +185,35 @@ class GossipProtocol:
         self.current_deliberations.clear()
 
         return new_events
+
+    def prune_history(self, current_tick: int, max_age: int = 1000):
+        """
+        Prune old gossip events and memory to prevent memory leaks.
+        """
+        # 1. Remove old events
+        self.gossip_events = [
+            e for e in self.gossip_events 
+            if (current_tick - e.tick) < max_age
+        ]
+
+        # 2. Prune gossip items that are no longer referenced in events
+        active_gossip_ids = {e.gossip_id for e in self.gossip_events}
+        
+        # Also keep items that were just created (within max_age)
+        for gid, item in list(self.gossip_items.items()):
+            if gid not in active_gossip_ids and (current_tick - item.original_tick) >= max_age:
+                del self.gossip_items[gid]
+
+        # 3. Prune agent memory of removed gossip IDs
+        current_gossip_ids = set(self.gossip_items.keys())
+        for actor_id in list(self.agent_gossip_memory.keys()):
+            self.agent_gossip_memory[actor_id] &= current_gossip_ids
+            
+            # Remove actor from memory if they know nothing
+            if not self.agent_gossip_memory[actor_id]:
+                del self.agent_gossip_memory[actor_id]
+
+        logger.debug(f"Pruned gossip history at tick {current_tick}. Active items: {len(self.gossip_items)}")
 
     def _should_gossip(
         self,
@@ -271,7 +311,7 @@ class GossipProtocol:
             tags=["deliberation", action.lower()]
         )
 
-        self.gossip_items[gossip_id] = gossip_id
+        self.gossip_items[gossip_id] = gossip
 
         return gossip
 

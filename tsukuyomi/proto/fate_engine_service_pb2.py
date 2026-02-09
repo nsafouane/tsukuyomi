@@ -22,10 +22,10 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import core_pb2 as core__pb2
+from . import core_pb2 as core__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19\x66\x61te_engine_service.proto\x12\x11tsukuyomi.service\x1a\ncore.proto\"L\n\x14RegisterActorRequest\x12\x10\n\x08\x61\x63tor_id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\t\n\x01x\x18\x03 \x01(\x02\x12\t\n\x01y\x18\x04 \x01(\x02\"9\n\x15RegisterActorResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"P\n\x16SubmitProposalResponse\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x13\n\x0bproposal_id\x18\x03 \x01(\t\"\x16\n\x14GetWorldStateRequest\":\n\x18StreamTickUpdatesRequest\x12\x1e\n\x16tick_downsample_factor\x18\x01 \x01(\x05\x32\x83\x03\n\x11\x46\x61teEngineService\x12U\n\x0eSubmitProposal\x12\x18.tsukuyomi.core.Proposal\x1a).tsukuyomi.service.SubmitProposalResponse\x12T\n\rGetWorldState\x12\'.tsukuyomi.service.GetWorldStateRequest\x1a\x1a.tsukuyomi.core.WorldState\x12]\n\x11StreamTickUpdates\x12+.tsukuyomi.service.StreamTickUpdatesRequest\x1a\x19.tsukuyomi.core.TickState0\x01\x12\x62\n\rRegisterActor\x12\'.tsukuyomi.service.RegisterActorRequest\x1a(.tsukuyomi.service.RegisterActorResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19\x66\x61te_engine_service.proto\x12\x11tsukuyomi.service\x1a\ncore.proto\"L\n\x14RegisterActorRequest\x12\x10\n\x08\x61\x63tor_id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\t\n\x01x\x18\x03 \x01(\x02\x12\t\n\x01y\x18\x04 \x01(\x02\"9\n\x15RegisterActorResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"P\n\x16SubmitProposalResponse\x12\x10\n\x08\x61\x63\x63\x65pted\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x13\n\x0bproposal_id\x18\x03 \x01(\t\"\x16\n\x14GetWorldStateRequest\"\x1a\n\x18StreamTickUpdatesRequest2\x83\x03\n\x11\x46\x61teEngineService\x12U\n\x0eSubmitProposal\x12\x18.tsukuyomi.core.Proposal\x1a).tsukuyomi.service.SubmitProposalResponse\x12T\n\rGetWorldState\x12\'.tsukuyomi.service.GetWorldStateRequest\x1a\x1a.tsukuyomi.core.WorldState\x12]\n\x11StreamTickUpdates\x12+.tsukuyomi.service.StreamTickUpdatesRequest\x1a\x19.tsukuyomi.core.TickState0\x01\x12\x62\n\rRegisterActor\x12\'.tsukuyomi.service.RegisterActorRequest\x1a(.tsukuyomi.service.RegisterActorResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -41,7 +41,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_GETWORLDSTATEREQUEST']._serialized_start=279
   _globals['_GETWORLDSTATEREQUEST']._serialized_end=301
   _globals['_STREAMTICKUPDATESREQUEST']._serialized_start=303
-  _globals['_STREAMTICKUPDATESREQUEST']._serialized_end=361
-  _globals['_FATEENGINESERVICE']._serialized_start=364
-  _globals['_FATEENGINESERVICE']._serialized_end=751
+  _globals['_STREAMTICKUPDATESREQUEST']._serialized_end=329
+  _globals['_FATEENGINESERVICE']._serialized_start=332
+  _globals['_FATEENGINESERVICE']._serialized_end=719
 # @@protoc_insertion_point(module_scope)

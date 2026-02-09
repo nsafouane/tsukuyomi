@@ -1,0 +1,19 @@
+{
+  "scenario_name": "The Evidence Room",
+  "objective": "Establish reasonable doubt via physical evidence examination.",
+  "evidence": {
+    "switchblade": {
+      "display_name": "Ornate Switchblade",
+      "type": "weapon",
+      "properties": {
+        "condition": "bloodstained",
+        "carvings": "ornate handle"
+      },
+      "hidden_properties": {
+        "uniqueness": "NOT unique. A shop nearby sells dozens of these identical knives.",
+        "notch": "A small notch on the blade indicates it was used for something other than the crime."
+      },
+      "interactive": true
+    }
+  }
+}

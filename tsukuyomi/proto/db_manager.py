@@ -79,11 +79,16 @@ class DBManager:
 
     def get_latest_tick_number(self) -> int:
         """Get the highest tick number recorded."""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT MAX(tick_number) FROM ticks")
-            row = cursor.fetchone()
-            return row[0] if row and row[0] is not None else -1
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT MAX(tick_number) FROM ticks")
+                row = cursor.fetchone()
+                return row[0] if row and row[0] is not None else -1
+        except Exception:
+            logger.info("Initializing DB tables...")
+            self._init_db()
+            return -1
 
     def list_ticks(self, limit: int = 100, offset: int = 0) -> List[int]:
         """List available tick numbers."""

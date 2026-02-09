@@ -57,6 +57,7 @@ class FateEngineClient:
         self.channel: Optional[aio.Channel] = None
         self.stub: Optional[fate_engine_service_pb2_grpc.FateEngineServiceStub] = None
         self._connected = False
+        self._session_tokens: Dict[str, str] = {}  # actor_id -> session_token
     
     async def connect(self) -> bool:
         """
@@ -102,7 +103,12 @@ class FateEngineClient:
     # -------------------------------------------------------------------------
     
     async def register_actor(self, actor_id: str, name: str, x: float = 0.0, y: float = 0.0) -> bool:
-        """Register a new actor in the simulation."""
+        """
+        Register a new actor in the simulation.
+        
+        Extracts and stores the session token returned by the server.
+        This token must be used for all subsequent requests for this actor.
+        """
         if not self.stub:
             raise RuntimeError("Not connected to server")
         
@@ -115,6 +121,16 @@ class FateEngineClient:
         
         try:
             response = await self.stub.RegisterActor(request)
+            
+            if response.success:
+                # Extract session token from response message
+                # The server returns it in the message format: "Actor X registered. Session token: <token>"
+                message = response.message
+                if "Session token:" in message:
+                    token = message.split("Session token:")[-1].strip()
+                    self._session_tokens[actor_id] = token
+                    logger.info(f"Stored session token for actor {actor_id}: {token[:8]}...")
+            
             return response.success
         except grpc.RpcError as e:
             logger.error(f"RegisterActor failed: {e}")
@@ -146,6 +162,12 @@ class FateEngineClient:
         if not self.stub:
             raise RuntimeError("Not connected to server")
         
+        # Check if we have a session token for this actor
+        session_token = self._session_tokens.get(actor_id)
+        if not session_token:
+            logger.error(f"No session token for actor {actor_id}. Call register_actor first.")
+            return False, "No session token. Actor must be registered first.", ""
+        
         proposal = core_pb2.Proposal(
             proposal_id=proposal_id or str(uuid.uuid4()),
             actor_id=actor_id,
@@ -155,7 +177,9 @@ class FateEngineClient:
         )
         
         try:
-            response = await self.stub.SubmitProposal(proposal)
+            # Include session token in metadata
+            metadata = [("session_token", session_token)]
+            response = await self.stub.SubmitProposal(proposal, metadata=metadata)
             return response.accepted, response.message, response.proposal_id
         
         except grpc.RpcError as e:

@@ -284,6 +284,7 @@ To prove determinism:
 ### Phase 3: Social & Scale
 *   Implement Gossip decay/Bridge Worker.
 *   Implement Tension Vector metrics.
+*   Implement Guest Agent Protocol (Standalone API).
 *   **Milestone:** Multi-zone simulation with emergent narratives.
 
 ### Phase 4: Production Hardening

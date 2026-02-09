@@ -1,0 +1,70 @@
+// tsukuyomi/proto/guest_api.proto
+
+syntax = "proto3";
+
+package tsukuyomi.guest;
+
+import "core.proto";
+import "common.proto";
+
+// Standalone Guest API for external agents
+service GuestService {
+  // Handshake protocol to establish a guest connection
+  rpc Handshake (HandshakeRequest) returns (HandshakeResponse);
+
+  // Pulse to maintain connection and heartbeat
+  rpc Pulse (PulseRequest) returns (PulseResponse);
+
+  // Submit a proposal to the Fate Engine
+  rpc SubmitProposal (tsukuyomi.core.Proposal) returns (SubmitProposalResponse);
+
+  // Subscribe to world updates
+  rpc Subscribe (SubscribeRequest) returns (stream tsukuyomi.core.TickState);
+
+  // Gracefully leave the simulation
+  rpc Disconnect (DisconnectRequest) returns (DisconnectResponse);
+}
+
+message HandshakeRequest {
+  string agent_id = 1;
+  string agent_name = 2;
+  string access_token = 3;
+  map<string, string> metadata = 4;
+}
+
+message HandshakeResponse {
+  bool success = 1;
+  string session_id = 2;
+  string message = 3;
+  map<string, string> world_config = 4;
+}
+
+message PulseRequest {
+  string session_id = 1;
+  tsukuyomi.common.Timestamp timestamp = 2;
+}
+
+message PulseResponse {
+  bool acknowledged = 1;
+  int64 server_tick = 2;
+}
+
+message SubmitProposalResponse {
+  bool accepted = 1;
+  string message = 2;
+  string proposal_id = 3;
+}
+
+message SubscribeRequest {
+  string session_id = 1;
+  int32 downsample_factor = 2;
+}
+
+message DisconnectRequest {
+  string session_id = 1;
+  string reason = 2;
+}
+
+message DisconnectResponse {
+  bool success = 1;
+}

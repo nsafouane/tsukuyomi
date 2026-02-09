@@ -1,0 +1,100 @@
+{
+  "locations": {
+    "market_square": {
+      "name": "market_square",
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "courthouse": {
+      "name": "courthouse",
+      "position": {
+        "x": 5,
+        "y": 10
+      }
+    },
+    "jury_room": {
+      "name": "jury_room",
+      "position": {
+        "x": 10,
+        "y": 15
+      }
+    },
+    "witness_stand": {
+      "name": "witness_stand",
+      "position": {
+        "x": 7,
+        "y": 12
+      }
+    },
+    "defendant_table": {
+      "name": "defendant_table",
+      "position": {
+        "x": 3,
+        "y": 12
+      }
+    },
+    "prosecutor_table": {
+      "name": "prosecutor_table",
+      "position": {
+        "x": 11,
+        "y": 12
+      }
+    }
+  },
+  "objects": {
+    "evidence_folder": {
+      "id": "evidence_folder",
+      "type": "document",
+      "position": {
+        "x": 5.5,
+        "y": 10.5
+      },
+      "interactive": true,
+      "properties": {
+        "description": "A folder containing trial evidence.",
+        "evidence_count": "15"
+      }
+    },
+    "jury_bench": {
+      "id": "jury_bench",
+      "type": "furniture",
+      "position": {
+        "x": 10.5,
+        "y": 15.5
+      },
+      "interactive": true,
+      "properties": {
+        "capacity": "12",
+        "description": "Where jurors sit during deliberations."
+      }
+    },
+    "gavel": {
+      "id": "gavel",
+      "type": "tool",
+      "position": {
+        "x": 5.2,
+        "y": 10.2
+      },
+      "interactive": true,
+      "properties": {
+        "durability": "100",
+        "description": "The judge's gavel for maintaining order."
+      }
+    },
+    "water_pitcher": {
+      "id": "water_pitcher",
+      "type": "container",
+      "position": {
+        "x": 7.5,
+        "y": 12.5
+      },
+      "interactive": true,
+      "properties": {
+        "filled": "true",
+        "description": "A pitcher of water for witnesses."
+      }
+    }
+  }
+}
