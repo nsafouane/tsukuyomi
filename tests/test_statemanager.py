@@ -13,9 +13,8 @@ This test suite validates:
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from brain.StateManager import (
+from tsukuyomi.brain.StateManager import (
     StateManager,
     PersonalityBaseline,
     EmotionalImpact,
