@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import uuid
+import os
 from typing import Dict, Optional, AsyncIterator
 import grpc
 from tsukuyomi.proto import guest_api_pb2
@@ -23,8 +24,11 @@ class GuestAgent:
         self.stub: Optional[guest_api_pb2_grpc.GuestServiceStub] = None
         self.is_connected = False
         
-    async def connect(self, access_token: str = "tsukuyomi-secret-2026") -> bool:
+    async def connect(self, access_token: str = None) -> bool:
         """Establish connection via Handshake."""
+        if access_token is None:
+            access_token = os.getenv("TSUKUYOMI_GUEST_TOKEN", "default-dev-secret")
+            
         logger.info(f"Connecting to Tsukuyomi at {self.server_addr}...")
         self.channel = grpc.aio.insecure_channel(self.server_addr)
         self.stub = guest_api_pb2_grpc.GuestServiceStub(self.channel)

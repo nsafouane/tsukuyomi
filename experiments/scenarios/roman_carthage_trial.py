@@ -15,7 +15,8 @@ import os
 from pathlib import Path
 
 # Ensure tsukuyomi package is in path
-sys.path.append("/root/.openclaw/workspace/tsukuyomi")
+project_root = Path(__file__).resolve().parent.parent.parent
+sys.path.append(str(project_root))
 
 from tsukuyomi.brain.AgentBrain import AgentBrain
 from tsukuyomi.proto.grpc_server import GrpcServer as FateEngineServer
@@ -26,8 +27,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger("RomanCarthageTrial")
 
 # Paths
-SCENARIO_DIR = Path("/root/.openclaw/workspace/tsukuyomi/experiments/scenarios")
-PROFILES_DIR = Path("/root/.openclaw/workspace/tsukuyomi/experiments/profiles")
+SCENARIO_DIR = project_root / "experiments/scenarios"
+PROFILES_DIR = project_root / "experiments/profiles"
 
 async def load_scenario():
     """Load scenario definition and character profiles."""

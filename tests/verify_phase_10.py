@@ -3,10 +3,12 @@ import logging
 import grpc
 import sys
 import os
+from pathlib import Path
 
-# Manual path adjustments to fix environment issues in this specific setup
-sys.path.insert(0, '/root/.openclaw/workspace/tsukuyomi/proto')
-sys.path.insert(0, '/root/.openclaw/workspace/tsukuyomi')
+# Relative path setup
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root / "proto"))
+sys.path.insert(0, str(project_root))
 
 from tsukuyomi.proto import guest_api_pb2
 from tsukuyomi.proto import guest_api_pb2_grpc
@@ -24,16 +26,14 @@ async def verify_guest_flow():
     
     try:
         # 2. Initialize Guest Client
-        import guest_client
-        client = guest_client.TsukuyomiGuestClient(server_address="localhost:50055")
+        from tsukuyomi.guest_sdk import GuestAgent
+        client = GuestAgent("guest-verifier-01", "Verifier Bot", server_addr="localhost:50055")
         
         # 3. Perform Handshake
         logger.info("Step 1: Handshake")
-        success = await client.connect(
-            agent_id="guest-verifier-01",
-            agent_name="Verifier Bot",
-            access_token="tsukuyomi-secret-2026"
-        )
+        # Use env var or fall back to default
+        token = os.getenv("TSUKUYOMI_GUEST_TOKEN", "tsukuyomi-secret-2026")
+        success = await client.connect(access_token=token)
         
         if not success:
             logger.error("Handshake failed!")
@@ -43,17 +43,16 @@ async def verify_guest_flow():
         
         # 4. Verify Action Submission
         logger.info("Step 2: Action Submission")
-        response = await client.submit_action("EMOTE", {"type": "salute"})
-        if response.accepted:
+        accepted = await client.submit_proposal("EMOTE", {"type": "salute"})
+        if accepted:
             logger.info("Action ACCEPTED")
         else:
-            logger.error(f"Action REJECTED: {response.message}")
+            logger.error(f"Action REJECTED")
             return False
             
         # 5. Verify Subscription (Basic Check)
         logger.info("Step 3: Subscription (Streaming 1 tick)")
-        # In current prototype, subscribe yields one placeholder
-        async for tick in client.subscribe():
+        async for tick in client.stream_updates():
             logger.info(f"Received Tick: {tick.tick_number}")
             break
         

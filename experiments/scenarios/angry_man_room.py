@@ -3,12 +3,15 @@ import logging
 import uuid
 import sys
 import os
+from pathlib import Path
+
+# Relative path setup
+project_root = Path(__file__).resolve().parent.parent.parent
+sys.path.append(str(project_root))
+
 from tsukuyomi.brain.AgentBrain import AgentBrain
 from tsukuyomi.proto.grpc_server import GrpcServer as FateEngineServer
 from tsukuyomi.proto.fate_engine import FateEngine
-
-# Ensure tsukuyomi package is in path
-sys.path.append("/root/.openclaw/workspace/tsukuyomi")
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("AngryManScenario")
