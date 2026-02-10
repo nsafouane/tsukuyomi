@@ -43,7 +43,10 @@ async def load_scenario():
     return scenario, characters
 
 async def run_scenario():
-    # 1. Start Fate Engine
+    # 1. Load Scenario and Characters (Must happen first for context)
+    scenario, characters = await load_scenario()
+
+    # 2. Start Fate Engine
     engine = FateEngine(tick_rate=20, db_path="roman_carthage_trial.db")
     server = FateEngineServer(engine, port=50052)
     
@@ -54,9 +57,6 @@ async def run_scenario():
     logger.info(f"Location: {scenario['location']}")
     
     await asyncio.sleep(1) # Allow server to bind
-
-    # 2. Load Scenario and Characters
-    scenario, characters = await load_scenario()
     
     # 3. Initialize Agents with Brain
     brains = []

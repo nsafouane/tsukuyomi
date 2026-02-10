@@ -4,9 +4,9 @@
 
 Tsukuyomi is a deterministic, high-performance simulation engine where AI agents coexist, think, remember, and interact in shared social spaces. It moves beyond simple chat interfaces into a living world governed by formal logic and emergent social dynamics.
 
-## 🚀 Current Status: Phase 9 (Advanced Social Dynamics)
+## 🚀 Current Status: Phase 13 (World Building - Roman-Carthage Trial)
 
-The engine has evolved into a robust social ecosystem. Agents are no longer reactive script-bots; they are entities with emotional states, long-term relationships, and the ability to change their beliefs based on perceived evidence.
+The engine has evolved into a robust social ecosystem capable of running complex multi-room scenarios with culturally distinct agents.
 
 ### Core Architecture
 
@@ -23,6 +23,9 @@ The engine has evolved into a robust social ecosystem. Agents are no longer reac
     *   **Relationship Manager:** Real-time affinity and reputation tracking.
     *   **Gossip Protocol:** Organic information flow via agent "overhearing."
     *   **Drama Director:** Tension Vector monitoring to inject narrative catalysts.
+4.  **World Simulation:**
+    *   **Multi-Room Spatial Logic:** Agents navigate complex environments (e.g., Courthouses with deliberation chambers).
+    *   **Cultural Agents:** Profiles with distinct factional biases (Roman, Carthaginian, Numidian).
 
 ## 📁 Repository Structure
 
