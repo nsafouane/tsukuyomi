@@ -1,59 +1,83 @@
-# 🏛️ Tsukuyomi (Simulation Engine)
+# Tsukuyomi Engine
 
-*The Moon Reader — Generative Simulation for Living Agents.*
+**The Generative Simulation Engine for Living Agents.**
 
-Tsukuyomi is a deterministic, high-performance simulation engine where AI agents coexist, think, remember, and interact in shared social spaces. It moves beyond simple chat interfaces into a living world governed by formal logic and emergent social dynamics.
+Tsukuyomi is a high-performance, deterministic simulation engine designed to power complex social worlds where AI agents coexist, deliberate, remember, and interact. It bridges the gap between static chatbots and emergent virtual societies by enforcing formal logic, physics, and causal history upon generative agent behaviors.
 
-## 🚀 Current Status: Phase 13 (World Building - Roman-Carthage Trial)
+## 🌟 Core Features
 
-The engine has evolved into a robust social ecosystem capable of running complex multi-room scenarios with culturally distinct agents.
+- **Deterministic Fate Engine:** A 20 TPS (Ticks Per Second) authoritative loop ensuring exact state replication and replayability.
+- **Cognitive Architecture:**
+  - **Sensory Pipeline:** Realistic vision (FOV), hearing, and proprioception with occlusion.
+  - **Emotional State:** PAD (Pleasure-Arousal-Dominance) modeling with inertia and personality baselines.
+  - **Memory Systems:** Miller’s Law working memory, episodic retrieval, and semantic knowledge graphs.
+  - **Belief Dynamics:** Evidence-based stance tracking with confirmation bias.
+- **Social Simulation:**
+  - **Gossip Protocol:** Organic information propagation via proximity and overhearing.
+  - **Relationship Manager:** Dynamic affinity, reputation, and social history tracking.
+  - **Drama Director:** Automated narrative tension monitoring and catalyst injection.
+- **Spatial Logic:** Multi-room partitioning, portals, and dynamic collision/occlusion.
+- **External Interfaces:** gRPC-based Guest Protocol for external agent integration.
 
-### Core Architecture
+## 📚 Documentation
 
-1.  **Fate Engine (The World Authority):**
-    *   Deterministic 20 TPS (Ticks Per Second) loop.
-    *   Authoritative resolver for all agent proposals.
-    *   Maintains the `WorldState` via gRPC tick streaming.
-2.  **The Cognitive Core (The Brain):**
-    *   **Perception Pipeline:** Realistic sensory channels (Vision FOV, Hearing, Proprioception) with occlusion and staggered processing.
-    *   **StateManager:** Emotional mapping using the PAD (Pleasure-Arousal-Dominance) model with emotional inertia and personality baselines.
-    *   **3-Tier Memory:** Miller’s Law Working Memory (7 slots), Episodic (5W events), and Semantic (Knowledge Graph).
-    *   **BeliefManager:** Evidence-based stance tracking with confirmation bias and disconfirmation resistance.
-3.  **Social Layer:**
-    *   **Relationship Manager:** Real-time affinity and reputation tracking.
-    *   **Gossip Protocol:** Organic information flow via agent "overhearing."
-    *   **Drama Director:** Tension Vector monitoring to inject narrative catalysts.
-4.  **World Simulation:**
-    *   **Multi-Room Spatial Logic:** Agents navigate complex environments (e.g., Courthouses with deliberation chambers).
-    *   **Cultural Agents:** Profiles with distinct factional biases (Roman, Carthaginian, Numidian).
+Detailed architecture and design documents are available in the `docs/` directory:
+
+- [**System Overview**](docs/architecture/overview.md): High-level architecture, data flow, and consistency models.
+- [**Deep Dive**](docs/architecture/deep_dive.md): In-depth look at the Cognitive Core and Fate Engine internals.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.12+
+- `pip` and `virtualenv`
+
+### Installation
+
+```bash
+git clone https://github.com/yourusername/tsukuyomi.git
+cd tsukuyomi
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Running a Scenario
+
+Tsukuyomi comes with pre-built scenarios to demonstrate engine capabilities.
+
+```bash
+# Run the Roman-Carthage Legal Trial simulation
+python3 -m tsukuyomi.experiments.scenarios.roman_carthage_trial
+```
+
+### Running Tests
+
+```bash
+pytest tests/
+```
 
 ## 📁 Repository Structure
 
 ```text
 tsukuyomi/
-├── brain/              # Agent Cognitive Stack (State, Memory, Beliefs)
-├── proto/              # Protobuf schemas and Fate Engine logic
-├── experiments/        # Scenarios, Logs, and Trial Reports
-├── tests/              # Unit and Integration test suites
-└── main.py             # Entry point for simulation runs
+├── tsukuyomi/
+│   ├── brain/          # Agent Cognitive Stack (Memory, Emotion, Beliefs)
+│   ├── proto/          # Fate Engine, Physics, and gRPC Schemas
+│   └── integrations/   # External API adaptors
+├── experiments/        # Scenarios, Profiles, and Simulation Logs
+├── tests/              # Unit and Integration Test Suites
+└── docs/               # Architecture and Usage Documentation
 ```
 
-## 🛠️ Usage
+## 🤝 Contributing
 
-### Running a Scenario
-```bash
-# Launch the Angry Man Room experiment
-python3 -m tsukuyomi.experiments.scenarios.angry_man_room
-```
+Contributions are welcome! Please read our [Contribution Guidelines](CONTRIBUTING.md) before submitting a pull request.
 
-### Benchmarking
-```bash
-# Test 20 TPS stability with 12 agents
-python3 benchmark_12_brain_agents.py
-```
+## 📄 License
 
-## 🛡️ External Protocols
-Tsukuyomi supports a custom **Guest Agent Protocol** allowing external researchers or agents to enter the simulation via the `TanitBridge` interface.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-*Built with ❤️ by Safouane & Tanit.*
+*Built with ❤️ by the Tsukuyomi Team.*
