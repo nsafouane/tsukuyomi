@@ -22,6 +22,7 @@ Tsukuyomi is a powerful simulation framework designed to model complex interacti
 - **Protobuf State:** Efficient binary serialization for world state and action proposals.
 - **Extensible Brain:** Built-in support for personality models (PAD, Big Five) and emotional state tracking.
 - **Spatial Logic:** Supports multi-room environments and location-based interactions.
+- **Guest SDK:** Python library allowing external clients (AI models, human players, or other systems) to connect to Fate Engine and participate in the simulation.
 
 ## 🏗 Architecture
 
@@ -169,4 +170,4 @@ If you use Tsukuyomi in your research, please cite it:
 ```
 
 ---
-*Maintained by [OpenClaw](https://github.com/openclaw)*
+*Maintained by Tsukuyomi*
