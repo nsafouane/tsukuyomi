@@ -320,7 +320,9 @@ class AgentBrain:
             if plan["action"] == "REFLECT":
                 self._handle_reflect(plan, tick_state.tick_number)
 
-            cot_log = f"/root/.openclaw/workspace/tsukuyomi/experiments/logs/chain_of_thought/{self.profile['name'].replace(' ', '_')}.jsonl"
+            cot_log_dir = os.path.join(os.getcwd(), "experiments/logs/chain_of_thought")
+            os.makedirs(cot_log_dir, exist_ok=True)
+            cot_log = os.path.join(cot_log_dir, f"{self.profile['name'].replace(' ', '_')}.jsonl")
             with open(cot_log, "a") as f:
                 f.write(
                     json.dumps(
@@ -339,7 +341,9 @@ class AgentBrain:
                 plan.get("params", {}).get("type") == "speak"
                 or "message" in plan.get("params", {})
             ):
-                dialogue_log = "/root/.openclaw/workspace/tsukuyomi/experiments/logs/dialogue/transcript.jsonl"
+                dialogue_log_dir = os.path.join(os.getcwd(), "experiments/logs/dialogue")
+                os.makedirs(dialogue_log_dir, exist_ok=True)
+                dialogue_log = os.path.join(dialogue_log_dir, "transcript.jsonl")
                 with open(dialogue_log, "a") as f:
                     f.write(
                         json.dumps(
