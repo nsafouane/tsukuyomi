@@ -17,6 +17,7 @@ import asyncio
 import logging
 import uuid
 import time
+import os
 from typing import AsyncIterator, Optional, Dict, Callable
 
 import grpc
@@ -66,13 +67,30 @@ class FateEngineClient:
         Returns True if connection successful.
         """
         try:
-            self.channel = aio.insecure_channel(
-                self.server_address,
-                options=[
-                    ('grpc.max_send_message_length', 50 * 1024 * 1024),
-                    ('grpc.max_receive_message_length', 50 * 1024 * 1024),
-                ]
-            )
+            # Security: Use secure channel if certificates are found
+            tls_cert_path = os.getenv("TLS_CERT_PATH", "certs/server.crt")
+            if os.path.exists(tls_cert_path):
+                with open(tls_cert_path, 'rb') as f:
+                    creds = grpc.ssl_channel_credentials(f.read())
+                self.channel = aio.secure_channel(
+                    self.server_address,
+                    creds,
+                    options=[
+                        ('grpc.max_send_message_length', 50 * 1024 * 1024),
+                        ('grpc.max_receive_message_length', 50 * 1024 * 1024),
+                    ]
+                )
+                logger.info(f"Connected securely (TLS) to {self.server_address}")
+            else:
+                self.channel = aio.insecure_channel(
+                    self.server_address,
+                    options=[
+                        ('grpc.max_send_message_length', 50 * 1024 * 1024),
+                        ('grpc.max_receive_message_length', 50 * 1024 * 1024),
+                    ]
+                )
+                logger.warning(f"Connected insecurely to {self.server_address}")
+
             self.stub = fate_engine_service_pb2_grpc.FateEngineServiceStub(self.channel)
             
             # Test connection with a simple call

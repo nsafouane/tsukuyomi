@@ -3,9 +3,11 @@ import asyncio
 import os
 import uuid
 import time
+import pytest
 from tsukuyomi.proto.fate_engine import FateEngine, create_proposal
 from tsukuyomi.proto.db_manager import DBManager
 
+@pytest.mark.asyncio
 async def test_persistence_integration():
     db_path = "test_persistence.db"
     if os.path.exists(db_path):

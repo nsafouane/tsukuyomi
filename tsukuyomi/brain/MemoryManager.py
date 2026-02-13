@@ -30,6 +30,45 @@ class MemoryManager:
             str, List[int]
         ] = {}  # keyword -> list of memory indices
 
+        self.long_term_memory: Dict[str, Any] = {}  # topic -> memory data
+        self._lts_persistence_path: Optional[str] = None
+
+    async def store_long_term(self, topic: str, content: str, tags: List[str], tick: int) -> None:
+        """Store information in long-term memory with retrieval tags."""
+        self.long_term_memory[topic] = {
+            "content": content,
+            "tags": tags,
+            "tick_added": tick,
+            "access_count": 0,
+            "last_accessed": tick,
+        }
+
+    def query_long_term(self, topics: List[str], limit: int = 5) -> List[Dict[str, Any]]:
+        """Query long-term memory by topics/tags."""
+        results = []
+        import time
+        for topic, data in self.long_term_memory.items():
+            if any(tag in data.get("tags", []) for tag in topics):
+                data["access_count"] += 1
+                data["last_accessed"] = time.time()
+                results.append({"topic": topic, **data})
+        return sorted(results, key=lambda x: x["access_count"], reverse=True)[:limit]
+
+    async def persist_to_disk(self, path: str) -> None:
+        """Persist long-term memory to disk."""
+        import json
+        with open(path, 'w') as f:
+            json.dump(self.long_term_memory, f)
+
+    async def load_from_disk(self, path: str) -> None:
+        """Load long-term memory from disk."""
+        import json
+        try:
+            with open(path, 'r') as f:
+                self.long_term_memory = json.load(f)
+        except FileNotFoundError:
+            self.long_term_memory = {}
+
     def add_fact(
         self,
         subject: str,

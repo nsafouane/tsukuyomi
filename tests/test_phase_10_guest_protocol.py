@@ -8,6 +8,9 @@ from tsukuyomi.guest_sdk import GuestAgent
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("GuestProtocolTest")
 
+import pytest
+
+@pytest.mark.asyncio
 async def test_guest_protocol():
     # 1. Start simulation server in a background thread/process
     # Using local mock server for testing

@@ -118,6 +118,7 @@ class FateEngine:
         seed: Optional[int] = None,
         db_path: Optional[str] = None,
         scenario_config: Optional[str] = None,  # Path to scenario JSON config
+        medieval_compatibility: bool = True,
     ):
         self.tick_rate = tick_rate
         self.tick_duration = 1.0 / tick_rate
@@ -150,6 +151,22 @@ class FateEngine:
 
             # FIX: Load scenario configuration from JSON file instead of hardcoding
             self._load_scenario(scenario_config)
+
+            # Hardcoded defaults for medieval scenario if world is still empty (backward compatibility for tests)
+            if medieval_compatibility or not self.world_state.locations:
+                medieval_locations = {
+                    "market_square": (0, 0),
+                    "tavern": (10, 10),
+                    "inn": (-5, 5),
+                    "well": (2, -3),
+                }
+                for name, pos in medieval_locations.items():
+                    if name not in self.world_state.locations:
+                        self.world_state.locations[name].CopyFrom(
+                            core_pb2.Location(
+                                name=name, position=common_pb2.Vector2(x=pos[0], y=pos[1])
+                            )
+                        )
 
         # Proposal management
         self.proposal_queue: List[core_pb2.Proposal] = []

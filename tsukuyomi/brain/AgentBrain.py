@@ -142,16 +142,31 @@ class AgentBrain:
         await self._run_reflexes(tick_state)
 
         reactive_trigger = self._check_reactive_triggers(percepts)
+        directive_trigger = await self._check_llm_directives(tick_state)
 
         if not self.is_thinking:
             if reactive_trigger:
                 asyncio.create_task(
                     self._deliberate(tick_state, percepts, reason=reactive_trigger)
                 )
+            elif directive_trigger:
+                asyncio.create_task(
+                    self._deliberate(tick_state, percepts, reason=f"directive: {directive_trigger}")
+                )
             elif self._should_deliberate(tick_state):
                 asyncio.create_task(
                     self._deliberate(tick_state, percepts, reason="scheduled")
                 )
+
+    async def _check_llm_directives(self, tick_state: core_pb2.TickState) -> Optional[str]:
+        """Check for active LLM directives before deliberation."""
+        # Check for pending directives from long-term memory
+        directive_memories = self.memory.query_long_term(["directive"], limit=1)
+        
+        if directive_memories:
+            return directive_memories[0].get("content", "")
+        
+        return None
 
     def _process_social_signals(self, percepts: list, tick: int):
         """Process perception signals to update relationships."""

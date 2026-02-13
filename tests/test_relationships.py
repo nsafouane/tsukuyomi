@@ -2,6 +2,7 @@ import asyncio
 import logging
 import uuid
 import json
+import pytest
 from typing import Dict
 from tsukuyomi.brain.AgentBrain import AgentBrain
 from tsukuyomi.proto import core_pb2, common_pb2, perception_pb2
@@ -10,6 +11,7 @@ from tsukuyomi.proto import core_pb2, common_pb2, perception_pb2
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("TestRelationship")
 
+@pytest.mark.asyncio
 async def test_relationship_tracking():
     actor_id = "juror_8"
     profile = {

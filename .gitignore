@@ -46,3 +46,4 @@ htmlcov/
 
 # Local Development Artifacts (ignored)
 dev_artifacts/
+certs/

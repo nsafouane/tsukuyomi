@@ -27,10 +27,21 @@ class GuestAgent:
     async def connect(self, access_token: str = None) -> bool:
         """Establish connection via Handshake."""
         if access_token is None:
-            access_token = os.getenv("TSUKUYOMI_GUEST_TOKEN", "default-dev-secret")
+            access_token = os.getenv("GUEST_ACCESS_TOKEN", "tsukuyomi-secret-2026")
             
         logger.info(f"Connecting to Tsukuyomi at {self.server_addr}...")
-        self.channel = grpc.aio.insecure_channel(self.server_addr)
+        
+        # Security: Use secure channel if certificates are found
+        tls_cert_path = os.getenv("TLS_CERT_PATH", "certs/server.crt")
+        if os.path.exists(tls_cert_path):
+            with open(tls_cert_path, 'rb') as f:
+                creds = grpc.ssl_channel_credentials(f.read())
+            self.channel = grpc.aio.secure_channel(self.server_addr, creds)
+            logger.info("Using secure channel (TLS)")
+        else:
+            self.channel = grpc.aio.insecure_channel(self.server_addr)
+            logger.warning("Using insecure channel")
+
         self.stub = guest_api_pb2_grpc.GuestServiceStub(self.channel)
         
         try:
@@ -88,7 +99,8 @@ class GuestAgent:
                 action=action_enum,
                 parameters=params or {}
             )
-            response = await self.stub.SubmitProposal(proposal)
+            metadata = [("session_token", self.session_id)]
+            response = await self.stub.SubmitProposal(proposal, metadata=metadata)
             return response.accepted
         except Exception as e:
             logger.error(f"SubmitProposal error: {e}")

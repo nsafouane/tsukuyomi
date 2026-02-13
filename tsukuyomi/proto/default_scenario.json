@@ -41,6 +41,13 @@
         "x": 11,
         "y": 12
       }
+    },
+    "tavern": {
+      "name": "tavern",
+      "position": {
+        "x": 10,
+        "y": 10
+      }
     }
   },
   "objects": {
@@ -94,6 +101,18 @@
       "properties": {
         "filled": "true",
         "description": "A pitcher of water for witnesses."
+      }
+    },
+    "well_structure": {
+      "id": "well_structure",
+      "type": "structure",
+      "position": {
+        "x": 2,
+        "y": -3
+      },
+      "interactive": true,
+      "properties": {
+        "description": "A stone well."
       }
     }
   }
