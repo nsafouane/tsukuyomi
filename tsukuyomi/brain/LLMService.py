@@ -305,6 +305,11 @@ class OpenAICompatibleProvider(LLMProvider):
         except Exception as e:
             logger.warning(f"Health check failed: {e}")
             return False
+
+class GroqProvider(OpenAICompatibleProvider):
+    """Concrete implementation for Groq API."""
+    def __init__(self, api_key: str, model: str, timeout: int = 30):
+        super().__init__(api_key, model, "https://api.groq.com/openai/v1", timeout)
     
     def _parse_json_response(self, content: str) -> Dict[str, Any]:
         """Parse JSON from LLM response, handling markdown code blocks."""
@@ -338,7 +343,7 @@ class OpenAICompatibleProvider(LLMProvider):
 class LLMService:
     """
     Main service class for LLM integration in Tsukuyomi.
-    
+
     This class serves as the bridge between the AgentBrain and external LLM providers.
     It manages provider instances, prompt templates, and handles response generation.
     
@@ -363,7 +368,7 @@ class LLMService:
     
     # Rate limiting configuration
     _rate_limit_lock = asyncio.Lock()
-    _min_request_interval = 0.5  # seconds between requests
+    _min_request_interval = 2.1  # seconds between requests (for Groq 30 RPM limit)
     _last_request_time = 0
     
     def __init__(
@@ -388,6 +393,71 @@ class LLMService:
         self._base_url = base_url or self.DEFAULT_BASE_URL
         self._initialized = False
         self._prompt_templates = self._load_prompt_templates()
+
+    @staticmethod
+    async def generate_plan_v2(
+        profile: Dict,
+        working_memory: str,
+        beliefs: str,
+        relationships: str,
+        emotional_modifier: str,
+        reason: str,
+    ) -> Dict:
+        """
+        Legacy compatibility method for V2 deliberation.
+        """
+        service = LLMService()
+        await service.initialize()
+        
+        context = LLMRequestContext(
+            agent_name=profile.get("name", "Unknown"),
+            agent_backstory=profile.get("backstory", ""),
+            agent_stance=profile.get("stance"),
+            working_memory=working_memory,
+            beliefs=beliefs,
+            relationships=relationships,
+            emotional_modifier=emotional_modifier,
+            trigger_reason=reason
+        )
+        
+        response = await service.generate_agent_response(context, ScenarioType.DELIBERATION)
+        
+        return {
+            "thought": response.thought,
+            "action": response.action,
+            "params": response.params
+        }
+
+    @staticmethod
+    async def generate_plan(
+        profile: Dict,
+        memories: List[Dict],
+        semantic_facts: List[str],
+        world_state_summary: str,
+    ) -> Dict:
+        """
+        Legacy compatibility method for V1 deliberation.
+        """
+        service = LLMService()
+        await service.initialize()
+        
+        context = LLMRequestContext(
+            agent_name=profile.get("name", "Unknown"),
+            agent_backstory=profile.get("backstory", ""),
+            agent_stance=profile.get("stance"),
+            semantic_facts=semantic_facts,
+            world_state_summary=world_state_summary,
+            working_memory=f"RECENT MEMORIES (Episodic):\n{json.dumps(memories, indent=2)}",
+            trigger_reason="scheduled"
+        )
+        
+        response = await service.generate_agent_response(context, ScenarioType.STORYTELLING)
+        
+        return {
+            "thought": response.thought,
+            "action": response.action,
+            "params": response.params
+        }
     
     async def initialize(self) -> bool:
         """
@@ -405,12 +475,20 @@ class LLMService:
                 logger.error("No API key provided. Set LLM_API_KEY environment variable.")
                 return False
             
-            self._provider = OpenAICompatibleProvider(
-                api_key=self._api_key,
-                model=self._model,
-                base_url=self._base_url,
-                timeout=self.DEFAULT_TIMEOUT
-            )
+            provider_type = os.getenv("LLM_PROVIDER", "openai").lower()
+            if provider_type == "groq" or "groq" in self._base_url:
+                self._provider = GroqProvider(
+                    api_key=self._api_key,
+                    model=self._model,
+                    timeout=self.DEFAULT_TIMEOUT
+                )
+            else:
+                self._provider = OpenAICompatibleProvider(
+                    api_key=self._api_key,
+                    model=self._model,
+                    base_url=self._base_url,
+                    timeout=self.DEFAULT_TIMEOUT
+                )
         
         # Health check
         if await self._provider.health_check():
@@ -713,70 +791,9 @@ RESPONSE FORMAT (JSON only):
 # Legacy Compatibility Functions (for backward compatibility)
 # ============================================================================
 
-async def generate_plan_v2(
-    profile: Dict,
-    working_memory: str,
-    beliefs: str,
-    relationships: str,
-    emotional_modifier: str,
-    reason: str,
-) -> Dict:
-    """
-    Legacy compatibility function for V2 deliberation.
-    
-    This function maintains the existing interface while using the new LLMService.
-    """
-    service = LLMService()
-    await service.initialize()
-    
-    context = LLMRequestContext(
-        agent_name=profile.get("name", "Unknown"),
-        agent_backstory=profile.get("backstory", ""),
-        agent_stance=profile.get("stance"),
-        working_memory=working_memory,
-        beliefs=beliefs,
-        relationships=relationships,
-        emotional_modifier=emotional_modifier,
-        trigger_reason=reason
-    )
-    
-    response = await service.generate_agent_response(context, ScenarioType.DELIBERATION)
-    
-    return {
-        "thought": response.thought,
-        "action": response.action,
-        "params": response.params
-    }
+async def generate_plan_v2(*args, **kwargs):
+    return await LLMService.generate_plan_v2(*args, **kwargs)
 
+async def generate_plan(*args, **kwargs):
+    return await LLMService.generate_plan(*args, **kwargs)
 
-async def generate_plan(
-    profile: Dict,
-    memories: List[Dict],
-    semantic_facts: List[str],
-    world_state_summary: str,
-) -> Dict:
-    """
-    Legacy compatibility function for V1 deliberation.
-    
-    This function maintains the existing interface while using the new LLMService.
-    """
-    service = LLMService()
-    await service.initialize()
-    
-    context = LLMRequestContext(
-        agent_name=profile.get("name", "Unknown"),
-        agent_backstory=profile.get("backstory", ""),
-        agent_stance=profile.get("stance"),
-        semantic_facts=semantic_facts,
-        world_state_summary=world_state_summary,
-        working_memory=f"RECENT MEMORIES (Episodic):\n{json.dumps(memories, indent=2)}",
-        trigger_reason="scheduled"
-    )
-    
-    response = await service.generate_agent_response(context, ScenarioType.STORYTELLING)
-    
-    return {
-        "thought": response.thought,
-        "action": response.action,
-        "params": response.params
-    }

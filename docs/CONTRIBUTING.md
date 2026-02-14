@@ -1,99 +1,56 @@
-# 🤝 Contributing to Tsukuyomi
+# 🤝 Contributing to Tsukuyomi V2
 
-We welcome contributions from the community! This project aims to be a high-performance, scalable simulation engine for multi-agent systems.
+Welcome! We are building an autonomous, general-purpose multi-agent simulation engine. Please follow these guidelines to keep the codebase organized and scalable.
 
-## 🚀 Getting Started
+## 🎯 Design Philosophy
 
-### 1. Setup Development Environment
-1.  Fork the repository: `https://github.com/nsafouane/tsukuyomi`.
-2.  Clone it locally:
-    ```bash
-    git clone https://github.com/nsafouane/tsukuyomi.git
-    cd tsukuyomi
-    ```
-3.  Create a virtual environment:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
-4.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+**"General Engine" over "Custom Scenarios"**
 
-### 2. Review Project Structure
-Familiarize yourself with the codebase.
-- `tsukuyomi/brain/`: Agent logic and decision-making.
-- `tsukuyomi/proto/`: Core engine and networking.
-- `tsukuyomi/experiments/`: Simulation scenarios.
-- `tests/`: Test suites.
+*   **Don't Hardcode:** Do not write specific scenario logic (e.g., "If agent is Davis, say X") directly into the `FateEngine` or `AgentBrain` files.
+*   **Use Systems:** Implement *general systems* (Needs System, Spatial Index, Affordance System) that apply to *all* agents.
+*   **Be Abstract:** A "Merchant" is just an agent with high `Social Need` and an inventory. A "Guard" is an agent with a `Patrol Goal`. Write the logic for the *role* into the agent profile or a subclass, not the core engine.
 
-See [RULES.md](../RULES.md) for coding standards and naming conventions.
+## 🏗️ Project Structure
 
-### 3. Choose an Issue
-Check the [Issues](https://github.com/nsafouane/tsukuyomi/issues) tab for a task that interests you or create a new one.
+*   `/tsukuyomi/core/` - Server logic (FateEngine, World, SpatialIndex).
+*   `/tsukuyomi/brain/` - Client logic (AgentBrain, Perception, Memory).
+*   `/tsukuyomi/proto/` - gRPC definitions (`.proto` files).
+*   `/tsukuyomi/experiments/` - Scenario scripts (e.g., `marketplace.py`).
+*   `/tsukuyomi/docs/` - Documentation (This directory).
 
-## 🧠 Coding Standards
+## 📝 Contribution Workflow
 
-### Style Guide
-- **Language:** Python 3.8+
-- **Line Length:** Keep lines under 700 characters for better readability.
-- **Imports:** Always use absolute imports from `tsukuyomi` package root.
-    - `from tsukuyomi.brain.AgentBrain import AgentBrain`
-- **Docstrings:** Use Google-style docstrings for all public classes and methods.
-- **Type Hinting:** Use modern Python type hints (`List`, `Optional`).
-- **Logging:** Use `logging` module, not `print()`.
+1.  **Discuss:** Open a GitHub Issue or Discord discussion.
+2.  **Branch:** Create a feature branch (e.g., `feat/spatial-index`).
+3.  **Code:** Write code following Python standards (PEP8) and docstring conventions.
+4.  **Test:** Write a test in `/tsukuyomi/tests/` (or a scenario script) validating the change.
+5.  **PR:** Submit a Pull Request with description and linking to Issue.
 
-### Directory Placement
-- **Tests:** All tests must be in `tests/` directory.
-- **Protobufs:** Source `.proto` files go in `tsukuyomi/proto/`. Generated `_pb2.py` files go in same directory.
+## 🧠 Guidelines for Components
 
-### Testing
-- Write unit tests for new features in `tests/`.
-- Ensure all existing tests pass before pushing.
-- Aim for >80% test coverage on new code.
+### Fate Engine (Server)
+*   **Keep it Async:** Avoid blocking I/O in the main tick loop.
+*   **State Authority:** All world state changes must happen via `Proposal` -> `Resolution`.
+*   **Input Validation:** Trust nothing from `AgentBrain`. Sanitize parameters.
 
-## 📝 Submitting Changes
+### Agent Brain (Client)
+*   **Perception:** Filter and tag percepts. Don't dump the whole world state to the LLM every tick.
+*   **Memory:** Implement short-term (Gossip) and long-term (RAG) storage strategies.
+*   **Caching:** Cache system prompts (Role, Backstory) to save API calls/tokens.
 
-### 1. Create a Branch
-Always create a new branch for your feature or bugfix.
-    ```bash
-    git checkout -b feature/my-amazing-feature
-    ```
+### World Management
+*   **Objects:** Define objects using the `WorldBuilder` API.
+*   **Affordances:** Define what *can* happen, not just what *is*.
+*   **Spatial:** Use the `SpatialIndex` for collision detection, not O(N) loops.
 
-### 2. Make Your Changes
-- Write code following the style guide.
-- Write/update tests for your changes.
-- Add docstrings to new functions.
+## 🚫 Prohibited Changes
 
-### 3. Commit Your Changes
-- Use a clear, descriptive commit message.
-    ```bash
-    git add .
-    git commit -m "feat(agent): add advanced memory recall"
-    ```
+*   **Do not modify** `experiments/angry_men_5_agents.py` to fix a general engine bug. Fix the engine in `/tsukuyomi/core/`.
+*   **Do not add** "If actor ID == 'davis'" logic to `FateEngine`. Use roles and traits instead.
+*   **Do not hardcode** specific scenarios into the core engine files. Scenarios belong in `/experiments/`.
 
-### 4. Push to Branch
-- Push your feature branch to GitHub.
-    ```bash
-    git push -u origin feature/my-amazing-feature
-    ```
+## 📜 Code Style
 
-### 5. Create a Pull Request
-1.  Go to the repository on GitHub.
-2.  Click the "New Pull Request" button.
-3.  Select your branch from the dropdown.
-4.  Fill in the PR title and description. Use the provided template.
-
-## 🧪 Code Review Process
-
-### What we look for:
-- **Correctness:** Does the code solve the intended problem?
-- **Performance:** Is the code efficient? Does it scale well?
-- **Readability:** Is the code easy to understand? Is it well-structured?
-- **Maintainability:** Is it easy to modify and extend?
-
-### Tips for a Great PR:
-- Keep PRs small and focused.
-- If a feature requires multiple files, mention why in the description.
-- Link to related issues if your PR fixes a bug.
+*   Use `typing` hints (e.g., `def func(x: int) -> str`).
+*   Use the `logging` module, not `print()` statements.
+*   Error handling: Wrap gRPC calls in `try/except` blocks.

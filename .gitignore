@@ -32,6 +32,7 @@ env/
 # Logs
 *.log
 experiments/logs/
+use memory/
 
 # IDEs and OS files
 .vscode/

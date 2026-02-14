@@ -3,6 +3,7 @@ import uuid
 import logging
 import json
 import re
+import os
 from typing import Dict, Optional, List, Any
 from tsukuyomi.proto.grpc_client import FateEngineClient
 from tsukuyomi.proto import core_pb2
@@ -254,8 +255,8 @@ class AgentBrain:
                     )
 
     def _should_deliberate(self, tick_state: core_pb2.TickState) -> bool:
-        """Rule: Deliberate every 50 ticks with a unique offset."""
-        return (tick_state.tick_number + self.tick_offset) % 50 == 0
+        """Rule: Deliberate every 200 ticks with a unique offset (safe for Groq 30 RPM)."""
+        return (tick_state.tick_number + self.tick_offset) % 200 == 0
 
     async def _deliberate(
         self, tick_state: core_pb2.TickState, percepts: list, reason: str = "scheduled"
@@ -361,8 +362,11 @@ class AgentBrain:
                 f"🧠 {self.profile['name']} DECIDED ({reason}): {plan['thought']} -> {plan['action']}"
             )
 
+            # Ensure all parameters are strings for gRPC/protobuf
+            params = {k: str(v) for k, v in plan.get("params", {}).items()}
+
             await self.client.submit_proposal(
-                self.actor_id, plan["action"], plan.get("params", {})
+                self.actor_id, plan["action"], params
             )
             logger.debug(
                 f"PROPOSAL SUBMITTED: {self.profile['name']} -> {plan['action']}"
