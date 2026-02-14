@@ -9,6 +9,7 @@ from tsukuyomi.proto.grpc_client import FateEngineClient
 from tsukuyomi.proto import core_pb2
 from tsukuyomi.brain.MemoryManager import MemoryManager
 from tsukuyomi.brain.LLMService import LLMService
+from tsukuyomi.brain.needs_system import NeedsSystem, NeedType  # V2: Add needs import
 from tsukuyomi.brain.PerceptionPipeline import (
     PerceptionPipeline,
     SensoryProfile,
@@ -85,6 +86,10 @@ class AgentBrain:
         self.working_memory = WorkingMemory()
         self.relationships = RelationshipManager(actor_id)
 
+        # V2: Initialize Needs System for autonomous behavior
+        self.needs = NeedsSystem()
+        logger.info(f"AgentBrain for {profile.get('name', 'Unknown')} initialized with NeedsSystem")
+
         # FIX: Get drama director instance for sentiment updates
         from tsukuyomi.brain.DramaDirector import DramaDirector
 
@@ -129,6 +134,9 @@ class AgentBrain:
 
         if tick_state.tick_number % 10 == 0:
             self.memory.tick_decay(tick_state.tick_number)
+
+        # V2: Update needs every tick (based on tick rate)
+        self.needs.update_all(tick_rate=20.0)  # 20 ticks per second
 
         # FIX: Process gossip propagation each tick
         from tsukuyomi.brain.GossipProtocol import get_gossip_protocol
@@ -289,12 +297,17 @@ class AgentBrain:
             emotional_modifier = self.state_manager.get_emotional_context()
             working_memory_context = self.working_memory.to_llm_context()
 
+            # V2: Get needs context for LLM prompt
+            needs_context = self.needs.get_prompt_context()
+
+            # Pass arguments in correct order matching function signature
             plan = await LLMService.generate_plan_v2(
                 self.profile,
                 working_memory_context,
                 belief_context,
                 relationship_context,
                 emotional_modifier,
+                needs_context,
                 reason,
             )
 
@@ -372,10 +385,42 @@ class AgentBrain:
                 f"PROPOSAL SUBMITTED: {self.profile['name']} -> {plan['action']}"
             )
 
+            # V2: Satisfy needs based on action taken
+            self._satisfy_needs_for_action(plan["action"])
+
         except Exception as e:
             logger.error(f"Deliberation failed for {self.profile['name']}: {e}")
         finally:
             self.is_thinking = False
+
+    def _satisfy_needs_for_action(self, action: str) -> None:
+        """
+        V2: Satisfy needs based on the action taken.
+        This provides feedback to the needs system when the agent successfully
+        addresses a need through action.
+
+        Args:
+            action: The action that was submitted
+        """
+        from tsukuyomi.brain.NeedsSystem import NeedType
+
+        # Map actions to needs they satisfy
+        action_need_map = {
+            "EAT": (NeedType.HUNGER, 0.7),  # Eating reduces hunger significantly
+            "DRINK": (NeedType.HUNGER, 0.3),
+            "SIT": (NeedType.FATIGUE, 0.2),  # Resting reduces fatigue
+            "SLEEP": (NeedType.FATIGUE, 0.8),  # Sleeping reduces fatigue significantly
+            "SOCIALIZE": (NeedType.SOCIAL, 0.5),  # Social interaction reduces social need
+            "DANCE": (NeedType.BOREDOM, 0.6),  # Dancing reduces boredom
+            "EXPLORE": (NeedType.BOREDOM, 0.3),  # Exploration reduces boredom slightly
+            "MOVE": (NeedType.BOREDOM, 0.1),  # Moving slightly reduces boredom
+            "EMOTE": (NeedType.SOCIAL, 0.1),  # Speaking reduces social need slightly
+        }
+
+        if action in action_need_map:
+            need_type, amount = action_need_map[action]
+            self.needs.satisfy_need(need_type, amount)
+            logger.debug(f"Action {action} satisfied {need_type.value} need by {amount}")
 
     def _extract_topics(self, percepts: list) -> List[str]:
         topics = []

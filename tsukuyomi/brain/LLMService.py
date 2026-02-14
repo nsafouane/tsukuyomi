@@ -56,8 +56,9 @@ class LLMRequestContext:
     emotional_modifier: str = ""
     semantic_facts: Optional[List[str]] = None
     world_state_summary: str = ""
+    needs_context: str = ""  # V2: Internal needs driving agent behavior
     trigger_reason: str = "scheduled"
-    
+
     def __post_init__(self):
         if self.semantic_facts is None:
             self.semantic_facts = []
@@ -401,14 +402,15 @@ class LLMService:
         beliefs: str,
         relationships: str,
         emotional_modifier: str,
-        reason: str,
+        needs_context: str = "",  # V2: Add needs context
+        reason: str = "scheduled",
     ) -> Dict:
         """
         Legacy compatibility method for V2 deliberation.
         """
         service = LLMService()
         await service.initialize()
-        
+
         context = LLMRequestContext(
             agent_name=profile.get("name", "Unknown"),
             agent_backstory=profile.get("backstory", ""),
@@ -417,11 +419,12 @@ class LLMService:
             beliefs=beliefs,
             relationships=relationships,
             emotional_modifier=emotional_modifier,
+            needs_context=needs_context,  # V2: Pass needs context
             trigger_reason=reason
         )
-        
+
         response = await service.generate_agent_response(context, ScenarioType.DELIBERATION)
-        
+
         return {
             "thought": response.thought,
             "action": response.action,
@@ -607,6 +610,8 @@ Identity: {agent_name}
 Backstory: {agent_backstory}
 {stance_section}
 
+{needs}
+
 {beliefs}
 
 {relationships}
@@ -618,20 +623,22 @@ Backstory: {agent_backstory}
 {semantic_facts}
 
 TASK:
-Based on your beliefs, emotional state, relationships, and working memory, decide your next action.
+Based on your internal needs, beliefs, emotional state, relationships, and working memory, decide your next action.
+IMPORTANT: If any need is above critical threshold (>80%), you MUST address it before other actions.
 Trigger: {trigger_reason}
 
 Allowed Actions:
-- MOVE (params: destination)
-- EMOTE (params: type="speak", message="your words") - Use this to talk to others.
-- EXAMINE (params: target_id) - Look closely at an object or person
+- MOVE (params: destination) - Move to a location. Use for exploration or finding food/items.
+- EMOTE (params: type="speak", message="your words") - Speak to others.
+- INTERACT (params: target_id) - Interact with an object (e.g., collect food, sit on chair).
+- EXAMINE (params: target_id) - Look closely at an object or person.
 - REFLECT (params: topic="defendant_guilt", position="for/against", weight=0.5, reasoning="...") - Update your beliefs
-- IDLE (params: duration)
+- IDLE (params: duration) - Wait and observe.
 
 RESPONSE FORMAT (JSON only):
 {{
     "thought": "your internal reasoning",
-    "action": "MOVE|EMOTE|IDLE|EXAMINE|REFLECT",
+    "action": "MOVE|EMOTE|INTERACT|IDLE|EXAMINE|REFLECT",
     "params": {{"key": "value"}}
 }}"""
     
@@ -757,17 +764,18 @@ RESPONSE FORMAT (JSON only):
     def _build_user_prompt(self, context: LLMRequestContext, scenario_type: ScenarioType) -> str:
         """Build user prompt from context and scenario template."""
         template = self._prompt_templates.get(scenario_type, self._get_deliberation_template())
-        
+
         stance_section = f"Current Stance: {context.agent_stance}" if context.agent_stance else ""
-        
+
         semantic_facts = ""
         if context.semantic_facts:
             semantic_facts = f"WORLD KNOWLEDGE (Semantic):\n{json.dumps(context.semantic_facts, indent=2)}"
-        
+
         return template.format(
             agent_name=context.agent_name,
             agent_backstory=context.agent_backstory,
             stance_section=stance_section,
+            needs=context.needs_context,  # V2: Add needs context
             beliefs=context.beliefs,
             relationships=context.relationships,
             emotional_modifier=context.emotional_modifier,
