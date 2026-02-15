@@ -4,7 +4,7 @@ import logging
 import json
 import re
 import os
-from typing import Dict, Optional, List, Any
+from typing import Dict, Optional, List, Any, Tuple
 from tsukuyomi.proto.grpc_client import FateEngineClient
 from tsukuyomi.proto import core_pb2
 from tsukuyomi.brain.MemoryManager import MemoryManager
@@ -90,10 +90,43 @@ class AgentBrain:
         self.needs = NeedsSystem()
         logger.info(f"AgentBrain for {profile.get('name', 'Unknown')} initialized with NeedsSystem")
 
+        # Phase 2: Spatial Index integration for efficient perception
+        self.spatial_index = None  # Will be set by external initialization
+        self.spatial_logic = None  # Will be set by external initialization
+
         # FIX: Get drama director instance for sentiment updates
         from tsukuyomi.brain.DramaDirector import DramaDirector
 
         self.drama_director = None
+
+    def set_spatial_index(self, spatial_index):
+        """
+        Set the spatial index for efficient proximity detection.
+
+        This is called during world initialization to integrate the agent
+        with the spatial partitioning system.
+
+        Args:
+            spatial_index: SpatialIndex instance from the world
+        """
+        self.spatial_index = spatial_index
+        self.perception.set_spatial_index(spatial_index)
+        logger.info(f"AgentBrain {self.profile['name']} connected to SpatialIndex")
+
+    def set_spatial_logic(self, spatial_logic):
+        """
+        Set the spatial logic for room/portal awareness.
+
+        This provides the agent with knowledge of room boundaries,
+        portals, and occluding obstacles for accurate line-of-sight.
+
+        Args:
+            spatial_logic: SpatialLogic instance from the world
+        """
+        self.spatial_logic = spatial_logic
+        self.perception.set_spatial_logic(spatial_logic)
+        logger.info(f"AgentBrain {self.profile['name']} connected to SpatialLogic")
+
 
     async def run(self):
         """Main cognitive loop: stream ticks and decide actions."""
@@ -115,11 +148,24 @@ class AgentBrain:
             await self._process_tick(tick_state)
 
     async def _process_tick(self, tick_state: core_pb2.TickState):
+        # Phase 2: Update spatial index with current position
+        my_actor = tick_state.world_state.actors.get(self.agent_id)
+        if my_actor and self.spatial_index:
+            # Update agent's position in spatial index for efficient queries
+            self.spatial_index.update_position(
+                self.agent_id,
+                (my_actor.position.x, my_actor.position.y)
+            )
+
+        # Calculate facing direction (simplified - could be derived from movement)
+        facing_direction = self._calculate_facing_direction(my_actor)
+
         agent_state = AgentInternalState(
             current_concerns=[],
             mood_label=self.state_manager.state.mood_label,
             arousal=self.state_manager.state.arousal,
             last_seen_entities={},
+            facing_direction=facing_direction,
         )
 
         percepts = self.perception.process(
@@ -300,6 +346,9 @@ class AgentBrain:
             # V2: Get needs context for LLM prompt
             needs_context = self.needs.get_prompt_context()
 
+            # Phase 2: Get visual context from perception pipeline
+            visual_context = self.get_visual_context_for_llm()
+
             # Pass arguments in correct order matching function signature
             plan = await LLMService.generate_plan_v2(
                 self.profile,
@@ -308,6 +357,7 @@ class AgentBrain:
                 relationship_context,
                 emotional_modifier,
                 needs_context,
+                visual_context,  # Add visual context
                 reason,
             )
 
@@ -467,6 +517,52 @@ class AgentBrain:
             logger.info(
                 f"📊 {self.profile['name']} Updated stance on {topic}: {stance.position} (confidence: {stance.confidence:.2f})"
             )
+
+    def _calculate_facing_direction(self, actor: core_pb2.Actor) -> Optional[Tuple[float, float]]:
+        """
+        Calculate the actor's facing direction based on state and interactions.
+
+        Args:
+            actor: The actor to calculate facing direction for
+
+        Returns:
+            Normalized (dx, dy) facing direction, or None if unknown
+        """
+        if not actor:
+            return None
+
+        # Infer facing from action state (simplified)
+        state_lower = actor.state.lower()
+
+        # If actor is in "moving" state, we could track their movement direction
+        # For MVP, use a simple heuristic based on state
+        if "moving" in state_lower or "walking" in state_lower:
+            # In a full implementation, we'd track previous position to infer direction
+            # For now, return a default forward direction
+            return (1.0, 0.0)
+        elif "speaking" in state_lower:
+            # When speaking, face towards the most recent interaction target
+            if actor.interactions:
+                last_interaction = actor.interactions[-1]
+                # This would need position info of the target
+                # For MVP, use default
+                return (1.0, 0.0)
+
+        # Default facing direction
+        return (1.0, 0.0)
+
+    def get_visual_context_for_llm(self) -> str:
+        """
+        Get visual context summary for LLM prompt generation.
+
+        This integrates with PerceptionPipeline to provide spatial awareness
+        to the LLM for more grounded decision-making.
+
+        Returns:
+            String describing the visual context
+        """
+        return self.perception.get_visual_context_summary()
+
 
 
 if __name__ == "__main__":

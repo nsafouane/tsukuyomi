@@ -57,6 +57,7 @@ class LLMRequestContext:
     semantic_facts: Optional[List[str]] = None
     world_state_summary: str = ""
     needs_context: str = ""  # V2: Internal needs driving agent behavior
+    visual_context: str = ""  # Phase 2: Visual perception and spatial awareness
     trigger_reason: str = "scheduled"
 
     def __post_init__(self):
@@ -403,10 +404,11 @@ class LLMService:
         relationships: str,
         emotional_modifier: str,
         needs_context: str = "",  # V2: Add needs context
+        visual_context: str = "",  # Phase 2: Add visual context
         reason: str = "scheduled",
     ) -> Dict:
         """
-        Legacy compatibility method for V2 deliberation.
+        Legacy compatibility method for V2 deliberation with visual context.
         """
         service = LLMService()
         await service.initialize()
@@ -420,6 +422,7 @@ class LLMService:
             relationships=relationships,
             emotional_modifier=emotional_modifier,
             needs_context=needs_context,  # V2: Pass needs context
+            visual_context=visual_context,  # Phase 2: Pass visual context
             trigger_reason=reason
         )
 
@@ -612,6 +615,8 @@ Backstory: {agent_backstory}
 
 {needs}
 
+{visual}
+
 {beliefs}
 
 {relationships}
@@ -623,8 +628,9 @@ Backstory: {agent_backstory}
 {semantic_facts}
 
 TASK:
-Based on your internal needs, beliefs, emotional state, relationships, and working memory, decide your next action.
+Based on your internal needs, visual perception, beliefs, emotional state, relationships, and working memory, decide your next action.
 IMPORTANT: If any need is above critical threshold (>80%), you MUST address it before other actions.
+Your visual perception tells you what you can see around you (people, objects, obstacles).
 Trigger: {trigger_reason}
 
 Allowed Actions:
@@ -771,11 +777,14 @@ RESPONSE FORMAT (JSON only):
         if context.semantic_facts:
             semantic_facts = f"WORLD KNOWLEDGE (Semantic):\n{json.dumps(context.semantic_facts, indent=2)}"
 
+        visual_section = f"VISUAL PERCEPTION:\n{context.visual_context}" if context.visual_context else "VISUAL PERCEPTION:\nYour vision is unobstructed."
+
         return template.format(
             agent_name=context.agent_name,
             agent_backstory=context.agent_backstory,
             stance_section=stance_section,
             needs=context.needs_context,  # V2: Add needs context
+            visual=visual_section,  # Phase 2: Add visual context
             beliefs=context.beliefs,
             relationships=context.relationships,
             emotional_modifier=context.emotional_modifier,

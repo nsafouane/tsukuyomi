@@ -1,14 +1,21 @@
 """
-TSUKUYOMI Fate Engine - Phase 1 Prototype
-==========================================
+TSUKUYOMI Fate Engine - Phase 2 Enhanced
+=========================================
 
 Implements the Logical Tick Loop with 20 TPS, handling:
 - State Broadcast
-- Proposal Window
-- Fate Resolution
+- Multi-Tick Proposal Window (Phase 2)
+- Fate Resolution with Affordance Validation (Phase 2)
+- Spatial Index Integration (Phase 2)
 - System 1 Reflex Integration
 
 The Fate Engine is the authoritative core of the simulation.
+
+Phase 2 Enhancements:
+- Multi-tick proposal windows with conflict resolution
+- Affordance-based action validation
+- Spatial index for efficient proximity queries
+- Enhanced performance for 50+ agents
 """
 
 import asyncio
@@ -24,6 +31,11 @@ from collections import defaultdict
 # Import generated protobuf classes
 from tsukuyomi.proto import common_pb2
 from tsukuyomi.proto import core_pb2
+
+# Import Phase 2 components
+from tsukuyomi.core.spatial_index import SpatialIndex
+from tsukuyomi.core.proposal_window import ProposalWindow, ConflictResolution
+from tsukuyomi.core.affordance import AffordanceValidator, ValidationResult
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -119,10 +131,18 @@ class FateEngine:
         db_path: Optional[str] = None,
         scenario_config: Optional[str] = None,  # Path to scenario JSON config
         medieval_compatibility: bool = True,
+        # Phase 2 parameters
+        enable_phase2: bool = True,
+        multi_tick_window_duration: int = 3,  # Number of ticks for proposal window
+        spatial_cell_size: float = 10.0,
+        conflict_resolution: ConflictResolution = ConflictResolution.HIGHEST_PRIORITY,
     ):
         self.tick_rate = tick_rate
         self.tick_duration = 1.0 / tick_rate
         self.proposal_window_ms = proposal_window_ms
+
+        # Phase 2 flag
+        self.enable_phase2 = enable_phase2
 
         # Determinism setup
         self.seed = seed if seed is not None else int(time.time())
@@ -168,7 +188,46 @@ class FateEngine:
                             )
                         )
 
-        # Proposal management
+        # Phase 2: Initialize Spatial Index
+        if self.enable_phase2:
+            # Calculate world bounds from scenario or use defaults
+            max_x = max(loc.position.x for loc in self.world_state.locations.values()) if self.world_state.locations else 100
+            max_y = max(loc.position.y for loc in self.world_state.locations.values()) if self.world_state.locations else 100
+            min_x = min(loc.position.x for loc in self.world_state.locations.values()) if self.world_state.locations else -100
+            min_y = min(loc.position.y for loc in self.world_state.locations.values()) if self.world_state.locations else -100
+
+            world_width = max(abs(max_x), abs(min_x)) * 2 + 100
+            world_height = max(abs(max_y), abs(min_y)) * 2 + 100
+
+            self.spatial_index = SpatialIndex(
+                width=world_width,
+                height=world_height,
+                cell_size=spatial_cell_size
+            )
+            logger.info(f"Phase 2: Spatial Index initialized with {world_width}x{world_height} world, {spatial_cell_size}m cells")
+        else:
+            self.spatial_index = None
+
+        # Phase 2: Initialize Proposal Window
+        if self.enable_phase2:
+            self.proposal_window = ProposalWindow(
+                duration_ticks=multi_tick_window_duration,
+                max_proposals_per_actor=2,
+                conflict_resolution=conflict_resolution,
+                auto_resolve=True
+            )
+            logger.info(f"Phase 2: Proposal Window initialized with {multi_tick_window_duration}-tick duration")
+        else:
+            self.proposal_window = None
+
+        # Phase 2: Initialize Affordance Validator
+        if self.enable_phase2:
+            self.affordance_validator = AffordanceValidator()
+            logger.info("Phase 2: Affordance Validator initialized")
+        else:
+            self.affordance_validator = None
+
+        # Proposal management (backward compatible)
         self.proposal_queue: List[core_pb2.Proposal] = []
         self.current_window_proposals: List[core_pb2.Proposal] = []
         self.proposal_buffer_lock = asyncio.Lock()
@@ -187,8 +246,9 @@ class FateEngine:
         # System 1 reflex layer (to be attached)
         self.reflex_layer: Optional[object] = None
 
+        phase_info = " (Phase 2 Enabled)" if self.enable_phase2 else ""
         logger.info(
-            f"Fate Engine initialized with seed={self.seed}, tick_rate={self.tick_rate} TPS"
+            f"Fate Engine initialized with seed={self.seed}, tick_rate={self.tick_rate} TPS{phase_info}"
         )
 
     def _load_scenario(self, scenario_config: Optional[str] = None):
@@ -293,22 +353,81 @@ class FateEngine:
 
     async def _phase_proposal_window(self, tick: int):
         """
-        Phase 2: Proposal Window
+        Phase 2: Multi-Tick Proposal Window
 
-        Open a small time window to receive actor proposals.
-        For Phase 1, we simply collect proposals that have accumulated.
+        Open a proposal window that can span multiple ticks.
+        Proposals are batched and conflicts are resolved when the window closes.
+
+        For Phase 1 compatibility: Falls back to single-tick collection.
         """
-        # Collect proposals for this tick
-        proposals = await self.flush_proposals()
-        self.current_window_proposals = proposals
+        if self.enable_phase2 and self.proposal_window:
+            # Phase 2: Use multi-tick proposal window
 
-        logger.debug(f"  Proposal window collected {len(proposals)} proposals")
+            # Check if we need to open a new window
+            if not self.proposal_window.is_open:
+                self.proposal_window.open_window(tick)
+                logger.debug(f"  Opened new proposal window at tick {tick}")
 
-        # Generate reflex proposals if reflex layer is attached
-        if self.reflex_layer:
-            reflex_proposals = await self._generate_reflex_proposals(tick)
-            self.current_window_proposals.extend(reflex_proposals)
-            logger.debug(f"  Generated {len(reflex_proposals)} reflex proposals")
+            # Collect proposals for this tick
+            proposals = await self.flush_proposals()
+
+            # Add collected proposals to the window
+            for proposal in proposals:
+                self.proposal_window.add_proposal(proposal, priority=0)
+
+            # Generate reflex proposals if reflex layer is attached
+            if self.reflex_layer:
+                reflex_proposals = await self._generate_reflex_proposals(tick)
+                for proposal in reflex_proposals:
+                    self.proposal_window.add_proposal(proposal, priority=0)
+                logger.debug(f"  Added {len(reflex_proposals)} reflex proposals to window")
+
+            # Check if window has expired
+            if self.proposal_window.is_expired(tick):
+                # Get ready proposals after conflict resolution
+                ready_proposals = self.proposal_window.get_ready_proposals()
+                rejected_proposals = self.proposal_window.get_rejected_proposals()
+
+                logger.debug(
+                    f"  Proposal window expired: {len(ready_proposals)} ready, "
+                    f"{len(rejected_proposals)} rejected"
+                )
+
+                self.current_window_proposals = ready_proposals
+
+                # Log conflict results
+                conflict_results = self.proposal_window.resolve_conflicts()
+                for result in conflict_results:
+                    if result.winning_proposal:
+                        logger.debug(
+                            f"    Conflict resolved: {result.winning_proposal.proposal_id} won "
+                            f"using {result.resolution_strategy.value}"
+                        )
+                    for rejected in result.rejected_proposals:
+                        logger.debug(f"    Rejected: {rejected.proposal_id} - {result.reason}")
+
+                # Close window (next window will open on next tick)
+                self.proposal_window.close_window()
+            else:
+                # Window still open, keep proposals for next tick
+                self.current_window_proposals = []
+                logger.debug(
+                    f"  Proposal window still open: "
+                    f"{self.proposal_window.get_ticks_remaining(tick)} ticks remaining"
+                )
+
+        else:
+            # Phase 1 compatibility: Single-tick collection
+            proposals = await self.flush_proposals()
+            self.current_window_proposals = proposals
+
+            logger.debug(f"  Proposal window collected {len(proposals)} proposals")
+
+            # Generate reflex proposals if reflex layer is attached
+            if self.reflex_layer:
+                reflex_proposals = await self._generate_reflex_proposals(tick)
+                self.current_window_proposals.extend(reflex_proposals)
+                logger.debug(f"  Generated {len(reflex_proposals)} reflex proposals")
 
     async def _phase_fate_resolution(self, tick: int) -> List[core_pb2.Resolution]:
         """
@@ -356,6 +475,8 @@ class FateEngine:
         Determine the fate of a proposal.
 
         For Phase 1, we implement basic movement and interaction resolution.
+        Phase 2 adds affordance validation for object interactions.
+
         Future phases will include physics checks, conflict resolution, and
         skill-based outcomes.
         """
@@ -371,6 +492,30 @@ class FateEngine:
             )
 
         actor = self.world_state.actors[actor_id]
+
+        # Phase 2: Affordance validation for object interactions
+        if self.enable_phase2 and self.affordance_validator:
+            # Check if action involves an object
+            target_id = proposal.parameters.get("target_id")
+            if target_id and target_id in self.world_state.objects:
+                obj = self.world_state.objects[target_id]
+
+                # Validate action against affordances
+                validation = self.affordance_validator.validate_action(
+                    obj, proposal.action, actor, proposal.parameters
+                )
+
+                if not validation.is_valid:
+                    logger.debug(
+                        f"Affordance validation failed for {proposal.proposal_id}: "
+                        f"{validation.reason}"
+                    )
+                    return core_pb2.Resolution(
+                        proposal_id=proposal.proposal_id,
+                        actor_id=actor_id,
+                        success=False,
+                        reason=f"Affordance validation failed: {validation.reason}",
+                    )
 
         # Resolve based on action type
         if proposal.action == core_pb2.ActionType.MOVE:
@@ -651,14 +796,33 @@ class FateEngine:
         outcome = resolution.outcome
 
         if outcome.get("action") == "move":
+            old_position = (actor.position.x, actor.position.y)
             actor.position.x = float(outcome.get("to_x", actor.position.x))
             actor.position.y = float(outcome.get("to_y", actor.position.y))
             actor.current_location = outcome.get("destination", actor.current_location)
             actor.state = "IDLE"
 
+            # Phase 2: Update spatial index
+            if self.enable_phase2 and self.spatial_index:
+                new_position = (actor.position.x, actor.position.y)
+                self.spatial_index.update_position(actor_id, new_position)
+                logger.debug(
+                    f"Updated spatial index for {actor.name}: {old_position} -> {new_position}"
+                )
+
         elif outcome.get("action") == "collect":
             obj_id = outcome.get("object_id")
             if obj_id in self.world_state.objects:
+                # Phase 2: Remove from spatial index
+                if self.enable_phase2 and self.spatial_index:
+                    obj = self.world_state.objects[obj_id]
+                    obj_pos = (obj.position.x, obj.position.y)
+                    # Try to remove object from spatial index
+                    try:
+                        self.spatial_index.remove(obj_id)
+                    except:
+                        pass
+
                 actor.inventory.append(obj_id)
                 del self.world_state.objects[obj_id]
                 logger.info(f"Actor {actor.name} collected {obj_id}")
@@ -673,6 +837,15 @@ class FateEngine:
             obj_id = outcome.get("object_id")
             if obj_id in self.world_state.objects:
                 obj = self.world_state.objects[obj_id]
+
+                # Phase 2: Remove from spatial index
+                if self.enable_phase2 and self.spatial_index:
+                    obj_pos = (obj.position.x, obj.position.y)
+                    try:
+                        self.spatial_index.remove(obj_id)
+                    except:
+                        pass
+
                 obj.owner_id = actor_id
                 if hasattr(obj, "state"):
                     obj.state = "in_inventory"
@@ -691,6 +864,12 @@ class FateEngine:
                     if hasattr(obj, "state"):
                         obj.state = "on_ground"
                     self.world_state.objects[obj_id] = obj
+
+                    # Phase 2: Add to spatial index
+                    if self.enable_phase2 and self.spatial_index:
+                        obj_pos = (obj.position.x, obj.position.y)
+                        self.spatial_index.insert(obj_id, obj_pos)
+
                 logger.info(f"Actor {actor.name} dropped {obj_id}")
 
         elif outcome.get("action") == "examine":
@@ -894,6 +1073,11 @@ class FateEngine:
             current_location="",  # default empty string
         )
         self.world_state.actors[actor_id].CopyFrom(actor)
+
+        # Phase 2: Add to spatial index
+        if self.enable_phase2 and self.spatial_index:
+            self.spatial_index.insert(actor_id, position)
+
         logger.info(f"Actor registered: {name} ({actor_id})")
 
     def unregister_actor(self, actor_id: str):
@@ -901,6 +1085,11 @@ class FateEngine:
         if actor_id in self.world_state.actors:
             name = self.world_state.actors[actor_id].name
             del self.world_state.actors[actor_id]
+
+            # Phase 2: Remove from spatial index
+            if self.enable_phase2 and self.spatial_index:
+                self.spatial_index.remove(actor_id)
+
             logger.info(f"Actor unregistered: {name} ({actor_id})")
 
     # -------------------------------------------------------------------------
@@ -927,6 +1116,36 @@ class FateEngine:
             if state.tick_number == tick:
                 return state
         return None
+
+    # -------------------------------------------------------------------------
+    # Phase 2: Statistics and Monitoring
+    # -------------------------------------------------------------------------
+
+    def get_phase2_stats(self) -> Dict:
+        """
+        Get statistics for Phase 2 components.
+
+        Returns:
+            Dictionary with Phase 2 statistics
+        """
+        stats = {
+            "phase2_enabled": self.enable_phase2,
+        }
+
+        if self.enable_phase2:
+            # Spatial Index stats
+            if self.spatial_index:
+                stats["spatial_index"] = self.spatial_index.get_stats()
+
+            # Proposal Window stats
+            if self.proposal_window:
+                stats["proposal_window"] = self.proposal_window.get_stats()
+
+            # Affordance Validator stats
+            if self.affordance_validator:
+                stats["affordance_validator"] = self.affordance_validator.get_stats()
+
+        return stats
 
 
 # ============================================================================
