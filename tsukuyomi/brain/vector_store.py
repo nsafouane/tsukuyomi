@@ -6,11 +6,13 @@ with support for Qdrant and future backends.
 """
 
 import logging
-from typing import Dict, List, Optional, Union, Any
+from typing import Dict, List, Optional, Union, Any, TYPE_CHECKING
 from dataclasses import dataclass
 from enum import Enum
 import hashlib
 import json
+
+from datetime import datetime
 
 try:
     from qdrant_client import QdrantClient
@@ -27,9 +29,16 @@ try:
     QDRANT_AVAILABLE = True
 except ImportError:
     QDRANT_AVAILABLE = False
+    # Define type stubs for when qdrant is not available
+    PointStruct = Any
+    Filter = Any
+    Distance = Any
+    VectorParams = Any
+    FieldCondition = Any
+    MatchValue = Any
+    SearchRequest = Any
+    QdrantClient = Any
     logging.warning("qdrant-client not installed. Install with: pip install qdrant-client")
-
-from datetime import datetime
 
 
 logger = logging.getLogger(__name__)

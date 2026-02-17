@@ -1,3 +1,26 @@
+"""
+Guest SDK - External Agent Integration
+
+Provides a Python SDK for external agents to connect to Tsukuyomi
+simulations as guests. Supports handshake authentication, action
+submission, and real-time tick streaming.
+
+Usage:
+    from tsukuyomi.guest_sdk import GuestAgent
+    
+    agent = GuestAgent("my_agent", "MyAgent", "localhost:50051")
+    await agent.connect(access_token="tsukuyomi-secret-2026")
+    await agent.register()
+    
+    async for tick in agent.stream_ticks():
+        # Process tick updates
+        pass
+
+Security:
+- Uses TLS when certificates are available
+- Requires access token for handshake authentication
+"""
+
 import asyncio
 import logging
 import uuid

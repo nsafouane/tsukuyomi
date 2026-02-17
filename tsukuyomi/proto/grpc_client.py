@@ -51,10 +51,19 @@ class FateEngineClient:
     - Submitting proposals (actions)
     - Querying world state
     - Streaming tick updates
+    
+    Security Configuration:
+    - allow_insecure: If False (default), connection fails when TLS cert not found.
+                     If True, falls back to insecure connection with warning.
     """
     
-    def __init__(self, server_address: str = "localhost:50051"):
+    def __init__(
+        self, 
+        server_address: str = "localhost:50051",
+        allow_insecure: bool = False
+    ):
         self.server_address = server_address
+        self.allow_insecure = allow_insecure  # Security: Control insecure fallback
         self.channel: Optional[aio.Channel] = None
         self.stub: Optional[fate_engine_service_pb2_grpc.FateEngineServiceStub] = None
         self._connected = False
@@ -65,6 +74,11 @@ class FateEngineClient:
         Connect to the Fate Engine server.
         
         Returns True if connection successful.
+        
+        Security:
+        - If TLS cert found: Uses secure channel
+        - If TLS cert NOT found and allow_insecure=True: Falls back to insecure with warning
+        - If TLS cert NOT found and allow_insecure=False: Raises RuntimeError
         """
         try:
             # Security: Use secure channel if certificates are found
@@ -82,6 +96,15 @@ class FateEngineClient:
                 )
                 logger.info(f"Connected securely (TLS) to {self.server_address}")
             else:
+                # SECURITY: Check if insecure connections are allowed
+                if not self.allow_insecure:
+                    raise RuntimeError(
+                        f"TLS certificate not found at '{tls_cert_path}' and "
+                        "insecure connections are disabled. Either provide a valid "
+                        "TLS certificate or set allow_insecure=True when creating "
+                        "the client (not recommended for production)."
+                    )
+                
                 self.channel = aio.insecure_channel(
                     self.server_address,
                     options=[
@@ -89,7 +112,10 @@ class FateEngineClient:
                         ('grpc.max_receive_message_length', 50 * 1024 * 1024),
                     ]
                 )
-                logger.warning(f"Connected insecurely to {self.server_address}")
+                logger.warning(
+                    f"SECURITY WARNING: Connected insecurely to {self.server_address}. "
+                    "Data is NOT encrypted. Use TLS in production!"
+                )
 
             self.stub = fate_engine_service_pb2_grpc.FateEngineServiceStub(self.channel)
             
@@ -141,13 +167,21 @@ class FateEngineClient:
             response = await self.stub.RegisterActor(request)
             
             if response.success:
-                # Extract session token from response message
-                # The server returns it in the message format: "Actor X registered. Session token: <token>"
-                message = response.message
-                if "Session token:" in message:
-                    token = message.split("Session token:")[-1].strip()
-                    self._session_tokens[actor_id] = token
-                    logger.info(f"Stored session token for actor {actor_id}: {token[:8]}...")
+                # SECURITY: Use proper protobuf field for session token
+                if response.session_token:
+                    self._session_tokens[actor_id] = response.session_token
+                    logger.info(f"Stored session token for actor {actor_id}: {response.session_token[:8]}...")
+                else:
+                    # Fallback for older servers that still use message-based token
+                    # TODO: Remove this fallback after server migration
+                    message = response.message
+                    if "Session token:" in message:
+                        token = message.split("Session token:")[-1].strip()
+                        self._session_tokens[actor_id] = token
+                        logger.warning(
+                            f"Server uses deprecated message-based session token. "
+                            "Please update server to use session_token field."
+                        )
             
             return response.success
         except grpc.RpcError as e:

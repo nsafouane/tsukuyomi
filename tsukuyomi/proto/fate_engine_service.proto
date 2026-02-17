@@ -33,6 +33,7 @@ message RegisterActorRequest {
 message RegisterActorResponse {
   bool success = 1;
   string message = 2;
+  string session_token = 3;  // Session token for subsequent authenticated requests
 }
 
 // Response for SubmitProposal RPC

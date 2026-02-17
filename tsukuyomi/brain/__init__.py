@@ -1,4 +1,14 @@
-# Tsukuyomi Brain Package
+"""
+Tsukuyomi Brain Package
+
+The cognitive core of Tsukuyomi agents. Provides:
+- AgentBrain: Main cognitive controller
+- MemoryManager: Short-term memory management
+- LLMService: Language model integration
+- NeedsSystem: Autonomous drives (hunger, fatigue, boredom)
+- PersonalitySystem: OCEAN-based personality profiles
+- ReasoningModule: Decision records and confidence calibration
+"""
 
 from .AgentBrain import AgentBrain
 from .MemoryManager import MemoryManager

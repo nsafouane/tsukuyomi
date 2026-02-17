@@ -10,6 +10,7 @@ from tsukuyomi.proto import core_pb2
 from tsukuyomi.brain.MemoryManager import MemoryManager
 from tsukuyomi.brain.LLMService import LLMService
 from tsukuyomi.brain.needs_system import NeedsSystem, NeedType  # V2: Add needs import
+from tsukuyomi.brain.rag_memory import RAGMemorySystem, RAGConfig  # V3: Add RAG import
 from tsukuyomi.brain.PerceptionPipeline import (
     PerceptionPipeline,
     SensoryProfile,
@@ -24,6 +25,7 @@ from tsukuyomi.brain.WorkingMemory import WorkingMemory
 from tsukuyomi.brain.BeliefManager import BeliefManager, PersonalityBias
 from tsukuyomi.brain.RelationshipManager import RelationshipManager
 from tsukuyomi.brain.DramaDirector import DramaDirector
+from tsukuyomi.brain.GossipProtocol import get_gossip_protocol  # Moved from late imports
 
 logger = logging.getLogger("AgentBrain")
 
@@ -89,6 +91,14 @@ class AgentBrain:
         # V2: Initialize Needs System for autonomous behavior
         self.needs = NeedsSystem()
         logger.info(f"AgentBrain for {profile.get('name', 'Unknown')} initialized with NeedsSystem")
+
+        # V3: Initialize RAG System for long-term memory
+        rag_config = RAGConfig(
+            vector_collection=f"memories_{actor_id}",
+            in_memory=True  # Use in-memory for now until vector DB service is up
+        )
+        self.rag_system = RAGMemorySystem(rag_config)
+        logger.info(f"AgentBrain for {profile.get('name', 'Unknown')} initialized with RAGMemorySystem")
 
         # Phase 2: Spatial Index integration for efficient perception
         self.spatial_index = None  # Will be set by external initialization
@@ -184,9 +194,7 @@ class AgentBrain:
         # V2: Update needs every tick (based on tick rate)
         self.needs.update_all(tick_rate=20.0)  # 20 ticks per second
 
-        # FIX: Process gossip propagation each tick
-        from tsukuyomi.brain.GossipProtocol import get_gossip_protocol
-
+        # Process gossip propagation each tick
         gossip_protocol = get_gossip_protocol()
         gossip_events = gossip_protocol.process_gossip(tick_state.tick_number)
         if gossip_events:
@@ -253,8 +261,6 @@ class AgentBrain:
 
     def _process_gossip_signals(self, tick: int):
         """Check for new gossip and update relationships."""
-        from tsukuyomi.brain.GossipProtocol import get_gossip_protocol
-
         gossip_protocol = get_gossip_protocol()
         recent_gossip = gossip_protocol.get_gossip_for_agent(self.actor_id)
 
@@ -349,6 +355,28 @@ class AgentBrain:
             # Phase 2: Get visual context from perception pipeline
             visual_context = self.get_visual_context_for_llm()
 
+            # Phase 3: RAG Retrieval
+            rag_context = ""
+            if hasattr(self, "rag_system") and self.rag_system:
+                # Construct query from current context
+                query_parts = []
+                if current_topics:
+                    query_parts.extend(current_topics[:3])
+                if reason:
+                    query_parts.append(reason)
+                
+                query = " ".join(query_parts) if query_parts else "general context"
+                
+                memories = self.rag_system.retrieve_memories(
+                    query=query,
+                    top_k=5,
+                    min_importance=None  # Get all relevant memories
+                )
+                
+                rag_context = self.rag_system.format_context_for_llm(memories)
+                if rag_context:
+                    logger.debug(f"Retrieved {len(memories)} RAG memories for query: '{query}'")
+
             # Pass arguments in correct order matching function signature
             plan = await LLMService.generate_plan_v2(
                 self.profile,
@@ -357,7 +385,8 @@ class AgentBrain:
                 relationship_context,
                 emotional_modifier,
                 needs_context,
-                visual_context,  # Add visual context
+                visual_context,
+                rag_context,  # Phase 3: Pass RAG context
                 reason,
             )
 
@@ -369,9 +398,7 @@ class AgentBrain:
             if self._cancel_current_deliberation:
                 return
 
-            # FIX: Register deliberation with GossipProtocol for information leakage
-            from tsukuyomi.brain.GossipProtocol import get_gossip_protocol
-
+            # Register deliberation with GossipProtocol for information leakage
             gossip_protocol = get_gossip_protocol()
             gossip_protocol.register_deliberation(
                 actor_id=self.actor_id,

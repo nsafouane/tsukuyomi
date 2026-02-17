@@ -7,9 +7,10 @@ Tests general capabilities: Spatial Nav, Object Interaction, Role Logic.
 
 import asyncio
 import logging
+import random
 from typing import Dict
 from tsukuyomi.brain.AgentBrain import AgentBrain
-from tsukuyomi.client.GrpcClient import GrpcClient
+from tsukuyomi.proto.grpc_client import FateEngineClient
 from tsukuyomi.proto import common_pb2
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -34,7 +35,8 @@ class RoleAgent:
         self.world = world_builder # Shared ref
         
     async def register(self):
-        await self.client.register_actor(self.actor_id)
+        await self.client.connect()
+        await self.client.register_actor(self.actor_id, self.profile["name"])
         logger.info(f"Registered {self.actor_id} ({self.role})")
 
     async def run_loop(self):
@@ -70,7 +72,7 @@ class RoleAgent:
             if random.random() > 0.5:
                 action = "EMOTE"
                 params = {"type": "speak", "message": "Fresh apples! Get your apples!"}
-        else:
+            else:
                 action = "IDLE" # Waiting for customers
         
         elif self.role == "Peasant":
@@ -102,7 +104,7 @@ class RoleAgent:
 class MarketplaceExperiment:
     def __init__(self, client_addr: str):
         self.client_addr = client_addr
-        self.client = GrpcClient(client_addr)
+        self.client = FateEngineClient(client_addr)
         self.agents: Dict[str, RoleAgent] = {}
         self.world = None # Placeholder
         self.running = True
@@ -131,7 +133,8 @@ class MarketplaceExperiment:
         
         try:
             while self.running:
-                tasks = [agent.run_loop() for agent in self.agents.values()]
+                # Run all agent loops concurrently
+                await asyncio.gather(*(agent.run_loop() for agent in self.agents.values()))
                 await asyncio.sleep(0.5) # Global tick
         except KeyboardInterrupt:
             logger.info("Stopping...")

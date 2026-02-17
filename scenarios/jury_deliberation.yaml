@@ -1,0 +1,381 @@
+# ============================================================================
+# The Verdict - A Jury Deliberation Scenario
+# ============================================================================
+# 12 jurors must decide the fate of a young defendant accused of murder.
+# This scenario demonstrates the branching narrative system and 
+# context-aware event injection.
+# ============================================================================
+
+scenario:
+  name: "The Verdict"
+  description: |
+    Twelve jurors gather in a cramped room to determine the guilt or innocence
+    of a young man accused of killing his father. Personal biases, hidden 
+    agendas, and the weight of reasonable doubt collide in this intense 
+    deliberation drama.
+  
+  # ==========================================================================
+  # World Configuration
+  # ==========================================================================
+  world:
+    type: "single_room"
+    room: "jury_room"
+    props:
+      - "long_table"
+      - "twelve_chairs"
+      - "window"
+      - "fan"
+      - "water_cooler"
+      - "coat_rack"
+      - "clock"
+      - "evidence_table"
+    
+    # Environment context for event injection
+    environment_context:
+      weather: "stormy"
+      time_of_day: "afternoon"
+      temperature: "hot"
+      outdoor_events:
+        - "thunder"
+        - "rain"
+        - "lightning"
+      indoor_events:
+        - "fan_noise"
+        - "lights_flicker"
+        - "door_opens"
+      location_type: "indoor"
+
+  # ==========================================================================
+  # Agent Configuration
+  # ==========================================================================
+  agents:
+    # Juror #3 - The Angry Father
+    - id: juror_3
+      name: "Arthur Miller"
+      profile: "profiles/angry_man.yaml"
+      position: [2, 0]
+      traits:
+        openness: -0.5
+        conscientiousness: 0.3
+        extraversion: 0.6
+        agreeableness: -0.7
+        neuroticism: 0.8
+      stance: "guilty"
+    
+    # Juror #8 - The Voice of Reason
+    - id: juror_8
+      name: "Davis"
+      profile: "profiles/analytical.yaml"
+      position: [0, 2]
+      traits:
+        openness: 0.7
+        conscientiousness: 0.8
+        extraversion: 0.2
+        agreeableness: 0.5
+        neuroticism: -0.3
+      stance: "not_guilty"
+    
+    # Juror #4 - The Logical Stockbroker
+    - id: juror_4
+      name: "Harold Benson"
+      profile: "profiles/logical.yaml"
+      position: [1, 1]
+      traits:
+        openness: 0.0
+        conscientiousness: 0.9
+        extraversion: -0.2
+        agreeableness: 0.0
+        neuroticism: -0.5
+      stance: "guilty"
+    
+    # Juror #9 - The Wise Elder
+    - id: juror_9
+      name: "Eugene Morris"
+      profile: "profiles/wise_elder.yaml"
+      position: [3, 1]
+      traits:
+        openness: 0.5
+        conscientiousness: 0.6
+        extraversion: -0.4
+        agreeableness: 0.7
+        neuroticism: 0.1
+      stance: "not_guilty"
+    
+    # Juror #10 - The Bigot
+    - id: juror_10
+      name: "Walter Collins"
+      profile: "profiles/prejudiced.yaml"
+      position: [4, 0]
+      traits:
+        openness: -0.8
+        conscientiousness: 0.2
+        extraversion: 0.7
+        agreeableness: -0.5
+        neuroticism: 0.4
+      stance: "guilty"
+
+  # ==========================================================================
+  # Narrative Beats - The Story Arc
+  # ==========================================================================
+  narrative_beats:
+    # --------------------------------------------------------------------------
+    # Act 1: Opening - Establishing Positions
+    # --------------------------------------------------------------------------
+    - id: opening
+      tick: 100
+      type: "rising_action"
+      description: "Initial positions established - 11 guilty, 1 not guilty"
+      trigger_if:
+        - condition: "ticks >= 100"
+      action:
+        type: "inject_event"
+        event: "Foreman calls for initial vote - 11 to 1 for guilty"
+    
+    - id: first_doubt
+      tick: 300
+      type: "rising_action"
+      description: "Davis raises his first doubt about the evidence"
+      prerequisite: "opening"
+      trigger_if:
+        - condition: "tension < 0.3"
+      action:
+        type: "inject_thought"
+        target: "juror_8"
+        thought: "The knife evidence seems weak - I need to examine it more carefully"
+    
+    # --------------------------------------------------------------------------
+    # Act 2: First Conflict - Major Branching Point
+    # --------------------------------------------------------------------------
+    - id: first_conflict
+      tick: 500
+      type: "conflict"
+      description: "First major argument erupts"
+      prerequisite: "first_doubt"
+      trigger_if:
+        - condition: "tension < 0.5"
+      action:
+        type: "inject_event"
+        event: "Arthur slams his hand on the table in frustration"
+      branches:
+        - id: conflict_cooperative
+          condition: "juror_3.agreeableness > -0.5"
+          then: reconciliation_path
+        - id: conflict_hostile
+          condition: "juror_3.agreeableness <= -0.5"
+          then: escalation_path
+    
+    # --------------------------------------------------------------------------
+    # Branch A: Reconciliation Path
+    # --------------------------------------------------------------------------
+    - id: reconciliation_path
+      type: "branch"
+      description: "Conflict resolved through cooperation"
+      beats:
+        - id: reconciliation_softening
+          tick: 600
+          type: "character_development"
+          description: "Arthur softens his stance slightly"
+          trigger_if:
+            - condition: "juror_3.neuroticism < 0.7"
+          action:
+            type: "inject_thought"
+            target: "juror_3"
+            thought: "Maybe there's more to this case... but I can't let a guilty man go free"
+        
+        - id: reconciliation_vote_change
+          tick: 800
+          type: "rising_action"
+          description: "A juror changes their vote"
+          action:
+            type: "inject_event"
+            event: "Juror #9 raises his hand - 'I want to hear more about this knife'"
+    
+    # --------------------------------------------------------------------------
+    # Branch B: Escalation Path
+    # --------------------------------------------------------------------------
+    - id: escalation_path
+      type: "branch"
+      description: "Conflict escalates"
+      beats:
+        - id: escalation_entrench
+          tick: 600
+          type: "intensification"
+          description: "Arthur becomes more entrenched"
+          trigger_if:
+            - condition: "juror_3.neuroticism >= 0.7"
+          action:
+            type: "inject_event"
+            event: "Arthur stands up and begins pacing angrily around the room"
+        
+        - id: escalation_confrontation
+          tick: 750
+          type: "conflict"
+          description: "Near-physical confrontation"
+          trigger_if:
+            - condition: "tension > 0.6"
+          action:
+            type: "inject_event"
+            event: "Two jurors nearly come to blows before others separate them"
+    
+    # --------------------------------------------------------------------------
+    # Act 3: Climax Events
+    # --------------------------------------------------------------------------
+    - id: climax_evidence
+      tick: 1000
+      type: "climax"
+      description: "Critical evidence is examined"
+      prerequisite: "reconciliation_path"
+      trigger_if:
+        - condition: "tension > 0.4"
+      action:
+        type: "inject_event"
+        event: "Davis produces an identical knife - the 'unique' murder weapon isn't unique"
+    
+    - id: climax_emotional
+      tick: 1000
+      type: "climax"
+      description: "Emotional breakthrough"
+      prerequisite: "escalation_path"
+      trigger_if:
+        - condition: "tension > 0.7"
+      action:
+        type: "inject_event"
+        event: "Arthur breaks down, revealing his personal connection to the case"
+    
+    # --------------------------------------------------------------------------
+    # Act 4: Resolution
+    # --------------------------------------------------------------------------
+    - id: turning_point
+      tick: 1500
+      type: "climax"
+      description: "The tide turns"
+      trigger_if:
+        - condition: "any_agent.belief_changed_recently"
+      action:
+        type: "inject_event"
+        event: "Vote count shifts - now 6 to 6"
+    
+    - id: resolution
+      tick: 2000
+      type: "resolution"
+      description: "Final verdict reached"
+      prerequisite: "turning_point"
+      trigger_if:
+        - condition: "all_agents.stance('defendant_guilt') == same_value"
+      action:
+        type: "inject_event"
+        event: "The foreman reads the verdict: Not Guilty"
+
+  # ==========================================================================
+  # Drama Director Configuration
+  # ==========================================================================
+  drama_config:
+    tension_threshold_low: 0.2
+    tension_threshold_high: 0.8
+    
+    # Event Library - Context-Matched Events
+    event_library:
+      # Environmental events (matched to weather and location)
+      environmental:
+        outdoor_stormy:
+          - "Thunder rumbles loudly outside"
+          - "Lightning illuminates the dark clouds"
+          - "Heavy rain pounds against the window"
+          - "The wind howls through the building"
+          - "A distant siren wails outside"
+          - "The sky darkens ominously"
+        
+        indoor_jury_room:
+          - "The overhead lights flicker momentarily"
+          - "The old fan wobbles and squeaks"
+          - "A door slams somewhere in the building"
+          - "The air conditioning clicks loudly"
+          - "Water drips from a leak in the ceiling"
+          - "The clock on the wall ticks loudly in the silence"
+        
+        indoor_tense:
+          - "The AC breaks - the room grows stiflingly hot"
+          - "The lights dim and buzz ominously"
+          - "A pipe bursts in the corner, spraying water"
+          - "The ceiling develops a new leak"
+          - "The fan stops working with a grinding noise"
+      
+      # Social events (matched to tension level)
+      social:
+        neutral:
+          - "The foreman checks the clock nervously"
+          - "Someone shuffles papers on the table"
+          - "A juror clears their throat"
+          - "Water cooler bubbles in the silence"
+          - "Someone adjusts the broken fan"
+        
+        conflict:
+          - "Two jurors exchange harsh words across the table"
+          - "Someone slams their palm on the table"
+          - "A juror storms to the corner of the room"
+          - "Voices rise to shouting level"
+          - "Someone throws a piece of paper in frustration"
+        
+        cooperative:
+          - "A juror offers a conciliatory gesture"
+          - "Someone suggests they take a break"
+          - "Nods of understanding pass around the table"
+          - "A juror offers water to another"
+          - "Someone proposes a compromise"
+      
+      # Character-specific event triggers
+      character_specific:
+        arthur_anger_spike:
+          condition: "juror_3.neuroticism > 0.6 AND tension > 0.5"
+          events:
+            - "Arthur's face turns red with anger"
+            - "Arthur begins pacing around the room"
+            - "Arthur slams his fist on the table"
+            - "Arthur shouts 'This is ridiculous!'"
+            - "Arthur points accusingly at another juror"
+        
+        davis_calm_reasoning:
+          condition: "juror_8.neuroticism < 0.0 AND tension > 0.5"
+          events:
+            - "Davis remains remarkably calm amid the chaos"
+            - "Davis speaks in measured, logical tones"
+            - "Davis attempts to redirect the conversation"
+            - "Davis raises a thoughtful question"
+        
+        harold_emotional_appeal:
+          condition: "juror_4.agreeableness > -0.3 AND tension > 0.7"
+          events:
+            - "Harold removes his glasses thoughtfully"
+            - "Harold's composed demeanor wavers"
+            - "Harold admits uncertainty"
+    
+    # Event Selection Configuration
+    event_selection:
+      mode: "context_weighted"
+      weights:
+        environmental: 0.25
+        social: 0.45
+        character_specific: 0.30
+      context_matching:
+        outdoor_match: 1.5      # Boost outdoor events during storm
+        indoor_match: 1.3       # Boost indoor events in jury room
+        tension_conflict_match: 1.4  # Boost conflict events at high tension
+
+  # ==========================================================================
+  # End Conditions
+  # ==========================================================================
+  end_conditions:
+    # Consensus reached - all jurors agree
+    - type: "consensus"
+      description: "All jurors agree on a verdict"
+      check: "all_agents.stance('defendant_guilt') == same_value"
+    
+    # Time limit reached
+    - type: "timeout"
+      ticks: 5000
+      description: "Deliberation time exhausted"
+    
+    # Hung jury - no consensus possible after sufficient time
+    - type: "hung_jury"
+      description: "No consensus possible - hung jury"
+      check: "ticks > 3000 AND stance_variance > 0.4"

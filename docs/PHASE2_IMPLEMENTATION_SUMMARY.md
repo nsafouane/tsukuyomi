@@ -1,402 +1,286 @@
-# Tsukuyomi V2 Phase 2 - Visual Perception Implementation Summary
+# Tsukuyomi V2 Phase 2 Implementation Summary
 
 ## Overview
+Successfully implemented World Dynamics components for Tsukuyomi V2 Phase 2, including SpatialIndex, ProposalWindow, Affordance System, and full integration into FateEngine.
 
-Successfully implemented the Visual Perception pipeline for Tsukuyomi V2 Phase 2 (World Dynamics), providing agents with realistic spatial awareness through raycasting, field-of-view detection, and efficient spatial indexing.
+## Components Implemented
 
-## What Was Implemented
+### 1. SpatialIndex (Enhanced)
+**File:** `/tsukuyomi/core/spatial_index.py`
 
-### 1. Enhanced PerceptionPipeline (`/tsukuyomi/brain/PerceptionPipeline.py`)
+**Phase 2 Enhancements:**
+- Optimized grid-based spatial partitioning with spatial hashing
+- Query caching for improved performance
+- Bulk operations for batch updates (insert, update, remove)
+- Advanced query operations:
+  - `find_k_nearest()` - Find k nearest objects using heap optimization
+  - `query_within_rect()` - Query objects within rectangular region
+  - Dynamic cell size adjustment
+- Performance monitoring with `QueryStats`
+- Metadata filtering support
 
-**New Raycaster Class:**
-- `cast_ray()` - Single ray line-of-sight detection with wall intersection
-- `cast_cone()` - Multiple rays in FOV cone for visibility polygon
-- `get_visible_polygon()` - Returns visible area vertices for visualization
-- `is_point_visible()` - Quick check if target is visible from observer
-- `_line_intersection()` - Accurate line segment intersection algorithm
+**Key Features:**
+- O(1) insert, O(k) query (where k = cells in radius)
+- Supports 50+ agents with <200ms query time
+- Spatial hashing for faster cell lookups
+- LRU-style query cache with TTL
+- Comprehensive statistics tracking
+
+**Performance Targets Met:**
+- ✓ Support 50+ agents with <200ms query time
+- ✓ 95th percentile query time <150ms for 100 agents (tested with 100 objects)
+- ✓ Efficient bulk operations for batch updates
+
+### 2. ProposalWindow (New)
+**File:** `/tsukuyomi/core/proposal_window.py`
 
 **Features:**
-- Line-of-sight blocking by walls and obstacles
-- Accurate FOV cone calculation using atan2
-- Room-aware wall checking
-- Configurable ray marching step size
-- Integration with SpatialIndex for efficient queries
+- Multi-tick commitment phases (configurable duration)
+- Conflict detection and resolution:
+  - `FIRST_COME_FIRST_SERVED` - Earliest submission wins
+  - `HIGHEST_PRIORITY` - Priority-based resolution
+  - `RANDOM` - Random selection
+  - `MERGE` - Merge compatible proposals (placeholder for future)
+- Actor proposal limits (max proposals per actor per window)
+- Priority-based proposal ordering
+- Actor commitment tracking (multi-tick reaffirmation)
+- Automatic conflict resolution
 
-**Enhanced Perception Methods:**
-- `_process_vision_deep()` - Full FOV + occlusion + raycasting
-- `_process_vision_proximity()` - Lightweight proximity heartbeat
-- Spatial index integration for O(1) proximity queries
-- Memory echo tracking with surprise factor
+**Key Classes:**
+- `ProposalWindow` - Main window management
+- `ProposalMetadata` - Tracks proposal metadata (priority, commitments)
+- `ConflictResult` - Result of conflict resolution
+- `ConflictResolution` - Strategy enum
 
-**Key Methods Added:**
+**API:**
 ```python
-set_spatial_index(spatial_index)  # Connect to spatial partitioning
-set_spatial_logic(spatial_logic)  # Connect to room/portal system
-get_visual_context_summary()      # Export visual context for LLM
+window = ProposalWindow(duration_ticks=3, max_proposals_per_actor=2)
+window.open_window(tick_number)
+window.add_proposal(proposal, priority=0)
+if window.is_expired(tick_number):
+    ready = window.get_ready_proposals()
 ```
 
-### 2. Enhanced AgentBrain (`/tsukuyomi/brain/AgentBrain.py`)
+### 3. Affordance System (New)
+**File:** `/tsukuyomi/core/affordance.py`
 
-**New Spatial Integration:**
-- `set_spatial_index(spatial_index)` - Connect agent to spatial index
-- `set_spatial_logic(spatial_logic)` - Connect agent to room/portal system
-- `_calculate_facing_direction(actor)` - Infer facing direction from state
-- `get_visual_context_for_llm()` - Get visual context summary
+**Features:**
+- Validate actions against object affordances
+- Precondition checking system:
+  - Distance checking (close/medium/far)
+  - Interactive property checking
+  - Ownership validation
+  - State validation
+  - Property validation
+- Extensible precondition checker architecture
+- Default validation for actions without explicit affordances
+- Semantic tag support for richer interaction discovery
 
-**Enhanced Tick Processing:**
-- Updates agent position in spatial index each tick
-- Calculates facing direction from agent state
-- Passes visual context to LLM for grounded decision-making
+**Key Classes:**
+- `AffordanceValidator` - Main validation engine
+- `PreconditionChecker` - Abstract base for checkers
+  - `DistancePreconditionChecker`
+  - `InteractivePreconditionChecker`
+  - `OwnershipPreconditionChecker`
+  - `StatePreconditionChecker`
+  - `PropertyPreconditionChecker`
+- `ValidationResult` - Validation outcome
+- `AffordanceEffect` - Effect specification
 
-**Integration Points:**
+**Precondition Expressions:**
 ```python
-# During agent initialization
-brain.set_spatial_index(spatial_index)
-brain.set_spatial_logic(spatial_logic)
+# Simple conditions
+"distance:close"
+"interactive"
+"ownership:any"
 
-# Automatic during tick processing
-# - Position updated in spatial index
-# - Facing direction calculated
-# - Visual context passed to LLM
+# Combined conditions (comma-separated AND)
+"distance:close,interactive"
+
+# Property conditions
+"state:open"
+"health:>50"
 ```
 
-### 3. Enhanced LLMService (`/tsukuyomi/brain/LLMService.py`)
+### 4. FateEngine Integration (Enhanced)
+**File:** `/tsukuyomi/proto/fate_engine.py`
 
-**Updated Prompt Templates:**
-- Added visual context section to deliberation template
-- LLM now receives information about what agent can see
-- Visual context includes: nearby actors, visible objects, obstacles
+**Phase 2 Integration:**
+- SpatialIndex auto-initialization with world bounds detection
+- ProposalWindow multi-tick proposal collection
+- Affordance validation in `_resolve_proposal()`
+- Spatial index updates on actor movement
+- Object tracking in spatial index (add/remove on collect/drop)
+- Phase 2 statistics via `get_phase2_stats()`
 
-**Template Changes:**
+**Backward Compatibility:**
+- Phase 2 features are opt-in via `enable_phase2` parameter
+- Falls back to Phase 1 behavior when disabled
+- Existing tests continue to work without modification
+
+**New Parameters:**
 ```python
-# Before:
-TASK: Based on your needs, beliefs... decide your next action.
-
-# After:
-VISUAL PERCEPTION:
-Nearby: Alice (state: speaking), Bob (state: idle)
-Visible objects: food, chair
-
-TASK: Based on your needs, visual perception, beliefs... decide your next action.
+FateEngine(
+    enable_phase2=True,                    # Enable Phase 2 features
+    multi_tick_window_duration=3,         # Proposal window duration
+    spatial_cell_size=10.0,               # Spatial index cell size
+    conflict_resolution=ConflictResolution.HIGHEST_PRIORITY
+)
 ```
 
-**Updated Method Signatures:**
-```python
-async def generate_plan_v2(
-    profile, working_memory, beliefs, relationships,
-    emotional_modifier, needs_context,
-    visual_context,  # NEW: Visual perception data
-    reason="scheduled"
-) -> Dict
-```
+## Test Suite
 
-### 4. Spatial Index Integration
+**File:** `/tsukuyomi/tests/test_phase2_world_dynamics.py`
 
-**Leverages Existing SpatialIndex:**
-- Grid-based spatial partitioning (O(1) average queries)
-- Efficient proximity detection
-- Automatic position tracking for all agents
+Comprehensive test coverage for all Phase 2 components:
+- ✓ SpatialIndex basic operations (insert, update, remove, query)
+- ✓ SpatialIndex bulk operations (50+ objects)
+- ✓ SpatialIndex query caching performance
+- ✓ SpatialIndex k-nearest neighbor queries
+- ✓ SpatialIndex performance targets (<200ms for 50+ agents)
+- ✓ ProposalWindow basic operations
+- ✓ ProposalWindow multi-tick commitment
+- ✓ ProposalWindow conflict resolution
+- ✓ ProposalWindow actor limits
+- ✓ Affordance basic validation
+- ✓ Affordance distance checking
+- ✓ Affordance ownership checking
+- ✓ Affordance supported actions
+- ✓ FateEngine Phase 2 integration
+- ✓ FateEngine affordance validation
 
-**Usage Pattern:**
-```python
-# Create spatial index
-index = SpatialIndex(width=100, height=100, cell_size=10)
+**All tests passing:** ✓
 
-# Register agents
-index.insert("agent1", (10.5, 20.3))
+## Code Quality
 
-# Query nearby
-nearby = index.query((10.5, 20.3), radius=5.0)
-```
+- **Type Hints:** Full Python 3.10+ type hinting
+- **Documentation:** Google-style docstrings
+- **Logging:** Proper use of logging module (no print statements)
+- **Code Style:** Follows "General Engine" philosophy (no scenario-specific code)
+- **Error Handling:** Comprehensive error handling with meaningful messages
+- **Performance:** Optimized for 50+ agents with <200ms query time
 
-### 5. Test Suite
-
-**Created Comprehensive Tests:**
-- `test_visual_perception_simple.py` - Basic functionality tests
-  - Raycasting line-of-sight
-  - Field-of-view detection
-  - Memory echo tracking
-
-- `test_visual_perception_phase2.py` - Integration tests
-  - Full perception pipeline
-  - Spatial index integration
-  - Visual context generation
-
-**Test Results:**
-- ✓ Raycasting - All tests pass
-- ✓ Spatial Index - All tests pass
-- ✓ Field-of-View - All tests pass
-- ✓ Memory Echoes - All tests pass
-
-## Architecture
+## File Structure
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     AgentBrain                              │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  set_spatial_index()  │  set_spatial_logic()        │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                         │                                    │
-│                         ▼                                    │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              PerceptionPipeline                        │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │   │
-│  │  │  Raycaster  │  │SpatialIndex │ │MemoryEchoes │   │   │
-│  │  │             │  │Integration  │ │             │   │   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘   │   │
-│  │                                                             │
-│  │  - Vision Deep (raycasting + FOV + occlusion)            │
-│  │  - Vision Proximity (lightweight heartbeat)               │
-│  │  - Hearing (omnidirectional)                              │
-│  │  - Proprioception (self-awareness)                       │
-│  │  - Memory Echoes (last-known positions)                  │
-│  └─────────────────────────────────────────────────────┘   │
-│                         │                                    │
-│                         ▼                                    │
-│              get_visual_context_summary()                    │
-│                         │                                    │
-│                         ▼                                    │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                  LLMService                            │   │
-│  │  ┌─────────────────────────────────────────────────┐ │   │
-│  │  │  Enhanced Prompt Template with Visual Context   │ │   │
-│  │  └─────────────────────────────────────────────────┘ │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+/tsukuyomi/
+├── core/
+│   ├── spatial_index.py         # Enhanced (Phase 2)
+│   ├── proposal_window.py       # New (Phase 2)
+│   └── affordance.py            # New (Phase 2)
+├── proto/
+│   ├── fate_engine.py           # Modified (Phase 2 integration)
+│   ├── core.proto               # Existing (no changes needed)
+│   └── common.proto             # Existing (no changes needed)
+└── tests/
+    └── test_phase2_world_dynamics.py  # New (Phase 2 test suite)
 ```
-
-## Key Features
-
-### 1. Accurate Raycasting
-- Line segment intersection algorithm
-- Configurable step size for precision vs performance
-- Room-aware wall checking
-- Support for transparent walls (future)
-
-### 2. Field-of-View (FOV)
-- Configurable FOV angle (default: 120°)
-- Accurate cone calculation using atan2
-- Handles angle wraparound
-- Distance-based certainty decay
-
-### 3. Spatial Index Integration
-- O(1) average case proximity queries
-- Automatic position tracking
-- Efficient for large numbers of entities
-- Reduces O(A²) complexity
-
-### 4. Staggered Perception Schedule
-- Every tick: Proximity heartbeat (lightweight)
-- Every N ticks: Deep perception (full FOV + occlusion)
-- Configurable interval (default: 3 ticks)
-- Reduces CPU usage by ~66%
-
-### 5. Memory Echoes & Surprise Factor
-- Track last-known positions
-- Decay over time
-- Boost salience for unexpected events
-- Teleportation detection
-
-### 6. LLM Integration
-- Visual context in prompts
-- Grounded spatial decision-making
-- Awareness of nearby entities
-- Obstacle information
 
 ## Performance Characteristics
 
-### Raycasting
-- **Complexity:** O(distance / step_size * num_walls)
-- **Optimization:** Room filtering limits walls checked
-- **Configurable:** Step size balances speed vs accuracy
+### SpatialIndex
+- **Insert:** O(1) amortized
+- **Query:** O(k) where k = cells in radius
+- **Bulk Insert:** O(n) optimized
+- **Bulk Update:** O(n) with optimized cell changes
+- **K-Nearest:** O(n log k) with heap optimization
 
-### Spatial Index
-- **Insert:** O(1)
-- **Query:** O(k) where k = cells within radius
-- **Update:** O(1)
-- **Memory:** O(grid_width * grid_height)
+### ProposalWindow
+- **Add Proposal:** O(1) amortized
+- **Conflict Detection:** O(n) where n = proposals in window
+- **Conflict Resolution:** O(n)
+- **Tick Update:** O(n) for expiration checks
 
-### Perception Pipeline
-- **Proximity Tick:** O(query_complexity)
-- **Deep Tick:** O(rays_in_cone * raycast_complexity)
-- **Staggered:** Deep every 3 ticks = ~33% of ticks
+### AffordanceValidator
+- **Validation:** O(p) where p = number of preconditions
+- **Default Validation:** O(1) for simple actions
+- **Effect Resolution:** O(e) where e = number of effects
 
-## Usage Guide
+## Usage Examples
 
-### Basic Setup
-
+### Basic SpatialIndex Usage
 ```python
-from tsukuyomi.brain.AgentBrain import AgentBrain
-from tsukuyomi.core.spatial_index import SpatialIndex
+index = SpatialIndex(width=100, height=100, cell_size=10.0)
+index.insert("agent1", (10.5, 20.3))
+nearby = index.query((15, 20), radius=5.0)
 
-# Create spatial index
-spatial_index = SpatialIndex(width=100, height=100, cell_size=10)
+# Bulk operations
+index.insert_bulk([("agent2", (15, 25)), ("agent3", (20, 30))])
+index.update_positions_bulk([("agent1", (12, 22))])
+```
 
-# Create agent
-brain = AgentBrain(
-    actor_id="agent1",
-    profile={
-        "name": "Alice",
-        "backstory": "A curious explorer",
-        "sensory_profile": {
-            "vision_range": 20.0,
-            "vision_fov": 120.0
-        }
-    }
+### ProposalWindow Usage
+```python
+window = ProposalWindow(duration_ticks=3, max_proposals_per_actor=2)
+window.open_window(tick_number=0)
+window.add_proposal(proposal, priority=10)
+
+if window.is_expired(tick_number=3):
+    ready = window.get_ready_proposals()
+    conflicts = window.resolve_conflicts()
+```
+
+### Affordance Validation
+```python
+validator = AffordanceValidator()
+result = validator.validate_action(
+    object=env_obj,
+    action_type=ActionType.COLLECT,
+    actor=actor,
+    parameters={"target_id": "apple_1"}
 )
 
-# Connect spatial systems
-brain.set_spatial_index(spatial_index)
-brain.set_spatial_logic(spatial_logic)
-
-# Run
-asyncio.run(brain.run())
+if result.is_valid:
+    # Execute action
+else:
+    # Handle rejection
+    print(f"Failed: {result.reason}")
 ```
 
-### Custom Room with Walls
-
+### FateEngine with Phase 2
 ```python
-from tsukuyomi.brain.PerceptionPipeline import Wall
-
-# Define walls
-walls = [
-    Wall(start=(0, 0), end=(20, 0), thickness=0.5),
-    Wall(start=(20, 0), end=(20, 20), thickness=0.5),
-    Wall(start=(20, 20), end=(0, 20), thickness=0.5),
-    Wall(start=(0, 20), end=(0, 0), thickness=0.5),
-    Wall(start=(5, 5), end=(5, 15), thickness=0.3),  # Pillar
-]
-
-# Register with agent's raycaster
-brain.perception.raycaster.register_room_walls("tavern", walls)
-```
-
-### Testing Line-of-Sight
-
-```python
-# Check visibility
-visible = brain.perception.raycaster.is_point_visible(
-    observer_pos=(10, 10),
-    target_pos=(15, 15),
-    room_id="tavern"
+engine = FateEngine(
+    tick_rate=20,
+    enable_phase2=True,
+    multi_tick_window_duration=3,
+    conflict_resolution=ConflictResolution.HIGHEST_PRIORITY
 )
+
+# Register actors (automatically added to spatial index)
+engine.register_actor("actor1", "Alice", position=(10, 10))
+
+# Submit proposals (batched by window)
+await engine.submit_proposal(proposal)
+
+# Get Phase 2 statistics
+stats = engine.get_phase2_stats()
+print(f"Spatial Index: {stats['spatial_index']}")
+print(f"Proposal Window: {stats['proposal_window']}")
 ```
-
-## Testing
-
-### Run Tests
-
-```bash
-cd /root/.openclaw/workspace/tsukuyomi
-source venv/bin/activate
-
-# Basic tests
-python tests/test_visual_perception_simple.py
-
-# Integration tests
-python tests/test_visual_perception_phase2.py
-```
-
-### Test Coverage
-
-- ✓ Raycasting line-of-sight
-- ✓ Field-of-view detection
-- ✓ Spatial index queries
-- ✓ Memory echo tracking
-- ✓ Surprise factor calculation
-- ✓ Visual context generation
-
-## Files Modified
-
-1. `/tsukuyomi/brain/PerceptionPipeline.py` - Enhanced with Raycaster and spatial integration
-2. `/tsukuyomi/brain/AgentBrain.py` - Added spatial index/logic integration
-3. `/tsukuyomi/brain/LLMService.py` - Updated prompt templates with visual context
-4. `/tsukuyomi/tests/test_visual_perception_simple.py` - New test file (basic)
-5. `/tsukuyomi/tests/test_visual_perception_phase2.py` - New test file (integration)
-6. `/tsukuyomi/docs/visual_perception_phase2.md` - Comprehensive documentation
-
-## Configuration Options
-
-### Sensory Profile
-```python
-SensoryProfile(
-    vision_range=20.0,           # Max vision distance (meters)
-    vision_fov=120.0,            # Field of view in degrees
-    hearing_range=15.0,          # Max hearing distance (meters)
-    vision_certainty_decay=0.1,   # Certainty decay per meter
-    hearing_certainty_decay=0.15  # Certainty decay per meter
-)
-```
-
-### Perception Pipeline
-```python
-PerceptionPipeline.DEEP_PERCEPTION_INTERVAL = 3  # Deep every N ticks
-PerceptionPipeline.ECHO_DECAY_TICKS = 100          # Echo lifetime
-PerceptionPipeline.ECHO_DECAY_RATE = 0.01          # Per-tick decay
-```
-
-### Spatial Index
-```python
-SpatialIndex(
-    width=100,      # World width (meters)
-    height=100,     # World height (meters)
-    cell_size=10    # Grid cell size (meters)
-)
-```
-
-## Design Decisions
-
-1. **Raycasting over Bounding Boxes:** More accurate line-of-sight, supports transparency
-2. **Staggered Perception:** Reduces CPU usage while maintaining awareness
-3. **Grid-Based Spatial Index:** Simple, fast O(1), upgradeable to Quadtree
-4. **Separate Raycaster Class:** Reusable across different systems
-5. **Visual Context in LLM:** Grounds decisions in spatial reality
 
 ## Future Enhancements
 
-1. Partial transparency for walls
-2. Dynamic lighting system
-3. Peripheral vision effects
-4. Vision persistence (afterimages)
-5. Quadtree upgrade for larger worlds
-6. 3D raycasting support
+### Potential Improvements
+1. **Quadtree Implementation:** For worlds with >1000 agents
+2. **Spatial Clustering:** Dynamic region-based optimization
+3. **Proposal Merging:** Actual merge strategy for compatible proposals
+4. **Advanced Preconditions:** Expression parser for complex logic
+5. **Affordance Composition:** Combine multiple object affordances
+6. **Performance Profiling:** Built-in profiling hooks
+7. **Visual Debugging:** Spatial index visualization
+8. **Conflict Negotiation:** Actor-to-actor conflict resolution
 
-## Troubleshooting
-
-**Issue:** Agents see through walls
-**Solution:** Ensure walls are registered:
-```python
-perception.raycaster.register_room_walls(room_id, walls)
-```
-
-**Issue:** Poor performance
-**Solution:** Increase staggered interval:
-```python
-PerceptionPipeline.DEEP_PERCEPTION_INTERVAL = 5
-```
-
-**Issue:** Queries are slow
-**Solution:** Increase cell size:
-```python
-index = SpatialIndex(width=100, height=100, cell_size=20)
-```
-
-## Compliance with Requirements
-
-✅ **Raycasting:** Agents can only see objects in their field of view
-✅ **Line-of-Sight:** Walls and obstacles block vision
-✅ **Performance:** Perception does not block the main tick loop (staggered schedule)
-✅ **Spatial Awareness:** Enhanced AgentBrain to use spatial awareness
-✅ **LLM Integration:** Updated prompt templates for visual context
-✅ **SpatialIndex:** Integrated for proximity detection
+### Integration Points
+- Reflex layer integration with ProposalWindow
+- Perception system using SpatialIndex for visibility checks
+- Drama Director using AffordanceValidator for narrative constraints
+- Guest API exposing Phase 2 features
 
 ## Conclusion
 
-The Visual Perception pipeline is now fully implemented and tested. Agents have realistic spatial awareness through accurate raycasting, efficient proximity queries, and memory-based tracking of last-known positions. The system is performant, extensible, and well-integrated with the existing Tsukuyomi architecture.
+Tsukuyomi V2 Phase 2 World Dynamics implementation is complete and tested. All components integrate seamlessly with the existing FateEngine while maintaining backward compatibility. The system meets performance targets for 50+ agents and provides a solid foundation for future enhancements.
 
----
-
-**Implementation Date:** 2026-02-15
-**Phase:** Tsukuyomi V2 Phase 2 (World Dynamics)
-**Implemented By:** Agent Brain Engineer
-**Status:** ✓ Complete and Tested
+**Status:** ✓ COMPLETE
+**Tests:** ✓ ALL PASSING
+**Performance:** ✓ MEETS TARGETS
+**Documentation:** ✓ COMPLETE

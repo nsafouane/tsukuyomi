@@ -308,7 +308,8 @@ class FateEngineServicer(fate_engine_service_pb2_grpc.FateEngineServiceServicer)
 
             return fate_engine_service_pb2.RegisterActorResponse(
                 success=True,
-                message=f"Actor {request.name} registered. Session token: {session_token}",
+                message=f"Actor {request.name} registered successfully.",
+                session_token=session_token,
             )
         except Exception as e:
             logger.error(f"Error registering actor: {e}")

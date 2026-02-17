@@ -58,6 +58,7 @@ class LLMRequestContext:
     world_state_summary: str = ""
     needs_context: str = ""  # V2: Internal needs driving agent behavior
     visual_context: str = ""  # Phase 2: Visual perception and spatial awareness
+    rag_context: str = ""  # Phase 3: Long-term memory retrieval
     trigger_reason: str = "scheduled"
 
     def __post_init__(self):
@@ -405,10 +406,11 @@ class LLMService:
         emotional_modifier: str,
         needs_context: str = "",  # V2: Add needs context
         visual_context: str = "",  # Phase 2: Add visual context
+        rag_context: str = "",  # Phase 3: Add RAG context
         reason: str = "scheduled",
     ) -> Dict:
         """
-        Legacy compatibility method for V2 deliberation with visual context.
+        Legacy compatibility method for V2 deliberation with visual and RAG context.
         """
         service = LLMService()
         await service.initialize()
@@ -421,8 +423,9 @@ class LLMService:
             beliefs=beliefs,
             relationships=relationships,
             emotional_modifier=emotional_modifier,
-            needs_context=needs_context,  # V2: Pass needs context
-            visual_context=visual_context,  # Phase 2: Pass visual context
+            needs_context=needs_context,
+            visual_context=visual_context,
+            rag_context=rag_context,
             trigger_reason=reason
         )
 
@@ -617,6 +620,8 @@ Backstory: {agent_backstory}
 
 {visual}
 
+{rag}
+
 {beliefs}
 
 {relationships}
@@ -779,12 +784,15 @@ RESPONSE FORMAT (JSON only):
 
         visual_section = f"VISUAL PERCEPTION:\n{context.visual_context}" if context.visual_context else "VISUAL PERCEPTION:\nYour vision is unobstructed."
 
+        rag_section = f"RELEVANT MEMORIES (RAG):\n{context.rag_context}" if context.rag_context else ""
+
         return template.format(
             agent_name=context.agent_name,
             agent_backstory=context.agent_backstory,
             stance_section=stance_section,
             needs=context.needs_context,  # V2: Add needs context
             visual=visual_section,  # Phase 2: Add visual context
+            rag=rag_section,  # Phase 3: Add RAG context
             beliefs=context.beliefs,
             relationships=context.relationships,
             emotional_modifier=context.emotional_modifier,

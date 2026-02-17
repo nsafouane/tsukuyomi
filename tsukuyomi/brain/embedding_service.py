@@ -7,6 +7,7 @@ with support for multiple providers: OpenAI, HuggingFace, and local models.
 
 import logging
 from typing import List, Optional, Union
+from dataclasses import dataclass
 from enum import Enum
 import os
 
@@ -43,8 +44,6 @@ class EmbeddingConfig:
     dimensions: Optional[int] = None
     batch_size: int = 32
     cache_embeddings: bool = True
-
-from dataclasses import dataclass
 
 
 class EmbeddingService:

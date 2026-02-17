@@ -48,3 +48,9 @@ htmlcov/
 # Local Development Artifacts (ignored)
 dev_artifacts/
 certs/
+
+# IDE configs
+.kilocode/
+
+# Simulation outputs
+simulation_output/

@@ -1171,55 +1171,19 @@ async def create_proposal(
 
 
 # ============================================================================
-# Demo / Test Runner
+# Server Entry Point
 # ============================================================================
 
-
-async def demo_fate_engine():
-    """Run a quick demonstration of the Fate Engine."""
-    # Initialize fate engine with deterministic seed
+async def serve():
+    """Start the Fate Engine as a gRPC server."""
     engine = FateEngine(tick_rate=20, seed=42)
-
-    # Register some actors (actor_id is now string)
-    alice_id = str(uuid.uuid4())
-    bob_id = str(uuid.uuid4())
-
-    engine.register_actor(alice_id, "Alice", position=(0, 0))
-    engine.register_actor(bob_id, "Bob", position=(5, 5))
-
-    # Submit some initial proposals
-    await engine.submit_proposal(
-        await create_proposal(
-            actor_id=alice_id, action="MOVE", parameters={"destination": "tavern"}
-        )
-    )
-
-    await engine.submit_proposal(
-        await create_proposal(
-            actor_id=bob_id, action="EMOTE", parameters={"type": "wave"}
-        )
-    )
-
-    # Run for a limited time
-    async def limited_run():
-        await asyncio.sleep(2)  # Run for 2 seconds (~40 ticks)
-        engine.stop()
-
-    # Start both the engine and the limiter
-    await asyncio.gather(engine.run(), limited_run())
-
-    # Print summary
-    print(f"\nDemo completed: {engine.current_tick} ticks executed")
-    print(f"Total proposals processed: {len(engine.tick_history)}")
-
-    # Show final state
-    final_world_state = engine._get_world_snapshot()
-    print("\nFinal World State:")
-    for aid, actor in final_world_state.actors.items():
-        print(
-            f"  {actor.name}: pos=({actor.position.x}, {actor.position.y}), loc={actor.current_location}"
-        )
-
+    logger.info("Starting Fate Engine Server on port 50051...")
+    
+    # Start the engine loop (it starts the gRPC server internally)
+    await engine.run()
 
 if __name__ == "__main__":
-    asyncio.run(demo_fate_engine())
+    try:
+        asyncio.run(serve())
+    except KeyboardInterrupt:
+        logger.info("Server stopped by user.")
