@@ -79,9 +79,9 @@ class DramaDirector:
         # Narrative constraints
         self.min_beat_interval = 50  # ticks between dramatic moments
         self.tension_thresholds = {
-            "increase": 0.6,
-            "climax": 0.85,
-            "release": 0.4
+            "increase": 0.3,   # Lowered from 0.6 - easier to reach CLIMAX
+            "climax": 0.6,     # Lowered from 0.85
+            "release": 0.2     # Lowered from 0.4
         }
         
         logger.info(f"DramaDirector initialized with {len(self.beats)} beats")
@@ -106,12 +106,13 @@ class DramaDirector:
         
         return beats
     
-    def update_tension(self, agent_emotions: Dict[str, Dict]) -> float:
+    def update_tension(self, agent_emotions: Dict[str, Dict], vote_state: Dict = None) -> float:
         """
-        Calculate overall tension from agent emotional states.
+        Calculate overall tension from agent emotional states and vote disagreement.
         
         Args:
             agent_emotions: Dict of agent_id -> {valence, arousal, dominance}
+            vote_state: Optional dict of {"guilty": N, "not_guilty": N}
         
         Returns:
             Smoothed tension level (0.0 to 1.0)
@@ -119,7 +120,7 @@ class DramaDirector:
         if not agent_emotions:
             return self.state.tension_level
         
-        # Tension = high arousal + negative valence + high dominance conflict
+        # Tension from emotions
         tensions = []
         for agent_id, emotion in agent_emotions.items():
             arousal = emotion.get("arousal", 0.5)
@@ -137,7 +138,22 @@ class DramaDirector:
         else:
             dominance_variance = 0
         
-        raw_tension = (sum(tensions) / len(tensions)) * (1 + dominance_variance)
+        emotional_tension = (sum(tensions) / len(tensions)) * (1 + dominance_variance)
+        
+        # NEW: Add tension from vote disagreement
+        vote_tension = 0.0
+        if vote_state:
+            total = sum(vote_state.values())
+            if total > 1:
+                # More evenly split = more tension
+                votes = list(vote_state.values())
+                max_vote = max(votes)
+                min_vote = min(votes)
+                split_ratio = 1 - abs(max_vote - min_vote) / total  # 0 = unanimous, 1 = tied
+                vote_tension = split_ratio * 0.5  # Max 0.5 from votes
+        
+        # Combine emotional and vote tension
+        raw_tension = emotional_tension + vote_tension
         
         # Smooth with previous value
         self.state.tension_level = (

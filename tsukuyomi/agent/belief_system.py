@@ -900,6 +900,108 @@ class BeliefSystem:
                 del self.evidence_store[eid]
         
         logger.debug(f"Pruned belief system: {len(self.beliefs)} beliefs, {len(self.evidence_store)} evidence")
+    
+    def apply_memory_decay(
+        self, 
+        tick: int = 0,
+        decay_rate: float = 0.0005,
+        min_confidence: float = 0.3
+    ) -> List[str]:
+        """
+        Apply general memory decay to all mutable beliefs.
+        
+        Beliefs that aren't reinforced gradually decay towards a minimum.
+        This simulates how memories fade without reinforcement.
+        
+        Args:
+            tick: Current tick for timestamp
+            decay_rate: How much confidence decays per call
+            min_confidence: Floor for decay (beliefs won't go below this)
+        
+        Returns:
+            List of belief IDs that were decayed
+        """
+        decayed = []
+        
+        for belief in self.beliefs.values():
+            if not belief.mutable:
+                continue
+            
+            # Skip recently updated beliefs (within last 100 ticks)
+            if tick - belief.last_updated < 100:
+                continue
+            
+            # Apply decay
+            if belief.confidence > min_confidence:
+                old_conf = belief.confidence
+                belief.confidence = max(min_confidence, belief.confidence - decay_rate)
+                
+                if belief.confidence < old_conf:
+                    decayed.append(belief.id)
+                    logger.debug(
+                        f"Memory decay on {belief.id[:8]}: "
+                        f"{old_conf:.3f} -> {belief.confidence:.3f}"
+                    )
+        
+        return decayed
+    
+    def apply_social_pressure(
+        self,
+        my_stance: str,
+        vote_distribution: Dict[str, int],
+        tick: int = 0,
+        pressure_strength: float = 0.02
+    ) -> List[str]:
+        """
+        Apply social pressure to beliefs when agent is in minority.
+        
+        Being in the minority should increase doubt in held beliefs.
+        
+        Args:
+            my_stance: Agent's current stance ("guilty" or "not_guilty")
+            vote_distribution: Dict like {"guilty": 3, "not_guilty": 2}
+            tick: Current tick
+            pressure_strength: Base pressure per tick
+        
+        Returns:
+            List of belief IDs affected
+        """
+        affected = []
+        
+        my_count = vote_distribution.get(my_stance, 0)
+        total = sum(vote_distribution.values())
+        
+        if total == 0:
+            return affected
+        
+        minority_ratio = my_count / total
+        
+        # Only apply pressure if in significant minority (< 40%)
+        if minority_ratio >= 0.4:
+            return affected
+        
+        # Calculate pressure (stronger minority = more pressure)
+        pressure = pressure_strength * (0.4 - minority_ratio)
+        
+        for belief in self.beliefs.values():
+            if not belief.mutable:
+                continue
+            
+            # Only affect beliefs related to the case
+            if "verdict" in belief.tags or "case" in belief.tags:
+                old_conf = belief.confidence
+                belief.confidence = max(0.2, belief.confidence - pressure)
+                belief.last_updated = tick
+                
+                if belief.confidence < old_conf:
+                    affected.append(belief.id)
+                    logger.debug(
+                        f"Social pressure on {belief.id[:8]}: "
+                        f"{old_conf:.3f} -> {belief.confidence:.3f} "
+                        f"(minority ratio: {minority_ratio:.1%})"
+                    )
+        
+        return affected
 
 
 # ========================

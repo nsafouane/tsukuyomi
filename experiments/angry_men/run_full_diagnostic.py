@@ -623,26 +623,26 @@ class DiagnosticExperiment:
             if tick > 0 and tick % 100 == 0:
                 await self._check_votes(tick)
                 
-                # Check consensus
+                # Check consensus (but don't stop - continue for full duration)
                 if await self._check_consensus(tick):
                     self.consensus_reached = True
                     self.consensus_tick = tick
-                    break
+                    # Don't break - continue running to see dynamics
             
             # Log progress every 200 ticks
             if tick > 0 and tick % 200 == 0:
                 main_log.info(f"\n⏱️  Tick {tick}/{self.duration_ticks} "
                             f"({tick/self.duration_ticks*100:.0f}%)")
         
-        # Final check
+        # Final check - always run at end
+        await self._check_votes(self.duration_ticks)
         if not self.consensus_reached:
-            await self._check_votes(self.duration_ticks)
             await self._check_consensus(self.duration_ticks)
         
-        # End
+        # End - always record full duration
         self.stats.end_time = datetime.now().isoformat()
         self.stats.duration_real_seconds = time.time() - start_real
-        self.stats.duration_ticks = self.consensus_tick if self.consensus_reached else self.duration_ticks
+        self.stats.duration_ticks = self.duration_ticks  # Always full duration
     
     async def _check_votes(self, tick: int):
         """Check and record votes."""
@@ -675,7 +675,8 @@ class DiagnosticExperiment:
         
         if len(set(votes)) == 1:
             self.consensus_vote = votes[0]
-            main_log.info(f"\n✅ UNANIMOUS CONSENSUS: {self.consensus_vote.upper()}")
+            main_log.info(f"\n✅ UNANIMOUS CONSENSUS: {self.consensus_vote.upper()} @ tick {tick}")
+            main_log.info(f"   Deliberation continues for remaining {self.duration_ticks - tick} ticks...")
             return True
         
         return False
