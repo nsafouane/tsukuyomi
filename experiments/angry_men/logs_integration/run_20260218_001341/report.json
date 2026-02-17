@@ -1,0 +1,146 @@
+{
+  "experiment": {
+    "name": "Full Integration Experiment",
+    "duration_minutes": 30,
+    "total_ticks": 18000,
+    "tick_rate": 10,
+    "use_llm": true,
+    "start_time": "2026-02-18T00:30:45.263248",
+    "log_dir": "/root/.openclaw/workspace/tsukuyomi/experiments/angry_men/logs_integration/run_20260218_001341"
+  },
+  "statistics": {
+    "total_ticks": 17999,
+    "total_llm_calls": 360,
+    "total_belief_updates": 50435,
+    "total_persuasion_attempts": 54000,
+    "successful_persuasions": 50435,
+    "vote_changes": 2,
+    "drama_beats_triggered": 4,
+    "act_transitions": 3,
+    "gaps_found": 1495
+  },
+  "final_votes": {
+    "guilty": 2,
+    "not_guilty": 3,
+    "abstain": 1
+  },
+  "narrative_summary": {
+    "current_act": "RESOLUTION",
+    "tension_level": 0.33333333333333337,
+    "beats_triggered": 4,
+    "beats_completed": 0,
+    "vote_count": 2,
+    "emotional_peaks": 0,
+    "conversation_turns": 360
+  },
+  "agents": {
+    "juror_00": {
+      "name": "The Observer",
+      "final_vote": "abstain",
+      "vote_history": [
+        {
+          "tick": 0,
+          "vote": "abstain"
+        }
+      ],
+      "thought_count": 9243,
+      "utterance_count": 60,
+      "final_confidence": 0.2
+    },
+    "juror_02": {
+      "name": "Sarah",
+      "final_vote": "not_guilty",
+      "vote_history": [
+        {
+          "tick": 0,
+          "vote": "guilty"
+        },
+        {
+          "tick": 9610,
+          "vote": "not_guilty",
+          "trigger": "persuasion",
+          "from": "The Observer"
+        }
+      ],
+      "thought_count": 9265,
+      "utterance_count": 60,
+      "final_confidence": 0.3
+    },
+    "juror_03": {
+      "name": "Arthur Miller",
+      "final_vote": "guilty",
+      "vote_history": [
+        {
+          "tick": 0,
+          "vote": "guilty"
+        }
+      ],
+      "thought_count": 9306,
+      "utterance_count": 60,
+      "final_confidence": 0.6883333333333354
+    },
+    "juror_04": {
+      "name": "George",
+      "final_vote": "not_guilty",
+      "vote_history": [
+        {
+          "tick": 0,
+          "vote": "guilty"
+        }
+      ],
+      "thought_count": 9350,
+      "utterance_count": 60,
+      "final_confidence": 0.2169999999999986
+    },
+    "juror_07": {
+      "name": "Jack",
+      "final_vote": "not_guilty",
+      "vote_history": [
+        {
+          "tick": 0,
+          "vote": "guilty"
+        }
+      ],
+      "thought_count": 9245,
+      "utterance_count": 60,
+      "final_confidence": 0.33799999999999997
+    },
+    "juror_08": {
+      "name": "Davis",
+      "final_vote": "not_guilty",
+      "vote_history": [
+        {
+          "tick": 0,
+          "vote": "not_guilty"
+        },
+        {
+          "tick": 0,
+          "vote": "guilty",
+          "trigger": "persuasion",
+          "from": "The Observer"
+        },
+        {
+          "tick": 15110,
+          "vote": "not_guilty",
+          "trigger": "persuasion",
+          "from": "The Observer"
+        }
+      ],
+      "thought_count": 9278,
+      "utterance_count": 60,
+      "final_confidence": 0.3756666666666658
+    }
+  },
+  "gap_summary": {
+    "total": 1495,
+    "by_category": {
+      "belief_saturation": 1495
+    },
+    "by_severity": {
+      "minor": 1495
+    }
+  },
+  "recommendations": [
+    "Consider stronger persuasion or memory decay"
+  ]
+}
