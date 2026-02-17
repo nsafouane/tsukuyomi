@@ -80,6 +80,52 @@ from .belief_system import (
     belief_strength_category
 )
 
+# Persuasion
+from .persuasion import (
+    PersuasionStrategy,
+    ArgumentStrength,
+    Argument,
+    PersuasionAttempt,
+    PersuasionProfile,
+    PersuasionEngine,
+    create_persuasion_profile_from_personality,
+    argument_strength_category as persuasion_strength_category
+)
+
+# Decision
+from .decision_engine import (
+    DecisionType,
+    DecisionPriority,
+    DecisionOutcome,
+    DecisionFactor,
+    ReasoningStep,
+    Decision,
+    DecisionEngine,
+    create_verdict_decision,
+    create_action_decision
+)
+
+# Context
+from .context_manager import (
+    ContextType,
+    Utterance,
+    KeyPoint,
+    Turn,
+    ContextManager,
+    extract_keywords,
+    extract_topics
+)
+
+# Proposal
+from .proposal_handler import (
+    ProposalType,
+    ProposalStatus,
+    Proposal,
+    ProposalHandler,
+    create_verdict_proposal,
+    tally_votes
+)
+
 __all__ = [
     # Identity
     "CoreValue",
@@ -114,5 +160,42 @@ __all__ = [
     "BeliefUpdate",
     "BeliefSystem",
     "create_belief_from_core_value",
-    "belief_strength_category"
+    "belief_strength_category",
+    
+    # Persuasion
+    "PersuasionStrategy",
+    "ArgumentStrength",
+    "Argument",
+    "PersuasionAttempt",
+    "PersuasionProfile",
+    "PersuasionEngine",
+    "create_persuasion_profile_from_personality",
+    
+    # Decision
+    "DecisionType",
+    "DecisionPriority",
+    "DecisionOutcome",
+    "DecisionFactor",
+    "ReasoningStep",
+    "Decision",
+    "DecisionEngine",
+    "create_verdict_decision",
+    "create_action_decision",
+    
+    # Context
+    "ContextType",
+    "Utterance",
+    "KeyPoint",
+    "Turn",
+    "ContextManager",
+    "extract_keywords",
+    "extract_topics",
+    
+    # Proposal
+    "ProposalType",
+    "ProposalStatus",
+    "Proposal",
+    "ProposalHandler",
+    "create_verdict_proposal",
+    "tally_votes"
 ]
