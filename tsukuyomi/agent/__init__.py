@@ -68,6 +68,18 @@ from .universal_agent import (
     create_agent
 )
 
+# Beliefs
+from .belief_system import (
+    BeliefType,
+    EvidenceStrength,
+    Evidence,
+    Belief,
+    BeliefUpdate,
+    BeliefSystem,
+    create_belief_from_core_value,
+    belief_strength_category
+)
+
 __all__ = [
     # Identity
     "CoreValue",
@@ -92,5 +104,15 @@ __all__ = [
     "AgentState",
     "AgentConfig",
     "UniversalAgent",
-    "create_agent"
+    "create_agent",
+    
+    # Beliefs
+    "BeliefType",
+    "EvidenceStrength",
+    "Evidence",
+    "Belief",
+    "BeliefUpdate",
+    "BeliefSystem",
+    "create_belief_from_core_value",
+    "belief_strength_category"
 ]
