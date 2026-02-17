@@ -1,8 +1,21 @@
+"""
+Relationship Tests for Tsukuyomi V2.
+
+Tests the relationship tracking system.
+
+NOTE: These tests require qdrant-client and sentence-transformers to be installed.
+They are skipped when these dependencies are not available.
+"""
+
+import pytest
+
+# Skip tests if qdrant-client is not installed
+qdrant = pytest.importorskip("qdrant_client", reason="qdrant_client not installed")
+
 import asyncio
 import logging
 import uuid
 import json
-import pytest
 from typing import Dict
 from tsukuyomi.brain.AgentBrain import AgentBrain
 from tsukuyomi.proto import core_pb2, common_pb2, perception_pb2
