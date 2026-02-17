@@ -1,0 +1,288 @@
+[
+  {
+    "tick": 0,
+    "event_type": "belief_update",
+    "agent": "Davis Thompson",
+    "details": {
+      "old": 0.38,
+      "new": 0.5097681047,
+      "change": 0.1297681047
+    },
+    "timestamp": "2026-02-17T21:55:39.460856"
+  },
+  {
+    "tick": 1,
+    "event_type": "belief_update",
+    "agent": "Davis Thompson",
+    "details": {
+      "old": 0.5097681047,
+      "new": 0.6493709332789277,
+      "change": 0.1396028285789277
+    },
+    "timestamp": "2026-02-17T21:55:39.461816"
+  },
+  {
+    "tick": 2,
+    "event_type": "belief_update",
+    "agent": "Davis Thompson",
+    "details": {
+      "old": 0.6493709332789277,
+      "new": 0.7794503698093527,
+      "change": 0.13007943653042497
+    },
+    "timestamp": "2026-02-17T21:55:39.463001"
+  },
+  {
+    "tick": 3,
+    "event_type": "belief_update",
+    "agent": "Davis Thompson",
+    "details": {
+      "old": 0.7794503698093527,
+      "new": 0.8996339178198972,
+      "change": 0.12018354801054454
+    },
+    "timestamp": "2026-02-17T21:55:39.463533"
+  },
+  {
+    "tick": 4,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The defendant was at a movie - the ticket stub proves it.",
+      "strategy": "logic",
+      "conf": 0.8996339178198972
+    },
+    "timestamp": "2026-02-17T21:55:39.463562"
+  },
+  {
+    "tick": 5,
+    "event_type": "belief_update",
+    "agent": "Davis Thompson",
+    "details": {
+      "old": 0.8996339178198972,
+      "new": 1.0,
+      "change": 0.10036608218010279
+    },
+    "timestamp": "2026-02-17T21:55:39.465353"
+  },
+  {
+    "tick": 9,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The witness identified the defendant from 60 feet away at night.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.466891"
+  },
+  {
+    "tick": 14,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The defendant's alibi was never properly investigated.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.469724"
+  },
+  {
+    "tick": 19,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The timeline doesn't work - the train makes it impossible.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.472476"
+  },
+  {
+    "tick": 24,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The witness identified the defendant from 60 feet away at night.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.475040"
+  },
+  {
+    "tick": 29,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The eyewitness testimony has critical inconsistencies.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.477732"
+  },
+  {
+    "tick": 34,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The timeline doesn't work - the train makes it impossible.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.480452"
+  },
+  {
+    "tick": 39,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The defendant was at a movie - the ticket stub proves it.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.483094"
+  },
+  {
+    "tick": 44,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The prosecution hasn't met their burden of proof.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.485900"
+  },
+  {
+    "tick": 49,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The old man couldn't have heard anything from 70 feet away.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.488369"
+  },
+  {
+    "tick": 54,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The witness identified the defendant from 60 feet away at night.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.490911"
+  },
+  {
+    "tick": 59,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The defendant was at a movie - the ticket stub proves it.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.493493"
+  },
+  {
+    "tick": 64,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The defendant's alibi was never properly investigated.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.496695"
+  },
+  {
+    "tick": 69,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The timeline doesn't work - the train makes it impossible.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.499287"
+  },
+  {
+    "tick": 74,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The woman's glasses prescription shows she can't see clearly.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.502099"
+  },
+  {
+    "tick": 79,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The defendant's alibi was never properly investigated.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.504932"
+  },
+  {
+    "tick": 84,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The eyewitness testimony has critical inconsistencies.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.507633"
+  },
+  {
+    "tick": 89,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The timeline doesn't work - the train makes it impossible.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.510714"
+  },
+  {
+    "tick": 94,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The defendant was at a movie - the ticket stub proves it.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.514131"
+  },
+  {
+    "tick": 99,
+    "event_type": "speak",
+    "agent": "Davis Thompson",
+    "details": {
+      "content": "The prosecution hasn't met their burden of proof.",
+      "strategy": "logic",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.516877"
+  },
+  {
+    "tick": 100,
+    "event_type": "vote_change",
+    "agent": "Davis Thompson",
+    "details": {
+      "old": "not_guilty",
+      "new": "guilty",
+      "confidence": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.518058"
+  }
+]

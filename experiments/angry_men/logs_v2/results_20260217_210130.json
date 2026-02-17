@@ -1,0 +1,90 @@
+{
+  "duration_ticks": 500,
+  "final_votes": {
+    "Arthur Miller": "guilty",
+    "George": "guilty",
+    "Sarah": "guilty",
+    "Jack": "guilty",
+    "Davis": "not_guilty"
+  },
+  "vote_history": [
+    {
+      "tick": 100,
+      "votes": {
+        "Arthur Miller": "guilty",
+        "George": "guilty",
+        "Sarah": "guilty",
+        "Jack": "guilty",
+        "Davis": "not_guilty"
+      }
+    },
+    {
+      "tick": 200,
+      "votes": {
+        "Arthur Miller": "guilty",
+        "George": "guilty",
+        "Sarah": "guilty",
+        "Jack": "guilty",
+        "Davis": "not_guilty"
+      }
+    },
+    {
+      "tick": 300,
+      "votes": {
+        "Arthur Miller": "guilty",
+        "George": "guilty",
+        "Sarah": "guilty",
+        "Jack": "guilty",
+        "Davis": "not_guilty"
+      }
+    },
+    {
+      "tick": 400,
+      "votes": {
+        "Arthur Miller": "guilty",
+        "George": "guilty",
+        "Sarah": "guilty",
+        "Jack": "guilty",
+        "Davis": "not_guilty"
+      }
+    }
+  ],
+  "utterance_count": 500,
+  "juror_summaries": [
+    {
+      "name": "Arthur Miller",
+      "vote": "guilty",
+      "vote_changes": 0,
+      "belief_count": 1,
+      "persuasion_attempts": 0
+    },
+    {
+      "name": "George",
+      "vote": "guilty",
+      "vote_changes": 0,
+      "belief_count": 1,
+      "persuasion_attempts": 0
+    },
+    {
+      "name": "Sarah",
+      "vote": "guilty",
+      "vote_changes": 0,
+      "belief_count": 1,
+      "persuasion_attempts": 0
+    },
+    {
+      "name": "Jack",
+      "vote": "guilty",
+      "vote_changes": 0,
+      "belief_count": 1,
+      "persuasion_attempts": 0
+    },
+    {
+      "name": "Davis",
+      "vote": "not_guilty",
+      "vote_changes": 0,
+      "belief_count": 1,
+      "persuasion_attempts": 0
+    }
+  ]
+}

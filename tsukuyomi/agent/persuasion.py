@@ -19,6 +19,10 @@ import json
 import math
 import random
 
+# Saturation constants (synced with belief_system)
+ENTRENCHED_THRESHOLD = 0.85
+MAX_CONFIDENCE = 0.95
+
 
 class PersuasionStrategy(Enum):
     """Types of persuasion strategies."""
@@ -419,6 +423,14 @@ class PersuasionEngine:
         # Belief strength resistance
         strength_res = abs(belief_confidence - 0.5) * 0.4  # Max 0.2
         
+        # SATURATION RESISTANCE: Much harder to change entrenched beliefs
+        if belief_confidence > ENTRENCHED_THRESHOLD:
+            # Exponential resistance growth as confidence approaches max
+            saturation = (belief_confidence - ENTRENCHED_THRESHOLD) / (MAX_CONFIDENCE - ENTRENCHED_THRESHOLD)
+            saturation_res = saturation * 0.6  # Up to 0.6 extra resistance
+        else:
+            saturation_res = 0.0
+        
         # Core value resistance
         core_res = 0.3 if belief_is_core else 0.0
         
@@ -430,6 +442,7 @@ class PersuasionEngine:
             base * 0.3 +
             strategy_res * 0.25 +
             strength_res +
+            saturation_res +  # NEW: Saturation resistance
             core_res +
             evidence_res
         )
@@ -480,6 +493,8 @@ class PersuasionEngine:
         
         if belief_is_core:
             factors.append("core_value")
+        if belief_confidence > ENTRENCHED_THRESHOLD:
+            factors.append("entrenched_belief")  # NEW: Saturation indicator
         if belief_confidence > 0.8:
             factors.append("strong_belief")
         if belief_confidence < 0.2:

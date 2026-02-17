@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-02-17T21:06:39.453179",
+  "jurors": [
+    {
+      "name": "Arthur",
+      "initial_vote": "guilty",
+      "final_vote": "guilty",
+      "stubbornness": 0.8
+    },
+    {
+      "name": "Sarah",
+      "initial_vote": "guilty",
+      "final_vote": "guilty",
+      "stubbornness": 0.3
+    },
+    {
+      "name": "Davis",
+      "initial_vote": "not_guilty",
+      "final_vote": "not_guilty",
+      "stubbornness": 0.5
+    }
+  ],
+  "total_belief_changes": 0
+}

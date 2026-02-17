@@ -1,0 +1,266 @@
+[
+  {
+    "tick": 0,
+    "event_type": "belief_update",
+    "agent": "Jack Morrison",
+    "details": {
+      "old": 0.52,
+      "new": 0.6607134727,
+      "change": 0.1407134727
+    },
+    "timestamp": "2026-02-17T21:55:39.460598"
+  },
+  {
+    "tick": 1,
+    "event_type": "belief_update",
+    "agent": "Jack Morrison",
+    "details": {
+      "old": 0.6607134727,
+      "new": 0.7841397766562942,
+      "change": 0.12342630395629417
+    },
+    "timestamp": "2026-02-17T21:55:39.461566"
+  },
+  {
+    "tick": 2,
+    "event_type": "belief_update",
+    "agent": "Jack Morrison",
+    "details": {
+      "old": 0.7841397766562942,
+      "new": 0.8998087399882115,
+      "change": 0.11566896333191734
+    },
+    "timestamp": "2026-02-17T21:55:39.462733"
+  },
+  {
+    "tick": 3,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The timeline is consistent across all witness testimony.",
+      "strategy": "authority",
+      "conf": 0.8998087399882115
+    },
+    "timestamp": "2026-02-17T21:55:39.463031"
+  },
+  {
+    "tick": 4,
+    "event_type": "belief_update",
+    "agent": "Jack Morrison",
+    "details": {
+      "old": 0.8998087399882115,
+      "new": 1.0,
+      "change": 0.10019126001178846
+    },
+    "timestamp": "2026-02-17T21:55:39.464561"
+  },
+  {
+    "tick": 8,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The woman across the street saw the murder through the window.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.466320"
+  },
+  {
+    "tick": 13,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.469212"
+  },
+  {
+    "tick": 18,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The defendant's alibi doesn't match the documented evidence.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.472028"
+  },
+  {
+    "tick": 23,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.474504"
+  },
+  {
+    "tick": 28,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "Three independent witnesses identified the defendant leaving the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.477306"
+  },
+  {
+    "tick": 33,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The woman across the street saw the murder through the window.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.479886"
+  },
+  {
+    "tick": 38,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "Three independent witnesses identified the defendant leaving the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.482579"
+  },
+  {
+    "tick": 43,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.485203"
+  },
+  {
+    "tick": 48,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.487862"
+  },
+  {
+    "tick": 53,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.490336"
+  },
+  {
+    "tick": 58,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The knife was traced to the defendant's father's shop.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.493072"
+  },
+  {
+    "tick": 63,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.496110"
+  },
+  {
+    "tick": 68,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The evidence directly links the defendant to the crime scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.498788"
+  },
+  {
+    "tick": 73,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The knife was traced to the defendant's father's shop.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.501522"
+  },
+  {
+    "tick": 78,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The knife was traced to the defendant's father's shop.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.504308"
+  },
+  {
+    "tick": 83,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.507074"
+  },
+  {
+    "tick": 88,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.510094"
+  },
+  {
+    "tick": 93,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.513472"
+  },
+  {
+    "tick": 98,
+    "event_type": "speak",
+    "agent": "Jack Morrison",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.516396"
+  }
+]

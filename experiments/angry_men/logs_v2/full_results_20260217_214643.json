@@ -1,0 +1,42 @@
+{
+  "Arthur Miller": {
+    "name": "Arthur Miller",
+    "role": "The Angry One",
+    "initial": "guilty",
+    "final": "guilty",
+    "confidence": 0.9959281766927018,
+    "changes": 0
+  },
+  "Sarah Chen": {
+    "name": "Sarah Chen",
+    "role": "The Quiet Observer",
+    "initial": "guilty",
+    "final": "guilty",
+    "confidence": 1.0,
+    "changes": 0
+  },
+  "George Wright": {
+    "name": "George Wright",
+    "role": "The Businessman",
+    "initial": "guilty",
+    "final": "guilty",
+    "confidence": 1.0,
+    "changes": 0
+  },
+  "Jack Morrison": {
+    "name": "Jack Morrison",
+    "role": "The Cynic",
+    "initial": "guilty",
+    "final": "guilty",
+    "confidence": 1.0,
+    "changes": 0
+  },
+  "Davis Thompson": {
+    "name": "Davis Thompson",
+    "role": "The Dissenter",
+    "initial": "not_guilty",
+    "final": "guilty",
+    "confidence": 1.0,
+    "changes": 1
+  }
+}

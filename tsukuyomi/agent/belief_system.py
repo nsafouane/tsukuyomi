@@ -30,6 +30,13 @@ class BeliefType(Enum):
     SOCIAL = "social"          # Beliefs about other agents
 
 
+# Saturation constants
+MAX_CONFIDENCE = 0.95  # Beliefs can never reach 100%
+MIN_CONFIDENCE = 0.05  # Beliefs can never reach 0%
+ENTRENCHED_THRESHOLD = 0.85  # Above this, beliefs become resistant
+SATURATION_DECAY = 0.002  # Decay per tick for saturated beliefs
+
+
 class EvidenceStrength(Enum):
     """Strength levels for evidence."""
     STRONG = 0.9
@@ -442,6 +449,15 @@ class BeliefSystem:
         support_score = sum(e.effective_strength for e in supporting)
         contradict_score = sum(e.effective_strength for e in contradicting)
         
+        # SATURATION RESISTANCE: Higher confidence = harder to change
+        if old_confidence > ENTRENCHED_THRESHOLD:
+            # Entrenched belief - much more resistant to change
+            resistance = 1.0 - ((1.0 - old_confidence) / (1.0 - ENTRENCHED_THRESHOLD))
+            # resistance goes from 0 at ENTRENCHED_THRESHOLD to ~0.67 at 0.95
+            change_dampener = 1.0 - (resistance * 0.8)  # Up to 80% reduction
+        else:
+            change_dampener = 1.0
+        
         # Apply confirmation bias
         if old_confidence > 0.5:  # Already leaning towards belief
             # Supporting evidence is amplified
@@ -467,6 +483,9 @@ class BeliefSystem:
         # Low openness = belief stays closer to initial
         evidence_weight = self.openness * 0.5  # Max 50% influence from evidence
         
+        # Apply saturation resistance
+        evidence_weight *= change_dampener
+        
         # Blend initial confidence with evidence ratio
         new_confidence = (
             (1 - evidence_weight) * belief.initial_confidence +
@@ -474,13 +493,13 @@ class BeliefSystem:
         )
         
         # Apply change gradually (belief inertia)
-        max_change = 0.3 * self.openness  # Max 30% change per update
+        max_change = 0.3 * self.openness * change_dampener  # Reduced max change for entrenched
         change = new_confidence - old_confidence
         if abs(change) > max_change:
             new_confidence = old_confidence + (max_change if change > 0 else -max_change)
         
-        # Clamp to valid range
-        new_confidence = max(0.0, min(1.0, new_confidence))
+        # SATURATION CAP: Prevent beliefs from reaching 100%
+        new_confidence = max(MIN_CONFIDENCE, min(MAX_CONFIDENCE, new_confidence))
         
         # Check if change is significant
         if abs(new_confidence - old_confidence) < min_change:
@@ -528,8 +547,15 @@ class BeliefSystem:
         
         old_confidence = belief.confidence
         
+        # SATURATION RESISTANCE
+        if old_confidence > ENTRENCHED_THRESHOLD:
+            resistance = 1.0 - ((1.0 - old_confidence) / (1.0 - ENTRENCHED_THRESHOLD))
+            saturation_factor = 1.0 - (resistance * 0.8)
+        else:
+            saturation_factor = 1.0
+        
         # Calculate impact
-        impact = evidence.effective_strength
+        impact = evidence.effective_strength * saturation_factor
         
         # Apply confirmation bias
         if (evidence.supports_belief and old_confidence > 0.5) or \
@@ -545,11 +571,16 @@ class BeliefSystem:
         
         # Calculate direction
         if evidence.supports_belief:
-            new_confidence = old_confidence + (impact * (1 - old_confidence))
+            # Move towards MAX_CONFIDENCE, not 1.0
+            target = MAX_CONFIDENCE
+            new_confidence = old_confidence + (impact * (target - old_confidence))
         else:
-            new_confidence = old_confidence - (impact * old_confidence)
+            # Move towards MIN_CONFIDENCE, not 0.0
+            target = MIN_CONFIDENCE
+            new_confidence = old_confidence - (impact * (old_confidence - target))
         
-        new_confidence = max(0.0, min(1.0, new_confidence))
+        # Apply saturation cap
+        new_confidence = max(MIN_CONFIDENCE, min(MAX_CONFIDENCE, new_confidence))
         
         if abs(new_confidence - old_confidence) < 0.01:
             return None
@@ -771,6 +802,45 @@ class BeliefSystem:
             bs.update_history.append(BeliefUpdate(**udata))
         
         return bs
+    
+    def apply_saturation_decay(self, tick: int = 0) -> List[str]:
+        """
+        Apply decay to saturated beliefs (above ENTRENCHED_THRESHOLD).
+        
+        This prevents beliefs from staying at maximum confidence indefinitely.
+        Beliefs near the cap slowly drift towards the threshold.
+        
+        Returns:
+            List of belief IDs that were decayed
+        """
+        decayed = []
+        
+        for belief in self.beliefs.values():
+            if belief.confidence > ENTRENCHED_THRESHOLD and belief.mutable:
+                # Decay towards threshold
+                decay_amount = SATURATION_DECAY * (belief.confidence - ENTRENCHED_THRESHOLD)
+                belief.confidence -= decay_amount
+                belief.last_updated = tick
+                decayed.append(belief.id)
+                logger.debug(f"Decayed belief {belief.id[:8]}: {belief.confidence:.3f}")
+        
+        return decayed
+    
+    def is_belief_saturated(self, belief_id: str) -> bool:
+        """Check if a belief is at or near saturation."""
+        belief = self.beliefs.get(belief_id)
+        if not belief:
+            return False
+        return belief.confidence >= ENTRENCHED_THRESHOLD
+    
+    def get_saturation_level(self, belief_id: str) -> float:
+        """Get how saturated a belief is (0.0 = not saturated, 1.0 = max saturated)."""
+        belief = self.beliefs.get(belief_id)
+        if not belief:
+            return 0.0
+        if belief.confidence <= ENTRENCHED_THRESHOLD:
+            return 0.0
+        return (belief.confidence - ENTRENCHED_THRESHOLD) / (MAX_CONFIDENCE - ENTRENCHED_THRESHOLD)
     
     def prune(self, max_beliefs: int = 100, max_evidence_per_belief: int = 20):
         """

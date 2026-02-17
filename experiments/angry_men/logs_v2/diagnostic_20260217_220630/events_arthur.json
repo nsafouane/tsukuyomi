@@ -1,0 +1,255 @@
+[
+  {
+    "tick": 0,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "Three independent witnesses identified the defendant leaving the scene.",
+      "strategy": "emotion",
+      "conf": 0.78
+    },
+    "timestamp": "2026-02-17T22:06:30.640304"
+  },
+  {
+    "tick": 1,
+    "event_type": "belief_update",
+    "agent": "Arthur Miller",
+    "details": {
+      "old": 0.78,
+      "new": 0.8912227550469669,
+      "change": 0.11122275504696688
+    },
+    "timestamp": "2026-02-17T22:06:30.641991"
+  },
+  {
+    "tick": 2,
+    "event_type": "belief_update",
+    "agent": "Arthur Miller",
+    "details": {
+      "old": 0.8912227550469669,
+      "new": 0.941047358666606,
+      "change": 0.04982460361963914
+    },
+    "timestamp": "2026-02-17T22:06:30.643207"
+  },
+  {
+    "tick": 5,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The evidence directly links the defendant to the crime scene.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.645667"
+  },
+  {
+    "tick": 10,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.649587"
+  },
+  {
+    "tick": 15,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.653538"
+  },
+  {
+    "tick": 20,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The evidence directly links the defendant to the crime scene.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.657129"
+  },
+  {
+    "tick": 25,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.660799"
+  },
+  {
+    "tick": 30,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.664527"
+  },
+  {
+    "tick": 35,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "Three independent witnesses identified the defendant leaving the scene.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.668251"
+  },
+  {
+    "tick": 40,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.672058"
+  },
+  {
+    "tick": 45,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.675790"
+  },
+  {
+    "tick": 50,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The woman across the street saw the murder through the window.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.679517"
+  },
+  {
+    "tick": 55,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.683401"
+  },
+  {
+    "tick": 60,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The evidence directly links the defendant to the crime scene.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.687370"
+  },
+  {
+    "tick": 65,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The defendant's alibi doesn't match the documented evidence.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.691325"
+  },
+  {
+    "tick": 70,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.695396"
+  },
+  {
+    "tick": 75,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.699321"
+  },
+  {
+    "tick": 80,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The timeline is consistent across all witness testimony.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.703351"
+  },
+  {
+    "tick": 85,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.707276"
+  },
+  {
+    "tick": 90,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.711159"
+  },
+  {
+    "tick": 95,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The woman across the street saw the murder through the window.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.715089"
+  },
+  {
+    "tick": 100,
+    "event_type": "speak",
+    "agent": "Arthur Miller",
+    "details": {
+      "content": "The defendant's alibi doesn't match the documented evidence.",
+      "strategy": "emotion",
+      "conf": 0.941047358666606
+    },
+    "timestamp": "2026-02-17T22:06:30.718930"
+  }
+]

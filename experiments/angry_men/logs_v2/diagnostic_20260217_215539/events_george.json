@@ -1,0 +1,266 @@
+[
+  {
+    "tick": 0,
+    "event_type": "belief_update",
+    "agent": "George Wright",
+    "details": {
+      "old": 0.58,
+      "new": 0.7141023607,
+      "change": 0.13410236070000003
+    },
+    "timestamp": "2026-02-17T21:55:39.460345"
+  },
+  {
+    "tick": 1,
+    "event_type": "belief_update",
+    "agent": "George Wright",
+    "details": {
+      "old": 0.7141023607,
+      "new": 0.8320034211969809,
+      "change": 0.1179010604969809
+    },
+    "timestamp": "2026-02-17T21:55:39.461377"
+  },
+  {
+    "tick": 2,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 0.8320034211969809
+    },
+    "timestamp": "2026-02-17T21:55:39.461849"
+  },
+  {
+    "tick": 3,
+    "event_type": "belief_update",
+    "agent": "George Wright",
+    "details": {
+      "old": 0.8320034211969809,
+      "new": 0.9465546897373995,
+      "change": 0.11455126854041864
+    },
+    "timestamp": "2026-02-17T21:55:39.463406"
+  },
+  {
+    "tick": 4,
+    "event_type": "belief_update",
+    "agent": "George Wright",
+    "details": {
+      "old": 0.9465546897373995,
+      "new": 1.0,
+      "change": 0.053445310262600465
+    },
+    "timestamp": "2026-02-17T21:55:39.464282"
+  },
+  {
+    "tick": 7,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.465845"
+  },
+  {
+    "tick": 12,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.468596"
+  },
+  {
+    "tick": 17,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.471439"
+  },
+  {
+    "tick": 22,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "Three independent witnesses identified the defendant leaving the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.473979"
+  },
+  {
+    "tick": 27,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The knife was traced to the defendant's father's shop.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.476649"
+  },
+  {
+    "tick": 32,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.479369"
+  },
+  {
+    "tick": 37,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.482102"
+  },
+  {
+    "tick": 42,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.484689"
+  },
+  {
+    "tick": 47,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.487411"
+  },
+  {
+    "tick": 52,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.489911"
+  },
+  {
+    "tick": 57,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The knife was traced to the defendant's father's shop.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.492521"
+  },
+  {
+    "tick": 62,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "Three independent witnesses identified the defendant leaving the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.495559"
+  },
+  {
+    "tick": 67,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.498330"
+  },
+  {
+    "tick": 72,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant's alibi doesn't match the documented evidence.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.501070"
+  },
+  {
+    "tick": 77,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.503671"
+  },
+  {
+    "tick": 82,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.506585"
+  },
+  {
+    "tick": 87,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The evidence directly links the defendant to the crime scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.509510"
+  },
+  {
+    "tick": 92,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.512905"
+  },
+  {
+    "tick": 97,
+    "event_type": "speak",
+    "agent": "George Wright",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "authority",
+      "conf": 1.0
+    },
+    "timestamp": "2026-02-17T21:55:39.515948"
+  }
+]

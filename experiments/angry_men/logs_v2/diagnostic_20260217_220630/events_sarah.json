@@ -1,0 +1,255 @@
+[
+  {
+    "tick": 0,
+    "event_type": "belief_update",
+    "agent": "Sarah Chen",
+    "details": {
+      "old": 0.62,
+      "new": 0.7497681047,
+      "change": 0.1297681047
+    },
+    "timestamp": "2026-02-17T22:06:30.640658"
+  },
+  {
+    "tick": 1,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "logic",
+      "conf": 0.7497681047
+    },
+    "timestamp": "2026-02-17T22:06:30.641641"
+  },
+  {
+    "tick": 2,
+    "event_type": "belief_update",
+    "agent": "Sarah Chen",
+    "details": {
+      "old": 0.7497681047,
+      "new": 0.8690475079638373,
+      "change": 0.11927940326383735
+    },
+    "timestamp": "2026-02-17T22:06:30.643401"
+  },
+  {
+    "tick": 3,
+    "event_type": "belief_update",
+    "agent": "Sarah Chen",
+    "details": {
+      "old": 0.8690475079638373,
+      "new": 0.9513625201823438,
+      "change": 0.08231501221850646
+    },
+    "timestamp": "2026-02-17T22:06:30.644367"
+  },
+  {
+    "tick": 6,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.646519"
+  },
+  {
+    "tick": 11,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.650523"
+  },
+  {
+    "tick": 16,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.654249"
+  },
+  {
+    "tick": 21,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.657832"
+  },
+  {
+    "tick": 26,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The old man's testimony places the defendant at the scene.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.661483"
+  },
+  {
+    "tick": 31,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.665286"
+  },
+  {
+    "tick": 36,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The timeline is consistent across all witness testimony.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.668984"
+  },
+  {
+    "tick": 41,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The defendant had motive, means, and opportunity.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.672801"
+  },
+  {
+    "tick": 46,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The forensic evidence is conclusive - DNA doesn't lie.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.676522"
+  },
+  {
+    "tick": 51,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The defendant's alibi doesn't match the documented evidence.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.680333"
+  },
+  {
+    "tick": 56,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The timeline is consistent across all witness testimony.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.684203"
+  },
+  {
+    "tick": 61,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "Three independent witnesses identified the defendant leaving the scene.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.688203"
+  },
+  {
+    "tick": 66,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The knife was traced to the defendant's father's shop.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.692176"
+  },
+  {
+    "tick": 71,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The evidence directly links the defendant to the crime scene.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.696172"
+  },
+  {
+    "tick": 76,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The woman across the street saw the murder through the window.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.700157"
+  },
+  {
+    "tick": 81,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The timeline is consistent across all witness testimony.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.704130"
+  },
+  {
+    "tick": 86,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The knife was traced to the defendant's father's shop.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.708135"
+  },
+  {
+    "tick": 91,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The defendant's fingerprints were on the murder weapon.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.712060"
+  },
+  {
+    "tick": 96,
+    "event_type": "speak",
+    "agent": "Sarah Chen",
+    "details": {
+      "content": "The evidence directly links the defendant to the crime scene.",
+      "strategy": "logic",
+      "conf": 0.9513625201823438
+    },
+    "timestamp": "2026-02-17T22:06:30.715885"
+  }
+]
