@@ -1,0 +1,173 @@
+{
+  "case": {
+    "title": "The State vs. Unknown Defendant",
+    "charge": "First-Degree Murder",
+    "penalty": "Death Penalty (Electric Chair)",
+    "defendant": {
+      "age": 19,
+      "background": "From the slums, father was absent, mother died when young",
+      "criminal_history": [" juvenile detention for car theft", "arrest for mugging", "knife fighting"],
+      "current_status": "On trial for father's murder"
+    },
+    "victim": {
+      "relation": "Father",
+      "circumstances": "Stabbed in chest at 12:10 AM"
+    }
+  },
+  
+  "evidence": {
+    "prosecution": [
+      {
+        "id": "evidence_001",
+        "type": "weapon",
+        "name": "The Switchblade",
+        "description": "A unique switchblade found at the crime scene",
+        "details": {
+          "wound_angle": "Downward thrust",
+          "knife_type": "Switchblade with unusual handle pattern",
+          "defendant_claim": "Lost his similar knife on night of murder"
+        },
+        "strength": 0.7,
+        "weaknesses": ["Similar knives exist in stores", "No fingerprints confirmed"]
+      },
+      {
+        "id": "evidence_002",
+        "type": "witness",
+        "name": "The Woman Across the Street",
+        "description": "Claims she saw the murder through windows of passing el train",
+        "details": {
+          "location": "Apartment across the street, 60 feet away",
+          "time": "12:10 AM",
+          "visibility": "Through passing train windows",
+          "marks": "Wore glasses, saw defendant stab father"
+        },
+        "strength": 0.75,
+        "weaknesses": ["Distance was significant", "Train was passing", "Late night visibility"]
+      },
+      {
+        "id": "evidence_003",
+        "type": "witness",
+        "name": "The Old Man Downstairs",
+        "description": "Heard argument and body fall, saw defendant running",
+        "details": {
+          "location": "Apartment directly below",
+          "heard": "\"I'm going to kill you!\" then body falling",
+          "saw": "Defendant running down stairs 15 seconds later",
+          "time_to_door": "Witness claimed 15 seconds from bedroom to door"
+        },
+        "strength": 0.65,
+        "weaknesses": ["Timing seems fast", "El train noise", "Bedroom is down hall"]
+      },
+      {
+        "id": "evidence_004",
+        "type": "alibi_weakness",
+        "name": "The Defendant's Alibi",
+        "description": "Claimed to be at movies but couldn't name film",
+        "details": {
+          "claim": "Was at movies from 11:30 PM to 3:10 AM",
+          "problem": "Could not name the films or recall details",
+          "stress": "Under emotional distress during questioning"
+        },
+        "strength": 0.6,
+        "weaknesses": ["Stress affects memory", "Reasonable for upset person"]
+      }
+    ],
+    "defense": [
+      {
+        "id": "defense_001",
+        "type": "counter_evidence",
+        "name": "Similar Knife Available",
+        "description": "Exact same knife pattern found in pawn shop",
+        "details": {
+          "location": "Pawn shop 2 blocks from defendant's home",
+          "price": "$6",
+          "uniqueness": "Not unique as prosecution claimed"
+        },
+        "strength": 0.7
+      },
+      {
+        "id": "defense_002",
+        "type": "timing_analysis",
+        "name": "Old Man's Timeline",
+        "description": "Physical impossibility of 15-second timeline",
+        "details": {
+          "distance": "Bedroom to front door is 43 feet",
+          "walk_time": "Would take at least 30 seconds with cane",
+          "train_passing": "Train makes loud noise, couldn't hear clearly"
+        },
+        "strength": 0.75
+      },
+      {
+        "id": "defense_003",
+        "type": "witness_credibility",
+        "name": "Woman's Vision",
+        "description": "Woman wore glasses, wasn't wearing them in bed",
+        "details": {
+          "observation": "Marks on nose indicate glasses",
+          "time": "12:10 AM - most people don't wear glasses to sleep",
+          "implication": "Vision impaired without glasses"
+        },
+        "strength": 0.65
+      }
+    ]
+  },
+  
+  "deliberation": {
+    "initial_vote": {
+      "guilty": 11,
+      "not_guilty": 1,
+      "abstain": 0
+    },
+    "requirements": {
+      "unanimity": true,
+      "standard": "Beyond reasonable doubt"
+    },
+    "time_limit_minutes": 60,
+    "tick_rate": 10
+  },
+  
+  "drama_beats": [
+    {
+      "act": 1,
+      "name": "Initial Positions",
+      "trigger": "tick_0",
+      "description": "Jurors introduce themselves, initial vote taken",
+      "expected_duration_ticks": 200
+    },
+    {
+      "act": 2,
+      "name": "Knife Discussion",
+      "trigger": "tick_200",
+      "description": "Davis produces identical knife, challenges uniqueness claim",
+      "expected_duration_ticks": 150
+    },
+    {
+      "act": 2,
+      "name": "Old Man's Testimony",
+      "trigger": "tick_350",
+      "description": "Discussion of old man's timeline and credibility",
+      "expected_duration_ticks": 200
+    },
+    {
+      "act": 2,
+      "name": "Woman's Testimony",
+      "trigger": "tick_550",
+      "description": "Glasses revelation, visibility questions",
+      "expected_duration_ticks": 150
+    },
+    {
+      "act": 3,
+      "name": "Arthur's Outburst",
+      "trigger": "vote_9_to_3",
+      "description": "Arthur emotionally breaks down about his son",
+      "expected_duration_ticks": 100
+    },
+    {
+      "act": 4,
+      "name": "Final Vote",
+      "trigger": "unanimous_not_guilty",
+      "description": "Resolution, jurors prepare to leave",
+      "expected_duration_ticks": 50
+    }
+  ]
+}

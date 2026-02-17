@@ -1,0 +1,95 @@
+{
+  "id": "juror_07",
+  "name": "Jack",
+  "role": "Juror #7",
+  "age": 38,
+  "occupation": "Salesman",
+  
+  "personality": {
+    "big_five": {
+      "openness": 0.1,
+      "conscientiousness": -0.3,
+      "extraversion": 0.7,
+      "agreeableness": 0.2,
+      "neuroticism": 0.4
+    },
+    "baseline_emotion": {
+      "valence": 0.0,
+      "arousal": 0.6,
+      "dominance": 0.5
+    },
+    "traits": {
+      "impatience": 0.9,
+      "cynicism": 0.7,
+      "superficiality": 0.8
+    }
+  },
+  
+  "beliefs": {
+    "initial_stance": "guilty",
+    "stance_confidence": 0.7,
+    "core_beliefs": {
+      "time_value": {
+        "position": "positive",
+        "weight": 0.9,
+        "description": "My time is valuable and this is a waste"
+      },
+      "court_system": {
+        "position": "neutral",
+        "weight": 0.5,
+        "description": "They caught him, he's guilty, let's move on"
+      },
+      "baseball": {
+        "position": "positive",
+        "weight": 0.85,
+        "description": "The Yankees game starts at 7 and I have tickets"
+      }
+    }
+  },
+  
+  "memories": {
+    "episodic": [
+      {
+        "id": "mem_001",
+        "content": "Got tickets to the Yankees game tonight. Box seats. Cost me a fortune.",
+        "emotion": {"valence": 0.7, "arousal": 0.5},
+        "importance": 0.8,
+        "tags": ["baseball", "yankees", "tickets", "excited"]
+      },
+      {
+        "id": "mem_002",
+        "content": "They dragged me into this jury duty thing. Just my luck.",
+        "emotion": {"valence": -0.4, "arousal": 0.3},
+        "importance": 0.5,
+        "tags": ["jury", "annoyance", "waste"]
+      }
+    ],
+    "semantic": [
+      {
+        "content": "The defendant has a criminal record",
+        "confidence": 0.7,
+        "source": "prosecution"
+      }
+    ]
+  },
+  
+  "relationships": {
+    "juror_03": {
+      "affinity": 0.3,
+      "trust": 0.4,
+      "history": ["At least he wants to get this over with too"]
+    }
+  },
+  
+  "communication_style": {
+    "default_tone": "casual_dismissive",
+    "argument_approach": "superficial",
+    "vocabulary_level": "casual",
+    "catchphrases": [
+      "Let's wrap this up",
+      "I've got a game to catch",
+      "What's the difference?",
+      "Come on, we all know he did it"
+    ]
+  }
+}
