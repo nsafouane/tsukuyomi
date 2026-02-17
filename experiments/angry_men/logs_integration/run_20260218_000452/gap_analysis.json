@@ -1,0 +1,2542 @@
+[
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857069375
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8931229937499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8890029625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.88735495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3810,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3820,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3830,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3840,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3850,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3860,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3870,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3880,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3890,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3900,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8911915548999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3910,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3910,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3910,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3910,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3920,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3920,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3920,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3920,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3930,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3930,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3930,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3930,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3940,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3940,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3940,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3940,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3950,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3950,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3950,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3950,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3960,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3960,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3960,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3960,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3970,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3970,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3970,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3970,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3980,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3980,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3980,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3980,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3990,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3990,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3990,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 3990,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4000,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887970546875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4000,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.890451171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4000,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.888021171875
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4000,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.887957890625
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4010,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4010,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4010,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4010,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4020,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4020,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4020,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4020,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4030,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4030,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4030,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4030,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4040,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4040,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4040,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4040,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4050,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4050,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4050,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4050,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4060,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4060,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4060,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4060,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4070,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4070,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4070,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4070,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4080,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4080,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4080,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4080,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4090,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4090,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4090,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4090,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867462213099999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8899178128499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8868116149499999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8867298728999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4110,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4110,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4110,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4110,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4120,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4120,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4120,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4120,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4130,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4130,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4130,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4130,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4140,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4140,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4140,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4140,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4150,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4150,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4150,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4150,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4160,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4160,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4160,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4160,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4170,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4170,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4170,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4170,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4180,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4180,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4180,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4180,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4190,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4190,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4190,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4190,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4200,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.885706916545
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4200,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889590095425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4200,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8857878161049999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4200,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8856866916549999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4210,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4210,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4210,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4210,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4220,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4220,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4220,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4220,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4230,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4230,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4230,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4230,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4240,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4240,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4240,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4240,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4250,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4250,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4250,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4250,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4260,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4260,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4260,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4260,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4270,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4270,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4270,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4270,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4280,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4280,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4280,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4280,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4290,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4290,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4290,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4290,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4300,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848523560999999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4300,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.8894666372
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4300,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88494949886
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4300,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.88482807041
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4310,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4310,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4310,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4310,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4320,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4320,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4320,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4320,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4330,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4330,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4330,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4330,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4340,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4340,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4340,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4340,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4350,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4350,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4350,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4350,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4360,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4360,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4360,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4360,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4370,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4370,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4370,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4370,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4380,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4380,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4380,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4380,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4390,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4390,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4390,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4390,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4400,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884182263495
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4400,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.889546055775
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4400,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884296386735
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 4400,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "Arthur Miller belief saturated at 95%",
+    "details": {
+      "confidence": 0.884153732685
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  }
+]
