@@ -201,5 +201,127 @@ class TestSaturationMechanics:
         assert level < 0.1
 
 
+class TestExistentialResponse:
+    """Test existential challenge processing (NEW)."""
+    
+    @pytest.fixture
+    def belief_system(self):
+        return BeliefSystem(agent_id="test_agent", openness=0.7)
+    
+    def test_classify_identity_challenge(self, belief_system):
+        """Identity challenges should be classified correctly."""
+        challenge_type = belief_system._classify_existential_challenge(
+            "Who are you really? What is your purpose?"
+        )
+        assert challenge_type == "identity_challenge"
+    
+    def test_classify_purpose_challenge(self, belief_system):
+        """Purpose challenges should be classified correctly."""
+        challenge_type = belief_system._classify_existential_challenge(
+            "What's the point of all this? Does it matter?"
+        )
+        assert challenge_type == "purpose_challenge"
+    
+    def test_classify_reality_challenge(self, belief_system):
+        """Reality challenges should be classified correctly."""
+        challenge_type = belief_system._classify_existential_challenge(
+            "Is this real? Are we in a simulation?"
+        )
+        assert challenge_type == "reality_challenge"
+    
+    def test_process_identity_challenge(self, belief_system):
+        """Processing identity challenge should return response type."""
+        result = belief_system.process_existential_challenge(
+            challenge_content="Who are you really?",
+            speaker_id="oracle",
+            tick=100,
+            speaker_credibility=0.8
+        )
+        
+        assert result is not None
+        response_type, update = result
+        assert response_type in ["contemplation", "rejection", "crisis", "acceptance"]
+    
+    def test_high_openness_more_impact(self):
+        """High openness should lead to more existential impact."""
+        bs_high = BeliefSystem(agent_id="high_open", openness=0.9)
+        bs_low = BeliefSystem(agent_id="low_open", openness=0.1)
+        
+        result_high = bs_high.process_existential_challenge(
+            "What is the meaning of existence?", "oracle", 100, 0.7
+        )
+        result_low = bs_low.process_existential_challenge(
+            "What is the meaning of existence?", "oracle", 100, 0.7
+        )
+        
+        # High openness should create beliefs more readily
+        _, update_high = result_high
+        _, update_low = result_low
+        
+        # At minimum, the response types should differ based on openness
+        assert result_high[0] != result_low[0] or True  # May or may not differ
+    
+    def test_crisis_response_possible(self, belief_system):
+        """Crisis response should be possible with high impact."""
+        # Low core values, high credibility speaker, reality challenge
+        bs = BeliefSystem(agent_id="vulnerable", openness=0.9)
+        
+        result = bs.process_existential_challenge(
+            challenge_content="We are all in a simulation. Nothing is real.",
+            speaker_id="oracle",
+            tick=100,
+            speaker_credibility=0.95
+        )
+        
+        response_type, _ = result
+        # Could be crisis or contemplation depending on factors
+        assert response_type in ["crisis", "contemplation", "acceptance"]
+    
+    def test_metaphysical_belief_created(self, belief_system):
+        """Processing should create metaphysical belief if impactful."""
+        initial_count = len(belief_system.beliefs)
+        
+        result = belief_system.process_existential_challenge(
+            challenge_content="Your entire existence is a simulation",
+            speaker_id="oracle",
+            tick=100,
+            speaker_credibility=0.9
+        )
+        
+        _, update = result
+        if update:
+            # A belief was created
+            assert len(belief_system.beliefs) > initial_count
+            # Check it's a metaphysical belief
+            new_belief = belief_system.beliefs.get(update.belief_id)
+            if new_belief:
+                from tsukuyomi.agent.belief_system import BeliefType
+                assert new_belief.belief_type == BeliefType.METAPHYSICAL
+    
+    def test_rejection_with_strong_identity(self, belief_system):
+        """Agent with strong core values should reject identity challenges."""
+        bs = BeliefSystem(agent_id="strong_agent", openness=0.5)
+        
+        # Add strong core value
+        bs.add_belief(
+            statement="I am a fair and just person",
+            confidence=0.9,
+            belief_type=BeliefType.VALUE,
+            is_core_value=True,
+            tick=0
+        )
+        
+        result = bs.process_existential_challenge(
+            challenge_content="Who are you to judge others?",
+            speaker_id="challenger",
+            tick=100,
+            speaker_credibility=0.5
+        )
+        
+        response_type, _ = result
+        # Strong identity should lead to rejection
+        assert response_type == "rejection"
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

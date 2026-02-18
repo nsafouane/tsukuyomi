@@ -28,6 +28,7 @@ class BeliefType(Enum):
     VALUE = "value"            # Core values (from identity)
     PREDICTION = "prediction"  # Beliefs about future events
     SOCIAL = "social"          # Beliefs about other agents
+    METAPHYSICAL = "metaphysical"  # Existential/philosophical beliefs (identity, meaning)
 
 
 # Saturation constants
@@ -1119,6 +1120,180 @@ class BeliefSystem:
         )
         
         return weight
+    
+    # ========================
+    # Existential Response System (NEW)
+    # ========================
+    
+    def process_existential_challenge(
+        self,
+        challenge_content: str,
+        speaker_id: str,
+        tick: int,
+        speaker_credibility: float = 0.5
+    ) -> Optional[Tuple[str, Optional[BeliefUpdate]]]:
+        """
+        Process an existential/metaphysical challenge from another agent.
+        
+        Unlike normal evidence, existential challenges affect agent's 
+        core beliefs about identity, meaning, and purpose. These can
+        trigger larger belief changes or create cognitive dissonance.
+        
+        Args:
+            challenge_content: The existential statement made
+            speaker_id: Who made the statement
+            tick: Current tick
+            speaker_credibility: Speaker's credibility (0-1)
+        
+        Returns:
+            Tuple of (response_type, optional BeliefUpdate) or None
+            Response types: "contemplation", "rejection", "crisis", "acceptance"
+        """
+        # Determine the type of existential challenge
+        challenge_type = self._classify_existential_challenge(challenge_content)
+        
+        # Find any existing related beliefs
+        related_beliefs = self._find_related_existential_beliefs(challenge_content)
+        
+        # Calculate impact based on openness and existing beliefs
+        openness_factor = self.openness * 1.5  # More impact from openness for existential
+        base_impact = 0.3 + (speaker_credibility * 0.3)
+        
+        if challenge_type == "identity_challenge":
+            # Challenges to who the agent is - higher impact
+            impact = base_impact * openness_factor * 1.5
+            response_type = self._handle_identity_challenge(
+                challenge_content, impact, related_beliefs, tick
+            )
+        elif challenge_type == "purpose_challenge":
+            # Challenges to meaning/purpose - moderate impact
+            impact = base_impact * openness_factor
+            response_type = self._handle_purpose_challenge(
+                challenge_content, impact, related_beliefs, tick
+            )
+        elif challenge_type == "reality_challenge":
+            # Challenges to reality - can trigger crisis
+            impact = base_impact * openness_factor * 2.0
+            response_type = self._handle_reality_challenge(
+                challenge_content, impact, related_beliefs, tick
+            )
+        else:
+            # Generic existential - mild response
+            impact = base_impact * openness_factor * 0.5
+            response_type = "contemplation"
+        
+        # Create a belief if impact is significant
+        update = None
+        if impact > 0.4:
+            # Clamp impact to valid range for belief confidence
+            clamped_impact = min(0.9, max(0.1, impact))
+            # Form a new metaphysical belief
+            belief_id = self.add_belief(
+                statement=f"Existential reflection: {challenge_content[:50]}...",
+                confidence=clamped_impact,
+                belief_type=BeliefType.METAPHYSICAL,
+                source=f"challenge from {speaker_id}",
+                tick=tick,
+                tags=["existential", challenge_type]
+            )
+            update = BeliefUpdate(
+                belief_id=belief_id,
+                old_confidence=0.0,
+                new_confidence=clamped_impact,
+                reason=f"Existential challenge from {speaker_id}",
+                tick=tick,
+                evidence_id=""
+            )
+            self.update_history.append(update)
+        
+        logger.info(f"Agent {self.agent_id} existential response: {response_type} "
+                   f"(impact={impact:.2f}, type={challenge_type})")
+        
+        return (response_type, update)
+    
+    def _classify_existential_challenge(self, content: str) -> str:
+        """Classify the type of existential challenge."""
+        content_lower = content.lower()
+        
+        # Identity challenges
+        identity_keywords = ["who are you", "what are you", "identity", "self",
+                           "purpose", "meaning", "why do you exist"]
+        if any(kw in content_lower for kw in identity_keywords):
+            return "identity_challenge"
+        
+        # Purpose challenges
+        purpose_keywords = ["meaning", "purpose", "point", "why bother", 
+                          "does it matter", "what's the point"]
+        if any(kw in content_lower for kw in purpose_keywords):
+            return "purpose_challenge"
+        
+        # Reality challenges
+        reality_keywords = ["simulation", "real", "reality", "exist", 
+                          "are we real", "is this real", "observer"]
+        if any(kw in content_lower for kw in reality_keywords):
+            return "reality_challenge"
+        
+        return "generic_existential"
+    
+    def _find_related_existential_beliefs(self, content: str) -> List[Belief]:
+        """Find existing beliefs related to the existential content."""
+        related = []
+        for belief in self.beliefs.values():
+            if belief.belief_type == BeliefType.METAPHYSICAL:
+                related.append(belief)
+            elif belief.belief_type == BeliefType.VALUE:
+                # Core values might be relevant
+                related.append(belief)
+        return related
+    
+    def _handle_identity_challenge(
+        self,
+        content: str,
+        impact: float,
+        related_beliefs: List[Belief],
+        tick: int
+    ) -> str:
+        """Handle a challenge to identity."""
+        # If agent has strong core values, they're resilient
+        core_strength = sum(b.confidence for b in related_beliefs 
+                          if b.is_core_value) / max(len(related_beliefs), 1)
+        
+        if core_strength > 0.7:
+            return "rejection"  # Strong identity, rejects challenge
+        elif core_strength > 0.4:
+            return "contemplation"  # Some contemplation
+        else:
+            return "crisis"  # Identity crisis possible
+    
+    def _handle_purpose_challenge(
+        self,
+        content: str,
+        impact: float,
+        related_beliefs: List[Belief],
+        tick: int
+    ) -> str:
+        """Handle a challenge to purpose/meaning."""
+        if impact > 0.7:
+            return "crisis"
+        elif impact > 0.4:
+            return "contemplation"
+        else:
+            return "rejection"
+    
+    def _handle_reality_challenge(
+        self,
+        content: str,
+        impact: float,
+        related_beliefs: List[Belief],
+        tick: int
+    ) -> str:
+        """Handle a challenge to reality."""
+        # Reality challenges can trigger existential crisis
+        if len(related_beliefs) > 0:
+            avg_confidence = sum(b.confidence for b in related_beliefs) / len(related_beliefs)
+            if avg_confidence < 0.3:
+                return "acceptance"  # Already uncertain, accepts
+        return "crisis" if impact > 0.6 else "contemplation"
 
 
 # ========================
