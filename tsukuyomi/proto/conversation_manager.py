@@ -76,7 +76,9 @@ class ConversationManager:
         agents: List[Any] = None,
         enable_interruptions: bool = True,
         base_speak_probability: float = 0.3,
-        min_turn_gap: int = 10
+        min_turn_gap: int = 10,
+        repetition_threshold: float = 0.7,
+        max_recent_phrases: int = 10
     ):
         """
         Initialize conversation manager.
@@ -86,6 +88,8 @@ class ConversationManager:
             enable_interruptions: Whether to allow interruptions
             base_speak_probability: Base probability of speaking
             min_turn_gap: Minimum ticks between same agent can speak
+            repetition_threshold: Similarity threshold for repetition detection (0-1)
+            max_recent_phrases: Maximum recent phrases to track per agent
         """
         self.agents = agents or []
         self.enable_interruptions = enable_interruptions
@@ -98,6 +102,11 @@ class ConversationManager:
         self.interruption_cooldown: Dict[str, int] = defaultdict(int)
         self.currently_speaking: Set[str] = set()
         self.silence_count: int = 0
+        
+        # NEW: Repetition detection
+        self.recent_phrases: Dict[str, List[str]] = {}  # agent_id -> recent phrases
+        self.repetition_threshold: float = repetition_threshold  # Similarity threshold
+        self.max_recent_phrases: int = max_recent_phrases  # Keep last N phrases
         
         # Statistics
         self.turn_statistics: Dict[str, Dict[str, int]] = defaultdict(lambda: {
@@ -117,7 +126,140 @@ class ConversationManager:
     def remove_agent(self, agent_id: str) -> None:
         """Remove an agent from the conversation."""
         self.agents = [a for a in self.agents if a.agent_id != agent_id]
+        # Clean up phrase tracking
+        self.recent_phrases.pop(agent_id, None)
         logger.debug(f"Removed agent {agent_id} from conversation")
+    
+    # ==================== REPETITION DETECTION ====================
+    
+    def record_phrase(self, agent_id: str, phrase: str) -> None:
+        """
+        Record a phrase spoken by an agent.
+        
+        Used for repetition detection - keeps track of what
+        the agent has recently said.
+        
+        Args:
+            agent_id: ID of the agent who spoke
+            phrase: The phrase they said
+        """
+        if agent_id not in self.recent_phrases:
+            self.recent_phrases[agent_id] = []
+        
+        # Normalize and truncate
+        normalized = phrase.lower().strip()
+        if len(normalized) > 10:  # Only store meaningful phrases
+            self.recent_phrases[agent_id].append(normalized)
+        
+        # Keep only recent phrases
+        self.recent_phrases[agent_id] = self.recent_phrases[agent_id][-self.max_recent_phrases:]
+    
+    def is_repetitive(self, agent_id: str, new_phrase: str) -> bool:
+        """
+        Check if a phrase is too similar to recent ones spoken by this agent.
+        
+        Helps prevent repetitive dialogue where agents keep saying the same things.
+        
+        Args:
+            agent_id: ID of the agent
+            new_phrase: The new phrase they're about to say
+        
+        Returns:
+            True if too similar to recent phrases
+        """
+        if agent_id not in self.recent_phrases:
+            return False
+        
+        new_normalized = new_phrase.lower().strip()
+        if len(new_normalized) < 10:
+            return False
+        
+        for recent in self.recent_phrases[agent_id]:
+            similarity = self._phrase_similarity(new_normalized, recent)
+            if similarity > self.repetition_threshold:
+                return True
+        
+        return False
+    
+    def _phrase_similarity(self, phrase1: str, phrase2: str) -> float:
+        """
+        Calculate similarity between two phrases.
+        
+        Uses Jaccard similarity on word sets.
+        
+        Args:
+            phrase1: First phrase
+            phrase2: Second phrase
+        
+        Returns:
+            Similarity score 0.0-1.0
+            1.0 = identical
+            0.0 = no overlap
+        """
+        # Tokenize by words
+        words1 = set(phrase1.split())
+        words2 = set(phrase2.split())
+        
+        if not words1 or not words2:
+            return 0.0
+        
+        # Remove common filler words
+        fillers = {"the", "a", "an", "is", "are", "was", "were", "be", "been",
+                   "to", "of", "in", "for", "on", "with", "at", "by", "i", 
+                   "you", "we", "they", "it", "that", "this", "have", "has",
+                   "and", "or", "but", "so", "not", "very", "really"}
+        
+        words1 = words1 - fillers
+        words2 = words2 - fillers
+        
+        if not words1 or not words2:
+            return 0.0
+        
+        # Jaccard similarity
+        intersection = len(words1 & words2)
+        union = len(words1 | words2)
+        
+        return intersection / union if union > 0 else 0.0
+    
+    def get_variety_penalty(self, agent_id: str) -> float:
+        """
+        Get a penalty multiplier based on how repetitive the agent has been.
+        
+        Higher penalty = less likely to speak again.
+        
+        Args:
+            agent_id: ID of the agent
+        
+        Returns:
+            Penalty 0.0-1.0, where 1.0 = no penalty
+        """
+        if agent_id not in self.recent_phrases:
+            return 1.0
+        
+        # If few phrases recorded, no penalty
+        if len(self.recent_phrases[agent_id]) < 3:
+            return 1.0
+        
+        # Calculate average similarity to recent phrases
+        phrases = self.recent_phrases[agent_id][-5:]  # Last 5
+        if len(phrases) < 2:
+            return 1.0
+        
+        total_sim = 0.0
+        count = 0
+        for i, p1 in enumerate(phrases):
+            for p2 in phrases[i+1:]:
+                sim = self._phrase_similarity(p1, p2)
+                total_sim += sim
+                count += 1
+        
+        avg_similarity = total_sim / count if count > 0 else 0.0
+        
+        # High similarity = high penalty
+        # avg 0.7+ = 0.3 multiplier, avg 0.3- = 1.0 multiplier
+        penalty = max(0.3, 1.0 - avg_similarity)
+        
+        return penalty
     
     def should_agent_speak(
         self,
@@ -206,6 +348,11 @@ class ConversationManager:
                     reason="High tension and arousal triggered interruption attempt",
                     interrupt_target=context.last_speaker_id
                 )
+        
+        # === NEW FACTOR 8: Repetition penalty ===
+        # If agent has been repetitive, reduce their chance to speak
+        variety_penalty = self.get_variety_penalty(agent.agent_id)
+        speak_prob *= variety_penalty
         
         # Clamp probability
         speak_prob = max(0.05, min(0.9, speak_prob))
