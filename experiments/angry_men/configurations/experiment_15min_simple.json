@@ -1,0 +1,69 @@
+{
+  "name": "Simple 15-Minute Deliberation",
+  "description": "Standard jury deliberation without Oracle/existential elements. Tests baseline agent behavior, persuasion mechanics, and dialogue naturalness.",
+  
+  "duration_minutes": 15,
+  "tick_rate": 10,
+  "total_ticks": 9000,
+  
+  "agents": {
+    "count": 6,
+    "profiles": [
+      "juror_02_sarah.json",
+      "juror_03_arthur.json", 
+      "juror_04_george.json",
+      "juror_07_jack.json",
+      "juror_08_davis.json"
+    ],
+    "include_oracle": false
+  },
+  
+  "llm_settings": {
+    "enabled": true,
+    "base_speak_probability": 0.15,
+    "llm_interval_ticks": 120,
+    "model": "llama-3.1-8b-instant",
+    "max_tokens": 512,
+    "temperature": 0.7
+  },
+  
+  "rate_limits": {
+    "requests_per_minute": 30,
+    "notes": "Groq free tier limit"
+  },
+  
+  "initial_votes": {
+    "guilty": 4,
+    "not_guilty": 1,
+    "abstain": 0
+  },
+  
+  "drama_settings": {
+    "acts": ["SETUP", "CONFRONTATION", "CLIMAX", "RESOLUTION"],
+    "tension_tracking": true,
+    "dramatic_beats": true
+  },
+  
+  "logging": {
+    "conversations": true,
+    "thoughts": true,
+    "beliefs": true,
+    "persuasion": true,
+    "narrative": true,
+    "gaps": true
+  },
+  
+  "focus_areas": [
+    "Agent dialogue naturalness",
+    "Persuasion effectiveness",
+    "Vote change patterns",
+    "Memory and belief dynamics",
+    "Dramatic arc progression"
+  ],
+  
+  "success_criteria": {
+    "min_llm_calls": 200,
+    "min_vote_changes": 1,
+    "act_transitions": 4
+  }
+}

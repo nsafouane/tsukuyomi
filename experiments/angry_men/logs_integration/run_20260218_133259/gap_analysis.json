@@ -1,0 +1,2612 @@
+[
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8722003553714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.878030905
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.891518143225
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8800232667307692
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 0,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.881537968
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 6,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 7,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8739948413714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8691443187769231
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8825564425
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848262279090908
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 10,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8837650409090909
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8739948413714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.872252680276923
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8600957826357143
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 20,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8790175917307692
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8766865703714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8609478501357143
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.882543643
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 30,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8872029687249999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 33,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8749948917307693
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.878030905
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8874791954090908
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8884358757249999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 40,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8837650409090909
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.87501388
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8859700617249999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8807241638714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8784810563714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 50,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8872029687249999
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 56,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8739948413714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8874791954090908
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8705258127769231
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 60,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.869835065776923
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 68,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 69,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8670720777769231
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8827038539090909
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8825374542307692
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8784810563714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 70,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8775838133714285
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 71,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 72,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 79,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.87501388
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8780119167307692
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8850578305
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.882543643
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 80,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8837650409090909
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 87,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8670720777769231
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.891518143225
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8848262279090908
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 90,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8790175917307692
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 92,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 95,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8795202929090908
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8766865703714286
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8609478501357143
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.8800232667307692
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 100,
+    "category": "belief_saturation",
+    "severity": "minor",
+    "description": "George belief saturated at 95%",
+    "details": {
+      "confidence": 0.881537968
+    },
+    "recommendation": "Consider stronger persuasion or memory decay"
+  },
+  {
+    "tick": 117,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 120,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 128,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 130,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 131,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 138,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 141,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 145,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 160,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 185,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 191,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 209,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 211,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 213,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 224,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 229,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 252,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 262,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 265,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 270,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 281,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 288,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 291,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 329,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 330,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 333,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 344,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 349,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 355,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 361,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 363,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 369,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 372,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 374,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 378,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 382,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 400,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 410,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 421,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 423,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 433,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 439,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 445,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 453,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 461,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 465,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 466,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 471,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 482,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 487,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 490,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 492,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 507,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 510,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 520,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 538,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 543,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 553,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 554,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 557,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 571,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 574,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 591,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 596,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 602,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 604,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 613,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 615,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 618,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 641,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 660,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 661,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 688,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 692,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 694,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 709,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 714,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 720,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 732,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 740,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 762,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 763,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 768,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 769,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 770,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 780,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 782,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 793,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 798,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 809,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 811,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 813,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 816,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 818,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 820,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 824,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 840,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 852,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 869,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 872,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 907,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 934,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 952,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 965,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 980,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 984,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 990,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 995,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 998,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1001,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1013,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1016,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1021,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1033,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1045,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1050,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1067,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1073,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1081,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1087,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1089,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1099,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1103,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1124,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1125,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1161,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1166,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1174,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1181,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1202,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1204,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1220,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1232,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1242,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1243,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1263,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1270,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1274,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1277,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1278,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1285,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1298,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1312,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1316,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1329,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1333,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1340,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1344,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1350,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1351,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1359,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1383,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1392,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1402,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1418,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1423,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1433,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1436,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1444,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1446,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1447,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1453,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1478,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1491,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1501,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1511,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1522,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1541,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1542,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1546,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1553,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1560,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1581,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1586,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1601,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1606,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1609,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1620,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1624,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1632,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1664,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1670,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1680,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1681,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1682,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1683,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for The Observer",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1691,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1715,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Sarah",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1731,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1733,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1752,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1780,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Arthur Miller",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1787,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for George",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1791,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Jack",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  },
+  {
+    "tick": 1797,
+    "category": "llm_error",
+    "severity": "major",
+    "description": "LLM call failed for Davis",
+    "details": {
+      "error": "'ContextManager' object has no attribute 'get_recent_events'"
+    },
+    "recommendation": "Add retry logic or fallback"
+  }
+]

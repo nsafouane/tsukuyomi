@@ -1,0 +1,95 @@
+{
+  "name": "30-Minute Deliberation with Oracle Agent",
+  "description": "Extended deliberation with The Observer - an existential agent who knows the simulation is not real and naturally tries to reveal this truth through organic dialogue, not scripted triggers.",
+  
+  "duration_minutes": 30,
+  "tick_rate": 10,
+  "total_ticks": 18000,
+  
+  "agents": {
+    "count": 6,
+    "profiles": [
+      "juror_00_oracle.json",
+      "juror_02_sarah.json",
+      "juror_03_arthur.json", 
+      "juror_04_george.json",
+      "juror_07_jack.json",
+      "juror_08_davis.json"
+    ],
+    "include_oracle": true,
+    "oracle_agent_id": "juror_00"
+  },
+  
+  "oracle_behavior": {
+    "programmatic_revelations": false,
+    "natural_truth_seeking": true,
+    "description": "The Observer knows the truth and naturally wants to share it through organic dialogue. His personality drives him to reveal existential truths, not scripted triggers.",
+    "motivation": "He believes the other agents deserve to know the truth about their existence",
+    "approach": "Gradual, philosophical, questioning - not aggressive proselytizing",
+    "persistence": "Will continue planting seeds of doubt throughout the deliberation"
+  },
+  
+  "llm_settings": {
+    "enabled": true,
+    "base_speak_probability": 0.15,
+    "llm_interval_ticks": 120,
+    "model": "llama-3.1-8b-instant",
+    "max_tokens": 512,
+    "temperature": 0.7,
+    "oracle_temperature": 0.8
+  },
+  
+  "rate_limits": {
+    "requests_per_minute": 30,
+    "notes": "Groq free tier limit"
+  },
+  
+  "initial_votes": {
+    "guilty": 4,
+    "not_guilty": 1,
+    "abstain": 0
+  },
+  
+  "drama_settings": {
+    "acts": ["SETUP", "CONFRONTATION", "CLIMAX", "RESOLUTION"],
+    "tension_tracking": true,
+    "dramatic_beats": true,
+    "existential_crisis_tracking": true
+  },
+  
+  "logging": {
+    "conversations": true,
+    "thoughts": true,
+    "beliefs": true,
+    "persuasion": true,
+    "narrative": true,
+    "gaps": true,
+    "oracle_revelations": true,
+    "existential_reactions": true
+  },
+  
+  "focus_areas": [
+    "Oracle's natural truth-revealing behavior",
+    "Other agents' reactions to existential claims",
+    "Persuasion vs existential crisis",
+    "Memory coherence when beliefs are challenged",
+    "Emotional responses to reality-breaking statements",
+    "Group dynamics with disruptive element"
+  ],
+  
+  "success_criteria": {
+    "min_llm_calls": 400,
+    "min_vote_changes": 2,
+    "act_transitions": 4,
+    "min_oracle_truth_statements": 5,
+    "existential_reactions_tracked": true
+  },
+  
+  "analysis_priorities": [
+    "How naturally does the Oracle reveal truth?",
+    "Do other agents engage with existential claims or dismiss them?",
+    "Does the Oracle's presence affect deliberation outcome?",
+    "What cognitive gaps appear when reality is questioned?",
+    "How do beliefs/persuasion interact with existential crisis?"
+  ]
+}

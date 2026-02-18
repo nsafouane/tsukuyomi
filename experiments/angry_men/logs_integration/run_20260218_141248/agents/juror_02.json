@@ -1,0 +1,3300 @@
+{
+  "agent_id": "juror_02",
+  "agent_name": "Sarah",
+  "profile": {
+    "id": "juror_02",
+    "name": "Sarah",
+    "role": "Juror #2",
+    "age": 34,
+    "occupation": "Bank Clerk",
+    "personality": {
+      "big_five": {
+        "openness": 0.4,
+        "conscientiousness": 0.7,
+        "extraversion": -0.6,
+        "agreeableness": 0.6,
+        "neuroticism": 0.5
+      },
+      "baseline_emotion": {
+        "valence": 0.0,
+        "arousal": 0.4,
+        "dominance": 0.3
+      },
+      "traits": {
+        "caution": 0.85,
+        "observance": 0.8,
+        "timidity": 0.7,
+        "attention_to_detail": 0.9
+      }
+    },
+    "beliefs": {
+      "initial_stance": "guilty",
+      "stance_confidence": 0.5,
+      "core_beliefs": {
+        "certainty_importance": {
+          "position": "positive",
+          "weight": 0.9,
+          "description": "We must be absolutely certain before deciding"
+        },
+        "authority_trust": {
+          "position": "positive",
+          "weight": 0.7,
+          "description": "The police and prosecution must have good reasons"
+        },
+        "caution_in_judgment": {
+          "position": "positive",
+          "weight": 0.85,
+          "description": "It's better to be careful than wrong"
+        }
+      }
+    },
+    "memories": {
+      "episodic": [
+        {
+          "id": "mem_001",
+          "content": "The older jurors seem so certain. They must know something I don't.",
+          "emotion": {
+            "valence": 0.0,
+            "arousal": 0.5
+          },
+          "importance": 0.7,
+          "tags": [
+            "uncertainty",
+            "intimidation",
+            "trust"
+          ]
+        },
+        {
+          "id": "mem_002",
+          "content": "I noticed something about the old man's testimony... the timing seemed off somehow.",
+          "emotion": {
+            "valence": 0.1,
+            "arousal": 0.6
+          },
+          "importance": 0.8,
+          "tags": [
+            "observation",
+            "testimony",
+            "doubt"
+          ]
+        }
+      ],
+      "semantic": [
+        {
+          "content": "The old man said he heard 'I'm going to kill you' and a body falling",
+          "confidence": 0.8,
+          "source": "court testimony"
+        },
+        {
+          "content": "The defendant has a history of arrests",
+          "confidence": 0.7,
+          "source": "prosecution"
+        }
+      ]
+    },
+    "relationships": {
+      "juror_08": {
+        "affinity": 0.4,
+        "trust": 0.5,
+        "history": [
+          "He seems thoughtful and patient"
+        ]
+      },
+      "juror_03": {
+        "affinity": -0.2,
+        "trust": 0.3,
+        "history": [
+          "His aggression frightens me"
+        ]
+      }
+    },
+    "communication_style": {
+      "default_tone": "hesitant_polite",
+      "argument_approach": "questioning",
+      "vocabulary_level": "simple_precise",
+      "catchphrases": [
+        "I'm not sure but...",
+        "Maybe I'm wrong, but...",
+        "It seems to me...",
+        "I was wondering if..."
+      ]
+    }
+  },
+  "current_vote": "guilty",
+  "vote_history": [
+    {
+      "tick": 0,
+      "vote": "guilty"
+    }
+  ],
+  "thoughts": [
+    {
+      "tick": 0,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5232696145454545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.023",
+      "timestamp": "2026-02-18T14:12:48.763973"
+    },
+    {
+      "tick": 0,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5564013829076924,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:48.765465"
+    },
+    {
+      "tick": 0,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5520192309090909,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:48.766165"
+    },
+    {
+      "tick": 0,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5468808218,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:48.766769"
+    },
+    {
+      "tick": 0,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.554148419,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:48.767400"
+    },
+    {
+      "tick": 10,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5396140868,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:48.781920"
+    },
+    {
+      "tick": 10,
+      "agent_id": "juror_02",
+      "thought_type": "deliberation",
+      "content": "Internal thoughts: Let me think about this, I'm with the majority. ...",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5,
+      "reasoning": "Emotional reaction: neutral",
+      "timestamp": "2026-02-18T14:12:48.782634"
+    },
+    {
+      "tick": 10,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5505141893,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:48.783576"
+    },
+    {
+      "tick": 10,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.56763097475,
+      "reasoning": "Resistance: core_value, Effect: 0.068",
+      "timestamp": "2026-02-18T14:12:48.784385"
+    },
+    {
+      "tick": 10,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.56466903425,
+      "reasoning": "Resistance: core_value, Effect: 0.065",
+      "timestamp": "2026-02-18T14:12:48.785122"
+    },
+    {
+      "tick": 10,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5497288324076923,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:48.785844"
+    },
+    {
+      "tick": 20,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.547320119,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:48.800360"
+    },
+    {
+      "tick": 20,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5317512145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.032",
+      "timestamp": "2026-02-18T14:12:48.802811"
+    },
+    {
+      "tick": 20,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5450388803214286,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:48.804196"
+    },
+    {
+      "tick": 20,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5494586184090909,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:48.805168"
+    },
+    {
+      "tick": 20,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5497288324076923,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:48.806108"
+    },
+    {
+      "tick": 22,
+      "agent_id": "juror_02",
+      "thought_type": "deliberation",
+      "content": "Internal thoughts: Let me think about this, I'm with the majority. ...",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5,
+      "reasoning": "Emotional reaction: neutral",
+      "timestamp": "2026-02-18T14:12:48.809614"
+    },
+    {
+      "tick": 30,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5250552145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:48.821428"
+    },
+    {
+      "tick": 30,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5564013829076924,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:48.822964"
+    },
+    {
+      "tick": 30,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5516324530769231,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:48.823556"
+    },
+    {
+      "tick": 30,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.555855494,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:48.824312"
+    },
+    {
+      "tick": 30,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5286264145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:48.825100"
+    },
+    {
+      "tick": 40,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5421030604076923,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:48.838951"
+    },
+    {
+      "tick": 40,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5537263059090909,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:48.840846"
+    },
+    {
+      "tick": 40,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5520192309090909,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:48.841607"
+    },
+    {
+      "tick": 40,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5295192145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.030",
+      "timestamp": "2026-02-18T14:12:48.842168"
+    },
+    {
+      "tick": 40,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5477515434090909,
+      "reasoning": "Resistance: core_value, Effect: 0.048",
+      "timestamp": "2026-02-18T14:12:48.842981"
+    },
+    {
+      "tick": 50,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5250552145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:48.856883"
+    },
+    {
+      "tick": 50,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.56960560175,
+      "reasoning": "Resistance: core_value, Effect: 0.070",
+      "timestamp": "2026-02-18T14:12:48.858303"
+    },
+    {
+      "tick": 50,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5450388803214286,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:48.859033"
+    },
+    {
+      "tick": 50,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5430413798214285,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:48.859585"
+    },
+    {
+      "tick": 50,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5454274748,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:48.860160"
+    },
+    {
+      "tick": 60,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5363830448214286,
+      "reasoning": "Resistance: core_value, Effect: 0.036",
+      "timestamp": "2026-02-18T14:12:48.875638"
+    },
+    {
+      "tick": 60,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5564013829076924,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:48.877877"
+    },
+    {
+      "tick": 60,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5450388803214286,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:48.878649"
+    },
+    {
+      "tick": 60,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5430413798214285,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:48.879223"
+    },
+    {
+      "tick": 60,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5286264145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:48.879736"
+    },
+    {
+      "tick": 70,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5396140868,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:48.893817"
+    },
+    {
+      "tick": 70,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5601231815,
+      "reasoning": "Resistance: core_value, Effect: 0.060",
+      "timestamp": "2026-02-18T14:12:48.895217"
+    },
+    {
+      "tick": 70,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5490608423,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:48.895943"
+    },
+    {
+      "tick": 70,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5516352754076923,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:48.896576"
+    },
+    {
+      "tick": 70,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.56269440725,
+      "reasoning": "Resistance: core_value, Effect: 0.063",
+      "timestamp": "2026-02-18T14:12:48.897145"
+    },
+    {
+      "tick": 80,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.540536465576923,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:48.911248"
+    },
+    {
+      "tick": 80,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5533395280769231,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:48.912990"
+    },
+    {
+      "tick": 80,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5520192309090909,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:48.913636"
+    },
+    {
+      "tick": 80,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.56466903425,
+      "reasoning": "Resistance: core_value, Effect: 0.065",
+      "timestamp": "2026-02-18T14:12:48.914472"
+    },
+    {
+      "tick": 80,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.554148419,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:48.915252"
+    },
+    {
+      "tick": 90,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5250552145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:48.929509"
+    },
+    {
+      "tick": 90,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5505141893,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:48.931023"
+    },
+    {
+      "tick": 90,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5308584145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:48.931593"
+    },
+    {
+      "tick": 90,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5295192145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.030",
+      "timestamp": "2026-02-18T14:12:48.932326"
+    },
+    {
+      "tick": 90,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5454274748,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:48.932960"
+    },
+    {
+      "tick": 100,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5409232434090909,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:48.947081"
+    },
+    {
+      "tick": 100,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Arthur Miller",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5533395280769231,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:48.948549"
+    },
+    {
+      "tick": 100,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from George",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5308584145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:48.949167"
+    },
+    {
+      "tick": 100,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Jack",
+      "confidence_before": 0.5,
+      "confidence_after": 0.555855494,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:48.949677"
+    },
+    {
+      "tick": 100,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.5,
+      "confidence_after": 0.5286264145454546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:48.950422"
+    },
+    {
+      "tick": 100,
+      "agent_id": "juror_02",
+      "thought_type": "memory_decay",
+      "content": "4 beliefs decayed slightly",
+      "confidence_before": 0.499,
+      "confidence_after": 0.499,
+      "reasoning": "Natural memory fade",
+      "timestamp": "2026-02-18T14:12:48.951082"
+    },
+    {
+      "tick": 110,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5398711861523636,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:48.964984"
+    },
+    {
+      "tick": 110,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5553155413621231,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:48.966599"
+    },
+    {
+      "tick": 110,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5439579840729143,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:48.967188"
+    },
+    {
+      "tick": 110,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5547673928308,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:48.967855"
+    },
+    {
+      "tick": 110,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5443486872052,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:48.968389"
+    },
+    {
+      "tick": 120,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5398711861523636,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:48.981968"
+    },
+    {
+      "tick": 120,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5590296515308,
+      "reasoning": "Resistance: core_value, Effect: 0.060",
+      "timestamp": "2026-02-18T14:12:48.983441"
+    },
+    {
+      "tick": 120,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5665329311872,
+      "reasoning": "Resistance: core_value, Effect: 0.068",
+      "timestamp": "2026-02-18T14:12:48.984040"
+    },
+    {
+      "tick": 120,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5635744207672,
+      "reasoning": "Resistance: core_value, Effect: 0.065",
+      "timestamp": "2026-02-18T14:12:48.984663"
+    },
+    {
+      "tick": 120,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5462874652141231,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:48.985248"
+    },
+    {
+      "tick": 130,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5353284369357143,
+      "reasoning": "Resistance: core_value, Effect: 0.036",
+      "timestamp": "2026-02-18T14:12:48.999175"
+    },
+    {
+      "tick": 130,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5522546273941231,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.001083"
+    },
+    {
+      "tick": 130,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5509360097375636,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:49.002145"
+    },
+    {
+      "tick": 130,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5284515991530182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:49.002959"
+    },
+    {
+      "tick": 130,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5443486872052,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.003981"
+    },
+    {
+      "tick": 140,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5353284369357143,
+      "reasoning": "Resistance: core_value, Effect: 0.036",
+      "timestamp": "2026-02-18T14:12:49.018007"
+    },
+    {
+      "tick": 140,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5522546273941231,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.019948"
+    },
+    {
+      "tick": 140,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5479769139052,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.020654"
+    },
+    {
+      "tick": 140,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.550555078662123,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:49.021382"
+    },
+    {
+      "tick": 140,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5406338133729143,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.022059"
+    },
+    {
+      "tick": 150,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.541053195112923,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.036106"
+    },
+    {
+      "tick": 150,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5494282045852,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.037556"
+    },
+    {
+      "tick": 150,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5573247480508,
+      "reasoning": "Resistance: core_value, Effect: 0.058",
+      "timestamp": "2026-02-18T14:12:49.038119"
+    },
+    {
+      "tick": 150,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5483786545175636,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.038769"
+    },
+    {
+      "tick": 150,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5406338133729143,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.039301"
+    },
+    {
+      "tick": 160,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.538558037392,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.052716"
+    },
+    {
+      "tick": 160,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5685052714672,
+      "reasoning": "Resistance: core_value, Effect: 0.070",
+      "timestamp": "2026-02-18T14:12:49.053970"
+    },
+    {
+      "tick": 160,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5573247480508,
+      "reasoning": "Resistance: core_value, Effect: 0.058",
+      "timestamp": "2026-02-18T14:12:49.054742"
+    },
+    {
+      "tick": 160,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5284515991530182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:49.055351"
+    },
+    {
+      "tick": 160,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5406338133729143,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.055913"
+    },
+    {
+      "tick": 170,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5240053869978182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:49.070641"
+    },
+    {
+      "tick": 170,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5590296515308,
+      "reasoning": "Resistance: core_value, Effect: 0.060",
+      "timestamp": "2026-02-18T14:12:49.072179"
+    },
+    {
+      "tick": 170,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5509360097375636,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:49.072849"
+    },
+    {
+      "tick": 170,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5419634816529143,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:49.073361"
+    },
+    {
+      "tick": 170,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5406338133729143,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.073932"
+    },
+    {
+      "tick": 180,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5462599244656,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.087118"
+    },
+    {
+      "tick": 180,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5494282045852,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.088451"
+    },
+    {
+      "tick": 180,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5573247480508,
+      "reasoning": "Resistance: core_value, Effect: 0.058",
+      "timestamp": "2026-02-18T14:12:49.089091"
+    },
+    {
+      "tick": 180,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5635744207672,
+      "reasoning": "Resistance: core_value, Effect: 0.065",
+      "timestamp": "2026-02-18T14:12:49.089625"
+    },
+    {
+      "tick": 180,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5406338133729143,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.090166"
+    },
+    {
+      "tick": 190,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.55373244277,
+      "reasoning": "Resistance: core_value, Effect: 0.055",
+      "timestamp": "2026-02-18T14:12:49.103455"
+    },
+    {
+      "tick": 190,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5685052714672,
+      "reasoning": "Resistance: core_value, Effect: 0.070",
+      "timestamp": "2026-02-18T14:12:49.104889"
+    },
+    {
+      "tick": 190,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5534113562821231,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.105618"
+    },
+    {
+      "tick": 190,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5419634816529143,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:49.106157"
+    },
+    {
+      "tick": 190,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5406338133729143,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.106699"
+    },
+    {
+      "tick": 200,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.499,
+      "confidence_after": 0.538558037392,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.120959"
+    },
+    {
+      "tick": 200,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5494282045852,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.123058"
+    },
+    {
+      "tick": 200,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from George",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5573247480508,
+      "reasoning": "Resistance: core_value, Effect: 0.058",
+      "timestamp": "2026-02-18T14:12:49.123937"
+    },
+    {
+      "tick": 200,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.499,
+      "confidence_after": 0.5457999778852,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.124534"
+    },
+    {
+      "tick": 200,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Davis",
+      "confidence_before": 0.499,
+      "confidence_after": 0.548650893582123,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.125162"
+    },
+    {
+      "tick": 200,
+      "agent_id": "juror_02",
+      "thought_type": "memory_decay",
+      "content": "4 beliefs decayed slightly",
+      "confidence_before": 0.498,
+      "confidence_after": 0.498,
+      "reasoning": "Natural memory fade",
+      "timestamp": "2026-02-18T14:12:49.125568"
+    },
+    {
+      "tick": 210,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5375020141508571,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.139651"
+    },
+    {
+      "tick": 210,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5674050207396,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.141013"
+    },
+    {
+      "tick": 210,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5428771602481715,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.141637"
+    },
+    {
+      "tick": 210,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5472987618510545,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.142349"
+    },
+    {
+      "tick": 210,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5455960289310545,
+      "reasoning": "Resistance: core_value, Effect: 0.048",
+      "timestamp": "2026-02-18T14:12:49.143132"
+    },
+    {
+      "tick": 220,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5388191519094545,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.157047"
+    },
+    {
+      "tick": 220,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5674050207396,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.158885"
+    },
+    {
+      "tick": 220,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5494670671988308,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.159746"
+    },
+    {
+      "tick": 220,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5408856544681714,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:49.160712"
+    },
+    {
+      "tick": 220,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5264948010728727,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.028",
+      "timestamp": "2026-02-18T14:12:49.161625"
+    },
+    {
+      "tick": 230,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5400033510193846,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.175549"
+    },
+    {
+      "tick": 230,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5674050207396,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.177101"
+    },
+    {
+      "tick": 230,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5428771602481715,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.177922"
+    },
+    {
+      "tick": 230,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5273840509928727,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:49.178660"
+    },
+    {
+      "tick": 230,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5455960289310545,
+      "reasoning": "Resistance: core_value, Effect: 0.048",
+      "timestamp": "2026-02-18T14:12:49.179350"
+    },
+    {
+      "tick": 240,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5388191519094545,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.193709"
+    },
+    {
+      "tick": 240,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5674050207396,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.195711"
+    },
+    {
+      "tick": 240,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5494670671988308,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.196604"
+    },
+    {
+      "tick": 240,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.553679366484,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:49.197461"
+    },
+    {
+      "tick": 240,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5432699707244572,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.198295"
+    },
+    {
+      "tick": 250,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5229555863912727,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:49.212855"
+    },
+    {
+      "tick": 250,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5296071757928728,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.032",
+      "timestamp": "2026-02-18T14:12:49.214555"
+    },
+    {
+      "tick": 250,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5494670671988308,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.215193"
+    },
+    {
+      "tick": 250,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5624798844396,
+      "reasoning": "Resistance: core_value, Effect: 0.064",
+      "timestamp": "2026-02-18T14:12:49.215720"
+    },
+    {
+      "tick": 250,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5264948010728727,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.028",
+      "timestamp": "2026-02-18T14:12:49.216270"
+    },
+    {
+      "tick": 260,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5384333578772308,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.229626"
+    },
+    {
+      "tick": 260,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5483422943444571,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.231148"
+    },
+    {
+      "tick": 260,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5494670671988308,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.231687"
+    },
+    {
+      "tick": 260,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5472987618510545,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.232512"
+    },
+    {
+      "tick": 260,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5432699707244572,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.233050"
+    },
+    {
+      "tick": 270,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5384333578772308,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.246955"
+    },
+    {
+      "tick": 270,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5511698001188308,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.248174"
+    },
+    {
+      "tick": 270,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5654349662196,
+      "reasoning": "Resistance: core_value, Effect: 0.067",
+      "timestamp": "2026-02-18T14:12:49.248849"
+    },
+    {
+      "tick": 270,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5624798844396,
+      "reasoning": "Resistance: core_value, Effect: 0.064",
+      "timestamp": "2026-02-18T14:12:49.249389"
+    },
+    {
+      "tick": 270,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.551976633564,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.249994"
+    },
+    {
+      "tick": 280,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5451997565424,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.263283"
+    },
+    {
+      "tick": 280,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5442048307681714,
+      "reasoning": "Resistance: core_value, Effect: 0.046",
+      "timestamp": "2026-02-18T14:12:49.264698"
+    },
+    {
+      "tick": 280,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5654349662196,
+      "reasoning": "Resistance: core_value, Effect: 0.067",
+      "timestamp": "2026-02-18T14:12:49.265268"
+    },
+    {
+      "tick": 280,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5447192060444571,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.265929"
+    },
+    {
+      "tick": 280,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5432699707244572,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.266482"
+    },
+    {
+      "tick": 290,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5229555863912727,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:49.280303"
+    },
+    {
+      "tick": 290,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5515555941510546,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.281734"
+    },
+    {
+      "tick": 290,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5287179258728727,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.282539"
+    },
+    {
+      "tick": 290,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5472987618510545,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.283134"
+    },
+    {
+      "tick": 290,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5452102348988308,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.283718"
+    },
+    {
+      "tick": 300,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from The Observer",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5384333578772308,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.298145"
+    },
+    {
+      "tick": 300,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Arthur Miller",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5515555941510546,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.299598"
+    },
+    {
+      "tick": 300,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5498528612310546,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:49.300346"
+    },
+    {
+      "tick": 300,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5624798844396,
+      "reasoning": "Resistance: core_value, Effect: 0.064",
+      "timestamp": "2026-02-18T14:12:49.301078"
+    },
+    {
+      "tick": 300,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.498,
+      "confidence_after": 0.5452102348988308,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.301704"
+    },
+    {
+      "tick": 300,
+      "agent_id": "juror_02",
+      "thought_type": "memory_decay",
+      "content": "4 beliefs decayed slightly",
+      "confidence_before": 0.497,
+      "confidence_after": 0.497,
+      "reasoning": "Natural memory fade",
+      "timestamp": "2026-02-18T14:12:49.302194"
+    },
+    {
+      "tick": 310,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5364460170765715,
+      "reasoning": "Resistance: core_value, Effect: 0.039",
+      "timestamp": "2026-02-18T14:12:49.315995"
+    },
+    {
+      "tick": 310,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5504703486807636,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.317454"
+    },
+    {
+      "tick": 310,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5551422599108,
+      "reasoning": "Resistance: core_value, Effect: 0.058",
+      "timestamp": "2026-02-18T14:12:49.318046"
+    },
+    {
+      "tick": 310,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5462189403807637,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.318584"
+    },
+    {
+      "tick": 310,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5594176555184001,
+      "reasoning": "Resistance: core_value, Effect: 0.062",
+      "timestamp": "2026-02-18T14:12:49.319158"
+    },
+    {
+      "tick": 320,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.53321929985,
+      "reasoning": "Resistance: core_value, Effect: 0.036",
+      "timestamp": "2026-02-18T14:12:49.333142"
+    },
+    {
+      "tick": 320,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5500850462222462,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.335236"
+    },
+    {
+      "tick": 320,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5276477845162182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.336163"
+    },
+    {
+      "tick": 320,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5483948985634769,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.337096"
+    },
+    {
+      "tick": 320,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5384822245184,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.337915"
+    },
+    {
+      "tick": 330,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5219058127258182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:49.352279"
+    },
+    {
+      "tick": 330,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5531440788634769,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:49.354169"
+    },
+    {
+      "tick": 330,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.551244406743477,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.355046"
+    },
+    {
+      "tick": 330,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5483948985634769,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.355921"
+    },
+    {
+      "tick": 330,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5508908516108,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.356639"
+    },
+    {
+      "tick": 340,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5364460170765715,
+      "reasoning": "Resistance: core_value, Effect: 0.039",
+      "timestamp": "2026-02-18T14:12:49.370286"
+    },
+    {
+      "tick": 340,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5285352608362182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.032",
+      "timestamp": "2026-02-18T14:12:49.371698"
+    },
+    {
+      "tick": 340,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5483844829022462,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.372256"
+    },
+    {
+      "tick": 340,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5458336379222462,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.372874"
+    },
+    {
+      "tick": 340,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5464952264434769,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.373386"
+    },
+    {
+      "tick": 350,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.53321929985,
+      "reasoning": "Resistance: core_value, Effect: 0.036",
+      "timestamp": "2026-02-18T14:12:49.387278"
+    },
+    {
+      "tick": 350,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5568428232308,
+      "reasoning": "Resistance: core_value, Effect: 0.060",
+      "timestamp": "2026-02-18T14:12:49.388573"
+    },
+    {
+      "tick": 350,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5417964088184,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.389171"
+    },
+    {
+      "tick": 350,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5436385062489715,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.389678"
+    },
+    {
+      "tick": 350,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5464952264434769,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.390234"
+    },
+    {
+      "tick": 360,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.55160560973,
+      "reasoning": "Resistance: core_value, Effect: 0.055",
+      "timestamp": "2026-02-18T14:12:49.404242"
+    },
+    {
+      "tick": 360,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5431220825384,
+      "reasoning": "Resistance: core_value, Effect: 0.046",
+      "timestamp": "2026-02-18T14:12:49.405666"
+    },
+    {
+      "tick": 360,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5417964088184,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.406505"
+    },
+    {
+      "tick": 360,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5398078982384,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:49.407125"
+    },
+    {
+      "tick": 360,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5254290937162182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.028",
+      "timestamp": "2026-02-18T14:12:49.407675"
+    },
+    {
+      "tick": 370,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5377671406803637,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.421525"
+    },
+    {
+      "tick": 370,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5285352608362182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.032",
+      "timestamp": "2026-02-18T14:12:49.423264"
+    },
+    {
+      "tick": 370,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.551244406743477,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.423896"
+    },
+    {
+      "tick": 370,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5398078982384,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:49.424439"
+    },
+    {
+      "tick": 370,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5594176555184001,
+      "reasoning": "Resistance: core_value, Effect: 0.062",
+      "timestamp": "2026-02-18T14:12:49.424986"
+    },
+    {
+      "tick": 380,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.53321929985,
+      "reasoning": "Resistance: core_value, Effect: 0.036",
+      "timestamp": "2026-02-18T14:12:49.438885"
+    },
+    {
+      "tick": 380,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5285352608362182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.032",
+      "timestamp": "2026-02-18T14:12:49.440250"
+    },
+    {
+      "tick": 380,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5417964088184,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.440957"
+    },
+    {
+      "tick": 380,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5462189403807637,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.441495"
+    },
+    {
+      "tick": 380,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5441330746022461,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.442121"
+    },
+    {
+      "tick": 390,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5377671406803637,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.456115"
+    },
+    {
+      "tick": 390,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5663048495384,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.457922"
+    },
+    {
+      "tick": 390,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5487697853607636,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:49.458714"
+    },
+    {
+      "tick": 390,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5398078982384,
+      "reasoning": "Resistance: core_value, Effect: 0.043",
+      "timestamp": "2026-02-18T14:12:49.459362"
+    },
+    {
+      "tick": 390,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5254290937162182,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.028",
+      "timestamp": "2026-02-18T14:12:49.460175"
+    },
+    {
+      "tick": 400,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from The Observer",
+      "confidence_before": 0.497,
+      "confidence_after": 0.55160560973,
+      "reasoning": "Resistance: core_value, Effect: 0.055",
+      "timestamp": "2026-02-18T14:12:49.476473"
+    },
+    {
+      "tick": 400,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Arthur Miller",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5431220825384,
+      "reasoning": "Resistance: core_value, Effect: 0.046",
+      "timestamp": "2026-02-18T14:12:49.478346"
+    },
+    {
+      "tick": 400,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5483844829022462,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.479202"
+    },
+    {
+      "tick": 400,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5462189403807637,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.480132"
+    },
+    {
+      "tick": 400,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.497,
+      "confidence_after": 0.5441330746022461,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.481022"
+    },
+    {
+      "tick": 400,
+      "agent_id": "juror_02",
+      "thought_type": "memory_decay",
+      "content": "4 beliefs decayed slightly",
+      "confidence_before": 0.496,
+      "confidence_after": 0.496,
+      "reasoning": "Natural memory fade",
+      "timestamp": "2026-02-18T14:12:49.481523"
+    },
+    {
+      "tick": 410,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.53216477065,
+      "reasoning": "Resistance: core_value, Effect: 0.036",
+      "timestamp": "2026-02-18T14:12:49.496002"
+    },
+    {
+      "tick": 410,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5420394076348,
+      "reasoning": "Resistance: core_value, Effect: 0.046",
+      "timestamp": "2026-02-18T14:12:49.497879"
+    },
+    {
+      "tick": 410,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5476867820978909,
+      "reasoning": "Resistance: core_value, Effect: 0.052",
+      "timestamp": "2026-02-18T14:12:49.498788"
+    },
+    {
+      "tick": 410,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5252491562542545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:49.499543"
+    },
+    {
+      "tick": 410,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5430559842955692,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.500246"
+    },
+    {
+      "tick": 420,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5208560660014545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:49.517372"
+    },
+    {
+      "tick": 420,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5557495248424,
+      "reasoning": "Resistance: core_value, Effect: 0.060",
+      "timestamp": "2026-02-18T14:12:49.520298"
+    },
+    {
+      "tick": 420,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5501610407728,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.521113"
+    },
+    {
+      "tick": 420,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5447543789755692,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.521854"
+    },
+    {
+      "tick": 420,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5243634525742545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.028",
+      "timestamp": "2026-02-18T14:12:49.522591"
+    },
+    {
+      "tick": 430,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5208560660014545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.025",
+      "timestamp": "2026-02-18T14:12:49.537941"
+    },
+    {
+      "tick": 430,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5493851767778909,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.539688"
+    },
+    {
+      "tick": 430,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5632392719548001,
+      "reasoning": "Resistance: core_value, Effect: 0.067",
+      "timestamp": "2026-02-18T14:12:49.540447"
+    },
+    {
+      "tick": 430,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5252491562542545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:49.541074"
+    },
+    {
+      "tick": 430,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5454174980728,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.541649"
+    },
+    {
+      "tick": 440,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.537903726436,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.556154"
+    },
+    {
+      "tick": 440,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5652047578348,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.557938"
+    },
+    {
+      "tick": 440,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5407157297548,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.558621"
+    },
+    {
+      "tick": 440,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5447543789755692,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.559294"
+    },
+    {
+      "tick": 440,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5583255572548,
+      "reasoning": "Resistance: core_value, Effect: 0.062",
+      "timestamp": "2026-02-18T14:12:49.560019"
+    },
+    {
+      "tick": 450,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5430795005296,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.574342"
+    },
+    {
+      "tick": 450,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5461706971699428,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.575955"
+    },
+    {
+      "tick": 450,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5473019709955692,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.576587"
+    },
+    {
+      "tick": 450,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5252491562542545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:49.577269"
+    },
+    {
+      "tick": 450,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5434407953978909,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.577903"
+    },
+    {
+      "tick": 460,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.537903726436,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.591745"
+    },
+    {
+      "tick": 460,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5520584578527999,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:49.593174"
+    },
+    {
+      "tick": 460,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5447255696899429,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.593723"
+    },
+    {
+      "tick": 460,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5425578784699429,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.594307"
+    },
+    {
+      "tick": 460,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5498051434624,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.595049"
+    },
+    {
+      "tick": 470,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.55054223317,
+      "reasoning": "Resistance: core_value, Effect: 0.055",
+      "timestamp": "2026-02-18T14:12:49.609182"
+    },
+    {
+      "tick": 470,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5493851767778909,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.611195"
+    },
+    {
+      "tick": 470,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5447255696899429,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.611990"
+    },
+    {
+      "tick": 470,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5425578784699429,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.612657"
+    },
+    {
+      "tick": 470,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5411127509899428,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.613468"
+    },
+    {
+      "tick": 480,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5367151524650909,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.628064"
+    },
+    {
+      "tick": 480,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5274634154542546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.629740"
+    },
+    {
+      "tick": 480,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5501610407728,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.630530"
+    },
+    {
+      "tick": 480,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5602910431348,
+      "reasoning": "Resistance: core_value, Effect: 0.064",
+      "timestamp": "2026-02-18T14:12:49.631354"
+    },
+    {
+      "tick": 480,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5243634525742545,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.028",
+      "timestamp": "2026-02-18T14:12:49.631966"
+    },
+    {
+      "tick": 490,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5367151524650909,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.645144"
+    },
+    {
+      "tick": 490,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5652047578348,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.646825"
+    },
+    {
+      "tick": 490,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5447255696899429,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.647444"
+    },
+    {
+      "tick": 490,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received reciprocity argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5451391900778909,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.648008"
+    },
+    {
+      "tick": 490,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5583255572548,
+      "reasoning": "Resistance: core_value, Effect: 0.062",
+      "timestamp": "2026-02-18T14:12:49.648674"
+    },
+    {
+      "tick": 500,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from The Observer",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5363303413627692,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.662782"
+    },
+    {
+      "tick": 500,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5274634154542546,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.664715"
+    },
+    {
+      "tick": 500,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from George",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5407157297548,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.665347"
+    },
+    {
+      "tick": 500,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5425578784699429,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.665936"
+    },
+    {
+      "tick": 500,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.496,
+      "confidence_after": 0.5498051434624,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.666567"
+    },
+    {
+      "tick": 500,
+      "agent_id": "juror_02",
+      "thought_type": "memory_decay",
+      "content": "4 beliefs decayed slightly",
+      "confidence_before": 0.495,
+      "confidence_after": 0.495,
+      "reasoning": "Natural memory fade",
+      "timestamp": "2026-02-18T14:12:49.667030"
+    },
+    {
+      "tick": 510,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54201941244,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.681402"
+    },
+    {
+      "tick": 510,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5641047456,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.682726"
+    },
+    {
+      "tick": 510,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54621953145,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.683325"
+    },
+    {
+      "tick": 510,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54367519095,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.683936"
+    },
+    {
+      "tick": 510,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54197896395,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.684766"
+    },
+    {
+      "tick": 520,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5494788832499999,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.701382"
+    },
+    {
+      "tick": 520,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5450850101785715,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.703270"
+    },
+    {
+      "tick": 520,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54621953145,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.704194"
+    },
+    {
+      "tick": 520,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5414773226785714,
+      "reasoning": "Resistance: core_value, Effect: 0.046",
+      "timestamp": "2026-02-18T14:12:49.705156"
+    },
+    {
+      "tick": 520,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5443398397961539,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.705987"
+    },
+    {
+      "tick": 530,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5368539459461539,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.721246"
+    },
+    {
+      "tick": 530,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5263916396181818,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.723241"
+    },
+    {
+      "tick": 530,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5255077076181818,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.724094"
+    },
+    {
+      "tick": 530,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.55041573609,
+      "reasoning": "Resistance: core_value, Effect: 0.055",
+      "timestamp": "2026-02-18T14:12:49.724868"
+    },
+    {
+      "tick": 530,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54197896395,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.725816"
+    },
+    {
+      "tick": 540,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5494788832499999,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.741505"
+    },
+    {
+      "tick": 540,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5263916396181818,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.743650"
+    },
+    {
+      "tick": 540,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54621953145,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.744614"
+    },
+    {
+      "tick": 540,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5462350027961539,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.745736"
+    },
+    {
+      "tick": 540,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54871950909,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.746643"
+    },
+    {
+      "tick": 550,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5368539459461539,
+      "reasoning": "Resistance: core_value, Effect: 0.042",
+      "timestamp": "2026-02-18T14:12:49.761434"
+    },
+    {
+      "tick": 550,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5509729102961538,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:49.763728"
+    },
+    {
+      "tick": 550,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54621953145,
+      "reasoning": "Resistance: core_value, Effect: 0.051",
+      "timestamp": "2026-02-18T14:12:49.764715"
+    },
+    {
+      "tick": 550,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.55041573609,
+      "reasoning": "Resistance: core_value, Effect: 0.055",
+      "timestamp": "2026-02-18T14:12:49.765662"
+    },
+    {
+      "tick": 550,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received emotion argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5363309155285714,
+      "reasoning": "Resistance: core_value, Effect: 0.041",
+      "timestamp": "2026-02-18T14:12:49.766581"
+    },
+    {
+      "tick": 560,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5494788832499999,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.780896"
+    },
+    {
+      "tick": 560,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received social_proof argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5509729102961538,
+      "reasoning": "Resistance: core_value, Effect: 0.056",
+      "timestamp": "2026-02-18T14:12:49.782493"
+    },
+    {
+      "tick": 560,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5436419351785714,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.783118"
+    },
+    {
+      "tick": 560,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54367519095,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.783634"
+    },
+    {
+      "tick": 560,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54197896395,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.784238"
+    },
+    {
+      "tick": 570,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5352788673,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.799043"
+    },
+    {
+      "tick": 570,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54791575845,
+      "reasoning": "Resistance: core_value, Effect: 0.053",
+      "timestamp": "2026-02-18T14:12:49.801278"
+    },
+    {
+      "tick": 570,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5255077076181818,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.031",
+      "timestamp": "2026-02-18T14:12:49.802165"
+    },
+    {
+      "tick": 570,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54367519095,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.803112"
+    },
+    {
+      "tick": 570,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received commitment argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54871950909,
+      "reasoning": "Resistance: core_value, Effect: 0.054",
+      "timestamp": "2026-02-18T14:12:49.804001"
+    },
+    {
+      "tick": 580,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5343341014285714,
+      "reasoning": "Resistance: core_value, Effect: 0.039",
+      "timestamp": "2026-02-18T14:12:49.819534"
+    },
+    {
+      "tick": 580,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5450850101785715,
+      "reasoning": "Resistance: core_value, Effect: 0.050",
+      "timestamp": "2026-02-18T14:12:49.821903"
+    },
+    {
+      "tick": 580,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5436419351785714,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.822866"
+    },
+    {
+      "tick": 580,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54367519095,
+      "reasoning": "Resistance: core_value, Effect: 0.049",
+      "timestamp": "2026-02-18T14:12:49.823781"
+    },
+    {
+      "tick": 580,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.54197896395,
+      "reasoning": "Resistance: core_value, Effect: 0.047",
+      "timestamp": "2026-02-18T14:12:49.824673"
+    },
+    {
+      "tick": 590,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received liking argument from The Observer",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5352788673,
+      "reasoning": "Resistance: core_value, Effect: 0.040",
+      "timestamp": "2026-02-18T14:12:49.839256"
+    },
+    {
+      "tick": 590,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from Arthur Miller",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5641047456,
+      "reasoning": "Resistance: core_value, Effect: 0.069",
+      "timestamp": "2026-02-18T14:12:49.840668"
+    },
+    {
+      "tick": 590,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received scarcity argument from George",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5621415426,
+      "reasoning": "Resistance: core_value, Effect: 0.067",
+      "timestamp": "2026-02-18T14:12:49.841468"
+    },
+    {
+      "tick": 590,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received authority argument from Jack",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5241818096181818,
+      "reasoning": "Resistance: core_value, resists_authority, Effect: 0.029",
+      "timestamp": "2026-02-18T14:12:49.842028"
+    },
+    {
+      "tick": 590,
+      "agent_id": "juror_02",
+      "thought_type": "persuasion_received",
+      "content": "Received logic argument from Davis",
+      "confidence_before": 0.495,
+      "confidence_after": 0.5400342476785714,
+      "reasoning": "Resistance: core_value, Effect: 0.045",
+      "timestamp": "2026-02-18T14:12:49.842583"
+    }
+  ],
+  "utterances": [],
+  "belief_snapshots": [
+    {
+      "tick": 0,
+      "agent_id": "juror_02",
+      "agent_name": "Sarah",
+      "current_vote": "guilty",
+      "core_confidence": 0.5,
+      "emotional_state": {
+        "valence": 0.0,
+        "arousal": 0.4,
+        "dominance": 0.3
+      },
+      "total_beliefs": 4,
+      "utterance_count": 0,
+      "thought_count": 5
+    },
+    {
+      "tick": 100,
+      "agent_id": "juror_02",
+      "agent_name": "Sarah",
+      "current_vote": "guilty",
+      "core_confidence": 0.499,
+      "emotional_state": {
+        "valence": 0.0,
+        "arousal": 0.4,
+        "dominance": 0.3
+      },
+      "total_beliefs": 4,
+      "utterance_count": 0,
+      "thought_count": 58
+    },
+    {
+      "tick": 200,
+      "agent_id": "juror_02",
+      "agent_name": "Sarah",
+      "current_vote": "guilty",
+      "core_confidence": 0.498,
+      "emotional_state": {
+        "valence": 0.0,
+        "arousal": 0.4,
+        "dominance": 0.3
+      },
+      "total_beliefs": 4,
+      "utterance_count": 0,
+      "thought_count": 109
+    },
+    {
+      "tick": 300,
+      "agent_id": "juror_02",
+      "agent_name": "Sarah",
+      "current_vote": "guilty",
+      "core_confidence": 0.497,
+      "emotional_state": {
+        "valence": 0.0,
+        "arousal": 0.4,
+        "dominance": 0.3
+      },
+      "total_beliefs": 4,
+      "utterance_count": 0,
+      "thought_count": 160
+    },
+    {
+      "tick": 400,
+      "agent_id": "juror_02",
+      "agent_name": "Sarah",
+      "current_vote": "guilty",
+      "core_confidence": 0.496,
+      "emotional_state": {
+        "valence": 0.0,
+        "arousal": 0.4,
+        "dominance": 0.3
+      },
+      "total_beliefs": 4,
+      "utterance_count": 0,
+      "thought_count": 211
+    },
+    {
+      "tick": 500,
+      "agent_id": "juror_02",
+      "agent_name": "Sarah",
+      "current_vote": "guilty",
+      "core_confidence": 0.495,
+      "emotional_state": {
+        "valence": 0.0,
+        "arousal": 0.4,
+        "dominance": 0.3
+      },
+      "total_beliefs": 4,
+      "utterance_count": 0,
+      "thought_count": 262
+    }
+  ],
+  "final_emotional_state": {
+    "valence": 0.0,
+    "arousal": 0.4,
+    "dominance": 0.3
+  }
+}

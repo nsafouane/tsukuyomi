@@ -1,0 +1,11 @@
+{
+  "total_ticks": 599,
+  "total_llm_calls": 0,
+  "total_belief_updates": 1476,
+  "total_persuasion_attempts": 1800,
+  "successful_persuasions": 1476,
+  "vote_changes": 0,
+  "drama_beats_triggered": 4,
+  "act_transitions": 3,
+  "gaps_found": 589
+}

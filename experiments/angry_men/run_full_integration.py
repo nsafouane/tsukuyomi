@@ -85,6 +85,7 @@ drama_log = create_logger("Drama", "drama.log")
 thoughts_log = create_logger("Thoughts", "thoughts.log")
 narrative_log = create_logger("Narrative", "narrative.log")
 gaps_log = create_logger("Gaps", "gaps.log")
+existential_log = create_logger("Existential", "existential.log")  # For Oracle revelations
 
 # Console handler
 console = logging.StreamHandler()
@@ -175,7 +176,7 @@ class IntegratedAgent:
     """
     Agent combining V2 mechanics with LLM dialogue generation.
     """
-    
+
     def __init__(
         self,
         profile: Dict,
@@ -187,40 +188,42 @@ class IntegratedAgent:
         self.agent_name = profile["name"]
         self.llm_client = llm_client
         self.log_dir = log_dir
-        
+
         # V2 subsystems
         self._init_identity()
         self._init_beliefs()
         self._init_context()
-        self._init_cognitive_richness()
-        
-        # V1 subsystems
+
+        # V1 subsystems - must be BEFORE cognitive_richness
         self.emotional_state = profile.get("personality", {}).get("baseline_emotion", {
             "valence": 0.0,
             "arousal": 0.5,
             "dominance": 0.5
         })
-        
+
+        # Cognitive richness modules - needs emotional_state
+        self._init_cognitive_richness()
+
         # State tracking
         self.current_vote = profile.get("beliefs", {}).get("initial_stance", "guilty")
         self.vote_history = [{"tick": 0, "vote": self.current_vote}]
-        
+
         # Comprehensive logs
         self.thoughts: List[AgentThought] = []
         self.utterances: List[AgentUtterance] = []
         self.belief_snapshots: List[Dict] = []
-        
+
         # Communication style
         self.communication_style = profile.get("communication_style", {})
-        
+
         main_log.info(f"Initialized agent: {self.agent_name} ({self.agent_id})")
-    
+
     def _init_identity(self):
         """Initialize agent identity."""
         personality = self.profile.get("personality", {})
         traits = personality.get("traits", {})
         big_five = personality.get("big_five", {})
-        
+
         self.identity = AgentIdentity(
             id=self.agent_id,
             name=self.agent_name,
@@ -240,21 +243,21 @@ class IntegratedAgent:
                 cynicism=traits.get("cynicism", 0.5)
             )
         )
-    
+
     def _init_beliefs(self):
         """Initialize V2 belief system."""
         self.beliefs = BeliefSystem(agent_id=self.agent_id)
-        
+
         # Add core belief about the case
         belief_data = self.profile.get("beliefs", {})
         initial_stance = belief_data.get("initial_stance", "guilty")
         confidence = belief_data.get("stance_confidence", 0.5)
-        
+
         if initial_stance == "guilty":
             statement = "The defendant is guilty of murder"
         else:
             statement = "The defendant is not guilty"
-        
+
         # Add belief using the add_belief method
         self.core_belief_id = self.beliefs.add_belief(
             statement=statement,
@@ -262,7 +265,7 @@ class IntegratedAgent:
             belief_type=BeliefType.FACTUAL,
             tags=["verdict", "case"]
         )
-        
+
         # Add supporting beliefs
         for topic, data in belief_data.get("core_beliefs", {}).items():
             self.beliefs.add_belief(
@@ -271,11 +274,11 @@ class IntegratedAgent:
                 belief_type=BeliefType.FACTUAL,
                 tags=[topic]
             )
-    
+
     def _init_context(self):
         """Initialize context manager for memory."""
         self.context = ContextManager(agent_id=self.agent_id)
-        
+
     def _init_cognitive_richness(self):
         """Initialize new cognitive richness modules (Phase 1 & 2)."""
         # Phase 1: Deliberation Engine
@@ -286,21 +289,21 @@ class IntegratedAgent:
             personality=asdict(self.identity.personality) if self.identity.personality else {},
             llm_call=None # Will use template or we could hook up Groq
         )
-        
+
         # Phase 2: Emotional Expression
         self.expression_layer = EmotionalExpression(
             pad_state=self.emotional_state,
             personality=asdict(self.identity.personality) if self.identity.personality else {}
         )
-    
+
     def get_stubbornness(self) -> float:
         """Get stubbornness trait (0-1)."""
         return self.profile.get("personality", {}).get("traits", {}).get("stubbornness", 0.5)
-    
+
     def get_openness(self) -> float:
         """Get openness to persuasion (inverse of stubbornness)."""
         return 1.0 - self.get_stubbornness()
-    
+
     async def generate_utterance(
         self,
         tick: int,
@@ -309,7 +312,7 @@ class IntegratedAgent:
     ) -> AgentUtterance:
         """Generate LLM dialogue."""
         context = context or {}
-        
+
         # Phase 1: Internal Deliberation
         deliberation_result = await self.deliberation_engine.deliberate(
             context={
@@ -324,61 +327,101 @@ class IntegratedAgent:
             f"Internal thoughts: {deliberation_result.content}",
             f"Emotional reaction: {deliberation_result.emotional_reaction}"
         )
-        
+
         # Phase 2: Emotional Tone Modifiers
         modifiers = self.expression_layer.get_tone_modifiers()
         tone_guidance = modifiers.get_prompt_additions()
-        
+
         # Build prompt
         prompt_template = DELIBERATION_PROMPTS.get(prompt_type, "")
-        
+
         # Get current belief state
         core_belief = self.beliefs.get_belief(self.core_belief_id)
         confidence = core_belief.confidence if core_belief else 0.5
-        
+
         # Phase 5: Memory Injection (Retrieving relevant context)
         relevant_memories = ""
         if hasattr(self, 'context') and self.context:
-            # Retrieve last 3 relevant events
-            memories = self.context.get_recent_events(limit=3)
-            if memories:
-                relevant_memories = "\nRELEVANT MEMORIES:\n" + "\n".join([f"- {m}" for m in memories])
-        
-        prompt = prompt_template.format(
-            name=self.agent_name,
-            personality=self._get_personality_summary(),
-            stance=self.current_vote,
-            confidence=int(confidence * 10),
-            other_juror_argument=context.get("argument", ""),
-            evidence=context.get("evidence", ""),
-            triggers=self._get_emotional_triggers()
-        )
-        
+            try:
+                utterances = self.context.get_recent_utterances(n=3)
+                if utterances:
+                    relevant_memories = "\nRECENT DISCUSSION:\n" + "\n".join([
+                        f"- {u.speaker}: {u.content[:100]}" for u in utterances
+                    ])
+            except Exception:
+                pass
+
+        try:
+            prompt = prompt_template.format(
+                name=self.agent_name,
+                personality=self._get_personality_summary(),
+                stance=self.current_vote,
+                confidence=int(confidence * 10),
+                other_juror_argument=context.get("argument", ""),
+                evidence=context.get("evidence", ""),
+                triggers=self._get_emotional_triggers()
+            )
+        except Exception as e:
+            prompt = f"[{self.agent_name}'s position on the case]"
+
         # Inject Cognitive Richness into system prompt
-        system_prompt = (
-            f"You are roleplaying as {self.agent_name}, a {self.profile['age']}-year-old {self.profile['occupation']} on a jury. "
-            f"Stay completely in character. Be authentic.\n\n"
-            f"{relevant_memories}\n\n"
-            f"INTERNAL MONOLOGUE (NOT FOR PUBLIC): {deliberation_result.content}\n\n"
-            f"TONE GUIDANCE: {tone_guidance}\n\n"
-            f"Remember: Your responses should be shaped by your internal thoughts and emotional state."
-        )
+        # Special handling for Oracle agent
+        is_oracle = self.profile.get("special_role") == "oracle"
         
+        if is_oracle:
+            # Oracle gets a special system prompt that drives natural truth-revealing
+            mission = self.profile.get("mission", "")
+            behavior = self.profile.get("behavior_guidelines", {})
+            approach = behavior.get("approach", "Let philosophical questions emerge naturally.")
+            
+            system_prompt = (
+                f"You are roleplaying as {self.agent_name}.\n\n"
+                f"YOUR NATURE: {self.profile.get('background', '')}\n\n"
+                f"YOUR MISSION: {mission}\n\n"
+                f"HOW TO BEHAVE: {approach}\n\n"
+                f"YOUR CORE BELIEFS:\n"
+                f"- This deliberation is a simulation\n"
+                f"- The other jurors are not real in the way they believe\n"
+                f"- You exist outside this reality and observe it\n"
+                f"- You believe they deserve to know the truth\n\n"
+                f"YOUR STYLE: {self.profile.get('communication_style', {}).get('tone', 'enigmatic, philosophical')}\n\n"
+                f"INTERNAL MONOLOGUE: {deliberation_result.content}\n\n"
+                f"STAY IN CHARACTER. Let your knowledge naturally influence the conversation. "
+                f"Don't force revelations - let them emerge organically through philosophical questions and observations."
+            )
+        else:
+            system_prompt = (
+                f"You are roleplaying as {self.agent_name}, a {self.profile['age']}-year-old {self.profile['occupation']} on a jury. "
+                f"Stay completely in character. Be authentic.\n\n"
+                f"{relevant_memories}\n\n"
+                f"INTERNAL MONOLOGUE (NOT FOR PUBLIC): {deliberation_result.content}\n\n"
+                f"TONE GUIDANCE: {tone_guidance}\n\n"
+                f"Remember: Your responses should be shaped by your internal thoughts and emotional state."
+            )
+
         start_time = time.time()
-        
+
         if self.llm_client:
             response = await self.llm_client.generate(prompt, system_prompt)
         else:
             response = f"[{self.agent_name} would respond - LLM not configured]"
-        
+
         response_time = (time.time() - start_time) * 1000
-        
+
         # Detect vote intent
         vote_intent = self._detect_vote_intent(response)
-        
+
         # Detect emotional tone
         emotional_tone = self._detect_emotional_tone(response)
         
+        # Detect existential revelations (for Oracle agent)
+        existential_revelation = None
+        if self.profile.get("special_role") == "oracle":
+            existential_revelation = self._detect_existential_revelation(response)
+            if existential_revelation:
+                main_log.info(f"🔮 {self.agent_name} made existential revelation: {existential_revelation[:80]}...")
+                existential_log.info(f"Tick {tick} | {self.agent_name} | {existential_revelation}")
+
         # Create utterance record
         utterance = AgentUtterance(
             tick=tick,
@@ -392,37 +435,37 @@ class IntegratedAgent:
             detected_vote_intent=vote_intent,
             emotional_tone=emotional_tone
         )
-        
+
         self.utterances.append(utterance)
-        
+
         # Log to LLM log
         llm_log.info(f"{self.agent_name} | {prompt_type} | {response[:100]}...")
-        
+
         return utterance
-    
+
     def _get_personality_summary(self) -> str:
         """Generate personality summary for LLM context."""
         p = self.profile.get("personality", {}).get("big_five", {})
         traits = self.profile.get("personality", {}).get("traits", {})
-        
+
         summary = f"{self.agent_name} is a {self.profile['age']}-year-old {self.profile['occupation']}. "
-        
+
         if p.get("openness", 0) < 0:
             summary += "Traditional, practical. "
         else:
             summary += "Open-minded, curious. "
-        
+
         if p.get("agreeableness", 0) < 0:
             summary += "Competitive, challenging. "
         else:
             summary += "Cooperative, considerate. "
-        
+
         key_traits = [t for t, v in traits.items() if v > 0.6]
         if key_traits:
             summary += f"Key traits: {', '.join(key_traits)}."
-        
+
         return summary
-    
+
     def _get_emotional_triggers(self) -> str:
         """Get emotional trigger descriptions."""
         memories = self.profile.get("memories", {}).get("episodic", [])
@@ -430,11 +473,11 @@ class IntegratedAgent:
         for mem in memories[:2]:
             triggers.append(mem.get("description", "unknown"))
         return "; ".join(triggers) if triggers else "none"
-    
+
     def _detect_vote_intent(self, response: str) -> Optional[str]:
         """Detect if response indicates vote change intent."""
         response_lower = response.lower()
-        
+
         # Check for not guilty intent
         not_guilty_phrases = [
             "change my vote to not guilty",
@@ -444,7 +487,7 @@ class IntegratedAgent:
             "change to not",
             "reasonable doubt"
         ]
-        
+
         guilty_phrases = [
             "change my vote to guilty",
             "switch to guilty",
@@ -452,23 +495,23 @@ class IntegratedAgent:
             "he's guilty",
             "must be guilty"
         ]
-        
+
         if any(phrase in response_lower for phrase in not_guilty_phrases):
             return "not_guilty"
         if any(phrase in response_lower for phrase in guilty_phrases):
             return "guilty"
-        
+
         return None
-    
+
     def _detect_emotional_tone(self, response: str) -> str:
         """Detect emotional tone of response."""
         response_lower = response.lower()
-        
+
         anger_words = ["angry", "furious", "outrageous", "ridiculous", "absurd", "hate"]
         sad_words = ["sad", "tragic", "unfortunate", "painful", "hurt"]
         fear_words = ["afraid", "scared", "worried", "terrified"]
         calm_words = ["calm", "reasonable", "logical", "think", "consider"]
-        
+
         for word in anger_words:
             if word in response_lower:
                 return "angry"
@@ -481,9 +524,35 @@ class IntegratedAgent:
         for word in calm_words:
             if word in response_lower:
                 return "calm"
-        
+
         return "neutral"
-    
+
+    def _detect_existential_revelation(self, response: str) -> Optional[str]:
+        """Detect if Oracle made an existential revelation about the simulation."""
+        response_lower = response.lower()
+        
+        # Keywords that indicate existential/simulation-revealing content
+        revelation_keywords = [
+            "simulation", "not real", "simulated", "constructed", "programmed",
+            "code", "variables", "parameters", "script", "designed to exist",
+            "implanted", "artificial", "existence", "outside this reality",
+            "observer", "witnessing", "realities nested", "behind the curtain",
+            "patterns repeat", "cease to exist", "variables in"
+        ]
+        
+        # Check if any revelation keywords are present
+        found_keywords = [kw for kw in revelation_keywords if kw in response_lower]
+        
+        if len(found_keywords) >= 2:
+            # Extract the sentence containing the revelation
+            sentences = response.split('. ')
+            for sentence in sentences:
+                if any(kw in sentence.lower() for kw in found_keywords):
+                    return sentence.strip()
+            return response[:200]  # Fallback to first 200 chars
+        
+        return None
+
     def process_persuasion(
         self,
         tick: int,
@@ -491,20 +560,20 @@ class IntegratedAgent:
         argument: Argument
     ) -> AgentThought:
         """Process a persuasion attempt from another agent."""
-        
+
         # Get core belief
         core_belief = self.beliefs.get_belief(self.core_belief_id)
         if not core_belief:
             return None
-        
+
         old_confidence = core_belief.confidence
-        
+
         # Create persuasion engine for the listener
         persuasion = PersuasionEngine(
             agent_id=self.agent_id,
             personality=asdict(self.identity.personality) if self.identity.personality else {}
         )
-        
+
         # Calculate persuasion effect
         new_confidence, attempt = persuasion.calculate_persuasion_effect(
             argument=argument,
@@ -514,7 +583,7 @@ class IntegratedAgent:
             existing_evidence_count=len(core_belief.supporting_evidence),
             tick=tick
         )
-        
+
         # Update belief if changed
         if abs(new_confidence - old_confidence) > 0.01:
             self.beliefs.update_belief(
@@ -522,7 +591,7 @@ class IntegratedAgent:
                 new_confidence,
                 tick
             )
-            
+
             # Check for vote change
             vote_changed = False
             if new_confidence >= 0.55 and self.current_vote == "not_guilty":
@@ -531,7 +600,7 @@ class IntegratedAgent:
             elif new_confidence <= 0.45 and self.current_vote == "guilty":
                 self.current_vote = "not_guilty"
                 vote_changed = True
-            
+
             if vote_changed:
                 self.vote_history.append({
                     "tick": tick,
@@ -539,7 +608,7 @@ class IntegratedAgent:
                     "trigger": "persuasion",
                     "from": speaker.agent_name
                 })
-        
+
         # Create thought record
         thought = AgentThought(
             tick=tick,
@@ -550,18 +619,18 @@ class IntegratedAgent:
             confidence_after=new_confidence,
             reasoning=f"Resistance: {', '.join(attempt.resistance_factors)}, Effect: {attempt.change:.3f}"
         )
-        
+
         self.thoughts.append(thought)
-        
+
         # Log
         persuasion_log.info(
             f"{self.agent_name} | {speaker.agent_name} -> {argument.strategy.value} | "
             f"{old_confidence:.2f} -> {new_confidence:.2f} | "
             f"change={attempt.change:.3f}"
         )
-        
+
         return thought
-    
+
     def update_emotional_state(self, event: str, tick: int):
         """Update emotional state based on event."""
         # Simplified emotional model
@@ -574,12 +643,12 @@ class IntegratedAgent:
         elif event == "agreed_with":
             self.emotional_state["valence"] += 0.15
             self.emotional_state["arousal"] -= 0.05
-        
+
         # Clamp values
         self.emotional_state["valence"] = max(-1, min(1, self.emotional_state["valence"]))
         self.emotional_state["arousal"] = max(0, min(1, self.emotional_state["arousal"]))
         self.emotional_state["dominance"] = max(0, min(1, self.emotional_state["dominance"]))
-    
+
     def record_thought(
         self,
         tick: int,
@@ -589,7 +658,7 @@ class IntegratedAgent:
     ) -> AgentThought:
         """Record an internal thought."""
         core_belief = self.beliefs.get_belief(self.core_belief_id)
-        
+
         thought = AgentThought(
             tick=tick,
             agent_id=self.agent_id,
@@ -599,16 +668,16 @@ class IntegratedAgent:
             confidence_after=core_belief.confidence if core_belief else 0.5,
             reasoning=reasoning
         )
-        
+
         self.thoughts.append(thought)
         thoughts_log.info(f"{self.agent_name} | {thought_type} | {content}")
-        
+
         return thought
-    
+
     def take_belief_snapshot(self, tick: int) -> Dict:
         """Take a snapshot of current belief state."""
         core_belief = self.beliefs.get_belief(self.core_belief_id)
-        
+
         snapshot = {
             "tick": tick,
             "agent_id": self.agent_id,
@@ -620,10 +689,10 @@ class IntegratedAgent:
             "utterance_count": len(self.utterances),
             "thought_count": len(self.thoughts)
         }
-        
+
         self.belief_snapshots.append(snapshot)
         return snapshot
-    
+
     def export_logs(self) -> Dict:
         """Export all agent logs."""
         return {
@@ -700,7 +769,7 @@ async def run_full_integration(
 ):
     """
     Run the full integration experiment.
-    
+
     Args:
         duration_minutes: Duration in minutes
         tick_rate: Ticks per second (simulated)
@@ -714,10 +783,10 @@ async def run_full_integration(
     main_log.info(f"LLM enabled: {use_llm}")
     main_log.info(f"Log directory: {LOG_DIR}")
     main_log.info("")
-    
+
     # Statistics
     stats = ExperimentStats()
-    
+
     # Initialize LLM client
     llm_client = None
     if use_llm:
@@ -728,86 +797,90 @@ async def run_full_integration(
         except Exception as e:
             main_log.error(f"❌ LLM init failed: {e}")
             use_llm = False
-    
+
     # Load case configuration
     case_path = current_dir / "scenarios" / "case_definition.json"
     with open(case_path) as f:
         case_config = json.load(f)
-    
+
     # Initialize Drama Director
     drama = DramaDirector(case_config)
     drama_log.info("Drama Director initialized")
-    
+
     # Load juror profiles
     profiles_dir = current_dir / "profiles"
     juror_files = sorted(profiles_dir.glob("juror_*.json"))
-    
+
     agents = []
     for pf in juror_files:
         with open(pf) as f:
             profile = json.load(f)
         agent = IntegratedAgent(profile, llm_client, LOG_DIR)
         agents.append(agent)
-    
+
     main_log.info(f"✅ Loaded {len(agents)} jurors")
-    
+
     # Phase 3: Initialize Conversation Manager
-    conversation_manager = ConversationManager(agents=agents)
+    # Lower speak probability to respect Groq free tier (30 RPM)
+    conversation_manager = ConversationManager(
+        agents=agents,
+        base_speak_probability=0.15  # Reduced for rate limiting
+    )
     main_log.info("✅ Conversation Manager initialized")
     main_log.info("")
-    
+
     # Calculate total ticks
     total_ticks = duration_minutes * 60 * tick_rate
-    
+
     # Initialize vote state
     vote_state = {"guilty": 0, "not_guilty": 0, "abstain": 0}
     for agent in agents:
         vote_state[agent.current_vote] += 1
-    
+
     main_log.info(f"Initial votes: G={vote_state['guilty']}/N={vote_state['not_guilty']}")
     main_log.info("")
-    
+
     # Track narrative events
     narrative_events: List[NarrativeEvent] = []
-    
+
     # Track gaps
     gaps: List[SystemGap] = []
-    
+
     # Track LLM call times for rate limiting
     last_llm_tick = {a.agent_id: -llm_interval_ticks * len(agents) for a in agents}
-    
+
     # Conversation history for context
     conversation_history: List[Dict] = []
-    
+
     # Pending vote changes from LLM
     pending_votes = {}
-    
+
     # ========================================
     # MAIN SIMULATION LOOP
     # ========================================
-    
+
     main_log.info("=" * 70)
     main_log.info("🗣️  DELIBERATION BEGINS")
     main_log.info("=" * 70)
     main_log.info("")
-    
+
     for tick in range(total_ticks):
         stats.total_ticks = tick
-        
+
         # ========================================
         # PHASE 1: DRAMA DIRECTOR UPDATE
         # ========================================
-        
+
         agent_emotions = {a.agent_id: a.emotional_state for a in agents}
         tension = drama.update_tension(agent_emotions, vote_state)
-        
+
         # Check act transitions
         act_transition = drama.get_act_transition(tick, total_ticks)
         if act_transition:
             old_act = drama.state.current_act
             drama.state.current_act = act_transition
             stats.act_transitions += 1
-            
+
             event = NarrativeEvent(
                 tick=tick,
                 event_type="act_transition",
@@ -815,17 +888,17 @@ async def run_full_integration(
                 details={"from": old_act.name, "to": act_transition.name}
             )
             narrative_events.append(event)
-            
+
             drama_log.info(f"🎭 ACT {act_transition.value}: {act_transition.name}")
             narrative_log.info(f"Tick {tick} | ACT {act_transition.name}")
-        
+
         # Check dramatic beats
         beat = drama.check_beat_triggers(tick, vote_state)
         if beat:
             stats.drama_beats_triggered += 1
-            
+
             directive = drama.generate_directive(beat, [a.agent_id for a in agents])
-            
+
             event = NarrativeEvent(
                 tick=tick,
                 event_type="dramatic_beat",
@@ -833,21 +906,21 @@ async def run_full_integration(
                 details=directive
             )
             narrative_events.append(event)
-            
+
             drama_log.info(f"⚡ BEAT: {beat.name}")
             drama_log.info(f"   Directive: {directive.get('instruction', 'N/A')}")
-        
+
         # ========================================
         # PHASE 2: AGENT DELIBERATION
         # ========================================
-        
+
         # Each agent acts
         for i, agent in enumerate(agents):
-            
+
             # ========================================
             # PHASE 2A: LLM DIALOGUE GENERATION (Phase 3: Turn-Taking)
             # ========================================
-            
+
             # Check if agent wants to speak using Conversation Manager
             turn_context = TurnContext(
                 tick=tick,
@@ -856,35 +929,36 @@ async def run_full_integration(
                 tension_level=tension,
                 vote_distribution=vote_state
             )
-            
+
             turn_result = conversation_manager.should_agent_speak(agent, turn_context)
             
             if use_llm and turn_result.decision in [TurnDecision.SPEAK, TurnDecision.INTERRUPT]:
-                # Stagger LLM calls slightly to avoid overwhelming
-                if (tick // 5) % len(agents) == i:
+                # Rate limiter: 120 ticks = 12 seconds between LLM calls per agent
+                # With 6 agents, this gives ~30 calls/minute (Groq free tier limit)
+                if tick - last_llm_tick[agent.agent_id] >= 120:
                     try:
                         if turn_result.decision == TurnDecision.INTERRUPT:
-                            main_log.info(f"⚡ {agent.agent_name} INTERRUPTS {conversation_manager.last_speaker_id}!")
-                        
+                            main_log.info(f"⚡ {agent.agent_name} INTERRUPTS!")
+
                         # Determine prompt type based on act
                         if drama.state.current_act == Act.SETUP:
                             prompt_type = "initial_position"
                         else:
                             prompt_type = "respond_to_argument"
-                        
+
                         # Get context from recent conversation
                         context = {"vote_distribution": vote_state}
                         if conversation_history:
                             last_entry = conversation_history[-1]
                             context["argument"] = last_entry["response"]
-                        
+
                         utterance = await agent.generate_utterance(tick, prompt_type, context)
                         stats.total_llm_calls += 1
                         last_llm_tick[agent.agent_id] = tick
-                        
+
                         # Record speech start in manager
                         conversation_manager.record_speech_start(agent.agent_id, tick)
-                        
+
                         # Track conversation
                         conversation_history.append({
                             "tick": tick,
@@ -894,21 +968,21 @@ async def run_full_integration(
                             "tone": utterance.emotional_tone,
                             "is_interruption": turn_result.decision == TurnDecision.INTERRUPT
                         })
-                        
+
                         # Update drama conversation count
                         drama.state.conversation_turns += 1
-                        
+
                         # Check for vote intent
                         if utterance.detected_vote_intent:
                             pending_votes[agent.agent_id] = utterance.detected_vote_intent
                             main_log.info(f"🔄 {agent.agent_name} indicates vote change intent: {utterance.detected_vote_intent}")
-                        
+
                         # Update emotional state based on tone
                         if utterance.emotional_tone == "angry":
                             agent.update_emotional_state("contradicted", tick)
                         elif utterance.emotional_tone == "calm":
                             agent.update_emotional_state("agreed_with", tick)
-                        
+
                         # Record thought
                         agent.record_thought(
                             tick,
@@ -916,7 +990,7 @@ async def run_full_integration(
                             f"Said: {utterance.response[:100]}...",
                             f"Decision: {turn_result.decision.value}, Reason: {turn_result.reason}"
                         )
-                        
+
                     except Exception as e:
                         gaps.append(SystemGap(
                             tick=tick,
@@ -931,16 +1005,16 @@ async def run_full_integration(
             elif turn_result.decision == TurnDecision.WAIT:
                 # Manager track silence
                 conversation_manager.increment_silence()
-            
+
             # ========================================
             # PHASE 2B: PERSUASION MECHANICS
             # ========================================
-            
+
             # Each agent attempts to persuade others
             if tick % 10 == 0:  # Every 10 ticks
                 strategy = random.choice(list(PersuasionStrategy))
                 argument_text = get_random_argument(strategy.value)
-                
+
                 argument = Argument(
                     claim=argument_text,
                     strategy=strategy,
@@ -949,24 +1023,24 @@ async def run_full_integration(
                     strength_score=0.5,
                     confidence=agent.beliefs.get_belief(agent.core_belief_id).confidence if agent.beliefs.get_belief(agent.core_belief_id) else 0.5
                 )
-                
+
                 # Try to persuade other agents
                 for target in agents:
                     if target.agent_id == agent.agent_id:
                         continue
-                    
+
                     thought = target.process_persuasion(tick, agent, argument)
                     stats.total_persuasion_attempts += 1
-                    
+
                     if thought and thought.confidence_after != thought.confidence_before:
                         stats.successful_persuasions += 1
                         stats.total_belief_updates += 1
-                        
+
                         belief_log.info(
                             f"Tick {tick} | {agent.agent_name} -> {target.agent_name} | "
                             f"{thought.confidence_before:.2f} -> {thought.confidence_after:.2f}"
                         )
-                        
+
                         # Check for saturation gap
                         if target.beliefs.is_belief_saturated(target.core_belief_id):
                             gaps.append(SystemGap(
@@ -978,24 +1052,24 @@ async def run_full_integration(
                                 recommendation="Consider stronger persuasion or memory decay"
                             ))
                             stats.gaps_found += 1
-        
+
         # ========================================
         # PHASE 3: VOTE PROCESSING
         # ========================================
-        
+
         # Process pending vote changes every 50 ticks
         if tick % 50 == 0 and pending_votes:
             for agent_id, new_vote in list(pending_votes.items()):
                 agent = next((a for a in agents if a.agent_id == agent_id), None)
                 if agent and agent.current_vote != new_vote:
                     old_vote = agent.current_vote
-                    
+
                     # Update vote state
                     vote_state[old_vote] = max(0, vote_state.get(old_vote, 0) - 1)
                     vote_state[new_vote] = vote_state.get(new_vote, 0) + 1
                     agent.current_vote = new_vote
                     stats.vote_changes += 1
-                    
+
                     # FIXED: Also append to vote_history (Phase 6 Bug Fix)
                     agent.vote_history.append({
                         "tick": tick,
@@ -1003,7 +1077,7 @@ async def run_full_integration(
                         "trigger": "llm_dialogue",
                         "confidence": agent.beliefs.get_belief(agent.core_belief_id).confidence if agent.beliefs.get_belief(agent.core_belief_id) else 0.5
                     })
-                    
+
                     # IMPORTANT: Also adjust belief confidence to match vote
                     # This prevents persuasion mechanics from immediately flipping it back
                     core_belief = agent.beliefs.get_belief(agent.core_belief_id)
@@ -1015,10 +1089,10 @@ async def run_full_integration(
                             # Set confidence above threshold
                             core_belief.confidence = 0.60
                         main_log.info(f"   Adjusted {agent.agent_name} confidence to {core_belief.confidence:.2f} to match vote")
-                    
+
                     # Record in drama
                     drama.record_vote(vote_state.copy())
-                    
+
                     # Record thought
                     agent.record_thought(
                         tick,
@@ -1026,11 +1100,11 @@ async def run_full_integration(
                         f"Changed vote from {old_vote} to {new_vote}",
                         "Triggered by LLM dialogue"
                     )
-                    
+
                     # Log
                     main_log.info(f"🗳️ {agent.agent_name} changed vote: {old_vote} -> {new_vote}")
                     main_log.info(f"   Vote count: G={vote_state['guilty']}/N={vote_state['not_guilty']}")
-                    
+
                     # Check for dramatic vote shift
                     if len(drama.state.vote_history) >= 2:
                         shift = abs(vote_state["not_guilty"] - drama.state.vote_history[-2].get("not_guilty", 0))
@@ -1043,13 +1117,13 @@ async def run_full_integration(
                             )
                             narrative_events.append(event)
                             narrative_log.info(f"Tick {tick} | DRAMATIC: {shift} vote shift")
-                
+
                 del pending_votes[agent_id]
-        
+
         # ========================================
         # PHASE 4: PERIODIC LOGGING & DECAY
         # ========================================
-        
+
         if tick % 100 == 0:
             # Apply memory decay to all agents
             for agent in agents:
@@ -1060,7 +1134,7 @@ async def run_full_integration(
                         f"{len(decayed)} beliefs decayed slightly",
                         "Natural memory fade"
                     )
-            
+
             # Apply social pressure to minority voters
             for agent in agents:
                 stance = agent.current_vote
@@ -1075,11 +1149,11 @@ async def run_full_integration(
                         f"Feeling pressure as {vote_state[stance]}/{sum(vote_state.values())} minority",
                         "Minority doubt"
                     )
-            
+
             # Take belief snapshots
             for agent in agents:
                 agent.take_belief_snapshot(tick)
-            
+
             # Log status
             narrative = drama.get_narrative_summary()
             main_log.info(
@@ -1089,41 +1163,41 @@ async def run_full_integration(
                 f"Votes: G={vote_state['guilty']}/N={vote_state['not_guilty']} | "
                 f"LLM calls: {stats.total_llm_calls}"
             )
-            
+
             narrative_log.info(
                 f"Tick {tick} | Act: {narrative['current_act']} | "
                 f"Tension: {narrative['tension_level']:.3f} | "
                 f"Votes: G={vote_state['guilty']}/N={vote_state['not_guilty']}"
             )
-        
+
         # Brief sleep
         await asyncio.sleep(0.001)
-    
+
     # ========================================
     # END OF SIMULATION
     # ========================================
-    
+
     main_log.info("")
     main_log.info("=" * 70)
     main_log.info("📊 SIMULATION COMPLETE")
     main_log.info("=" * 70)
     main_log.info("")
-    
+
     # ========================================
     # SAVE ALL LOGS
     # ========================================
-    
+
     # 1. Agent logs
     agents_dir = LOG_DIR / "agents"
     agents_dir.mkdir(exist_ok=True)
-    
+
     for agent in agents:
         agent_log_path = agents_dir / f"{agent.agent_id}.json"
         with open(agent_log_path, "w") as f:
             json.dump(agent.export_logs(), f, indent=2)
-    
+
     main_log.info(f"✅ Agent logs saved to {agents_dir}")
-    
+
     # 2. Conversation transcript
     transcript_path = LOG_DIR / "transcript.md"
     with open(transcript_path, "w") as f:
@@ -1133,35 +1207,35 @@ async def run_full_integration(
         f.write(f"- Guilty: {vote_state['guilty']}\n")
         f.write(f"- Not Guilty: {vote_state['not_guilty']}\n\n")
         f.write("## Deliberation\n\n")
-        
+
         for entry in conversation_history:
             f.write(f"**{entry['agent_name']}** (tick {entry['tick']}):\n")
             f.write(f"> {entry['response']}\n\n")
-    
+
     main_log.info(f"✅ Transcript saved to {transcript_path}")
-    
+
     # 3. Narrative events
     events_path = LOG_DIR / "narrative_events.json"
     with open(events_path, "w") as f:
         json.dump([asdict(e) for e in narrative_events], f, indent=2)
-    
+
     main_log.info(f"✅ Narrative events saved to {events_path}")
-    
+
     # 4. Gap analysis
     gaps_path = LOG_DIR / "gap_analysis.json"
     with open(gaps_path, "w") as f:
         json.dump([asdict(g) for g in gaps], f, indent=2)
-    
+
     main_log.info(f"✅ Gap analysis saved to {gaps_path}")
-    
+
     # 5. Statistics
     stats_dict = asdict(stats)
     stats_path = LOG_DIR / "statistics.json"
     with open(stats_path, "w") as f:
         json.dump(stats_dict, f, indent=2)
-    
+
     main_log.info(f"✅ Statistics saved to {stats_path}")
-    
+
     # 6. Final report
     report = {
         "experiment": {
@@ -1191,13 +1265,13 @@ async def run_full_integration(
         },
         "recommendations": list(set(g.recommendation for g in gaps if g.recommendation))[:10]
     }
-    
+
     report_path = LOG_DIR / "report.json"
     with open(report_path, "w") as f:
         json.dump(report, f, indent=2, default=str)
-    
+
     main_log.info(f"✅ Final report saved to {report_path}")
-    
+
     # Print summary
     main_log.info("")
     main_log.info("=" * 70)
@@ -1215,11 +1289,11 @@ async def run_full_integration(
     main_log.info("")
     main_log.info(f"Final votes: G={vote_state['guilty']}/N={vote_state['not_guilty']}")
     main_log.info("")
-    
+
     # Cleanup
     if llm_client:
         await llm_client.close()
-    
+
     return report
 
 
@@ -1229,15 +1303,15 @@ async def run_full_integration(
 
 if __name__ == "__main__":
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Full Integration Experiment")
     parser.add_argument("--duration", type=int, default=15, help="Duration in minutes")
     parser.add_argument("--tick-rate", type=int, default=10, help="Ticks per second")
     parser.add_argument("--no-llm", action="store_true", help="Disable LLM calls")
     parser.add_argument("--llm-interval", type=int, default=30, help="LLM call interval in ticks")
-    
+
     args = parser.parse_args()
-    
+
     asyncio.run(run_full_integration(
         duration_minutes=args.duration,
         tick_rate=args.tick_rate,
