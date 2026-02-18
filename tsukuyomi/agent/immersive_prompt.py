@@ -28,6 +28,10 @@ class PromptContext:
     emotional_state: str = ""             # How they're feeling now
     physical_state: str = ""              # Tired, injured, etc.
     
+    # Cognitive richness fields
+    deliberation: str = ""                # Internal monologue
+    tone_modifiers: str = ""              # Guidance on tone/length
+    
     def __post_init__(self):
         self.recent_events = self.recent_events or []
         self.present_characters = self.present_characters or []
@@ -93,7 +97,7 @@ class ImmersivePromptBuilder:
         sections.append(self._memories_section())
         
         # === SECTION 5: CURRENT STATE ===
-        sections.append(self._current_state_section(context))
+        sections.append(self._current_rich_state_section(context))
         
         # === SECTION 6: SITUATION ===
         sections.append(self._situation_section(context))
@@ -155,7 +159,7 @@ You simply ARE.
         # All other sections
         sections.append(self._emotional_baseline_section())
         sections.append(self._memories_section())
-        sections.append(self._current_state_section(context))
+        sections.append(self._current_rich_state_section(context))
         sections.append(self._situation_section(context))
         
         # Urgent context framing
@@ -304,13 +308,22 @@ Act from this state.""")
         
         return "\n".join(lines)
     
-    def _current_state_section(self, context: PromptContext) -> str:
-        """Build current state section."""
+    def _current_rich_state_section(self, context: PromptContext) -> str:
+        """Build current state section with deliberation and emotions."""
         lines = ["## RIGHT NOW\n"]
         
         if context.emotional_state:
             lines.append(f"Your current emotional state: **{context.emotional_state}**\n")
         
+        if context.deliberation:
+            lines.append("### YOUR INTERNAL THOUGHTS (DO NOT SAY THESE OUT LOUD):")
+            lines.append(f"*{context.deliberation}*")
+            lines.append("\n*Use these thoughts to shape your next response.*\n")
+            
+        if context.tone_modifiers:
+            lines.append("### SPEAKING STYLE GUIDANCE:")
+            lines.append(f"{context.tone_modifiers}\n")
+            
         if context.physical_state:
             lines.append(f"Your physical condition: {context.physical_state}\n")
         

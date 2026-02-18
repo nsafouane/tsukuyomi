@@ -24,6 +24,8 @@ from .immersive_prompt import (
     PromptContext, 
     create_prompt_context
 )
+from ..brain.deliberation import DeliberationEngine, DeliberationResult
+from ..proto.emotional_expression import EmotionalExpression, ToneModifiers
 
 logger = logging.getLogger("UniversalAgent")
 
@@ -82,6 +84,8 @@ class UniversalAgent:
         self.identity: Optional[AgentIdentity] = None
         self.memory: Optional[LongTermMemory] = None
         self.prompt_builder: Optional[ImmersivePromptBuilder] = None
+        self.deliberation_engine: Optional[DeliberationEngine] = None
+        self.emotional_expression: Optional[EmotionalExpression] = None
         
         # State
         self.state = AgentState.IDLE
@@ -140,6 +144,18 @@ class UniversalAgent:
             scenario_name=self.config.scenario_name
         )
         
+        # Initialize deliberation and emotional expression (Phase 1 & 2)
+        self.deliberation_engine = DeliberationEngine(
+            agent_id=self.identity.id,
+            personality=self.identity.personality.to_dict() if self.identity.personality else {},
+            llm_call=self._llm_call
+        )
+        
+        self.emotional_expression = EmotionalExpression(
+            pad_state=self.identity.get_baseline_pad(),
+            personality=self.identity.personality.to_dict() if self.identity.personality else {}
+        )
+        
         logger.info(f"Agent identity loaded: {self.identity.name}")
     
     def set_llm(self, llm_call: Callable) -> None:
@@ -152,6 +168,8 @@ class UniversalAgent:
             llm_call: Async function that takes (prompt, **kwargs) and returns response
         """
         self._llm_call = llm_call
+        if self.deliberation_engine:
+            self.deliberation_engine._llm_call = llm_call
         logger.info(f"LLM set: {self.config.llm_provider}")
     
     async def respond(
@@ -179,12 +197,32 @@ class UniversalAgent:
         
         self.state = AgentState.THINKING
         
+        # Phase 1: Internal Deliberation
+        deliberation_text = ""
+        if self.deliberation_engine:
+            deliberation_result = await self.deliberation_engine.deliberate(
+                context={
+                    "stimulus": input_text,
+                    "recent_arguments": [h["content"] for h in self.conversation_history[-3:] if h["role"] == "user"]
+                },
+                tick=self.current_tick
+            )
+            deliberation_text = deliberation_result.content
+            
+        # Phase 2: Emotional Expression (Tone Modifiers)
+        tone_modifiers_text = ""
+        if self.emotional_expression:
+            modifiers = self.emotional_expression.get_tone_modifiers()
+            tone_modifiers_text = modifiers.get_prompt_additions()
+        
         # Build context if not provided
         if context is None:
             context = create_prompt_context(
                 situation=input_text,
                 recent_events=[h["content"] for h in self.conversation_history[-3:]],
-                emotional_state=self._get_current_emotional_state()
+                emotional_state=self._get_current_emotional_state(),
+                deliberation=deliberation_text,
+                tone_modifiers=tone_modifiers_text
             )
         
         # Build prompt

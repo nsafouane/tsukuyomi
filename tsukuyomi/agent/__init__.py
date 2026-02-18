@@ -89,6 +89,9 @@ from .persuasion import (
     PersuasionProfile,
     PersuasionEngine,
     create_persuasion_profile_from_personality,
+    apply_personality_to_persuasion_engine,
+    calculate_persuasion_effectiveness_by_personality,
+    calculate_persuasion_resistance_by_personality,
     argument_strength_category as persuasion_strength_category
 )
 
@@ -170,6 +173,9 @@ __all__ = [
     "PersuasionProfile",
     "PersuasionEngine",
     "create_persuasion_profile_from_personality",
+    "apply_personality_to_persuasion_engine",
+    "calculate_persuasion_effectiveness_by_personality",
+    "calculate_persuasion_resistance_by_personality",
     
     # Decision
     "DecisionType",

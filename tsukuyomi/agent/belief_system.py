@@ -754,6 +754,64 @@ class BeliefSystem:
         
         return "\n".join(lines)
     
+    def retrieve_relevant(
+        self,
+        query: str,
+        limit: int = 5,
+        min_confidence: float = 0.3
+    ) -> List[Belief]:
+        """
+        Retrieve beliefs relevant to a query.
+        
+        This enables agents to recall relevant beliefs when making decisions.
+        Uses keyword matching for retrieval.
+        
+        Args:
+            query: Search query (statement or topic)
+            limit: Maximum number of beliefs to return
+            min_confidence: Minimum confidence threshold
+        
+        Returns:
+            List of relevant beliefs, sorted by relevance
+        """
+        if not self.beliefs:
+            return []
+        
+        query_lower = query.lower()
+        query_words = set(query_lower.split())
+        
+        candidates = []
+        
+        for belief in self.beliefs.values():
+            # Filter by confidence
+            if belief.confidence < min_confidence:
+                continue
+            
+            # Calculate relevance score
+            score = 0.0
+            
+            # Direct statement match
+            if query_lower in belief.statement.lower():
+                score += 0.5
+            
+            # Keyword match
+            if belief.tags:
+                belief_words = set(t.lower() for t in belief.tags)
+                keyword_overlap = query_words & belief_words
+                if keyword_overlap:
+                    score += 0.3 * (len(keyword_overlap) / len(belief_words))
+            
+            # Confidence weight (higher confidence = more relevant)
+            score += 0.2 * belief.confidence
+            
+            if score > 0:
+                candidates.append((score, belief))
+        
+        # Sort by score descending
+        candidates.sort(key=lambda x: -x[0])
+        
+        return [belief for _, belief in candidates[:limit]]
+    
     def to_dict(self) -> Dict[str, Any]:
         """Serialize belief system to dict."""
         return {

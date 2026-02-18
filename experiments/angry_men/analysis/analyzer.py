@@ -115,7 +115,7 @@ class ExperimentAnalyzer:
         """
         gaps = []
         
-        # Analyze narrative
+        # 1. Analyze narrative
         narrative = self.analyze_narrative_flow()
         if narrative["acts_completed"] < 4:
             gaps.append({
@@ -125,7 +125,7 @@ class ExperimentAnalyzer:
                 "detail": f"Only {narrative['acts_completed']}/4 acts completed"
             })
         
-        # Analyze decisions
+        # 2. Analyze decisions
         decisions = self.analyze_decisions()
         if decisions["reasoning_coherence"] == "poor":
             gaps.append({
@@ -134,15 +134,52 @@ class ExperimentAnalyzer:
                 "description": "Poor reasoning coherence in decisions",
                 "detail": "Decisions lack detailed reasoning chains"
             })
+            
+        # 3. Phase 6: Expanded Gap Detection (Cognitive Richness)
         
-        # Analyze memory
+        # A. Deliberation Gap
+        juror_data = self.results.get("jurors", {})
+        total_thoughts = 0
+        deliberation_thoughts = 0
+        for juror in juror_data.values():
+            for thought in juror:
+                total_thoughts += 1
+                if thought.get("thought_type") == "deliberation" or "think" in thought.get("content", "").lower():
+                    deliberation_thoughts += 1
+        
+        if total_thoughts > 0 and (deliberation_thoughts / total_thoughts) < 0.2:
+            gaps.append({
+                "category": "cognitive",
+                "severity": "medium",
+                "description": "Insufficient deliberation phase",
+                "detail": f"Only {deliberation_thoughts}/{total_thoughts} thoughts were deliberative"
+            })
+            
+        # B. Emotional Gap
+        emotional_content = 0
+        emotion_keywords = ["feel", "angry", "sad", "frustrated", "worried", "happy", "excited"]
+        for juror in juror_data.values():
+            for thought in juror:
+                content = thought.get("content", "").lower()
+                if any(kw in content for kw in emotion_keywords):
+                    emotional_content += 1
+                    
+        if total_thoughts > 0 and (emotional_content / total_thoughts) < 0.1:
+            gaps.append({
+                "category": "cognitive",
+                "severity": "medium",
+                "description": "Low emotional richness in thoughts",
+                "detail": f"Only {emotional_content}/{total_thoughts} thoughts contained emotional content"
+            })
+            
+        # C. Memory Gap
         memory = self.analyze_memory_usage()
-        if memory["memory_gaps"]:
+        if memory.get("memory_usage_count", 0) == 0:
             gaps.append({
                 "category": "memory",
                 "severity": "medium",
                 "description": "Memory retrieval gaps detected",
-                "detail": memory["memory_gaps"]
+                "detail": "No memories were retrieved during the session"
             })
         
         return gaps

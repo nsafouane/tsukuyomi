@@ -43,8 +43,13 @@ from tsukuyomi.agent import (
     PersuasionEngine, PersuasionStrategy, PersuasionAttempt, Argument,
     ContextManager,
     ProposalHandler, Proposal, ProposalStatus, ProposalType,
-    AgentIdentity, PersonalityTraits
+    AgentIdentity, PersonalityTraits,
+    apply_personality_to_persuasion_engine
 )
+
+from tsukuyomi.brain.deliberation import DeliberationEngine
+from tsukuyomi.proto.emotional_expression import EmotionalExpression
+from tsukuyomi.proto.conversation_manager import ConversationManager, TurnContext, TurnDecision
 
 # V1 imports
 sys.path.insert(0, str(current_dir))
@@ -187,6 +192,7 @@ class IntegratedAgent:
         self._init_identity()
         self._init_beliefs()
         self._init_context()
+        self._init_cognitive_richness()
         
         # V1 subsystems
         self.emotional_state = profile.get("personality", {}).get("baseline_emotion", {
@@ -269,6 +275,23 @@ class IntegratedAgent:
     def _init_context(self):
         """Initialize context manager for memory."""
         self.context = ContextManager(agent_id=self.agent_id)
+        
+    def _init_cognitive_richness(self):
+        """Initialize new cognitive richness modules (Phase 1 & 2)."""
+        # Phase 1: Deliberation Engine
+        self.deliberation_engine = DeliberationEngine(
+            agent_id=self.agent_id,
+            belief_system=self.beliefs,
+            emotional_state=self.emotional_state,
+            personality=asdict(self.identity.personality) if self.identity.personality else {},
+            llm_call=None # Will use template or we could hook up Groq
+        )
+        
+        # Phase 2: Emotional Expression
+        self.expression_layer = EmotionalExpression(
+            pad_state=self.emotional_state,
+            personality=asdict(self.identity.personality) if self.identity.personality else {}
+        )
     
     def get_stubbornness(self) -> float:
         """Get stubbornness trait (0-1)."""
@@ -287,12 +310,39 @@ class IntegratedAgent:
         """Generate LLM dialogue."""
         context = context or {}
         
+        # Phase 1: Internal Deliberation
+        deliberation_result = await self.deliberation_engine.deliberate(
+            context={
+                "stimulus": context.get("argument", ""),
+                "others_votes": context.get("vote_distribution", {}),
+                "my_vote": self.current_vote
+            },
+            tick=tick
+        )
+        self.record_thought(
+            tick, "deliberation",
+            f"Internal thoughts: {deliberation_result.content}",
+            f"Emotional reaction: {deliberation_result.emotional_reaction}"
+        )
+        
+        # Phase 2: Emotional Tone Modifiers
+        modifiers = self.expression_layer.get_tone_modifiers()
+        tone_guidance = modifiers.get_prompt_additions()
+        
         # Build prompt
         prompt_template = DELIBERATION_PROMPTS.get(prompt_type, "")
         
         # Get current belief state
         core_belief = self.beliefs.get_belief(self.core_belief_id)
         confidence = core_belief.confidence if core_belief else 0.5
+        
+        # Phase 5: Memory Injection (Retrieving relevant context)
+        relevant_memories = ""
+        if hasattr(self, 'context') and self.context:
+            # Retrieve last 3 relevant events
+            memories = self.context.get_recent_events(limit=3)
+            if memories:
+                relevant_memories = "\nRELEVANT MEMORIES:\n" + "\n".join([f"- {m}" for m in memories])
         
         prompt = prompt_template.format(
             name=self.agent_name,
@@ -304,7 +354,15 @@ class IntegratedAgent:
             triggers=self._get_emotional_triggers()
         )
         
-        system_prompt = f"You are roleplaying as {self.agent_name}, a {self.profile['age']}-year-old {self.profile['occupation']} on a jury. Stay completely in character. Be concise and authentic."
+        # Inject Cognitive Richness into system prompt
+        system_prompt = (
+            f"You are roleplaying as {self.agent_name}, a {self.profile['age']}-year-old {self.profile['occupation']} on a jury. "
+            f"Stay completely in character. Be authentic.\n\n"
+            f"{relevant_memories}\n\n"
+            f"INTERNAL MONOLOGUE (NOT FOR PUBLIC): {deliberation_result.content}\n\n"
+            f"TONE GUIDANCE: {tone_guidance}\n\n"
+            f"Remember: Your responses should be shaped by your internal thoughts and emotional state."
+        )
         
         start_time = time.time()
         
@@ -442,7 +500,10 @@ class IntegratedAgent:
         old_confidence = core_belief.confidence
         
         # Create persuasion engine for the listener
-        persuasion = PersuasionEngine(agent_id=self.agent_id)
+        persuasion = PersuasionEngine(
+            agent_id=self.agent_id,
+            personality=asdict(self.identity.personality) if self.identity.personality else {}
+        )
         
         # Calculate persuasion effect
         new_confidence, attempt = persuasion.calculate_persuasion_effect(
@@ -689,6 +750,10 @@ async def run_full_integration(
         agents.append(agent)
     
     main_log.info(f"✅ Loaded {len(agents)} jurors")
+    
+    # Phase 3: Initialize Conversation Manager
+    conversation_manager = ConversationManager(agents=agents)
+    main_log.info("✅ Conversation Manager initialized")
     main_log.info("")
     
     # Calculate total ticks
@@ -780,13 +845,27 @@ async def run_full_integration(
         for i, agent in enumerate(agents):
             
             # ========================================
-            # PHASE 2A: LLM DIALOGUE GENERATION
+            # PHASE 2A: LLM DIALOGUE GENERATION (Phase 3: Turn-Taking)
             # ========================================
             
-            if use_llm and tick - last_llm_tick[agent.agent_id] >= llm_interval_ticks * len(agents):
-                # Stagger LLM calls across agents
-                if (tick // tick_rate) % len(agents) == i:
+            # Check if agent wants to speak using Conversation Manager
+            turn_context = TurnContext(
+                tick=tick,
+                agent_id=agent.agent_id,
+                last_speaker_id=conversation_manager.last_speaker_id,
+                tension_level=tension,
+                vote_distribution=vote_state
+            )
+            
+            turn_result = conversation_manager.should_agent_speak(agent, turn_context)
+            
+            if use_llm and turn_result.decision in [TurnDecision.SPEAK, TurnDecision.INTERRUPT]:
+                # Stagger LLM calls slightly to avoid overwhelming
+                if (tick // 5) % len(agents) == i:
                     try:
+                        if turn_result.decision == TurnDecision.INTERRUPT:
+                            main_log.info(f"⚡ {agent.agent_name} INTERRUPTS {conversation_manager.last_speaker_id}!")
+                        
                         # Determine prompt type based on act
                         if drama.state.current_act == Act.SETUP:
                             prompt_type = "initial_position"
@@ -794,7 +873,7 @@ async def run_full_integration(
                             prompt_type = "respond_to_argument"
                         
                         # Get context from recent conversation
-                        context = {}
+                        context = {"vote_distribution": vote_state}
                         if conversation_history:
                             last_entry = conversation_history[-1]
                             context["argument"] = last_entry["response"]
@@ -803,13 +882,17 @@ async def run_full_integration(
                         stats.total_llm_calls += 1
                         last_llm_tick[agent.agent_id] = tick
                         
+                        # Record speech start in manager
+                        conversation_manager.record_speech_start(agent.agent_id, tick)
+                        
                         # Track conversation
                         conversation_history.append({
                             "tick": tick,
                             "agent_id": agent.agent_id,
                             "agent_name": agent.agent_name,
                             "response": utterance.response,
-                            "tone": utterance.emotional_tone
+                            "tone": utterance.emotional_tone,
+                            "is_interruption": turn_result.decision == TurnDecision.INTERRUPT
                         })
                         
                         # Update drama conversation count
@@ -831,7 +914,7 @@ async def run_full_integration(
                             tick,
                             "spoke",
                             f"Said: {utterance.response[:100]}...",
-                            f"Tone: {utterance.emotional_tone}"
+                            f"Decision: {turn_result.decision.value}, Reason: {turn_result.reason}"
                         )
                         
                     except Exception as e:
@@ -845,6 +928,9 @@ async def run_full_integration(
                         ))
                         stats.gaps_found += 1
                         gaps_log.error(f"{agent.agent_name} LLM error: {e}")
+            elif turn_result.decision == TurnDecision.WAIT:
+                # Manager track silence
+                conversation_manager.increment_silence()
             
             # ========================================
             # PHASE 2B: PERSUASION MECHANICS
@@ -909,6 +995,14 @@ async def run_full_integration(
                     vote_state[new_vote] = vote_state.get(new_vote, 0) + 1
                     agent.current_vote = new_vote
                     stats.vote_changes += 1
+                    
+                    # FIXED: Also append to vote_history (Phase 6 Bug Fix)
+                    agent.vote_history.append({
+                        "tick": tick,
+                        "vote": new_vote,
+                        "trigger": "llm_dialogue",
+                        "confidence": agent.beliefs.get_belief(agent.core_belief_id).confidence if agent.beliefs.get_belief(agent.core_belief_id) else 0.5
+                    })
                     
                     # IMPORTANT: Also adjust belief confidence to match vote
                     # This prevents persuasion mechanics from immediately flipping it back

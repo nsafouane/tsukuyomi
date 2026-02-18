@@ -245,10 +245,12 @@ class PersuasionEngine:
     def __init__(
         self,
         agent_id: str,
-        profile: Optional[PersuasionProfile] = None
+        profile: Optional[PersuasionProfile] = None,
+        personality: Optional[Dict[str, float]] = None
     ):
         self.agent_id = agent_id
         self.profile = profile or PersuasionProfile(agent_id=agent_id)
+        self.personality = personality or {}
         
         # Argument tracking
         self.arguments: Dict[str, Argument] = {}
@@ -260,6 +262,10 @@ class PersuasionEngine:
         # Configuration
         self.min_change = 0.01
         self.max_change = 0.3
+        
+        # Apply personality to profile if provided
+        if self.personality:
+            apply_personality_to_persuasion_engine(self, self.personality)
     
     # ==================== ARGUMENT CREATION ====================
     
@@ -437,10 +443,11 @@ class PersuasionEngine:
         # Evidence count resistance (more evidence = harder to sway)
         evidence_res = min(0.2, existing_evidence_count * 0.02)
         
-        # Combine
+        # Combine - strategy resistance from personality has SIGNIFICANT weight
+        # This ensures personality has a strong impact on persuasion outcomes
         total_resistance = (
-            base * 0.3 +
-            strategy_res * 0.25 +
+            base * 0.15 +
+            strategy_res * 0.5 +  # Increased from 0.25 - personality matters!
             strength_res +
             saturation_res +  # NEW: Saturation resistance
             core_res +
@@ -469,11 +476,19 @@ class PersuasionEngine:
         # Relationship bonus
         rel_bonus = (relationship - 0.5) * 0.3  # -0.15 to +0.15
         
+        # Phase 4: Personality Susceptibility
+        personality_susceptibility = 1.0
+        if self.personality:
+            personality_susceptibility = calculate_persuasion_effectiveness_by_personality(
+                self.personality, argument.strategy
+            )
+        
         # Combine
         effectiveness = (
-            arg_strength * 0.4 +
-            confidence * 0.3 +
-            0.3 +
+            arg_strength * 0.3 +
+            confidence * 0.2 +
+            personality_susceptibility * 0.3 +
+            0.2 +
             rel_bonus
         )
         
@@ -712,3 +727,220 @@ def argument_strength_category(strength: float) -> ArgumentStrength:
         return ArgumentStrength.WEAK
     else:
         return ArgumentStrength.VERY_WEAK
+
+
+# ==================== PERSONALITY-WEIGHTED PERSUASION ====================
+# Phase 4: Personality-Weighted Argument Effectiveness
+# This makes argument effectiveness vary by agent personality
+
+# Mapping of which personality traits affect which argument types
+ARGUMENT_EFFECTIVENESS_BY_PERSONALITY = {
+    "logic": {
+        "openness": 0.8,       # Open agents value logic more
+        "conscientiousness": 0.6,
+    },
+    "emotion": {
+        "neuroticism": 0.9,    # Neurotic agents more emotional
+        "agreeableness": 0.5,
+    },
+    "authority": {
+        "conscientiousness": 0.8,
+        "openness": 0.3,       # Low openness = more deferential to authority
+    },
+    "social_proof": {
+        "extraversion": 0.7,
+        "agreeableness": 0.6,
+    },
+    "scarcity": {
+        "conscientiousness": 0.5,
+        "neuroticism": 0.7,
+    },
+    "liking": {
+        "agreeableness": 0.8,
+        "extraversion": 0.5,
+    },
+    "reciprocity": {
+        "agreeableness": 0.7,
+        "extraversion": 0.4,
+    },
+    "commitment": {
+        "conscientiousness": 0.6,
+        "openness": 0.4,
+    },
+}
+
+
+def calculate_persuasion_effectiveness_by_personality(
+    agent_personality: Dict[str, float],
+    argument_strategy: PersuasionStrategy
+) -> float:
+    """
+    Calculate how effective a specific argument type is for an agent,
+    based on their personality.
+    
+    This is the key function that makes persuasion personality-dependent.
+    
+    Args:
+        agent_personality: Dict with Big Five traits (0-1 scale)
+        argument_strategy: The type of persuasion being used
+    
+    Returns:
+        Effectiveness score (0-1), where higher = more susceptible
+    """
+    strategy_name = argument_strategy.value
+    
+    # Get trait weights for this strategy
+    trait_weights = ARGUMENT_EFFECTIVENESS_BY_PERSONALITY.get(strategy_name, {})
+    
+    if not trait_weights:
+        # Unknown strategy, return neutral
+        return 0.5
+    
+    effectiveness = 0.0
+    total_weight = 0.0
+    
+    for trait, weight in trait_weights.items():
+        # Get the trait value (default to 0.5 if not present)
+        trait_value = agent_personality.get(trait, 0.5)
+        
+        # Add weighted contribution
+        effectiveness += trait_value * weight
+        total_weight += weight
+    
+    # Normalize
+    if total_weight > 0:
+        effectiveness = effectiveness / total_weight
+    
+    # Scale to meaningful range (0.2 to 0.8 instead of 0 to 1)
+    effectiveness = 0.2 + (effectiveness * 0.6)
+    
+    return effectiveness
+
+
+def calculate_persuasion_resistance_by_personality(
+    agent_personality: Dict[str, float],
+    argument_strategy: PersuasionStrategy
+) -> float:
+    """
+    Calculate how resistant an agent is to a specific argument type,
+    based on their personality.
+    
+    This is the inverse of effectiveness - high resistance means
+    the argument won't work well regardless of other factors.
+    
+    Args:
+        agent_personality: Dict with Big Five traits (0-1 scale)
+        argument_strategy: The type of persuasion being used
+    
+    Returns:
+        Resistance score (0-1), where higher = more resistant
+    """
+    strategy_name = argument_strategy.value
+    
+    # Some traits naturally resist certain argument types
+    resistance_factors = {
+        "logic": {
+            "openness": -0.8,   # High openness = much less resistant to logic
+            "neuroticism": 0.4,  # Neurotic = more skeptical
+        },
+        "emotion": {
+            "conscientiousness": 0.6,  # Conscientious = more logical, less emotional
+            "neuroticism": -0.5,       # Neurotic = more emotional, less resistant
+        },
+        "authority": {
+            "openness": 0.7,     # High openness = questioning, less deferential
+            "extraversion": -0.4,  # Extraverted = more dominant, less submissive
+        },
+        "social_proof": {
+            "agreeableness": -0.6,  # Agreeable = follows group
+            "stubbornness": 0.8,     # Stubborn = resists peer pressure
+        },
+        "scarcity": {
+            "conscientiousness": -0.4,  # Conscientious = plans ahead, fears missing out
+            "cynicism": 0.6,            # Cynical = skeptical of scarcity claims
+        },
+    }
+    
+    factors = resistance_factors.get(strategy_name, {})
+    
+    # Base resistance modified by general stubbornness if present
+    base_res = agent_personality.get("stubbornness", 0.5) * 0.4
+    resistance = 0.2 + base_res
+    
+    for trait, modifier in factors.items():
+        # Use 0.5 as neutral point: (trait - 0.5) * 2 gives -1 to 1
+        trait_value = agent_personality.get(trait, 0.5)
+        impact = (trait_value - 0.5) * modifier * 2
+        resistance += impact
+    
+    # Normalize and clamp
+    resistance = max(0.05, min(0.95, resistance))
+    
+    return resistance
+
+
+def get_personality_persuasion_summary(
+    agent_personality: Dict[str, float]
+) -> Dict[str, Dict[str, float]]:
+    """
+    Get a summary of how an agent responds to all argument types.
+    
+    Useful for debugging and analysis.
+    
+    Args:
+        agent_personality: Dict with personality traits
+    
+    Returns:
+        Dict mapping strategy names to effectiveness/resistance scores
+    """
+    summary = {}
+    
+    for strategy in PersuasionStrategy:
+        effectiveness = calculate_persuasion_effectiveness_by_personality(
+            agent_personality, strategy
+        )
+        resistance = calculate_persuasion_resistance_by_personality(
+            agent_personality, strategy
+        )
+        
+        summary[strategy.value] = {
+            "effectiveness": effectiveness,
+            "resistance": resistance,
+            "net_impact": effectiveness - resistance
+        }
+    
+    return summary
+
+
+# ==================== HELPER TO INTEGRATE WITH PERSUASION ENGINE ====================
+
+def apply_personality_to_persuasion_engine(
+    engine: PersuasionEngine,
+    agent_personality: Dict[str, float]
+) -> None:
+    """
+    Apply personality weights to an existing PersuasionEngine.
+    
+    This modifies the engine's strategy resistances to reflect
+    the agent's personality.
+    
+    Args:
+        engine: PersuasionEngine to modify
+        agent_personality: Dict with personality traits
+    """
+    # Update engine personality reference
+    engine.personality = agent_personality
+    
+    for strategy in PersuasionStrategy:
+        # Get personality-based resistance
+        personality_resistance = calculate_persuasion_resistance_by_personality(
+            agent_personality, strategy
+        )
+        
+        # Blend with existing profile resistance
+        existing_resistance = engine.profile.strategy_resistance.get(strategy, 0.5)
+        
+        # Weight: 60% personality, 40% original profile
+        new_resistance = (personality_resistance * 0.6) + (existing_resistance * 0.4)
+        
+        engine.profile.strategy_resistance[strategy] = new_resistance

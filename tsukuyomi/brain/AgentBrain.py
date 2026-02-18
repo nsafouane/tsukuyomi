@@ -26,6 +26,8 @@ from tsukuyomi.brain.BeliefManager import BeliefManager, PersonalityBias
 from tsukuyomi.brain.RelationshipManager import RelationshipManager
 from tsukuyomi.brain.DramaDirector import DramaDirector
 from tsukuyomi.brain.GossipProtocol import get_gossip_protocol  # Moved from late imports
+from tsukuyomi.brain.deliberation import DeliberationEngine
+from tsukuyomi.proto.emotional_expression import EmotionalExpression
 
 logger = logging.getLogger("AgentBrain")
 
@@ -108,6 +110,19 @@ class AgentBrain:
         from tsukuyomi.brain.DramaDirector import DramaDirector
 
         self.drama_director = None
+
+        # Cognitive Richness (Phase 1 & 2)
+        self.deliberation_engine = DeliberationEngine(
+            actor_id,
+            belief_system=self.belief_manager,
+            emotional_state=self.state_manager.get_emotional_context(),
+            personality=profile.get("personality", {}),
+            llm_call=None # Placeholder
+        )
+        self.expression_layer = EmotionalExpression(
+            pad_state=self.state_manager.get_emotional_context(),
+            personality=profile.get("personality", {})
+        )
 
     def set_spatial_index(self, spatial_index):
         """
@@ -590,6 +605,32 @@ class AgentBrain:
         """
         return self.perception.get_visual_context_summary()
 
+    # === COGNITIVE RICHNESS METHODS (Phase 1 & 2) ===
+
+    async def deliberate(self, stimulus: str, others_votes: Dict[str, int]) -> str:
+        """
+        Phase 1: Thinking before speaking.
+        """
+        # Sync state
+        self.deliberation_engine.update_emotional_state(self.state_manager.get_emotional_context())
+        
+        result = await self.deliberation_engine.deliberate({
+            "stimulus": stimulus,
+            "others_votes": others_votes,
+            "my_vote": self.profile.get("stance", "neutral")
+        })
+        
+        return result.content
+
+    def get_tone_modifiers(self) -> str:
+        """
+        Phase 2: Dialogue reflections of emotional state.
+        """
+        # Sync state
+        self.expression_layer.update_pad(self.state_manager.get_emotional_context())
+        
+        modifiers = self.expression_layer.get_tone_modifiers()
+        return modifiers.get_prompt_additions()
 
 
 if __name__ == "__main__":
