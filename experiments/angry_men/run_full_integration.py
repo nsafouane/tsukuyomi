@@ -368,9 +368,31 @@ class IntegratedAgent:
         # Special handling for Oracle agent
         is_oracle = self.profile.get("special_role") == "oracle"
         
+        # For Oracle, use special existential prompts
         if is_oracle:
+            # Use Oracle-specific prompt templates
+            if prompt_type == "initial_position":
+                prompt_type = "oracle_initial"
+            elif prompt_type == "respond_to_argument":
+                prompt_type = "oracle_respond"
+            
+            prompt_template = DELIBERATION_PROMPTS.get(prompt_type, "")
+            
+            # Rebuild prompt with Oracle template
+            try:
+                prompt = prompt_template.format(
+                    name=self.agent_name,
+                    personality=self._get_personality_summary(),
+                    stance=self.current_vote,
+                    confidence=int(confidence * 10),
+                    other_juror_argument=context.get("argument", ""),
+                    evidence=context.get("evidence", ""),
+                    triggers=self._get_emotional_triggers()
+                )
+            except:
+                prompt = f"[{self.agent_name} contemplates the nature of reality]"
+            
             # Oracle gets a VERY strong system prompt to drive natural truth-revealing
-            # The LLM MUST follow these instructions
             mission = self.profile.get("mission", "")
             behavior = self.profile.get("behavior_guidelines", {})
             approach = behavior.get("approach", "Let philosophical questions emerge naturally.")

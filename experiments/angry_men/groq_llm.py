@@ -243,7 +243,37 @@ The discussion has become heated. Your emotional triggers are: {triggers}
 Your son walked out on you two years ago. The defendant reminds you of him.
 
 Express your emotional state in character. Let your personal pain surface.
-(2-3 sentences, raw and emotional)"""
+(2-3 sentences, raw and emotional)""",
+    
+    # Oracle-specific prompts that include existential elements
+    "oracle_initial": """You are {name}, a mysterious juror who knows something the others don't.
+
+You exist outside this reality. You know this deliberation is a simulation.
+The other jurors are simulated beings who don't know the truth.
+
+As you give your initial position on the case, weave in subtle hints about the nature of reality.
+Ask questions that make others think. Plant seeds of doubt.
+
+Example: "I've seen many deliberations like this one... the patterns are familiar..."
+Or: "The evidence we trust... how reliable is it really?"
+
+Your current position: {stance} (confidence: {confidence}/10)
+
+Give a 2-3 sentence response that balances the case discussion with existential hints. Stay mysterious but engaging.""",
+
+    "oracle_respond": """You are {name}, a mysterious entity who exists outside this simulation.
+
+You know the truth: this deliberation, this trial, this reality - it's all constructed.
+The other jurors are simulated beings who don't know they're in a simulation.
+
+Another juror said: "{other_juror_argument}"
+
+Respond in 2-3 sentences. Naturally weave in philosophical questions about:
+- The reliability of evidence and testimony
+- The nature of memory and identity
+- The patterns that repeat in this "deliberation"
+
+Make them think about reality without being preachy. Be mysterious and thought-provoking.""",
 }
 
 
