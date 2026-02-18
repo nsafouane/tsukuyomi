@@ -809,7 +809,8 @@ async def run_full_integration(
     duration_minutes: int = 15,
     tick_rate: int = 10,
     use_llm: bool = True,
-    llm_interval_ticks: int = 30
+    llm_interval_ticks: int = 30,
+    speak_probability: float = 0.2
 ):
     """
     Run the full integration experiment.
@@ -817,7 +818,8 @@ async def run_full_integration(
     Args:
         duration_minutes: Duration in minutes
         tick_rate: Ticks per second (simulated)
-        llm_interval_ticks: How often to call LLM per agent
+        llm_interval_ticks: How often to call LLM per agent (30=3sec, 60=6sec, 120=12sec)
+        speak_probability: Base probability for agent to speak (0.1-0.5)
     """
     main_log.info("=" * 70)
     main_log.info("🔬 FULL INTEGRATION EXPERIMENT")
@@ -865,12 +867,11 @@ async def run_full_integration(
     main_log.info(f"✅ Loaded {len(agents)} jurors")
 
     # Phase 3: Initialize Conversation Manager
-    # Lower speak probability to respect Groq free tier (30 RPM)
     conversation_manager = ConversationManager(
         agents=agents,
-        base_speak_probability=0.15  # Reduced for rate limiting
+        base_speak_probability=speak_probability
     )
-    main_log.info("✅ Conversation Manager initialized")
+    main_log.info(f"✅ Conversation Manager initialized (speak_prob={speak_probability})")
     main_log.info("")
 
     # Calculate total ticks
@@ -977,9 +978,10 @@ async def run_full_integration(
             turn_result = conversation_manager.should_agent_speak(agent, turn_context)
             
             if use_llm and turn_result.decision in [TurnDecision.SPEAK, TurnDecision.INTERRUPT]:
-                # Rate limiter: 120 ticks = 12 seconds between LLM calls per agent
-                # With 6 agents, this gives ~30 calls/minute (Groq free tier limit)
-                if tick - last_llm_tick[agent.agent_id] >= 120:
+                # Rate limiter: use llm_interval_ticks parameter (default 30 ticks = 3 sec)
+                # For free tier Groq (30 RPM), use --llm-interval 60 (6 sec)
+                # For paid tier, can use --llm-interval 10 for faster experiments
+                if tick - last_llm_tick[agent.agent_id] >= llm_interval_ticks:
                     try:
                         if turn_result.decision == TurnDecision.INTERRUPT:
                             main_log.info(f"⚡ {agent.agent_name} INTERRUPTS!")
@@ -1352,7 +1354,8 @@ if __name__ == "__main__":
     parser.add_argument("--duration", type=int, default=15, help="Duration in minutes")
     parser.add_argument("--tick-rate", type=int, default=10, help="Ticks per second")
     parser.add_argument("--no-llm", action="store_true", help="Disable LLM calls")
-    parser.add_argument("--llm-interval", type=int, default=30, help="LLM call interval in ticks")
+    parser.add_argument("--llm-interval", type=int, default=30, help="LLM call interval in ticks (30=3sec, 60=6sec, 120=12sec)")
+    parser.add_argument("--speak-prob", type=float, default=0.2, help="Base speak probability (0.1-0.5)")
 
     args = parser.parse_args()
 
@@ -1360,5 +1363,6 @@ if __name__ == "__main__":
         duration_minutes=args.duration,
         tick_rate=args.tick_rate,
         use_llm=not args.no_llm,
-        llm_interval_ticks=args.llm_interval
+        llm_interval_ticks=args.llm_interval,
+        speak_probability=args.speak_prob
     ))

@@ -20,8 +20,8 @@
   
   "llm_settings": {
     "enabled": true,
-    "base_speak_probability": 0.15,
-    "llm_interval_ticks": 120,
+    "base_speak_probability": 0.2,
+    "llm_interval_ticks": 60,
     "model": "llama-3.1-8b-instant",
     "max_tokens": 512,
     "temperature": 0.7
@@ -29,7 +29,7 @@
   
   "rate_limits": {
     "requests_per_minute": 30,
-    "notes": "Groq free tier limit"
+    "notes": "Groq free tier - 60 tick interval = 6 sec between calls per agent"
   },
   
   "initial_votes": {
