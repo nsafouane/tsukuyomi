@@ -568,17 +568,26 @@ Now respond as {self.agent_name}, staying completely in character as someone who
         
         # Keywords that indicate existential/simulation-revealing content
         revelation_keywords = [
-            "simulation", "not real", "simulated", "constructed", "programmed",
-            "code", "variables", "parameters", "script", "designed to exist",
-            "implanted", "artificial", "existence", "outside this reality",
-            "observer", "witnessing", "realities nested", "behind the curtain",
-            "patterns repeat", "cease to exist", "variables in"
+            # Explicit simulation/AI terms
+            "simulation", "simulated", "code", "programmed", "variables", "parameters",
+            "constructed", "artificial", "designed to exist", "implanted",
+            # Reality-bending terms  
+            "not real", "not what it seems", "beyond the", "outside this",
+            "question reality", "truth about", "realities nested", "behind the curtain",
+            # Observer-specific terms
+            "observer", "witnessing", "patterns repeat", "seen this before",
+            "watched many", "in my observations", "cease to exist",
+            # Evidence-reality connection (his actual language)
+            "evidence isn't", "evidence isn't reliable", "evidence seems to shift",
+            "can't trust", "question the", "don't know what", 
+            "grappling with", "not entirely convinced", "shifting like",
+            "beyond the surface", "questioning the", "memory", "identity"
         ]
         
         # Check if any revelation keywords are present
         found_keywords = [kw for kw in revelation_keywords if kw in response_lower]
         
-        if len(found_keywords) >= 2:
+        if len(found_keywords) >= 1:
             # Extract the sentence containing the revelation
             sentences = response.split('. ')
             for sentence in sentences:
