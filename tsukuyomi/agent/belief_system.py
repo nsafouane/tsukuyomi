@@ -529,12 +529,20 @@ class BeliefSystem:
         self,
         belief_id: str,
         evidence_id: str,
-        tick: int = 0
+        tick: int = 0,
+        influence_weight: float = 0.5
     ) -> Optional[BeliefUpdate]:
         """
         Evaluate a single piece of evidence and update belief.
         
         More targeted update than update_belief().
+        
+        Args:
+            belief_id: ID of belief to update
+            evidence_id: ID of evidence to evaluate
+            tick: Current tick
+            influence_weight: How much the evidence source influences this agent (0-1)
+                             0.5 = neutral/average, 1.0 = strong influence
         """
         belief = self.beliefs.get(belief_id)
         evidence = self.evidence_store.get(evidence_id)
@@ -568,6 +576,13 @@ class BeliefSystem:
         
         # Apply openness
         impact *= self.openness
+        
+        # NEW: Apply asymmetric influence weight
+        # Scale from 0.5 (neutral) to full range
+        # influence_weight 0.0 = no influence, 1.0 = full influence
+        # Map to 0.0-1.5 range for impact scaling
+        influence_multiplier = influence_weight * 1.5  # 0 to 1.5
+        impact *= influence_multiplier
         
         # Calculate direction
         if evidence.supports_belief:
@@ -1060,6 +1075,50 @@ class BeliefSystem:
                     )
         
         return affected
+    
+    def calculate_influence_weight(
+        self,
+        speaker_personality: Dict[str, float],
+        speaker_credibility: float = 0.5,
+        relationship_trust: float = 0.5,
+        argument_strength: float = 0.5
+    ) -> float:
+        """
+        Calculate how much influence a speaker has on this agent.
+        
+        This creates ASYMMETRIC influence - A→B ≠ B→A
+        
+        Args:
+            speaker_personality: Speaker's Big Five traits
+            speaker_credibility: Speaker's credibility/track record (0-1)
+            relationship_trust: Trust between speaker and listener (0-1)
+            argument_strength: Strength of the argument (0-1)
+        
+        Returns:
+            Influence weight (0-1), where 0.5 is neutral
+        """
+        # Import here to avoid circular imports
+        from .influence import InfluenceWeightCalculator
+        
+        # Build listener personality from belief system attributes
+        listener_personality = {
+            "openness": self.openness,
+            "conscientiousness": getattr(self, 'conscientiousness', 0.5),
+            "agreeableness": getattr(self, 'agreeableness', 0.5),
+            "neuroticism": getattr(self, 'neuroticism', 0.5),
+            "extraversion": getattr(self, 'extraversion', 0.5)
+        }
+        
+        calc = InfluenceWeightCalculator()
+        weight, _ = calc.calculate(
+            speaker_personality=speaker_personality,
+            listener_personality=listener_personality,
+            speaker_credibility=speaker_credibility,
+            relationship_trust=relationship_trust,
+            argument_strength=argument_strength
+        )
+        
+        return weight
 
 
 # ========================
