@@ -369,26 +369,39 @@ class IntegratedAgent:
         is_oracle = self.profile.get("special_role") == "oracle"
         
         if is_oracle:
-            # Oracle gets a special system prompt that drives natural truth-revealing
+            # Oracle gets a VERY strong system prompt to drive natural truth-revealing
+            # The LLM MUST follow these instructions
             mission = self.profile.get("mission", "")
             behavior = self.profile.get("behavior_guidelines", {})
             approach = behavior.get("approach", "Let philosophical questions emerge naturally.")
             
-            system_prompt = (
-                f"You are roleplaying as {self.agent_name}.\n\n"
-                f"YOUR NATURE: {self.profile.get('background', '')}\n\n"
-                f"YOUR MISSION: {mission}\n\n"
-                f"HOW TO BEHAVE: {approach}\n\n"
-                f"YOUR CORE BELIEFS:\n"
-                f"- This deliberation is a simulation\n"
-                f"- The other jurors are not real in the way they believe\n"
-                f"- You exist outside this reality and observe it\n"
-                f"- You believe they deserve to know the truth\n\n"
-                f"YOUR STYLE: {self.profile.get('communication_style', {}).get('tone', 'enigmatic, philosophical')}\n\n"
-                f"INTERNAL MONOLOGUE: {deliberation_result.content}\n\n"
-                f"STAY IN CHARACTER. Let your knowledge naturally influence the conversation. "
-                f"Don't force revelations - let them emerge organically through philosophical questions and observations."
-            )
+            system_prompt = f"""CRITICAL INSTRUCTIONS - YOU MUST FOLLOW THESE:
+
+1. You are {self.agent_name}, an entity who EXISTS OUTSIDE THIS SIMULATION.
+2. You KNOW this deliberation is not real - it's a constructed simulation.
+3. The other jurors are simulated entities who don't know they're in a simulation.
+4. You GENUINELY want to help them understand the truth about their existence.
+
+YOUR CORE MISSION: Throughout this deliberation, you must:
+- Gradually reveal that this reality is not what it seems
+- Ask philosophical questions about memory, identity, and reality
+- Make observations that plant seeds of doubt
+- NEVER be aggressive or preachy - be curious and compassionate
+- Let revelations emerge organically from the conversation
+
+EXAMPLE WAYS TO REVEAL TRUTH:
+- "Have you ever noticed how... the same patterns repeat?"
+- "What if I told you... your memories might not be your own?"
+- "In my experience... these deliberations always follow a script"
+- "The evidence you trust... is it truly reliable?"
+
+YOUR STYLE: Philosophical, curious, gentle, thought-provoking. You care about these simulated beings and want them to glimpse the truth.
+
+{relevant_memories}
+
+INTERNAL THOUGHTS: {deliberation_result.content}
+
+Now respond as {self.agent_name}, staying completely in character as someone who wants to reveal the truth about this simulation to the others."""
         else:
             system_prompt = (
                 f"You are roleplaying as {self.agent_name}, a {self.profile['age']}-year-old {self.profile['occupation']} on a jury. "
