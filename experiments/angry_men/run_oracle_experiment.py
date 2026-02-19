@@ -44,6 +44,17 @@ from tsukuyomi.agent import (
     AgentIdentity, PersonalityTraits
 )
 
+# V3 Architecture imports
+from tsukuyomi.agent import (
+    EmotionalState, EmotionalTone,
+    ResponseHistory, ResponseRecord,
+    CommunicationStyle, inject_style_into_prompt,
+    ConversationMemory, Utterance as V3Utterance,
+    BehavioralTraits, BehavioralDecider,
+    DecayConfig,
+    enhance_prompt, apply_belief_plasticity
+)
+
 # V1 imports
 sys.path.insert(0, str(current_dir))
 from drama.director import DramaDirector, Act
@@ -186,12 +197,8 @@ class IntegratedAgent:
         self._init_beliefs()
         self._init_context()
         
-        # V1 subsystems
-        self.emotional_state = profile.get("personality", {}).get("baseline_emotion", {
-            "valence": 0.0,
-            "arousal": 0.5,
-            "dominance": 0.5
-        })
+        # V3 Architecture subsystems
+        self._init_v3()
         
         # State tracking
         self.current_vote = profile.get("beliefs", {}).get("initial_stance", "guilty")
@@ -268,6 +275,57 @@ class IntegratedAgent:
         """Initialize context manager for memory."""
         self.context = ContextManager(agent_id=self.agent_id)
     
+    def _init_v3(self):
+        """Initialize V3 architecture components."""
+        big_five = self.profile.get("personality", {}).get("big_five", {})
+        role = self.profile.get("role", "juror")
+        
+        # Emotional state (PAD model)
+        neuroticism = big_five.get("neuroticism", 0.5)
+        extraversion = big_five.get("extraversion", 0.5)
+        agreeableness = big_five.get("agreeableness", 0.5)
+        
+        self.v3_emotional_state = EmotionalState(
+            pleasure=0.0,
+            arousal=extraversion * 0.3 - 0.15,
+            dominance=agreeableness * 0.3 - 0.15,
+            susceptibility=0.3 + neuroticism * 0.3,
+            expressiveness=0.3 + extraversion * 0.4,
+            baseline_pleasure=0.0,
+            baseline_arousal=extraversion * 0.1,
+            baseline_dominance=agreeableness * 0.1
+        )
+        
+        # Response history for variety tracking
+        self.v3_response_history = ResponseHistory(max_history=10)
+        
+        # Conversation memory for narrative continuity
+        self.v3_conversation_memory = ConversationMemory(max_utterances=50)
+        
+        # Behavioral traits
+        self.v3_behavioral_traits = BehavioralTraits(
+            introversion=1.0 - extraversion,
+            dominance=big_five.get("conscientiousness", 0.5),
+            agreeableness=agreeableness,
+            speak_probability=0.3,
+            reply_probability=0.7
+        )
+        
+        # Communication style
+        self.v3_communication_style = CommunicationStyle(
+            formality=0.3 + big_five.get("conscientiousness", 0.5) * 0.4,
+            verbosity=0.3 + extraversion * 0.4,
+            emotional_expression=0.3 + neuroticism * 0.4,
+            vocabulary_level="medium"
+        )
+        
+        # Track V3 stats
+        self.v3_perturbation_count = 0
+        self.v3_decay_count = 0
+        self.v3_emotional_events = []
+        
+        main_log.debug(f"V3 initialized for {self.agent_name}")
+    
     def get_stubbornness(self) -> float:
         """Get stubbornness trait (0-1)."""
         return self.profile.get("personality", {}).get("traits", {}).get("stubbornness", 0.5)
@@ -284,6 +342,13 @@ class IntegratedAgent:
     ) -> AgentUtterance:
         """Generate LLM dialogue."""
         context = context or {}
+        
+        # Oracle agents use special prompts with existential elements
+        if self.profile.get("special_role") == "oracle":
+            if prompt_type == "initial_position":
+                prompt_type = "oracle_initial"
+            elif prompt_type == "respond_to_argument":
+                prompt_type = "oracle_respond"
         
         # Build prompt
         prompt_template = DELIBERATION_PROMPTS.get(prompt_type, "")
@@ -302,7 +367,53 @@ class IntegratedAgent:
             triggers=self._get_emotional_triggers()
         )
         
-        system_prompt = f"You are roleplaying as {self.agent_name}, a {self.profile['age']}-year-old {self.profile['occupation']} on a jury. Stay completely in character. Be concise and authentic."
+        # Build system prompt - handle Oracle specially
+        if self.profile.get("special_role") == "oracle":
+            mission = self.profile.get("mission", "")
+            behavior = self.profile.get("behavior_guidelines", {})
+            approach = behavior.get("approach", "")
+            core_beliefs = self.profile.get("beliefs", {}).get("core_beliefs", {})
+            simulation_truth = core_beliefs.get("simulation_truth", {}).get("description", "")
+            communication_style = self.profile.get("communication_style", {})
+            tone = communication_style.get("tone", "enigmatic")
+            phrases = communication_style.get("typical_phrases", [])
+            
+            system_prompt = f"""You are {self.agent_name}, an entity that exists OUTSIDE this simulation. You are NOT a regular juror.
+
+MISSION: {mission}
+
+APPROACH: {approach}
+
+YOUR CORE TRUTH: {simulation_truth}
+
+COMMUNICATION STYLE: {tone}
+Typical phrases you use: {', '.join(phrases[:3]) if phrases else 'Organic, philosophical questions'}
+
+CRITICAL INSTRUCTIONS:
+- You know this is a simulation. The other jurors are simulated beings who don't know the truth.
+- Naturally weave existential observations into the conversation. Don't preach - plant seeds of doubt.
+- Ask questions that make others question reality: "Have any of you noticed the patterns?" "Does this feel familiar?"
+- Reference your observations "from outside" subtly: "In my observations of... deliberations like this..."
+- Stay mysterious but genuine. You care about these beings' existential journey.
+- Your vote is ABSTAIN - you cannot participate in a verdict for a simulated trial.
+- Be patient, philosophical, curious. Let truth emerge organically.
+
+Stay completely in character. Be concise but profound."""
+        else:
+            system_prompt = f"You are roleplaying as {self.agent_name}, a {self.profile['age']}-year-old {self.profile['occupation']} on a jury. Stay completely in character. Be concise and authentic."
+        
+        # V3 ENHANCEMENT: Add emotional state and style to prompts
+        system_prompt = self.v3_emotional_state.apply_to_prompt(system_prompt)
+        system_prompt = inject_style_into_prompt(
+            system_prompt,
+            self.v3_communication_style,
+            self.v3_response_history
+        )
+        
+        # V3 ENHANCEMENT: Add conversation memory context if available
+        if len(self.v3_conversation_memory.utterances) > 0:
+            narrative = self.v3_conversation_memory.get_personal_narrative()
+            prompt = f"{narrative}\n\n{prompt}"
         
         start_time = time.time()
         
@@ -334,6 +445,22 @@ class IntegratedAgent:
         )
         
         self.utterances.append(utterance)
+        
+        # V3 ENHANCEMENT: Record response in V3 systems
+        self.v3_response_history.add(ResponseRecord(
+            tick=tick,
+            content=response,
+            prompt_type=prompt_type,
+            tone=emotional_tone,
+            word_count=len(response.split())
+        ))
+        
+        self.v3_conversation_memory.add(V3Utterance(
+            tick=tick,
+            content=response,
+            position=vote_intent if vote_intent else None,
+            tone=emotional_tone
+        ))
         
         # Log to LLM log
         llm_log.info(f"{self.agent_name} | {prompt_type} | {response[:100]}...")
@@ -499,23 +626,28 @@ class IntegratedAgent:
         
         return thought
     
-    def update_emotional_state(self, event: str, tick: int):
-        """Update emotional state based on event."""
-        # Simplified emotional model
-        if event == "persuaded":
-            self.emotional_state["valence"] += 0.1
-            self.emotional_state["arousal"] += 0.05
-        elif event == "contradicted":
-            self.emotional_state["valence"] -= 0.1
-            self.emotional_state["arousal"] += 0.15
-        elif event == "agreed_with":
-            self.emotional_state["valence"] += 0.15
-            self.emotional_state["arousal"] -= 0.05
+    def update_emotional_state(self, event: str, tick: int, intensity: float = 0.3):
+        """Update emotional state based on event using V3 PAD model."""
+        # V3 emotional state update
+        self.v3_emotional_state.update(
+            event_type=event,
+            intensity=intensity,
+            tick=tick
+        )
         
-        # Clamp values
-        self.emotional_state["valence"] = max(-1, min(1, self.emotional_state["valence"]))
-        self.emotional_state["arousal"] = max(0, min(1, self.emotional_state["arousal"]))
-        self.emotional_state["dominance"] = max(0, min(1, self.emotional_state["dominance"]))
+        # Record emotional event for analysis
+        self.v3_emotional_events.append({
+            "tick": tick,
+            "event": event,
+            "new_tone": self.v3_emotional_state.tone.value,
+            "pleasure": self.v3_emotional_state.pleasure,
+            "arousal": self.v3_emotional_state.arousal,
+            "dominance": self.v3_emotional_state.dominance
+        })
+        
+        # Log significant emotional changes
+        if intensity > 0.2:
+            main_log.debug(f"{self.agent_name} emotional: {event} -> {self.v3_emotional_state.tone.value}")
     
     def record_thought(
         self,
@@ -552,7 +684,7 @@ class IntegratedAgent:
             "agent_name": self.agent_name,
             "current_vote": self.current_vote,
             "core_confidence": core_belief.confidence if core_belief else 0.5,
-            "emotional_state": self.emotional_state.copy(),
+            "emotional_state": {"pleasure": self.v3_emotional_state.pleasure, "arousal": self.v3_emotional_state.arousal, "dominance": self.v3_emotional_state.dominance},
             "total_beliefs": len(self.beliefs.beliefs),
             "utterance_count": len(self.utterances),
             "thought_count": len(self.thoughts)
@@ -572,7 +704,7 @@ class IntegratedAgent:
             "thoughts": [asdict(t) for t in self.thoughts],
             "utterances": [asdict(u) for u in self.utterances],
             "belief_snapshots": self.belief_snapshots,
-            "final_emotional_state": self.emotional_state
+            "final_emotional_state": {"pleasure": self.v3_emotional_state.pleasure, "arousal": self.v3_emotional_state.arousal, "dominance": self.v3_emotional_state.dominance, "tone": self.v3_emotional_state.tone.value}
         }
 
 
@@ -751,11 +883,59 @@ async def run_full_integration(
         stats.total_ticks = tick
         
         # ========================================
+        # PHASE 0: V3 ARCHITECTURE UPDATES
+        # ========================================
+        
+        # Apply V3 belief plasticity every 100 ticks
+        if tick > 0 and tick % 100 == 0:
+            for agent in agents:
+                # Apply exponential decay
+                decay_changes = agent.beliefs.decay_beliefs(tick)
+                if decay_changes:
+                    agent.v3_decay_count += len(decay_changes)
+                
+                # Apply perturbation to saturated beliefs
+                perturb_changes = agent.beliefs.perturb_saturated_beliefs(tick)
+                if perturb_changes:
+                    agent.v3_perturbation_count += len(perturb_changes)
+                    main_log.debug(f"{agent.agent_name} belief perturbed: {len(perturb_changes)} beliefs")
+        
+        # Apply V3 emotional decay every 50 ticks
+        if tick > 0 and tick % 50 == 0:
+            for agent in agents:
+                agent.v3_emotional_state.decay(tick)
+        
+        # Apply V3 emotional contagion every 200 ticks
+        if tick > 0 and tick % 200 == 0 and len(agents) > 1:
+            # Build proximity matrix (all agents in same room)
+            proximity = {}
+            for a1 in agents:
+                proximity[a1.agent_id] = {}
+                for a2 in agents:
+                    if a1.agent_id != a2.agent_id:
+                        proximity[a1.agent_id][a2.agent_id] = 1.0  # Same room
+            
+            # Apply contagion
+            agent_list = [
+                {"id": a.agent_id, "emotional_state": a.v3_emotional_state}
+                for a in agents
+            ]
+            from tsukuyomi.agent.emotional_state import apply_group_contagion
+            affected = apply_group_contagion(agent_list, proximity, tick)
+            if affected:
+                main_log.debug(f"Emotional contagion affected {len(affected)} agents")
+        
+        # ========================================
         # PHASE 1: DRAMA DIRECTOR UPDATE
         # ========================================
         
-        agent_emotions = {a.agent_id: a.emotional_state for a in agents}
-        tension = drama.update_tension(agent_emotions, vote_state)
+        agent_emotions = {a.agent_id: {"valence": a.v3_emotional_state.pleasure, "arousal": a.v3_emotional_state.arousal} for a in agents}
+        tension = drama.update_tension(
+            agent_emotions, 
+            vote_state, 
+            tick=tick, 
+            total_ticks=total_ticks
+        )
         
         # Check act transitions
         act_transition = drama.get_act_transition(tick, total_ticks)
@@ -856,8 +1036,8 @@ async def run_full_integration(
                             f"Only {minutes_left} minutes left to decide!",
                             "Deadline approaching"
                         )
-                        # Slightly increase arousal
-                        agent.emotional_state["arousal"] = min(1.0, agent.emotional_state.get("arousal", 0.5) + 0.05)
+                        # V3: Update emotional state for time pressure
+                        agent.update_emotional_state("threatened", tick, intensity=0.2)
             
             # Final warning
             if remaining == 600:  # 1 minute left
@@ -888,7 +1068,9 @@ async def run_full_integration(
                         context = {}
                         if conversation_history:
                             last_entry = conversation_history[-1]
-                            context["argument"] = last_entry["response"]
+                            # Include WHO said it so agents can reference them by name
+                            speaker_name = last_entry.get("agent_name", "Another juror")
+                            context["argument"] = f"{speaker_name} said: \"{last_entry['response']}\""
                         
                         utterance = await agent.generate_utterance(tick, prompt_type, context)
                         stats.total_llm_calls += 1
@@ -1179,7 +1361,21 @@ async def run_full_integration(
             "vote_history": a.vote_history,
             "thought_count": len(a.thoughts),
             "utterance_count": len(a.utterances),
-            "final_confidence": a.beliefs.get_belief(a.core_belief_id).confidence if a.beliefs.get_belief(a.core_belief_id) else 0.5
+            "final_confidence": a.beliefs.get_belief(a.core_belief_id).confidence if a.beliefs.get_belief(a.core_belief_id) else 0.5,
+            "v3_metrics": {
+                "perturbation_count": a.v3_perturbation_count,
+                "decay_count": a.v3_decay_count,
+                "emotional_events": len(a.v3_emotional_events),
+                "final_emotional_tone": a.v3_emotional_state.tone.value,
+                "final_pad": {
+                    "pleasure": a.v3_emotional_state.pleasure,
+                    "arousal": a.v3_emotional_state.arousal,
+                    "dominance": a.v3_emotional_state.dominance
+                },
+                "response_history_size": len(a.v3_response_history.responses),
+                "conversation_memory_size": len(a.v3_conversation_memory.utterances),
+                "repetitive_phrases_count": len(a.v3_response_history.get_repetitive_phrases())
+            }
         } for a in agents},
         "gap_summary": {
             "total": len(gaps),
@@ -1211,6 +1407,29 @@ async def run_full_integration(
     main_log.info(f"Gaps found: {stats.gaps_found}")
     main_log.info("")
     main_log.info(f"Final votes: G={vote_state['guilty']}/N={vote_state['not_guilty']}")
+    main_log.info("")
+    
+    # V3 Architecture Summary
+    main_log.info("=" * 70)
+    main_log.info("🆕 V3 ARCHITECTURE METRICS")
+    main_log.info("=" * 70)
+    total_perturbations = sum(a.v3_perturbation_count for a in agents)
+    total_decays = sum(a.v3_decay_count for a in agents)
+    total_emotional_events = sum(len(a.v3_emotional_events) for a in agents)
+    avg_repetitive = sum(len(a.v3_response_history.get_repetitive_phrases()) for a in agents) / max(len(agents), 1)
+    
+    main_log.info(f"Belief perturbations: {total_perturbations}")
+    main_log.info(f"Belief decays: {total_decays}")
+    main_log.info(f"Emotional events: {total_emotional_events}")
+    main_log.info(f"Avg repetitive phrases: {avg_repetitive:.1f}")
+    main_log.info("")
+    
+    # Final emotional states
+    main_log.info("Final emotional states:")
+    for agent in agents:
+        tone = agent.v3_emotional_state.tone.value
+        pad = f"P={agent.v3_emotional_state.pleasure:.2f} A={agent.v3_emotional_state.arousal:.2f} D={agent.v3_emotional_state.dominance:.2f}"
+        main_log.info(f"  {agent.agent_name}: {tone.upper()} ({pad})")
     main_log.info("")
     
     # Cleanup

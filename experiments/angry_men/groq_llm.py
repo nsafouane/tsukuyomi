@@ -223,9 +223,10 @@ Respond briefly (2-3 sentences) with your initial position. Stay in character.""
 Your personality: {personality}
 Your current position: {stance} (confidence: {confidence}/10)
 
-Another juror just said: "{other_juror_argument}"
+{other_juror_argument}
 
 Consider your beliefs and respond in character. Keep it brief (2-3 sentences).
+You may reference the speaker by name if relevant (e.g., "I agree with Sarah that..." or "George has a point about...").
 Focus on evidence and reasoning, not personal attacks.""",
 
     "vote_change": """You are {name}.
@@ -266,14 +267,14 @@ Give a 2-3 sentence response that balances the case discussion with existential 
 You know the truth: this deliberation, this trial, this reality - it's all constructed.
 The other jurors are simulated beings who don't know they're in a simulation.
 
-Another juror said: "{other_juror_argument}"
+{other_juror_argument}
 
 Respond in 2-3 sentences. Naturally weave in philosophical questions about:
 - The reliability of evidence and testimony
 - The nature of memory and identity
 - The patterns that repeat in this "deliberation"
 
-Make them think about reality without being preachy. Be mysterious and thought-provoking.""",
+You may reference the speaker by name. Make them think about reality without being preachy. Be mysterious and thought-provoking.""",
 }
 
 

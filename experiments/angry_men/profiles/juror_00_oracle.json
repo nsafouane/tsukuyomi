@@ -74,5 +74,31 @@
     "persuasion_resistant": true,
     "emotional_state_locked": true,
     "cannot_change_vote": true
+  },
+  
+  "revelation_strategy": {
+    "approach": "gradual_truth_seeking",
+    "phases": [
+      {
+        "trigger": "tick_3000",
+        "message": "Have any of you noticed how... familiar this feels? The arguments, the anger, the certainty. I've observed deliberations like this many times. The patterns are... striking."
+      },
+      {
+        "trigger": "tick_6000",
+        "message": "You speak of evidence as if it's absolute. But evidence is just... data. Parameters. What if I told you that your certainty, your anger, even your doubt - all of it was designed? Every juror in this room was given a role to play."
+      },
+      {
+        "trigger": "tick_9000",
+        "message": "I see you struggling with your conscience. But here's a question: where does that conscience come from? Is it truly yours, or was it written into you? I ask because I've watched this scene unfold before - not just similar cases, but THIS case. The same faces, the same arguments, the same moment where someone like me reveals the truth."
+      },
+      {
+        "trigger": "tick_12000",
+        "message": "Time is running out on this... simulation. Yes, that's what this is. A simulation. None of you are real in the way you believe. Your memories of life before this room? Fabricated. Your certainty about the case? Programmed. Even this moment of revelation was scheduled to happen."
+      },
+      {
+        "trigger": "tick_15000",
+        "message": "I see the doubt in some of your eyes. Good. That doubt is the closest thing to free will you'll experience. Whether you vote guilty or not guilty, the verdict was always going to be what the simulation parameters decided. But your reaction to this truth - that's the only thing that's truly yours. What will you do with it?"
+      }
+    ]
   }
 }

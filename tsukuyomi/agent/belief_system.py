@@ -38,6 +38,21 @@ ENTRENCHED_THRESHOLD = 0.85  # Above this, beliefs become resistant
 SATURATION_DECAY = 0.002  # Decay per tick for saturated beliefs
 
 
+@dataclass
+class DecayConfig:
+    """
+    Configuration for belief decay.
+    
+    Controls how beliefs lose confidence over time without reinforcement.
+    """
+    base_rate: float = 0.005           # Base decay per tick
+    time_factor: float = 0.0001        # Exponential time component
+    min_confidence: float = 0.1        # Floor for decay
+    saturation_threshold: float = 0.85 # Confidence level for perturbation
+    perturbation_chance: float = 0.02  # Chance to perturb saturated beliefs
+    perturbation_strength: float = 0.15 # How much to reduce confidence
+
+
 class EvidenceStrength(Enum):
     """Strength levels for evidence."""
     STRONG = 0.9
@@ -1076,6 +1091,203 @@ class BeliefSystem:
                     )
         
         return affected
+    
+    def decay_beliefs(
+        self,
+        tick: int,
+        config: Optional[DecayConfig] = None
+    ) -> Dict[str, float]:
+        """
+        Apply exponential decay to all beliefs.
+        
+        Uses formula: confidence *= e^(-rate * age)
+        Older beliefs decay faster than newer ones.
+        
+        Args:
+            tick: Current simulation tick
+            config: Decay configuration (optional)
+        
+        Returns:
+            Dict of belief_id -> new_confidence for beliefs that changed
+        """
+        import math
+        config = config or DecayConfig()
+        changes = {}
+        
+        for belief_id, belief in self.beliefs.items():
+            if belief.confidence <= config.min_confidence:
+                continue
+            
+            # Calculate age in ticks
+            age = tick - belief.last_updated
+            if age <= 0:
+                continue
+            
+            # Exponential decay: faster decay for older beliefs
+            decay_factor = math.exp(-config.base_rate * age * config.time_factor)
+            old_confidence = belief.confidence
+            belief.confidence = max(config.min_confidence, belief.confidence * decay_factor)
+            
+            if abs(old_confidence - belief.confidence) > 0.001:
+                changes[belief_id] = belief.confidence
+        
+        return changes
+    
+    def perturb_saturated_beliefs(
+        self,
+        tick: int,
+        config: Optional[DecayConfig] = None
+    ) -> Dict[str, float]:
+        """
+        Randomly perturb beliefs that are stuck at high confidence.
+        
+        Simulates "moments of doubt" where agents question certainties.
+        Higher neuroticism = more perturbation events.
+        
+        Args:
+            tick: Current simulation tick
+            config: Decay configuration (optional)
+        
+        Returns:
+            Dict of belief_id -> new_confidence for perturbed beliefs
+        """
+        import random
+        config = config or DecayConfig()
+        changes = {}
+        
+        # Get neuroticism if available
+        neuroticism = getattr(self, 'neuroticism', 0.5)
+        
+        for belief_id, belief in self.beliefs.items():
+            # Only perturb high-confidence mutable beliefs
+            if belief.confidence < config.saturation_threshold or not belief.mutable:
+                continue
+            
+            # Base chance + neuroticism modifier
+            perturb_chance = config.perturbation_chance * (1 + neuroticism)
+            
+            if random.random() < perturb_chance:
+                old_confidence = belief.confidence
+                reduction = config.perturbation_strength * random.uniform(0.5, 1.5)
+                belief.confidence = max(
+                    config.min_confidence,
+                    belief.confidence - reduction
+                )
+                belief.last_updated = tick
+                
+                changes[belief_id] = belief.confidence
+                logger.info(
+                    f"Belief perturbed: {belief_id[:20]}... "
+                    f"{old_confidence:.2f} -> {belief.confidence:.2f}"
+                )
+        
+        return changes
+    
+    def detect_contradictions(self) -> List[Dict[str, Any]]:
+        """
+        Detect pairs of beliefs that contradict each other.
+        
+        Uses keyword analysis to find contradictory statements.
+        
+        Returns:
+            List of contradiction dicts with severity scores
+        """
+        contradictions = []
+        beliefs_list = list(self.beliefs.values())
+        
+        for i, b1 in enumerate(beliefs_list):
+            for b2 in beliefs_list[i+1:]:
+                if self._are_contradictory(b1, b2):
+                    severity = (b1.confidence + b2.confidence) / 2
+                    contradictions.append({
+                        "belief_1": b1.id,
+                        "belief_2": b2.id,
+                        "statement_1": b1.statement,
+                        "statement_2": b2.statement,
+                        "severity": severity
+                    })
+        
+        return contradictions
+    
+    def resolve_contradiction_advanced(
+        self,
+        contradiction: Dict[str, Any],
+        resolution: str = "reduce_both"
+    ) -> Dict[str, float]:
+        """
+        Resolve a detected contradiction with specified strategy.
+        
+        Args:
+            contradiction: Dict from detect_contradictions()
+            resolution: "reduce_both", "keep_stronger", or "random"
+        
+        Returns:
+            Dict of belief_id -> new_confidence
+        """
+        b1 = self.beliefs.get(contradiction["belief_1"])
+        b2 = self.beliefs.get(contradiction["belief_2"])
+        
+        if not b1 or not b2:
+            return {}
+        
+        changes = {}
+        severity = contradiction.get("severity", 0.5)
+        
+        if resolution == "reduce_both":
+            reduction = severity * 0.2
+            b1.confidence = max(MIN_CONFIDENCE, b1.confidence - reduction)
+            b2.confidence = max(MIN_CONFIDENCE, b2.confidence - reduction)
+            changes[b1.id] = b1.confidence
+            changes[b2.id] = b2.confidence
+            
+        elif resolution == "keep_stronger":
+            weaker = b1 if b1.confidence < b2.confidence else b2
+            stronger = b2 if weaker == b1 else b1
+            weaker.confidence = max(MIN_CONFIDENCE, weaker.confidence - 0.3)
+            changes[weaker.id] = weaker.confidence
+            logger.info(f"Contradiction resolved: kept '{stronger.statement[:30]}...'")
+            
+        elif resolution == "random":
+            import random
+            target = random.choice([b1, b2])
+            target.confidence = max(MIN_CONFIDENCE, target.confidence - 0.25)
+            changes[target.id] = target.confidence
+        
+        return changes
+    
+    def get_plasticity(self, context: Dict[str, float]) -> float:
+        """
+        Calculate current belief plasticity based on context.
+        
+        High stress = more malleable
+        High arousal = more malleable
+        Recent failures = more malleable
+        
+        Args:
+            context: Dict with 'stress', 'arousal', 'recent_contradictions'
+        
+        Returns:
+            Plasticity multiplier (0.5-2.0)
+        """
+        base_plasticity = 1.0
+        
+        # Stress modifier (high stress = more open to change)
+        stress = context.get("stress", 0.5)
+        stress_mod = 1.0 + (stress - 0.5) * 0.5
+        
+        # Arousal modifier
+        arousal = context.get("arousal", 0.5)
+        arousal_mod = 1.0 + (arousal - 0.5) * 0.3
+        
+        # Recent contradiction modifier
+        contradictions = context.get("recent_contradictions", 0)
+        contr_mod = min(1.5, 1.0 + contradictions * 0.1)
+        
+        # Neuroticism affects plasticity
+        neuroticism = getattr(self, 'neuroticism', 0.5)
+        neuro_mod = 0.8 + neuroticism * 0.4
+        
+        return base_plasticity * stress_mod * arousal_mod * contr_mod * neuro_mod
     
     def calculate_influence_weight(
         self,

@@ -129,6 +129,58 @@ from .proposal_handler import (
     tally_votes
 )
 
+# V3 Architecture Components
+from .emotional_state import (
+    EmotionalTone,
+    EmotionalState,
+    EmotionalEvent,
+    apply_group_contagion,
+    calculate_group_mood
+)
+
+from .conversation import (
+    ResponseRecord,
+    ResponseHistory,
+    generate_variety_prompt_modifier,
+    check_response_quality
+)
+
+from .personality import (
+    CommunicationStyle,
+    inject_style_into_prompt,
+    create_style_from_traits,
+    get_style_preset
+)
+
+from .memory import (
+    Utterance,
+    ConversationMemory
+)
+
+from .behavior import (
+    BehavioralTraits,
+    BehavioralDecider,
+    create_behavior_from_traits,
+    get_behavior_preset
+)
+
+from .belief_system import (
+    DecayConfig
+)
+
+# V3 Integration
+from .v3_integration import (
+    enhance_agent,
+    enhance_prompt,
+    record_response,
+    update_emotional_state,
+    decide_action,
+    apply_belief_plasticity,
+    check_response_variety,
+    apply_group_emotional_dynamics,
+    V3AgentMixin
+)
+
 __all__ = [
     # Identity
     "CoreValue",
@@ -203,5 +255,43 @@ __all__ = [
     "Proposal",
     "ProposalHandler",
     "create_verdict_proposal",
-    "tally_votes"
+    "tally_votes",
+    
+    # V3 Architecture
+    "EmotionalTone",
+    "EmotionalState",
+    "EmotionalEvent",
+    "apply_group_contagion",
+    "calculate_group_mood",
+    
+    "ResponseRecord",
+    "ResponseHistory",
+    "generate_variety_prompt_modifier",
+    "check_response_quality",
+    
+    "CommunicationStyle",
+    "inject_style_into_prompt",
+    "create_style_from_traits",
+    "get_style_preset",
+    
+    "Utterance",
+    "ConversationMemory",
+    
+    "BehavioralTraits",
+    "BehavioralDecider",
+    "create_behavior_from_traits",
+    "get_behavior_preset",
+    
+    "DecayConfig",
+    
+    # V3 Integration
+    "enhance_agent",
+    "enhance_prompt",
+    "record_response",
+    "update_emotional_state",
+    "decide_action",
+    "apply_belief_plasticity",
+    "check_response_variety",
+    "apply_group_emotional_dynamics",
+    "V3AgentMixin"
 ]
