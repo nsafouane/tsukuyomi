@@ -1,54 +1,18 @@
 """
-BeliefManager — Evidence-based belief tracking and stance dynamics.
-Phase 2 Module 7
+BeliefManager - Evidence-based belief stance calculation.
 
-Implements:
-- Evidence ledger per topic (pro/against)
-- Stance calculation from weighted evidence
-- Personality bias modulation
-- REFLECT action integration
+This module provides the BeliefManager class for managing evidence-based
+beliefs and calculating stances on topics.
+
+Extracted from logic.py for ARCHITECTURE_SPEC 3.1 compliance.
 """
 
 import logging
-from typing import Dict, List, Optional, Any
-from dataclasses import dataclass, field
+from typing import List, Dict, Optional
+
+from .structures import EvidenceItem, StanceResult, PersonalityBias
 
 logger = logging.getLogger("BeliefManager")
-
-
-@dataclass
-class EvidenceItem:
-    """A single piece of evidence about a topic."""
-
-    evidence_id: str
-    topic: str
-    position: str
-    weight: float
-    source_type: str
-    description: str
-    tick_added: int
-    confidence: float = 1.0
-
-
-@dataclass
-class PersonalityBias:
-    """Personality traits that modulate evidence weighting."""
-
-    confirmation_bias: float = 1.0
-    disconfirmation_resistance: float = 1.0
-    social_pressure_immunity: float = 1.0
-
-
-@dataclass
-class StanceResult:
-    """Calculated stance for a topic."""
-
-    topic: str
-    position: str
-    confidence: float
-    for_score: float
-    against_score: float
-    total_evidence_count: int
 
 
 class BeliefManager:
@@ -140,7 +104,7 @@ class BeliefManager:
         for_score = 0.0
         against_score = 0.0
 
-        # FIX: Calculate current stance first to avoid infinite recursion
+        # Calculate current stance first to avoid infinite recursion
         # We use a simple initial pass without bias to get a baseline stance
         baseline_for_score = sum(ev.weight * ev.confidence for ev in evidence_list if ev.position == "for")
         baseline_against_score = sum(ev.weight * ev.confidence for ev in evidence_list if ev.position == "against")
@@ -292,7 +256,7 @@ class BeliefManager:
             position: Evidence position ("for" or "against")
             current_stance: Optional pre-computed stance (to avoid infinite recursion)
         """
-        # FIX: Accept current_stance as parameter to avoid infinite recursion
+        # Accept current_stance as parameter to avoid infinite recursion
         # If not provided, fall back to "neutral" (no bias)
         if current_stance is None:
             return max(0.01, min(1.0, weight))
@@ -304,3 +268,6 @@ class BeliefManager:
                 weight /= self.bias.disconfirmation_resistance
 
         return max(0.01, min(1.0, weight))
+
+
+__all__ = ["BeliefManager"]

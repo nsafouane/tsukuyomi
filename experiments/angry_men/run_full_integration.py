@@ -38,14 +38,35 @@ project_root = current_dir.parent.parent
 sys.path.insert(0, str(project_root))
 
 # V2 imports
+from tsukuyomi.core.belief.unified import (
+    BeliefSystem,
+    Belief,
+    BeliefType,
+    EvidenceStrength
+)
+from tsukuyomi.agent.persuasion import (
+    PersuasionEngine,
+    PersuasionStrategy,
+    PersuasionAttempt,
+    Argument
+)
+from tsukuyomi.agent.context_manager import (
+    ContextManager
+)
+from tsukuyomi.agent.proposal_handler import (
+    ProposalHandler,
+    Proposal,
+    ProposalStatus,
+    ProposalType
+)
+from tsukuyomi.agent.identity import (
+    AgentIdentity,
+    PersonalityTraits
+)
 from tsukuyomi.agent import (
-    BeliefSystem, Belief, BeliefType, EvidenceStrength,
-    PersuasionEngine, PersuasionStrategy, PersuasionAttempt, Argument,
-    ContextManager,
-    ProposalHandler, Proposal, ProposalStatus, ProposalType,
-    AgentIdentity, PersonalityTraits,
     apply_personality_to_persuasion_engine
 )
+
 
 from tsukuyomi.brain.deliberation import DeliberationEngine
 from tsukuyomi.proto.emotional_expression import EmotionalExpression

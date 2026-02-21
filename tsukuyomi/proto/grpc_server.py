@@ -34,7 +34,7 @@ from tsukuyomi.proto import guest_api_pb2_grpc
 
 # Import the Fate Engine
 from tsukuyomi.proto.fate_engine import FateEngine, _to_pb_timestamp
-from tsukuyomi.brain.DramaDirector import DramaDirector
+from tsukuyomi.brain.drama_director import DramaDirector
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"

@@ -15,7 +15,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
 
 
-from tsukuyomi.agent.belief_system import (
+from tsukuyomi.core.belief.unified import (
     BeliefSystem, Belief, BeliefType, DecayConfig
 )
 

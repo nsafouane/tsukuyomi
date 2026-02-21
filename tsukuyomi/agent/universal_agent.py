@@ -65,7 +65,9 @@ class AgentConfig:
     scenario_context: str = ""
 
 
-class UniversalAgent:
+from tsukuyomi.core.agent_base import BaseAgent
+
+class UniversalAgent(BaseAgent):
     """
     A complete, runnable agent for any scenario.
     
@@ -78,6 +80,7 @@ class UniversalAgent:
     """
     
     def __init__(self, config: AgentConfig = None):
+        super().__init__(agent_id="unknown_temp_id")
         self.config = config or AgentConfig()
         
         # Core components
@@ -91,6 +94,8 @@ class UniversalAgent:
         self.state = AgentState.IDLE
         self.current_tick = 0
         self.conversation_history: List[Dict[str, Any]] = []
+        self._running = True
+        self._paused = False
         
         # LLM function (injected)
         self._llm_call: Optional[Callable] = None
@@ -436,6 +441,40 @@ Speak as yourself, in first person."""
             json.dump(state, f, indent=2)
         
         logger.info(f"Agent state saved to {filepath}")
+
+    # BaseAgent Abstract Methods
+    async def perceive(self, *args, **kwargs):
+        pass
+
+    async def deliberate(self, *args, **kwargs):
+        pass
+
+    async def act(self, *args, **kwargs):
+        """Perform an action."""
+        if self._paused:
+            return
+        pass
+
+    def start(self):
+        """Start agent lifecycle."""
+        self._running = True
+        self._paused = False
+        logger.info(f"UniversalAgent {self.agent_id} started.")
+
+    def pause(self):
+        """Pause agent processing."""
+        self._paused = True
+        logger.info(f"UniversalAgent {self.agent_id} paused.")
+
+    def resume(self):
+        """Resume agent processing."""
+        self._paused = False
+        logger.info(f"UniversalAgent {self.agent_id} resumed.")
+
+    def cleanup(self):
+        """Clean up agent resources."""
+        self._running = False
+        logger.info(f"UniversalAgent {self.agent_id} cleaned up.")
     
     @classmethod
     def load_state(cls, filepath: str) -> 'UniversalAgent':

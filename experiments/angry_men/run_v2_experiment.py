@@ -31,20 +31,47 @@ sys.path.insert(0, str(project_root))
 # Import new architecture
 from tsukuyomi.agent import (
     # Identity
-    AgentIdentity, CoreValue, DefiningMemory, PersonalityTraits, create_identity,
+    AgentIdentity,
     # Memory
-    LongTermMemory, MemoryType, MemoryImportance, store_event_memory,
+    LongTermMemory,
     # Beliefs
-    BeliefSystem, BeliefType,
+    BeliefSystem,
     # Persuasion
-    PersuasionEngine, PersuasionStrategy,
+    PersuasionEngine,
     # Decision
-    DecisionEngine, DecisionType, DecisionPriority,
+    DecisionEngine,
     # Context
     ContextManager,
     # Proposal
-    ProposalHandler, ProposalType
+    ProposalHandler
 )
+from tsukuyomi.agent.identity import (
+    CoreValue,
+    DefiningMemory,
+    PersonalityTraits,
+    create_identity
+)
+from tsukuyomi.core.memory.base import (
+    MemoryType
+)
+from tsukuyomi.agent.memory_system import (
+    MemoryImportance,
+    store_event_memory
+)
+from tsukuyomi.core.belief.unified import (
+    BeliefType
+)
+from tsukuyomi.agent.persuasion import (
+    PersuasionStrategy
+)
+from tsukuyomi.agent.decision_engine import (
+    DecisionType,
+    DecisionPriority
+)
+from tsukuyomi.agent.proposal_handler import (
+    ProposalType
+)
+
 
 # Configure logging
 LOG_DIR = current_dir / "logs_v2"

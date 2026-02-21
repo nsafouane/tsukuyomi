@@ -9,7 +9,7 @@ import asyncio
 import logging
 import random
 from typing import Dict
-from tsukuyomi.brain.AgentBrain import AgentBrain
+from tsukuyomi.brain.agent_brain import AgentBrain
 from tsukuyomi.proto.grpc_client import FateEngineClient
 from tsukuyomi.proto import common_pb2
 

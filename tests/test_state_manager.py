@@ -9,7 +9,7 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.brain.StateManager import (
+from tsukuyomi.core.emotion.unified import (
     StateManager, PersonalityBaseline, EmotionalState
 )
 

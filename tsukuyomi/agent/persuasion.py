@@ -1,3 +1,4 @@
+import uuid
 """
 Persuasion Dynamics Engine
 ==========================
@@ -50,7 +51,7 @@ class Argument:
     """
     A persuasive argument made by an agent.
     """
-    id: str = field(default_factory=lambda: f"arg_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"arg_{str(uuid.uuid4())}")
     claim: str = ""                          # What's being argued
     strategy: PersuasionStrategy = PersuasionStrategy.LOGIC
     evidence_ids: List[str] = field(default_factory=list)  # Linked evidence
@@ -100,7 +101,7 @@ class PersuasionAttempt:
     """
     Record of a persuasion attempt between agents.
     """
-    id: str = field(default_factory=lambda: f"pa_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"pa_{str(uuid.uuid4())}")
     arg_id: str = ""
     speaker_id: str = ""
     listener_id: str = ""

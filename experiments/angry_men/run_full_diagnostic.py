@@ -26,13 +26,31 @@ project_root = current_dir.parent.parent
 import sys
 sys.path.insert(0, str(project_root))
 
-from tsukuyomi.agent import (
-    BeliefSystem, Belief, BeliefType, EvidenceStrength,
-    PersuasionEngine, PersuasionStrategy, PersuasionAttempt, Argument,
-    ContextManager,
-    ProposalHandler, Proposal, ProposalStatus, ProposalType,
+from tsukuyomi.core.belief.unified import (
+    BeliefSystem,
+    Belief,
+    BeliefType,
+    EvidenceStrength
+)
+from tsukuyomi.agent.persuasion import (
+    PersuasionEngine,
+    PersuasionStrategy,
+    PersuasionAttempt,
+    Argument
+)
+from tsukuyomi.agent.context_manager import (
+    ContextManager
+)
+from tsukuyomi.agent.proposal_handler import (
+    ProposalHandler,
+    Proposal,
+    ProposalStatus,
+    ProposalType
+)
+from tsukuyomi.agent.identity import (
     AgentIdentity
 )
+
 
 # ============================================================================
 # LOGGING SETUP

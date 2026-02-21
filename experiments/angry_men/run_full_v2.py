@@ -18,12 +18,23 @@ project_root = current_dir.parent.parent
 import sys
 sys.path.insert(0, str(project_root))
 
-from tsukuyomi.agent import (
-    BeliefSystem, Belief, BeliefType,
-    PersuasionEngine, PersuasionStrategy, Argument,
-    ContextManager,
+from tsukuyomi.core.belief.unified import (
+    BeliefSystem,
+    Belief,
+    BeliefType
+)
+from tsukuyomi.agent.persuasion import (
+    PersuasionEngine,
+    PersuasionStrategy,
+    Argument
+)
+from tsukuyomi.agent.context_manager import (
+    ContextManager
+)
+from tsukuyomi.agent.identity import (
     AgentIdentity
 )
+
 
 # Logging
 LOG_DIR = current_dir / "logs_v2"

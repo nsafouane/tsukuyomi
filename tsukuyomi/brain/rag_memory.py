@@ -15,26 +15,15 @@ import uuid
 
 from .vector_store import VectorStore, VectorConfig, MemoryPoint, DistanceMetric
 from .embedding_service import EmbeddingService, EmbeddingProvider
+from tsukuyomi.core.memory.base import MemoryType, ImportanceLevel
+
 
 
 logger = logging.getLogger(__name__)
 
 
-class MemoryType(Enum):
-    """Types of memories stored in the system."""
-    EPISODIC = "episodic"  # Specific events and experiences
-    SEMANTIC = "semantic"  # General knowledge and facts
-    PROCEDURAL = "procedural"  # Skills and how-to knowledge
-    WORKING = "working"  # Short-term working memory
 
 
-class ImportanceLevel(Enum):
-    """Importance levels for memory consolidation."""
-    CRITICAL = 5
-    HIGH = 4
-    MEDIUM = 3
-    LOW = 2
-    TRIVIAL = 1
 
 
 @dataclass

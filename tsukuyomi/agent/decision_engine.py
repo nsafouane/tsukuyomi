@@ -1,3 +1,4 @@
+import uuid
 """
 Decision Engine
 ===============
@@ -50,7 +51,7 @@ class DecisionFactor:
     """
     A factor influencing a decision.
     """
-    id: str = field(default_factory=lambda: f"df_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"df_{str(uuid.uuid4())}")
     description: str = ""
     weight: float = 0.5              # How much this factors in (0-1)
     belief_id: Optional[str] = None   # Related belief
@@ -75,7 +76,7 @@ class ReasoningStep:
     """
     A step in the reasoning chain.
     """
-    id: str = field(default_factory=lambda: f"rs_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"rs_{str(uuid.uuid4())}")
     step_number: int = 0
     premise: str = ""                # What we know/assume
     inference: str = ""              # What we infer from premise
@@ -102,7 +103,7 @@ class Decision:
     """
     A decision made by an agent.
     """
-    id: str = field(default_factory=lambda: f"dec_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"dec_{str(uuid.uuid4())}")
     decision_type: DecisionType = DecisionType.ACTION
     question: str = ""               # What we're deciding
     choice: str = ""                  # The chosen option

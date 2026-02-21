@@ -13,7 +13,7 @@ import unittest
 from datetime import datetime
 import sys
 
-from tsukuyomi.brain.PerceptionPipeline import PerceptionPipeline, SensoryProfile, AgentInternalState
+from tsukuyomi.brain.perception_pipeline import PerceptionPipeline, SensoryProfile, AgentInternalState
 from tsukuyomi.proto import core_pb2, perception_pb2, common_pb2
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')

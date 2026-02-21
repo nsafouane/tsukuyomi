@@ -1,3 +1,4 @@
+import uuid
 """
 Context Manager
 ==============
@@ -38,7 +39,7 @@ class Utterance:
     """
     A single utterance in the conversation.
     """
-    id: str = field(default_factory=lambda: f"utt_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"utt_{str(uuid.uuid4())}")
     speaker_id: str = ""
     content: str = ""
     context_type: ContextType = ContextType.STATEMENT
@@ -93,7 +94,7 @@ class KeyPoint:
     """
     A key point extracted from conversation.
     """
-    id: str = field(default_factory=lambda: f"kp_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"kp_{str(uuid.uuid4())}")
     content: str = ""
     speakers: List[str] = field(default_factory=list)  # Who mentioned this
     utterance_ids: List[str] = field(default_factory=list)

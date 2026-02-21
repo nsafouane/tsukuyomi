@@ -18,14 +18,14 @@ import os
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tsukuyomi.brain.PerceptionPipeline import (
+from tsukuyomi.brain.perception_pipeline import (
     PerceptionPipeline,
     SensoryProfile,
     AgentInternalState,
     Raycaster,
     Wall,
 )
-from tsukuyomi.brain.AgentBrain import AgentBrain
+from tsukuyomi.brain.agent_brain import AgentBrain
 from tsukuyomi.core.spatial_index import SpatialIndex
 from tsukuyomi.proto import core_pb2, perception_pb2, common_pb2
 

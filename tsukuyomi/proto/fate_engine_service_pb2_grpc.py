@@ -6,7 +6,7 @@ import warnings
 from . import core_pb2 as core__pb2
 from . import fate_engine_service_pb2 as fate__engine__service__pb2
 
-GRPC_GENERATED_VERSION = '1.76.0'
+GRPC_GENERATED_VERSION = '1.78.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 

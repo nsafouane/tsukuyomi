@@ -9,7 +9,7 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.brain.BeliefManager import BeliefManager, PersonalityBias
+from tsukuyomi.core.belief import BeliefManager, PersonalityBias
 
 
 class TestPersonalityBias:

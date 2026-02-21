@@ -20,25 +20,10 @@ from enum import Enum
 from typing import List, Optional, Dict, Any
 import uuid
 import time
+from tsukuyomi.core.memory.base import MemoryType, ImportanceLevel
 
 
-class MemoryType(Enum):
-    """
-    Classification of memory types for the Deep Memory Architecture.
-    
-    Each type serves a different cognitive purpose:
-    - EPISODIC: "Marcus sold me a rotten apple at the market"
-    - SEMANTIC: "Apples are a type of fruit that grows on trees"
-    - EMOTIONAL: "I feel angry when I think about Marcus"
-    - SOCIAL: "Marcus is known to be dishonest in trade"
-    - PROCEDURAL: "To bargain effectively, start with a low offer"
-    """
-    
-    EPISODIC = "episodic"      # Specific events with temporal context
-    SEMANTIC = "semantic"      # General facts and world knowledge
-    EMOTIONAL = "emotional"    # Emotional imprints and associations
-    SOCIAL = "social"          # Knowledge about people and relationships
-    PROCEDURAL = "procedural"  # Skills, habits, and how-to knowledge
+
 
 
 class MemoryPriority(Enum):

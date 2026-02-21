@@ -24,7 +24,7 @@ from tsukuyomi.agent.influence import (
     demonstrate_asymmetry,
     get_influence_weight_for_belief_update
 )
-from tsukuyomi.agent.belief_system import BeliefSystem, BeliefType
+from tsukuyomi.core.belief.unified import BeliefSystem, BeliefType
 
 
 class TestInfluenceFactors:

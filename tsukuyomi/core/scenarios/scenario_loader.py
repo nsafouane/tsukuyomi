@@ -51,7 +51,7 @@ class ScenarioLoader:
     
     Usage:
         loader = ScenarioLoader()
-        scenario = loader.load("scenarios/jury_deliberation.yaml")
+        scenario = loader.load("experiments/scenarios/jury_deliberation.yaml")
         if scenario.is_valid():
             # Use scenario
     """

@@ -10,7 +10,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.agent.belief_system import (
+from tsukuyomi.core.belief import (
     BeliefSystem,
     Belief,
     BeliefType,
@@ -295,7 +295,7 @@ class TestExistentialResponse:
             # Check it's a metaphysical belief
             new_belief = belief_system.beliefs.get(update.belief_id)
             if new_belief:
-                from tsukuyomi.agent.belief_system import BeliefType
+                from tsukuyomi.core.belief import BeliefType
                 assert new_belief.belief_type == BeliefType.METAPHYSICAL
     
     def test_rejection_with_strong_identity(self, belief_system):

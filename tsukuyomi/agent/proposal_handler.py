@@ -1,3 +1,4 @@
+import uuid
 """
 Proposal Handler
 ================
@@ -42,7 +43,7 @@ class Proposal:
     """
     A formal proposal for group decision.
     """
-    id: str = field(default_factory=lambda: f"prop_{random.randint(100000, 999999)}")
+    id: str = field(default_factory=lambda: f"prop_{str(uuid.uuid4())}")
     proposal_type: ProposalType = ProposalType.VOTE
     
     # Content

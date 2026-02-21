@@ -7,32 +7,34 @@ import os
 from typing import Dict, Optional, List, Any, Tuple
 from tsukuyomi.proto.grpc_client import FateEngineClient
 from tsukuyomi.proto import core_pb2
-from tsukuyomi.brain.MemoryManager import MemoryManager
-from tsukuyomi.brain.LLMService import LLMService
+from tsukuyomi.brain.memory_manager import MemoryManager
+from tsukuyomi.brain.llm_service import LLMService
 from tsukuyomi.brain.needs_system import NeedsSystem, NeedType  # V2: Add needs import
 from tsukuyomi.brain.rag_memory import RAGMemorySystem, RAGConfig  # V3: Add RAG import
-from tsukuyomi.brain.PerceptionPipeline import (
+from tsukuyomi.brain.perception_pipeline import (
     PerceptionPipeline,
     SensoryProfile,
     AgentInternalState,
 )
-from tsukuyomi.brain.StateManager import (
+from tsukuyomi.core.emotion.unified import (
     StateManager,
     PersonalityBaseline,
     EmotionalState,
 )
-from tsukuyomi.brain.WorkingMemory import WorkingMemory
-from tsukuyomi.brain.BeliefManager import BeliefManager, PersonalityBias
-from tsukuyomi.brain.RelationshipManager import RelationshipManager
-from tsukuyomi.brain.DramaDirector import DramaDirector
-from tsukuyomi.brain.GossipProtocol import get_gossip_protocol  # Moved from late imports
+from tsukuyomi.brain.working_memory import WorkingMemory
+from tsukuyomi.core.belief.unified import BeliefManager, PersonalityBias
+from tsukuyomi.brain.relationship_manager import RelationshipManager
+from tsukuyomi.brain.drama_director import DramaDirector
+from tsukuyomi.brain.gossip_protocol import get_gossip_protocol  # Moved from late imports
 from tsukuyomi.brain.deliberation import DeliberationEngine
 from tsukuyomi.proto.emotional_expression import EmotionalExpression
 
 logger = logging.getLogger("AgentBrain")
 
 
-class AgentBrain:
+from tsukuyomi.core.agent_base import BaseAgent
+
+class AgentBrain(BaseAgent):
     """
     The Dual-Mode Cognitive Controller for Tsukuyomi Agents.
     """
@@ -45,10 +47,13 @@ class AgentBrain:
         fate_engine=None,
     ):
         self.actor_id = actor_id
+        super().__init__(agent_id=actor_id)
         self.profile = profile
         self.client = FateEngineClient(server_addr)
         self.memory = MemoryManager(actor_id)
         self.is_thinking = False
+        self._running = True
+        self._paused = False
         self._cancel_current_deliberation = False
         match = re.search(r"\d+", actor_id)
         self.tick_offset = int(match.group()) * 7 if match else 0
@@ -107,7 +112,7 @@ class AgentBrain:
         self.spatial_logic = None  # Will be set by external initialization
 
         # FIX: Get drama director instance for sentiment updates
-        from tsukuyomi.brain.DramaDirector import DramaDirector
+        from tsukuyomi.brain.drama_director import DramaDirector
 
         self.drama_director = None
 
@@ -631,6 +636,45 @@ class AgentBrain:
         
         modifiers = self.expression_layer.get_tone_modifiers()
         return modifiers.get_prompt_additions()
+
+    # BaseAgent Abstract Methods
+    async def deliberate(self, *args, **kwargs):
+        """Internal reasoning cycle."""
+        if self._paused:
+            return
+        # Existing deliberation logic is already integrated in run()
+        # For BaseAgent compliance, we can call a single step of the loop here if needed.
+        pass
+
+    async def act(self, *args, **kwargs):
+        """Produce an output or behavior."""
+        if self._paused:
+            return
+        pass
+
+    def start(self):
+        """Start the agent lifecycle."""
+        self._running = True
+        self._paused = False
+        logger.info(f"AgentBrain {self.actor_id} started.")
+
+    def pause(self):
+        """Pause agent processing."""
+        self._paused = True
+        logger.info(f"AgentBrain {self.actor_id} paused.")
+
+    def resume(self):
+        """Resume agent processing."""
+        self._paused = False
+        logger.info(f"AgentBrain {self.actor_id} resumed.")
+
+    def cleanup(self):
+        """Clean up resources before shutdown."""
+        self._running = False
+        if hasattr(self, 'memory') and self.memory:
+            # Assume memory manager might need cleanup in future
+            pass
+        logger.info(f"AgentBrain {self.actor_id} cleaned up.")
 
 
 if __name__ == "__main__":

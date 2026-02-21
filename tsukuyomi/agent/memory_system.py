@@ -13,15 +13,12 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Any, Set
 from enum import Enum
 from collections import defaultdict
+from tsukuyomi.core.memory.base import MemoryType, ImportanceLevel
+
 
 logger = logging.getLogger("MemorySystem")
 
 
-class MemoryType(Enum):
-    """Types of memories an agent can have."""
-    EPISODIC = "episodic"    # Specific events with context
-    SEMANTIC = "semantic"    # Facts and knowledge
-    EMOTIONAL = "emotional"  # Emotional associations
 
 
 class MemoryImportance(Enum):

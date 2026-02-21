@@ -36,24 +36,60 @@ project_root = current_dir.parent.parent
 sys.path.insert(0, str(project_root))
 
 # V2 imports
-from tsukuyomi.agent import (
-    BeliefSystem, Belief, BeliefType, EvidenceStrength,
-    PersuasionEngine, PersuasionStrategy, PersuasionAttempt, Argument,
-    ContextManager,
-    ProposalHandler, Proposal, ProposalStatus, ProposalType,
-    AgentIdentity, PersonalityTraits
+from tsukuyomi.core.belief.unified import (
+    BeliefSystem,
+    Belief,
+    BeliefType,
+    EvidenceStrength
+)
+from tsukuyomi.agent.persuasion import (
+    PersuasionEngine,
+    PersuasionStrategy,
+    PersuasionAttempt,
+    Argument
+)
+from tsukuyomi.agent.context_manager import (
+    ContextManager
+)
+from tsukuyomi.agent.proposal_handler import (
+    ProposalHandler,
+    Proposal,
+    ProposalStatus,
+    ProposalType
+)
+from tsukuyomi.agent.identity import (
+    AgentIdentity,
+    PersonalityTraits
 )
 
+
 # V3 Architecture imports
-from tsukuyomi.agent import (
-    EmotionalState, EmotionalTone,
-    ResponseHistory, ResponseRecord,
-    CommunicationStyle, inject_style_into_prompt,
-    ConversationMemory, Utterance as V3Utterance,
-    BehavioralTraits, BehavioralDecider,
-    DecayConfig,
-    enhance_prompt, apply_belief_plasticity
+from tsukuyomi.core.emotion.unified import (
+    EmotionalState,
+    EmotionalTone
 )
+from tsukuyomi.agent.conversation import (
+    ResponseHistory,
+    ResponseRecord
+)
+from tsukuyomi.agent.personality import (
+    CommunicationStyle
+)
+from tsukuyomi.agent import (
+    inject_style_into_prompt,
+    Utterance as V3Utterance
+)
+from tsukuyomi.agent.memory import (
+    ConversationMemory
+)
+from tsukuyomi.agent.behavior import (
+    BehavioralTraits,
+    BehavioralDecider
+)
+from tsukuyomi.core.belief.unified import (
+    DecayConfig
+)
+
 
 # V1 imports
 sys.path.insert(0, str(current_dir))
@@ -920,7 +956,7 @@ async def run_full_integration(
                 {"id": a.agent_id, "emotional_state": a.v3_emotional_state}
                 for a in agents
             ]
-            from tsukuyomi.agent.emotional_state import apply_group_contagion
+            from tsukuyomi.core.emotion.unified import apply_group_contagion
             affected = apply_group_contagion(agent_list, proximity, tick)
             if affected:
                 main_log.debug(f"Emotional contagion affected {len(affected)} agents")

@@ -1,3 +1,4 @@
+import uuid
 """
 Event Library - Context-matched event selection for narrative injection.
 
@@ -357,7 +358,7 @@ class EventLibrary:
         
         # Create and return Event
         return Event(
-            id=f"event_{random.randint(10000, 99999)}",
+            id=f"event_{str(uuid.uuid4())}",
             category=EventCategory(category),
             description=event_description,
             context_tags=self._extract_context_tags(context),
@@ -392,7 +393,7 @@ class EventLibrary:
         )
         
         return Event(
-            id=f"char_event_{random.randint(10000, 99999)}",
+            id=f"char_event_{str(uuid.uuid4())}",
             category=EventCategory.CHARACTER_SPECIFIC,
             description=event_description,
             target_agent=agent_id,

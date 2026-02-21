@@ -22,7 +22,7 @@ from dataclasses import dataclass, asdict
 
 # Import generated protobuf classes
 from tsukuyomi.proto import core_pb2
-from tsukuyomi.brain.CatalystSystem import CatalystSystem
+from tsukuyomi.brain.catalyst_system import CatalystSystem
 
 logger = logging.getLogger("DramaDirector")
 

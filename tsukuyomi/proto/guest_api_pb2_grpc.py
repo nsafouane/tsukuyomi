@@ -4,8 +4,8 @@
 import grpc
 import warnings
 
-from . import core_pb2 as core__pb2
-from . import guest_api_pb2 as guest__api__pb2
+from . from . import core_pb2 as core__pb2
+from . from . import guest_api_pb2 as guest__api__pb2
 
 GRPC_GENERATED_VERSION = "1.76.0"
 GRPC_VERSION = grpc.__version__

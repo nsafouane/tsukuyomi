@@ -14,7 +14,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
 
 
-from tsukuyomi.agent.emotional_state import (
+from tsukuyomi.core.emotion.unified import (
     EmotionalState, EmotionalTone, apply_group_contagion
 )
 

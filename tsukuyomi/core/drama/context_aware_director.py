@@ -20,7 +20,7 @@ from .branch_manager import BranchManager, ConditionEvaluator
 
 # Import base DramaDirector if available
 try:
-    from tsukuyomi.brain.DramaDirector import DramaDirector, TensionVector
+    from tsukuyomi.brain.drama_director import DramaDirector, TensionVector
 except ImportError:
     # Define placeholder for standalone testing
     @dataclass
@@ -314,7 +314,7 @@ class ContextAwareDramaDirector(DramaDirector):
             elif action.type == 'inject_thought' and action.thought:
                 # Create thought event
                 return Event(
-                    id=f"thought_{beat.id}_{random.randint(10000, 99999)}",
+                    id=f"thought_{beat.id}_{str(uuid.uuid4())}",
                     category=EventCategory.NARRATIVE,
                     description=action.thought,
                     target_agent=action.target,
@@ -323,7 +323,7 @@ class ContextAwareDramaDirector(DramaDirector):
                 )
         
         return Event(
-            id=f"beat_{beat.id}_{random.randint(10000, 99999)}",
+            id=f"beat_{beat.id}_{str(uuid.uuid4())}",
             category=EventCategory.NARRATIVE,
             description=description,
             context_tags=[beat.beat_type if hasattr(beat, 'beat_type') else beat.type.value if hasattr(beat.type, 'value') else str(beat.type)],

@@ -27,13 +27,13 @@ project_root = current_dir.parent.parent
 sys.path.insert(0, str(project_root))
 
 from tsukuyomi.proto.fate_engine import FateEngine
-from tsukuyomi.brain.AgentBrain import AgentBrain
+from tsukuyomi.brain.agent_brain import AgentBrain
 from tsukuyomi.proto.grpc_server import run_server
 from tsukuyomi.guest_sdk import GuestAgent
-from tsukuyomi.brain.MemoryManager import MemoryManager
-from tsukuyomi.brain.BeliefManager import BeliefManager, PersonalityBias
-from tsukuyomi.brain.StateManager import StateManager, PersonalityBaseline, EmotionalState
-from tsukuyomi.brain.RelationshipManager import RelationshipManager
+from tsukuyomi.brain.memory_manager import MemoryManager
+from tsukuyomi.core.belief.unified import BeliefManager, PersonalityBias
+from tsukuyomi.core.emotion.unified import StateManager, PersonalityBaseline, EmotionalState
+from tsukuyomi.brain.relationship_manager import RelationshipManager
 from tsukuyomi.brain.memory.memory_types import Memory, MemoryType
 
 # Import drama director and Groq LLM

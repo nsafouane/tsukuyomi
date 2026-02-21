@@ -10,7 +10,7 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tsukuyomi.brain.PerceptionPipeline import (
+from tsukuyomi.brain.perception_pipeline import (
     PerceptionPipeline,
     SensoryProfile,
     AgentInternalState,

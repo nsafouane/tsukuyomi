@@ -1,6 +1,6 @@
 # 🛣️ Tsukuyomi MVP v0.1 - Development Roadmap
 
-**Status:** Architecture Unification Phase -> MVP v0.1 (Complete AI Infrastructure)
+**Status:** MVP v0.1 Core Complete -> Phase 4 (State Persistence & Scale)
 
 ## 🎯 Final Objective
 Transform Tsukuyomi into a **complete AI infrastructure for games, storytelling, and agent simulations**. 
@@ -11,25 +11,25 @@ The final system will serve as a universal backend for any environment, capable 
 
 ---
 
-## 🏗️ Phase 1: Architecture Unification (Current Focus)
+## 🏗️ Phase 1: Architecture Unification (Complete)
 **Goal:** Consolidate fragmented "Simulation" and "Standalone" modes into a single, unified MVP v0.1 codebase.
 
 ### 1.1 The Purge & Foundation
-*   [ ] Delete all `v3_integration` wrappers, mixins, and duck-typing logic.
-*   [ ] Remove unused databases (`asyncpg`, `sqlalchemy`) from dependencies.
-*   [ ] Establish `core/agent_base.py` (`BaseAgent`) as the single abstraction.
-*   [ ] Define strict interfaces for `core/emotion/`, `core/memory/`, and `core/belief/`.
+*   [x] Delete all `v3_integration` wrappers, mixins, and duck-typing logic.
+*   [x] Remove unused databases (`asyncpg`, `sqlalchemy`) from dependencies.
+*   [x] Establish `core/agent_base.py` (`BaseAgent`) as the single abstraction.
+*   [x] Define strict interfaces for `core/emotion/`, `core/memory/`, and `core/belief/`.
 
 ### 1.2 Component Consolidation
-*   [ ] Unify `StateManager` and `EmotionalState` into a single PAD emotional system.
-*   [ ] Unify `BeliefManager` and `BeliefSystem` into a single, LLM-friendly tracker.
-*   [ ] Unify the 4 conflicting Memory Models and Enum definitions into `core/memory/`.
-*   [ ] Ensure both `AgentBrain` (gRPC) and `UniversalAgent` inherit from `BaseAgent` and use these shared components.
+*   [x] Unify `StateManager` and `EmotionalState` into a single PAD emotional system.
+*   [x] Unify `BeliefManager` and `BeliefSystem` into a single, LLM-friendly tracker.
+*   [x] Unify the 4 conflicting Memory Models and Enum definitions into `core/memory/`.
+*   [x] Ensure both `AgentBrain` (gRPC) and `UniversalAgent` inherit from `BaseAgent` and use these shared components.
 
 ### 1.3 Engineering Standards Enforcement
-*   [ ] Refactor monolithic files (>700 lines) into focused sub-modules.
-*   [ ] Implement formal `start()`, `pause()`, and `cleanup()` lifecycle methods.
-*   [ ] Enforce stable UUID generation globally (replace random integers).
+*   [x] Refactor monolithic files (>700 lines) into focused sub-modules.
+*   [x] Implement formal `start()`, `pause()`, and `cleanup()` lifecycle methods.
+*   [x] Enforce stable UUID generation globally (replace random integers).
 
 ---
 
@@ -37,13 +37,13 @@ The final system will serve as a universal backend for any environment, capable 
 **Goal:** Agents correctly utilize their unified brains to exist and react in the world.
 
 ### 2.1 Needs & Urges
-*   [ ] Implement generic `NeedsSystem` (Hunger, Fatigue, Social) tied to `BaseAgent`.
+*   [x] Implement generic `NeedsSystem` (Hunger, Fatigue, Social) tied to `BaseAgent`.
 *   [ ] Ensure urgent needs dynamically override idle Deliberation.
 
 ### 2.2 Spatial & Affordance Physics
-*   [ ] Implement `SpatialHash` or `QuadTree` for O(log N) proximity indexing.
-*   [ ] Validate interactions via generic `Affordance` rules (Action, Condition, Effect).
-*   [ ] Implement visual raycasting so agents only perceive what they can legitimately see.
+*   [x] Implement `SpatialHash` or `QuadTree` for O(log N) proximity indexing.
+*   [x] Validate interactions via generic `Affordance` rules (Action, Condition, Effect).
+*   [x] Implement visual raycasting so agents only perceive what they can legitimately see.
 
 ---
 
@@ -51,12 +51,12 @@ The final system will serve as a universal backend for any environment, capable 
 **Goal:** The Engine takes control of the story, shaping the agent simulation into a narrative experience.
 
 ### 3.1 Fate Control & Event Injection
-*   [ ] Establish the `FateEngine` as the ultimate arbiter of physical truth.
-*   [ ] Handle simultaneous proposal conflicts (e.g., two agents grabbing the same item).
+*   [x] Establish the `FateEngine` as the ultimate arbiter of physical truth.
+*   [x] Handle simultaneous proposal conflicts (e.g., two agents grabbing the same item).
 
 ### 3.2 Drama Director
-*   [ ] Implement `TensionTracker` to monitor narrative pacing.
-*   [ ] Dynamically inject environmental events or world state changes to drive story.
+*   [/] Implement `TensionTracker` to monitor narrative pacing.
+*   [/] Dynamically inject environmental events or world state changes to drive story.
 *   [ ] Ensure the engine can shape the narrative without relying on hardcoded character scripts.
 
 ---
@@ -74,4 +74,4 @@ The final system will serve as a universal backend for any environment, capable 
 
 ---
 
-**Last Updated:** 2026-02-21 (Architecture Consolidation)
+**Last Updated:** 2026-02-21 (Post-Architecture Refactor)
