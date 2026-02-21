@@ -1,71 +1,51 @@
-# 🌙 Tsukuyomi V2 - Real World Simulation Engine
+# 🌙 Tsukuyomi - Intelligent Simulation Engine
 
-**The Autonomous Agent Platform for Massively Multi-Agent Simulations.**
+**The Complete AI Infrastructure for Games, Storytelling, and Agent Simulations.**
 
-**Current Version:** 2.0 (Development)  
-**Status:** 🏗️ Phase 13+ Complete | Multi-Zone Synchronization Active
+**Current Version:** MVP v0.1 (Architecture Unification)  
+**Status:** 🏗️ Phase 1 Active | Consolidating Core Logic
 
 ---
 
 ## 🎯 Vision
 
-Tsukuyomi is an open-source engine designed to simulate complex, dynamic worlds populated by autonomous AI agents (Agent Brains). Unlike static chatbots, these agents have **bodies (Avatars)**, **needs (Drives)**, and **perspectives (Memory)**. They perceive the world, make decisions, and interact with it to create emergent, narrative experiences.
+Tsukuyomi is an open-source, universal backend engine designed to simulate complex, dynamic worlds populated by autonomous AI agents. It goes beyond static chatbots by creating a "Living World." Agents have **bodies (Avatars)**, **needs (Drives)**, **perspectives (Beliefs & Memory)**, and **emotions (PAD State)**.
 
-**The Goal:** Create a "Living World" where agents live, trade, fight, and govern themselves without human scripts.
-
----
-
-## ✅ Completed Phases
-
-| Phase | Description | Status |
-|-------|-------------|--------|
-| 1-3 | Fate Engine Core, Cognitive Core, Action Logic | ✅ Complete |
-| 4-6 | Persistence, gRPC Infrastructure, Agent Intelligence | ✅ Complete |
-| 7-9 | Belief Dynamics, Social Layers, Performance & Scale | ✅ Complete |
-| 10 | External Guest Protocol | ✅ Complete |
-| 11 | World Expansions (Multi-Room Spatial Logic) | ✅ Complete |
-| 12 | Multi-Zone Shard Synchronization | ✅ Complete |
-| 13 | World Building: Roman-Carthage Trial Scenario | 🚧 In Progress |
-| 14+ | Personality System, Reasoning Module | 🚧 In Progress |
+**The Goal:** Serve as the ultimate AI infrastructure that natively drives world physics, environmental rules, and dynamic narrative flow, capable of producing complete, unscripted story-worlds where agents live, interact, and govern themselves.
 
 ---
 
 ## 🏗️ Architecture Overview
 
-Tsukuyomi follows a **Client-Server** architecture driven by gRPC.
+Tsukuyomi relies on a highly modular **Client-Server** and **Unified Base** architecture. The engine supports both tick-based simulations (gRPC) and standalone asynchronous operation, all running on the exact same underlying logic.
 
-### 1. Fate Engine (The Core)
-*   **Role:** The authoritative "Source of Truth" for the world state.
-*   **Tech:** Python `asyncio`, gRPC Server, SQLite Persistence.
+### 1. The Unified Core (`BaseAgent`)
+*   **Role:** The single source of truth for all cognitive features. 
 *   **Features:**
-    *   20 TPS deterministic simulation loop
-    *   Multi-zone shard synchronization
-    *   Cross-zone gossip propagation
+    *   3-Tier Memory System (Working, Semantic, RAG Episodic)
+    *   Unified PAD Emotional Core (Pleasure-Arousal-Dominance)
+    *   Belief Dynamics and Tracking
+    *   Needs System (Hunger, Fatigue, Social)
+
+### 2. Fate Engine (The Server)
+*   **Role:** The authoritative "Source of Truth" for world state and physics.
+*   **Tech:** Python `asyncio`, gRPC Server.
+*   **Features:**
+    *   Deterministic simulation tick loop
+    *   Spatial proximity and raycasting validation
+    *   Affordance-based interaction checking
     *   Proposal window with conflict resolution
 
-### 2. Agent Brain (The Intelligence)
-*   **Role:** Client-side controller. Acts as the "Cortex" for the agent.
-*   **Tech:** Python `asyncio`, gRPC Client, RAG Memory System.
-*   **Features:**
-    *   3-Tier Memory (Sensory, Working, Long-term RAG)
-    *   Emotional PAD State (Pleasure-Arousal-Dominance)
-    *   Needs System (Hunger, Fatigue, Boredom, Social)
-    *   Belief Dynamics with Confirmation Bias
-    *   Personality System with Drift Monitoring
+### 3. Agent Brain (The Client)
+*   **Role:** Connects the `BaseAgent` intelligence to the `FateEngine` world via gRPC. 
+*   **Process:** Evaluates the engine's "Percepts" through its core emotional and memory systems, then submits action "Proposals" back to the server.
 
-### 3. Drama Director (The Orchestrator)
+### 4. Drama Director (The Narrator)
 *   **Role:** Ensures narrative momentum and prevents "sandbox death".
 *   **Features:**
     *   Context-aware tension tracking
-    *   Event library with branching narratives
-    *   Agent-specific drama triggers
-
-### 4. Guest Protocol (External Integration)
-*   **Role:** Allow external agents to join simulations.
-*   **Features:**
-    *   Standalone Guest API client
-    *   Handshake authentication
-    *   Real-time tick streaming
+    *   Event injection (weather, disasters, world changes)
+    *   Dynamic story oversight directly from the engine
 
 ---
 
@@ -82,15 +62,14 @@ python3 -m tsukuyomi.proto.grpc_server
 ```
 
 ### 2. Run Tests
+*All tests must be run from the dedicated `/tests/` directory.*
 ```bash
 # Run all tests
 python3 -m pytest tests/ -v
-
-# Run with coverage
-python3 -m pytest tests/ --cov=tsukuyomi --cov-report=term-missing
 ```
 
-### 3. Run a Demo
+### 3. Run a Scenario Experiment
+*Scenarios are isolated experiments used purely to test engine capabilities.*
 ```bash
 # Marketplace simulation
 python3 experiments/marketplace_roleplay.py
@@ -99,43 +78,22 @@ python3 experiments/marketplace_roleplay.py
 python3 experiments/angry_men.py
 ```
 
-### 4. Connect as a Guest Agent
-```python
-from tsukuyomi.guest_sdk import GuestClient
-
-client = GuestClient("localhost:50051", secret="tsukuyomi-secret-2026")
-await client.connect()
-await client.register("MyAgent", x=10, y=10)
-```
-
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 tsukuyomi/
 ├── tsukuyomi/
-│   ├── brain/                 # Agent intelligence modules
-│   │   ├── reasoning/         # Decision records, confidence calibration
-│   │   ├── personality/       # OCEAN profiles, drift monitoring
-│   │   ├── memory/            # RAG system, decay calculator
-│   │   └── AgentBrain.py      # Main cognitive controller
-│   ├── core/                  # Core engine logic
-│   │   ├── drama/             # Drama director, event library
-│   │   ├── world_builder.py   # Environment construction
-│   │   └── spatial_index.py   # Quadtree spatial queries
-│   ├── proto/                 # gRPC definitions
-│   │   ├── fate_engine.py     # Server implementation
-│   │   ├── grpc_client.py     # Python client
-│   │   └── *.proto            # Protocol buffer schemas
-│   ├── scenarios/             # Scenario definitions
+│   ├── core/                  # Unified BaseAgent, emotion, memory, and engine logic
+│   ├── brain/                 # Simulation/gRPC specific implementations
+│   ├── agent/                 # Standalone/Async specific implementations
+│   ├── proto/                 # gRPC protocol schemas and server implementation
+│   ├── dev-artifacts/         # Specifications, roadmaps, and architecture plans (REQUIRED)
 │   └── guest_sdk.py           # External agent SDK
-├── tests/                     # Test suite
-│   ├── test_phase1_components.py
-│   ├── test_reasoning.py
-│   ├── test_personality.py
-│   └── test_drama.py
-└── experiments/               # Demo scripts
+├── docs/                      # Official manuals, published architecture, and guides
+├── tests/                     # Dedicated test suite (all tests live here)
+└── experiments/               # Isolated testing scenarios and demo scripts
 ```
 
 ---
@@ -144,7 +102,7 @@ tsukuyomi/
 
 ### Environment Variables
 ```bash
-# LLM Service (Groq/Claude)
+# LLM Service (Provider configurable)
 export GROQ_API_KEY=your_key_here
 
 # gRPC Server
@@ -154,38 +112,16 @@ export GRPC_PORT=50051
 export TLS_CERT_PATH=certs/server.crt
 ```
 
-### Security Settings
-The gRPC client defaults to secure TLS connections. To allow insecure connections for development:
-```python
-client = FateEngineClient("localhost:50051", allow_insecure=True)
-```
-
----
-
-## 📊 Test Coverage
-
-| Module | Coverage |
-|--------|----------|
-| `brain/reasoning/decision_record.py` | 85% |
-| `brain/personality/profile.py` | 77% |
-| `brain/needs_system.py` | 76% |
-| `core/world_builder.py` | 94% |
-| **Overall** | 31% |
-
-Run coverage report:
-```bash
-python3 -m pytest tests/ --cov=tsukuyomi --cov-report=html
-```
-
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see `/docs/CONTRIBUTING.md` for guidelines.
+We welcome contributions! Please review the `rules.md` at the root of the project before contributing.
+*All specifications, plans, and architectural proposals MUST be placed in `/tsukuyomi/dev-artifacts/`.*
 
-*   **Design Philosophy:** "General Engine" over "Custom Scenarios". Build systems, not scripts.
-*   **Workflow:** Discuss → Branch → Code → Test → PR.
-*   **Code Style:** Follow PEP 8, use type hints, write docstrings.
+*   **Design Philosophy:** "Unified Engine" over "Custom Scenarios". Build generic systems that govern any narrative, not hardcoded scripts.
+*   **Code Style:** Python `snake_case` files, `PascalCase` classes, strict <700 lines-of-code per file limits.
+*   **Workflow:** Discuss → Plan in `dev-artifacts/` → Code → Test → PR.
 
 ---
 
@@ -195,4 +131,4 @@ MIT License - See LICENSE file for details.
 
 ---
 
-**Maintained by:** safouane (safouane_94908) & Tanit (AI Co-founder)
+**Maintained by:** safouane

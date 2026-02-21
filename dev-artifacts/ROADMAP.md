@@ -1,108 +1,77 @@
-# 🛣️ Tsukuyomi V2 - Development Roadmap
+# 🛣️ Tsukuyomi MVP v0.1 - Development Roadmap
 
-**Status:** V1 (Prototype) -> V2 (Real World Simulation)
+**Status:** Architecture Unification Phase -> MVP v0.1 (Complete AI Infrastructure)
 
-## 🎯 Objective
-Transform Tsukuyomi from a static narrative demo into an **autonomous multi-agent world simulation platform** where agents live, trade, fight, and persist in a dynamic environment.
+## 🎯 Final Objective
+Transform Tsukuyomi into a **complete AI infrastructure for games, storytelling, and agent simulations**. 
 
----
+The final system will serve as a universal backend for any environment, capable of adapting to custom physics, world rules, and objects. The engine natively drives the world and the narrative flow via the `FateEngine` and `DramaDirector`, producing complete, living story-worlds where agents interact naturally. 
 
-## 🗺️ Current Status (V1)
-*   **Core:** `FateEngine` (gRPC Server) + `AgentBrain` (LLM Client).
-*   **Issue:** "Static Narrative Loop". Agents perceive nothing -> do nothing -> sleep.
-*   **Scenario:** "Angry Men 5 Agents" (Empty Jury Room).
+*Note: While current development uses isolated testing scenarios (e.g., Angry Men, Marketplace) to test agent logic, the ultimate engine will autonomously oversee complete, unscripted narrative environments.*
 
 ---
 
-## 🚀 Phase 1: Foundations of Autonomy (Weeks 1-2)
-**Goal:** Make agents self-sufficient. They should move and act without user prompts.
+## 🏗️ Phase 1: Architecture Unification (Current Focus)
+**Goal:** Consolidate fragmented "Simulation" and "Standalone" modes into a single, unified MVP v0.1 codebase.
 
-### 1.1 Needs System Implementation
-*   [ ] Create `AgentNeeds` class (Hunger, Fatigue, Boredom, Social).
-*   [ ] Integrate `Needs` into `AgentBrain` prompt template.
-    *   *Logic:* High need overrides IDLE state.
-*   [ ] Implement decay logic (needs increase over time).
+### 1.1 The Purge & Foundation
+*   [ ] Delete all `v3_integration` wrappers, mixins, and duck-typing logic.
+*   [ ] Remove unused databases (`asyncpg`, `sqlalchemy`) from dependencies.
+*   [ ] Establish `core/agent_base.py` (`BaseAgent`) as the single abstraction.
+*   [ ] Define strict interfaces for `core/emotion/`, `core/memory/`, and `core/belief/`.
 
-### 1.2 World Builder API
-*   [ ] Create `WorldBuilder` Python class.
-*   [ ] Implement `add_object(id, type, position, properties)` method.
-*   [ ] Update `FateEngine` to accept world initialization via gRPC.
+### 1.2 Component Consolidation
+*   [ ] Unify `StateManager` and `EmotionalState` into a single PAD emotional system.
+*   [ ] Unify `BeliefManager` and `BeliefSystem` into a single, LLM-friendly tracker.
+*   [ ] Unify the 4 conflicting Memory Models and Enum definitions into `core/memory/`.
+*   [ ] Ensure both `AgentBrain` (gRPC) and `UniversalAgent` inherit from `BaseAgent` and use these shared components.
 
-### 1.3 Scenario: The Busy Marketplace (V1 Proof)
-*   [ ] Script: `experiments/marketplace_roleplay.py` (Created).
-*   [ ] Setup: Spawn 4 agents (Merchant, Guard, Peasant, Thief).
-*   [ ] Goal: Agents wander, trade, and interact with stalls autonomously.
-*   [ ] Test: Verify agents generate `MOVE` and `INTERACT` proposals without hardcoded triggers.
-
----
-
-## 🤝 Phase 2: Interaction & Physics (Weeks 3-5)
-**Goal:** Make the world feel "Real" and responsive.
-
-### 2.1 Spatial Partitioning
-*   [ ] Implement `SpatialHash` or `QuadTree` index.
-*   [ ] Replace O(N) proximity checks with O(log N) queries.
-*   [ ] Benefit: Support 50+ agents moving fluidly.
-
-### 2.2 Affordance System
-*   [ ] Define `Affordance` structure (Action, Condition, Effect).
-*   [ ] Attach affordances to `EnvironmentObject`s.
-    *   *Example:* Door has "OPEN" affordance if "key" in inventory.
-*   [ ] Resolution: `FateEngine` checks affordances before resolving `INTERACT`.
-
-### 2.3 Visual Perception (Raycasting)
-*   [ ] Implement `VisionCone` for agents.
-*   [ ] Generate "Visual Percepts": `PERCEPT:VISUAL:OBJ_TABLE(distance:2, occluded:false)`.
-*   [ ] Benefit: Agents can hide behind walls or see only in front.
+### 1.3 Engineering Standards Enforcement
+*   [ ] Refactor monolithic files (>700 lines) into focused sub-modules.
+*   [ ] Implement formal `start()`, `pause()`, and `cleanup()` lifecycle methods.
+*   [ ] Enforce stable UUID generation globally (replace random integers).
 
 ---
 
-## 🌐 Phase 3: Persistence & Scale (Weeks 6-8)
-**Goal:** Robust service capable of running for hours/days.
+## 🤝 Phase 2: Autonomous Intelligence & Interaction
+**Goal:** Agents correctly utilize their unified brains to exist and react in the world.
 
-### 3.1 Database Persistence
-*   [ ] Connect `FateEngine` to PostgreSQL (or SQLite for dev).
-*   [ ] Save `WorldState` snapshot every 100 ticks.
-*   [ ] Save `Actor` state (inventory, position) on change.
-*   [ ] Load logic: `./run --resume-from-tick 5000`.
+### 2.1 Needs & Urges
+*   [ ] Implement generic `NeedsSystem` (Hunger, Fatigue, Social) tied to `BaseAgent`.
+*   [ ] Ensure urgent needs dynamically override idle Deliberation.
 
-### 3.2 Proposal Windows (Combat/Speed)
-*   [ ] Implement `ProposalWindow` class.
-    *   *Logic:* Agents submit plans for future ticks.
-    *   *Benefit:* Enables "Commitment Phase" (Counter-play).
-*   [ ] Conflict resolution: Compare stamina/speed for simultaneous moves.
-
-### 3.3 Federation (Multi-World)
-*   [ ] Support for multiple `FateEngine` nodes (Town, Forest).
-*   [ ] Agents travel between nodes via "Portals".
-*   [ ] Event synchronization (Chat/Trade across worlds).
+### 2.2 Spatial & Affordance Physics
+*   [ ] Implement `SpatialHash` or `QuadTree` for O(log N) proximity indexing.
+*   [ ] Validate interactions via generic `Affordance` rules (Action, Condition, Effect).
+*   [ ] Implement visual raycasting so agents only perceive what they can legitimately see.
 
 ---
 
-## 🧠 Phase 4: Advanced Intelligence (Weeks 9+)
-**Goal:** Narrative depth and long-term memory.
+## 🎭 Phase 3: The Narrative Engine
+**Goal:** The Engine takes control of the story, shaping the agent simulation into a narrative experience.
 
-### 4.1 Long-Term Memory (RAG)
-*   [ ] Integrate Vector Database (Qdrant/Weaviate).
-*   [ ] Store agent memories: "Merchant overcharged me".
-*   [ ] Query memories: "memories.similar('merchant')" -> Bias decisions.
-*   [ ] Update prompt: "Recall that Marcus is dishonest."
+### 3.1 Fate Control & Event Injection
+*   [ ] Establish the `FateEngine` as the ultimate arbiter of physical truth.
+*   [ ] Handle simultaneous proposal conflicts (e.g., two agents grabbing the same item).
 
-### 4.2 Drama Director
-*   [ ] Implement `TensionTracker` (4-axis metric).
-*   [ ] Event System: Inject environmental events (Thunder, Fire).
-*   [ ] Plot Hooks: Ensure story progresses (Ending the conflict).
+### 3.2 Drama Director
+*   [ ] Implement `TensionTracker` to monitor narrative pacing.
+*   [ ] Dynamically inject environmental events or world state changes to drive story.
+*   [ ] Ensure the engine can shape the narrative without relying on hardcoded character scripts.
 
 ---
 
-## ✅ Success Metrics
+## 🌐 Phase 4: Persistence & Scale
+**Goal:** Robust, long-running service for real-world application backends.
 
-We will consider V2 successful when:
-1.  [ ] 50 agents run simultaneously with < 200ms tick time.
-2.  [ ] Agents survive 1 hour without user input (Autonomy > 95%).
-3.  [ ] World state can be saved and restored (Persistence).
-4.  [ ] Complex interactions (Trade > 5 steps) occur without logic errors.
+### 4.1 State Persistence
+*   [ ] Save `WorldState` snapshot intervals.
+*   [ ] Ability to resume engine state natively (`--resume-from-tick`).
+
+### 4.2 Production Scalability
+*   [ ] Scale to support 50+ concurrent agents with < 200ms tick time.
+*   [ ] Implement LLM circuit-breakers and graceful degradation for failed agent requests.
 
 ---
 
-**Last Updated:** 2026-02-14
+**Last Updated:** 2026-02-21 (Architecture Consolidation)

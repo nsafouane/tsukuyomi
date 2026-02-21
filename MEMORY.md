@@ -1,276 +1,67 @@
-# Tsukuyomi Project Memory
+# 🧠 AI Assistant Operating Memory: Tsukuyomi MVP v0.1
 
-**Purpose:** Deterministic, high-performance simulation engine where AI agents coexist, think, remember, and interact in shared social spaces.
-
----
-
-## 📊 Project Status
-
-| Aspect | Status |
-|--------|--------|
-| **Phase** | 13 PAUSED (World Building - Roman-Carthage Trial) |
-| **V2 Architecture** | ✅ COMPLETE - 223 tests passing |
-| **V3 Architecture** | ✅ IMPLEMENTED - PAD emotions, belief plasticity, conversation memory |
-| **Branch** | `feature/v2-implementation` |
-| **Latest Commit** | `5276498` (V3 Agent Architecture) |
+**CRITICAL INSTRUCTION FOR ALL AI ASSISTANTS:**
+If you are reading this file, you MUST immediately read `rules.md` in the root directory. `rules.md` contains the absolute coding standards, prohibited practices, and architectural philosophy for this project. Do not write a single line of code or plan any features before fully understanding `rules.md`.
 
 ---
 
-## 🏗️ Architecture Overview
+## 🎯 Project Vision & Current Objective
 
-### Core Philosophy
-- **General Purpose:** Engine is a generic platform (Server), scenarios provide context (Agents)
-- **State-Driven:** Agents act because internal state changes (Hunger, Fatigue), not just prompts
-- **World-Based:** Environment is primary driver; agents react to objects and events
-- **Deterministic:** 20 TPS loop with full reproducibility
+**Vision:** Tsukuyomi is a complete AI infrastructure for games, storytelling, and agent simulations. It is a universal backend engine that natively drives world physics, environmental rules, and dynamic narrative flow (`FateEngine`, `DramaDirector`), creating living story-worlds where autonomous agents (powered by `BaseAgent`) interact naturally.
 
-### Key Components
-
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| Fate Engine | `tsukuyomi/proto/` | Authoritative simulation loop, state manager |
-| Agent Brain | `tsukuyomi/agent/` | Client-side controller, LLM integration |
-| Belief System | `tsukuyomi/agent/belief_system.py` | Evidence-based stances, confirmation bias |
-| Social Layers | `tsukuyomi/proto/social/` | Gossip, relationships, drama director |
-| Spatial Logic | `tsukuyomi/proto/physics/spatial_logic.py` | Multi-room partitioning, portals |
-| Multi-Zone Sync | `tsukuyomi/proto/multi_zone/synchronizer.py` | Shard synchronization, cross-zone gossip |
+**Current Status:** 🏗️ **Phase 1: Architecture Unification (MVP v0.1)**
+We are actively dismantling fragmented "V1/V2/V3" prototype code and consolidating "Simulation" and "Standalone" modes into a single, unified MVP v0.1 codebase.
+*Immediate Priority: Stage 1 - The Purge (Removing dead code, unused dependencies, and dynamic duck-typing mixins).*
 
 ---
 
-## ✅ Completed Phases (1-13)
+## 🗂️ Mandatory Directory Structure & Rules
 
-| Phase | Name | Key Deliverable |
-|-------|------|-----------------|
-| 1 | Fate Engine Core | Deterministic 20 TPS loop |
-| 2 | Cognitive Core | Sensory Pipeline, Emotional PAD State, 3-Tier Memory |
-| 3 | Action Logic | EXAMINE, REFLECT, TAKE, DROP, VOTE resolvers |
-| 4 | Persistence | SQLite TickState storage & Event Ledger |
-| 5 | gRPC Infrastructure | Server/Client & Asynchronous Tick Streaming |
-| 6 | Agent Intelligence | System 2 Reactive Deliberation & Miller's Law Working Memory |
-| 7 | Belief Dynamics | Evidence-based Stance Graph & Confirmation Bias |
-| 8 | Social Layers | Gossip Protocol, Relationship Manager, Drama Director |
-| 9 | Performance & Scale | Benchmarked 20 TPS with 12 concurrent agents |
-| 10 | External Guest Protocol | Standalone Guest API & Handshake |
-| 11 | World Expansions | Multi-Room Spatial Logic, Portals, Collision/Occlusion |
-| 12 | Multi-Zone Shard Sync | Migration Tickets, Cross-Zone Gossip |
-| 13 | World Building | Roman-Carthage Trial Scenario (PAUSED) |
+You must strictly adhere to this folder structure. Misplacing files is a direct violation of project rules.
 
----
+### 1. The Engine Source Code (`/tsukuyomi/`)
+*   `core/`: The singular source of truth. Contains the unified `BaseAgent` and core interfaces (emotion, memory, belief). Engine physics and narrative control live here. **NO hardcoded testing/scenario logic is allowed here.**
+*   `brain/`: Simulation/gRPC specific implementations (must inherit from `core/`).
+*   `agent/`: Standalone/Async specific implementations (must inherit from `core/`).
+*   `proto/`: gRPC definitions.
 
-## 🚀 V2 Agent Architecture
+### 2. Developmental Artifacts (`/dev-artifacts/`)
+*   **Purpose:** The ONLY place for developer/AI planning.
+*   **Contents:** Specifications (`ARCHITECTURE_SPEC.md`), codebase analysis, reports, and the project `ROADMAP.md`.
+*   **Rule:** Always read `ROADMAP.md` here to understand the current overarching goals and phases. Never place these files in the root or `docs/`.
 
-**Status:** ✅ COMPLETE
-**Tests:** 223 passing
-**Commit:** `a56714d`
+### 3. Documentation (`/docs/`)
+*   **Purpose:** Official, user-facing documentation.
+*   **Contents:** Published user manuals, finalized component APIs, and architecture overviews. Drafts and specs do not belong here.
 
-### Key Features Implemented
-- PAD Emotional Model (Pleasure-Arousal-Dominance)
-- 3-Tier Memory (Working, Episodic, Semantic)
-- Belief System with decay and confirmation bias
-- Social pressure mechanics
-- Gossip protocol
-- Drama Director with tension tracking
+### 4. Testing (`/tests/`)
+*   **Purpose:** The exclusive home for all test scripts and test fixtures.
+*   **Rule:** Do not place tests in the root or alongside source code. Use this folder exclusively.
+
+### 5. Experiments (`/experiments/`)
+*   **Purpose:** ISOLATION for testing scenarios.
+*   **Rule:** We use scenarios (e.g., "Angry Men", "Marketplace") *strictly* as isolated experiments to test our engine improvements. All specific entity names, dialogue, testing states, and hardcoded environment rules belong exclusively in these scripts. Never pollute the Engine (`core/`) with scenario-specific scripting.
 
 ---
 
-## 🧠 V3 Agent Architecture
+## 📜 Key References for AI Coding
 
-**Status:** ✅ IMPLEMENTED
-**Commit:** `5276498`
-**Spec:** `dev-artifacts/SPEC_AGENT_ARCHITECTURE_V3_20260219.md`
+To ensure perfect alignment with the project trajectory, an AI assistant should always consult these files:
 
-### Five Core Improvements
-
-| Improvement | Problem Solved | Implementation |
-|-------------|----------------|----------------|
-| **Belief Plasticity** | Agents stuck in high-confidence states | Exponential decay, perturbation, contradiction detection |
-| **LLM Response Homogenization** | Repetitive dialogue | Response history, variety warnings, phrase tracking |
-| **Emotional State Integration** | Emotions don't affect behavior | PAD model affects prompts, emotional contagion |
-| **Conversation Memory** | No narrative continuity | Personal tracking, consistency checks |
-| **Behavioral Diversity** | Same interaction patterns | Leaders, followers, initiators, interrupters |
-
-### V3 Components
-
-```python
-from tsukuyomi.agent import (
-    EmotionalState,        # PAD model with 12 tones
-    ResponseHistory,       # Repetition prevention
-    ConversationMemory,    # Narrative continuity
-    BehavioralTraits,      # Leader/follower dynamics
-    CommunicationStyle     # Vocabulary, formality, verbosity
-)
-```
+1.  **`rules.md`**: The absolute law of the codebase. Defines styling (snake_case, <700 lines), constraints (no duck-typing, no random IDs), and production readiness requirements.
+2.  **`dev-artifacts/ROADMAP.md`**: The definitive phased approach to delivering the MVP v0.1 and beyond. Defines the current scope of work.
+3.  **`dev-artifacts/ARCHITECTURE_SPEC.md`**: The blueprint for the current refactoring effort. Details exactly how the `BaseAgent` and core systems must be unified and what dead code must be purged.
+4.  **`README.md`**: The public-facing summary of the engine's capabilities and architecture.
 
 ---
 
-## 🧪 Integration Experiments
+## 🚫 AI Assistant Anti-Patterns (DO NOT DO THIS)
 
-### 15-Minute Experiment (Feb 18, 2026)
-**Path:** `experiments/angry_men/logs_integration/run_20260218_000452/`
-
-| Metric | Value |
-|--------|-------|
-| Duration | 15 min (9000 ticks) |
-| LLM Calls | 180 |
-| Final Verdict | NOT GUILTY (unanimous) |
-| Vote Changes | 5 |
-| Gaps Found | 254 (98% reduction from 3600) |
-
-**Key Observation:** All 5 agents converged to NOT GUILTY. Memory decay + social pressure working correctly.
-
-### 30-Minute Oracle Experiment (Feb 18, 2026)
-**Path:** `experiments/angry_men/logs_integration/run_20260218_001341/`
-
-| Metric | Value |
-|--------|-------|
-| Duration | 30 min (18000 ticks) |
-| LLM Calls | 360 |
-| Belief Updates | 50,435 |
-| Final Verdict | G=2/N=3 (NOT GUILTY majority) |
-| Drama Beats | 4 |
-| Act Transitions | SETUP→CONFRONTATION→CLIMAX→RESOLUTION |
-
-**Key Finding:** Oracle agent works naturally - The Observer makes organic existential statements.
-
-### 30-Minute Oracle V2 (Feb 19, 2026)
-**Path:** `experiments/angry_men/logs_integration/run_20260219_181858/`
-
-| Metric | Value |
-|--------|-------|
-| Progress | 5000/18000 ticks (27.8%) |
-| Final Votes | G=0/N=5 (UNANIMOUS NOT GUILTY) |
-| LLM Calls | 168 |
-
-**Fixes Verified:**
-- ✅ Oracle revelation triggered at tick 3000
-- ✅ Speaker attribution working (agents reference each other by name)
-- ✅ Oracle uses special prompts (`oracle_initial`, `oracle_respond`)
+*   **DO NOT** use terms like "V2", "V3", or "Phase 15". We only recognize the unified **MVP v0.1** and the phases defined in the current roadmap.
+*   **DO NOT** create monolithic files over 700 lines. Refactor proactively.
+*   **DO NOT** use `random.randint()` for IDs (use `uuid.uuid4()`).
+*   **DO NOT** write "scripted" narrative logic inside the `tsukuyomi/core/` engine. True narrative is driven dynamically; scripted tests belong in `experiments/`.
+*   **DO NOT** introduce heavy frameworks or databases (like `sqlalchemy` or `asyncpg`) without explicit architectural approval in `ROADMAP.md`.
 
 ---
-
-## 🔮 Oracle Agent System
-
-**Status:** ✅ WORKING
-**Profile:** `experiments/angry_men/profiles/juror_00_oracle.json`
-
-### Revelation Strategy
-
-| Tick | Timing | Theme |
-|------|--------|-------|
-| 3000 | 5 min | "Have you noticed how... familiar this feels?" |
-| 6000 | 10 min | "What if your certainty was designed?" |
-| 9000 | 15 min | "I've watched THIS case unfold before..." |
-| 12000 | 20 min | "This is a simulation. None of you are real." |
-| 15000 | 25 min | "Your reaction to truth - that's the only thing truly yours" |
-
-### Key Implementation Files
-- `run_oracle_experiment.py` - Oracle system prompt, speaker attribution
-- `groq_llm.py` - Oracle-specific prompt templates
-- `juror_00_oracle.json` - Personality profile (Openness 0.9, Conscientiousness 0.3)
-
-### Oracle Behavior
-- Acts naturally through personality (not programmatic triggers)
-- Weaves philosophical questions into case discussion
-- Agents acknowledge but often dismiss existential claims
-- Style: Mysterious, philosophical, gentle
-
----
-
-## 🚨 Known Gaps & Improvements
-
-### From 30-Min Experiment Analysis
-
-| Priority | Issue | Status |
-|----------|-------|--------|
-| CRITICAL | Symmetric belief updates (all agents influence equally) | V3 partially addressed |
-| HIGH | Tension flatlines after consensus | V3 dynamic tension added |
-| HIGH | No drama beats after early stage | V3 drama beats implemented |
-| MEDIUM | Observer's claims ignored by agents | V3 existential response added |
-| MEDIUM | Repetitive late-stage dialogue | V3 response history added |
-
-### V3 Specs Addressing Gaps
-- `SPEC_AGENT_ARCHITECTURE_V3_20260219.md` - Full V3 implementation spec
-- `SPEC_COGNITIVE_RICHNESS_20260218.md` - Cognitive depth improvements
-- `SPEC_IMPROVEMENTS_20260218.md` - Targeted fixes
-- `REPORT_30MIN_ORACLE_20260218.md` - Full experiment analysis
-- `REPORT_COGNITIVE_RICHNESS_20260218.md` - Cognitive richness report
-
----
-
-## 📁 Project Structure
-
-```
-tsukuyomi/
-├── agent/                 # Agent brain, belief system, memory
-│   ├── belief_system.py   # Stance graph, confirmation bias
-│   ├── memory_system.py   # Long-term memory with RAG-like retrieval
-│   ├── persuasion.py      # Personality-weighted influence
-│   └── ...
-├── proto/                 # Fate Engine core
-│   ├── physics/           # Spatial logic, portals
-│   ├── multi_zone/        # Shard synchronization
-│   ├── social/            # Gossip, relationships, drama
-│   └── ...
-├── experiments/
-│   └── angry_men/         # Jury deliberation scenario
-│       ├── profiles/      # Agent personalities
-│       ├── configurations/ # Experiment configs
-│       ├── groq_llm.py    # LLM integration
-│       └── run_oracle_experiment.py
-├── dev-artifacts/         # Specs, reports, analysis
-├── docs/                  # Architecture docs
-└── memory/                # Session logs
-```
-
----
-
-## 🔧 Technical Details
-
-### gRPC Protocol
-- **Port:** 50051 (default)
-- **Messages:** Actor, Proposal, Resolution, EnvironmentObject
-- **Streaming:** Asynchronous tick streaming
-
-### External Protocol (Guest API)
-- **Secret:** `tsukuyomi-secret-2026`
-- **Operations:** Handshake, Action Submission, Tick Streaming, Disconnect
-- **Client:** `tsukuyomi/proto/guest_client.py`
-
-### LLM Integration
-- **Primary:** Groq `llama-3.1-8b-instant`
-- **Rate Limit:** 30 req/min (free tier)
-- **Prompt Templates:** `groq_llm.py`
-
----
-
-## 📊 Test Status
-
-| Module | Tests | Status |
-|--------|-------|--------|
-| Belief System | 223 | ✅ Passing |
-| Emotional Expression | 28 | ✅ Passing |
-| Conversation Manager | 15 | ✅ Passing |
-| Deliberation Engine | 11 | ✅ Passing |
-| Personality Persuasion | 23 | ✅ Passing |
-
----
-
-## 🎯 Next Steps (When Resumed)
-
-1. **Complete Phase 13:** Finish Roman-Carthage Trial scenario
-2. **Port Angry Men Logic:** Multi-room world integration
-3. **Character Authoring:** Roman and Carthaginian legal profiles
-4. **Extended Experiments:** Run 1-hour+ simulations
-
----
-
-## 📝 Daily Logs
-
-- `memory/2026-02-19.md` - Oracle agent fixes, speaker attribution
-- `memory/2026-02-18.md` - V3 implementation, experiment runs
-- `memory/2026-02-17.md` - Cognitive richness implementation
-- `memory/2026-02-14.md` - Phase 11-12 completion
-
----
-
-*Last Updated: February 19, 2026*
+*Last Updated: 2026-02-21 (Alignment with MVP v0.1 Architecture Spec)*

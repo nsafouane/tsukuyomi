@@ -1,66 +1,44 @@
-# 📜 Tsukuyomi V2 - Project Rules & Standards
+# 📜 Tsukuyomi MVP v0.1 - Project Rules & Standards
 
-**Purpose:** Define the engineering philosophy and coding standards for the Tsukuyomi Engine V2.
+**Purpose:** Define the absolute engineering philosophy and coding standards for the Tsukuyomi Engine MVP v0.1.
 
-## 1. 🎯 Design Philosophy: "General Engine"
+## 1. 🎯 MVP v0.1 Philosophy: "Unified Codebase"
 
 ### 1.1 Core Principle
-The **Fate Engine** and **Agent Brain** are generic platforms. **Scenarios** (e.g., "Angry Men", "Marketplace") are **applications** running on this platform.
+The engine is a singular, unified platform. "Simulation Mode" and "Standalone Mode" are merely different interfaces for the **exact same underlying `BaseAgent` logic**.
 
-*   **Engine Code:** Must contain NO specific narrative logic (e.g., "If actor is Davis, he says..."). Engine only handles physics, state, and generic affordances.
-*   **Agent Logic:** Is generic ("I am hungry" -> "Find Food"). Specific behaviors (e.g., "If I am a Guard, patrol") must be encoded in the **Agent's Profile** (Traits, Backstory), or handled via a **Role Subclass**, not hardcoded in the engine.
+*   **No Version Fragmentation:** There is no "V2" or "V3". All logic upgrades and improvements belong in the core **MVP v0.1**. Any feature that cannot be integrated into the core event loop must be deleted, not isolated.
+*   **Engine vs Testing Scenarios:** The engine code (`core/`) natively drives the world. It includes the `FateEngine` and the `DramaDirector` to dynamically guide narrative flow, manage events, and produce complete stories for the agents to live inside. However, you must **NEVER hardcode specific testing scenario data** (e.g., "If agent=Davis, say hello") inside the core engine.
+*   **Isolating Experiments:** We use scenarios (e.g., the marketplace or angry-men) strictly as isolated experiments to test our engine improvements. All specific names, dialogue, testing states, and environment layouts belong exclusively inside the `experiments/` scripts, not the `core/`.
 
-### 1.2 Allowed Customizations
-*   **Profiles:** You can define agent `Personality`, `Traits`, and `Role` in the scenario setup.
-*   **World Setup:** You can use `WorldBuilder` to spawn specific `EnvironmentObjects` (Stalls, Doors, Fountains) for a scenario.
-*   **Prohibited:** Do NOT modify `/tsukuyomi/core/` to support a specific scenario. If a scenario needs "X", implement "X" in a generic way (e.g., a `MoveTo` action that accepts any target).
-
-## 2. 🗂️ Coding Standards
+## 2. 🗂️ Coding Standards & Structure
 
 ### 2.1 File Structure
-*   `/tsukuyomi/core/`: Server logic. `FateEngine`, `WorldBuilder`.
-*   `/tsukuyomi/brain/`: Client logic. `AgentBrain`, `NeedsSystem`.
+*   `/tsukuyomi/core/`: The absolute source of truth. Contains `BaseAgent`, unified interfaces (`core/emotion/`, `core/memory/`, `core/belief/`), and server logic.
+*   `/tsukuyomi/brain/`: Simulation/gRPC specific implementations (must inherit from `core/`).
+*   `/tsukuyomi/agent/`: Standalone/Async specific implementations (must inherit from `core/`).
 *   `/tsukuyomi/proto/`: gRPC definitions.
-*   `/tsukuyomi/experiments/`: Scenario scripts.
+*   `/tsukuyomi/dev-artifacts/`: **MANDATORY DIRECTORY** for all specifications, analysis reports, roadmaps, and non-engine developmental markdown files.
+*   `/docs/`: Dedicated folder for official project documentation, component documentation, user manuals, and the published architecture.
+*   `/tests/`: Dedicated folder for **all** test files. No test scripts should exist outside of this directory.
 
-### 2.2 Style Guide
-*   **Python:** Version 3.10+.
-*   **Indentation:** 4 spaces.
-*   **Docstrings:** Use Google-style docstrings for all public functions/modules.
-*   **Typing:** Use `typing` module for hints (e.g., `def func(x: int) -> str`).
+### 2.2 Style Guide & Quality Enforcements
+*   **File Naming:** Strictly Python `snake_case` globally (e.g., `agent_brain.py`).
+*   **Class Naming:** Strictly `PascalCase`. No acronym prefixes unless absolutely necessary.
+*   **Size Constraints:** No file shall exceed **700 lines of code**. If a file grows past this limit, extract logic into sub-modules immediately.
+*   **ID Generation:** Never use `random.randint()` for identity generation. Use `uuid.uuid4()` globally.
 
-### 2.3 Logging
-*   Use the standard `logging` module.
-*   Do NOT use `print()` for operational logs.
-
-## 3. 🧠 Component Rules
-
-### 3.1 Fate Engine (Server)
-*   **State Authority:** The server is the ONLY place where `WorldState` (Actors, Objects) changes. Clients cannot modify state directly; they must submit `Proposal`s.
-*   **Loop:** The main simulation tick must be non-blocking (`asyncio.sleep`).
+### 2.3 Production Readiness
+*   **Lifecycle Management:** All agents and engine components MUST implement strict `start()`, `pause()`, `resume()`, and `cleanup()` interfaces. 
+*   **Safety & Backoff:** The engine must gracefully degrade, circuit break on LLM timeouts, and cleanly close network channels to prevent memory leaks.
 *   **Validation:** All input from clients must be treated as untrusted and validated (sanitization).
 
-### 3.2 Agent Brain (Client)
-*   **Caching:** Do NOT regenerate the system prompt ("You are a juror...") on every tick. Cache it.
-*   **Percepts:** Filter sensory data. Do not send the entire world state to the LLM every tick.
-*   **Safety:** Wrap all gRPC calls in `try/except` blocks to handle network errors.
+## 3. 🚫 Prohibited Practices
 
-### 3.3 World Management
-*   **Affordances:** All interactions must be validated against an object's `Affordance` list.
-*   **Spatial:** Use a spatial index (Grid/Quadtree) for collision checks. Do not use O(N) loops.
-
-## 4. 🚫 Contribution Workflow
-
-1.  **Check Docs:** Read `/docs/ROADMAP.md` to see current priorities.
-2.  **Issue:** Open an issue if you are starting a new major component (e.g., Spatial Indexing).
-3.  **Branch:** Create a feature branch (e.g., `feat/spatial-index`).
-4.  **PR:** Ensure your PR describes the "General System" impact, not just the specific scenario fix.
-
-## 5. 🚫 Prohibited Practices
-
-*   **Scripting:** Do not edit `experiments/angry_men_5_agents.py` to fix bugs that should be in the core engine. Fix the root cause in `/tsukuyomi/core/`.
-*   **Hardcoding:** Do not write `if agent_name == "Davis":` in the engine core. Use roles, traits, or profile data.
+*   **Duck-Typing Architecture:** Do not use mixins or dynamic runtime attachment (e.g., `enhance_agent()`) to add features to agents. All components (memory, emotion) must be statically defined via composition on the `BaseAgent`.
+*   **Unapproved Dependencies:** Do not add database connectors (like `sqlalchemy` or `asyncpg`) or heavy framework libraries until explicitly approved for the MVP architecture.
+*   **Scripting:** Do not edit experiments to fix bugs that should be in the core engine. Fix the root cause in `/tsukuyomi/core/`.
 
 ---
 
-**Last Updated:** 2026-02-14 (V2)
+**Last Updated:** 2026-02-21 (MVP v0.1 Foundation)
