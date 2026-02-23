@@ -23,7 +23,7 @@ from typing import Dict, List
 from unittest.mock import Mock, AsyncMock, patch
 
 # Import Phase 3 components (mocked for testing)
-from tsukuyomi.proto import core_pb2, fate_engine_service_pb2, fate_engine_service_pb2_grpc
+from tsukuyomi.transport.proto import core_pb2, fate_engine_service_pb2, fate_engine_service_pb2_grpc
 
 
 class MockPhase3FateEngine(fate_engine_service_pb2_grpc.FateEngineServiceServicer):

@@ -10,8 +10,8 @@ import logging
 import random
 from typing import Dict
 from tsukuyomi.brain.agent_brain import AgentBrain
-from tsukuyomi.proto.grpc_client import FateEngineClient
-from tsukuyomi.proto import common_pb2
+from tsukuyomi.transport.grpc.client import FateEngineClient
+from tsukuyomi.transport.proto import common_pb2
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)

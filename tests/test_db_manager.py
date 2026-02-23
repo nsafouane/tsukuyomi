@@ -10,7 +10,7 @@ import sys
 import tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.proto.db_manager import DBManager
+from tsukuyomi.services.database.manager import DBManager
 
 
 class TestDBManager:

@@ -7,7 +7,7 @@ Tests for CoreValue, DefiningMemory, PersonalityTraits, and AgentIdentity.
 
 import pytest
 import json
-from tsukuyomi.agent.identity import (
+from tsukuyomi.agents.core.identity import (
     CoreValue,
     DefiningMemory,
     PersonalityTraits,
@@ -279,8 +279,8 @@ class TestAgentIdentity:
         """Test default personality is created."""
         identity = AgentIdentity(name="Test")
         
-        assert identity.personality is not None
-        assert isinstance(identity.personality, PersonalityTraits)
+        assert identity.agents.internal.personality is not None
+        assert isinstance(identity.agents.internal.personality, PersonalityTraits)
     
     def test_get_baseline_pad(self):
         """Test PAD baseline retrieval."""
@@ -409,7 +409,7 @@ class TestAgentIdentity:
         assert identity.occupation == "Teacher"
         assert len(identity.core_values) == 1
         assert identity.core_values[0].value == "Value 1"
-        assert identity.personality.openness == 0.5
+        assert identity.agents.internal.personality.openness == 0.5
         assert identity.baseline_valence == 0.2
 
 
@@ -446,7 +446,7 @@ class TestCreateIdentity:
         assert identity.age == 35
         assert identity.occupation == "Nurse"
         assert len(identity.core_values) == 1
-        assert identity.personality.empathy == 0.9
+        assert identity.agents.internal.personality.empathy == 0.9
     
     def test_create_identity_with_defaults(self):
         """Test creating minimal identity."""
@@ -461,7 +461,7 @@ class TestCreateIdentity:
         )
         
         assert identity.name == "Minimal"
-        assert identity.personality is not None
+        assert identity.agents.internal.personality is not None
 
 
 class TestRoundTripSerialization:
@@ -504,7 +504,7 @@ class TestRoundTripSerialization:
         assert restored.age == original.age
         assert restored.core_values[0].value == original.core_values[0].value
         assert restored.defining_memories[0].event == original.defining_memories[0].event
-        assert restored.personality.cynicism == original.personality.cynicism
+        assert restored.agents.internal.personality.cynicism == original.agents.internal.personality.cynicism
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ Unit Tests for Long-Term Memory System
 
 import pytest
 import asyncio
-from tsukuyomi.agent.memory_system import (
+from tsukuyomi.agents.cognitive.memory.memory_system import (
     MemoryType,
     MemoryImportance,
     Memory,

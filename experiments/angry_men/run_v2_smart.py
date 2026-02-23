@@ -25,7 +25,7 @@ from tsukuyomi.core.belief.unified import (
     BeliefSystem,
     BeliefType
 )
-from tsukuyomi.agent.persuasion import (
+from tsukuyomi.agents.social import (
     PersuasionEngine,
     PersuasionStrategy
 )
@@ -33,10 +33,10 @@ from tsukuyomi.agent.decision_engine import (
     DecisionEngine,
     DecisionType
 )
-from tsukuyomi.agent.context_manager import (
+from tsukuyomi.agents.runtime import (
     ContextManager
 )
-from tsukuyomi.agent.proposal_handler import (
+from tsukuyomi.agents.runtime import (
     ProposalHandler
 )
 

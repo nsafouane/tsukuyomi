@@ -9,13 +9,17 @@ import tempfile
 import os
 from unittest.mock import AsyncMock, MagicMock
 
-from tsukuyomi.agent.universal_agent import (
+from tsukuyomi.agents.runtime.standalone_agent import (
     AgentState,
     AgentConfig,
     UniversalAgent,
-    create_agent
 )
-from tsukuyomi.agent.identity import AgentIdentity
+from tsukuyomi.agents.core.identity import AgentIdentity
+
+
+def create_agent(config=None):
+    """Factory function for creating agents."""
+    return UniversalAgent(config or AgentConfig())
 
 
 class TestAgentState:
@@ -347,16 +351,18 @@ class TestCreateAgent:
     
     def test_create_agent_basic(self):
         """Test creating agent with helper."""
-        agent = create_agent(
-            name="Helper Agent",
-            age=25,
-            occupation="Assistant",
-            origin_story="Created for testing",
-            core_values=[{"value": "Helpfulness", "source": "Programming", "intensity": 0.8}],
-            defining_memories=[],
-            personality={"big_five": {"openness": 0.5}},
-            scenario_name="test"
-        )
+        config = AgentConfig(scenario_name="test")
+        agent = create_agent(config)
+        identity_dict = {
+            "name": "Helper Agent",
+            "age": 25,
+            "occupation": "Assistant",
+            "origin_story": "Created for testing",
+            "core_values": [{"value": "Helpfulness", "source": "Programming", "intensity": 0.8}],
+            "defining_memories": [],
+            "personality": {"big_five": {"openness": 0.5}}
+        }
+        agent.load_identity(identity_dict=identity_dict)
         
         assert agent.identity.name == "Helper Agent"
         assert agent.identity.age == 25

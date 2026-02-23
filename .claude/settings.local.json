@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd C:\\\\Users\\\\Dell\\\\Desktop\\\\tsukuyomi:*)",
+      "Bash(cd \"C:\\\\Users\\\\Dell\\\\Desktop\\\\tsukuyomi\" && python -c \"from tsukuyomi.services.llm import LLMService; print\\('OK: LLM service imports work'\\)\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\Dell\\\\Desktop\\\\tsukuyomi\" && python -c \"from tsukuyomi.scenarios import loader; print\\('OK: Scenarios imports work'\\)\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\Dell\\\\Desktop\\\\tsukuyomi\" && python -c \"\nimport sys\ntests = [\n    \\('tsukuyomi.shared', 'Shared'\\),\n    \\('tsukuyomi.services.llm', 'LLM Service'\\),\n    \\('tsukuyomi.scenarios', 'Scenarios'\\),\n    \\('tsukuyomi.environment.core', 'Environment Core'\\),\n    \\('tsukuyomi.narrative.core', 'Narrative Core'\\),\n    \\('tsukuyomi.agents.internal', 'Agents Internal'\\),\n]\nfor module, name in tests:\n    try:\n        __import__\\(module\\)\n        print\\(f'OK: {name}'\\)\n    except Exception as e:\n        print\\(f'FAIL: {name} - {e}'\\)\n\" 2>&1)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(python:*)",
+      "Bash(ls:*)",
+      "Bash(find tests:*)",
+      "Bash(grep ^ERROR:*)",
+      "Bash(grep collected\\\\|errors:*)"
+    ]
+  }
+}

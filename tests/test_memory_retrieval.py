@@ -9,10 +9,10 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.brain.memory.retrieval import (
+from tsukuyomi.agents.cognitive.memory.retrieval import (
     MemoryRetrieval, RetrievalContext, RetrievalMode, RetrievalWeights, ScoredMemory
 )
-from tsukuyomi.brain.memory.memory_types import (
+from tsukuyomi.agents.cognitive.memory.memory_types import (
     Memory, MemoryType, MemoryPriority, MemoryContext, MemoryImportance
 )
 

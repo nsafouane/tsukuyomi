@@ -18,9 +18,9 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
 sys.path.append(os.path.join(current_dir, "tsukuyomi"))
 
-from tsukuyomi.proto.fate_engine import FateEngine, create_proposal
-from tsukuyomi.proto.grpc_server import GrpcServer
-from tsukuyomi.proto.grpc_client import FateEngineClient
+from tsukuyomi.environment.core.engine import FateEngine, create_proposal
+from tsukuyomi.transport.grpc.server import GrpcServer
+from tsukuyomi.transport.grpc.client import FateEngineClient
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("TestDrama")

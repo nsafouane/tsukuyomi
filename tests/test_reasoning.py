@@ -9,7 +9,7 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.brain.reasoning import (
+from tsukuyomi.agents.cognitive.reasoning import (
     DecisionRecord, DecisionContext, DecisionType, ReasoningStep, ConsideredAction,
     ConfidenceCalibration, ReasoningValidator, ValidationResult,
     PersonalitySnapshot, BeliefSnapshot, NeedsSnapshot, ReasoningLogger, LogConfig, LogFormat

@@ -6,7 +6,7 @@ Tests for Utterance, KeyPoint, ContextManager.
 """
 
 import pytest
-from tsukuyomi.agent.context_manager import (
+from tsukuyomi.agents.runtime.context_manager import (
     ContextType, Utterance, KeyPoint, Turn, ContextManager,
     extract_topics, extract_keywords
 )

@@ -45,7 +45,7 @@ from tsukuyomi.agent import (
     # Proposal
     ProposalHandler
 )
-from tsukuyomi.agent.identity import (
+from tsukuyomi.agents.core import (
     CoreValue,
     DefiningMemory,
     PersonalityTraits,
@@ -61,14 +61,14 @@ from tsukuyomi.agent.memory_system import (
 from tsukuyomi.core.belief.unified import (
     BeliefType
 )
-from tsukuyomi.agent.persuasion import (
+from tsukuyomi.agents.social import (
     PersuasionStrategy
 )
 from tsukuyomi.agent.decision_engine import (
     DecisionType,
     DecisionPriority
 )
-from tsukuyomi.agent.proposal_handler import (
+from tsukuyomi.agents.runtime import (
     ProposalType
 )
 

@@ -1,6 +1,6 @@
 """
-Unit Tests for TSUKUYOMI Fate Engine (Protobuf Version)
-======================================================
+Unit Tests for TSUKUYOMI Environment Engine (Protobuf Version)
+==============================================================
 
 Comprehensive test suite ensuring 80%+ coverage of resolution logic.
 """
@@ -11,13 +11,13 @@ import time
 import uuid
 from typing import Dict
 
-# Import generated protobuf classes
-from tsukuyomi.proto import common_pb2, core_pb2
-from tsukuyomi.proto.fate_engine import (
+from tsukuyomi.transport.proto import common_pb2, core_pb2
+from tsukuyomi.environment.core import (
     FateEngine,
+    EnvironmentEngine,
     create_proposal,
-    _to_pb_timestamp
 )
+from tsukuyomi.shared.utils import to_pb_timestamp
 
 class TestProposal(unittest.TestCase):
     """Test Proposal protobuf creation."""

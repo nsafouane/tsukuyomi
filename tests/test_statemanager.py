@@ -14,7 +14,7 @@ This test suite validates:
 import sys
 import os
 
-from tsukuyomi.core.emotion.unified import (
+from tsukuyomi.agents.internal.emotion.unified import (
     StateManager,
     PersonalityBaseline,
     EmotionalImpact,

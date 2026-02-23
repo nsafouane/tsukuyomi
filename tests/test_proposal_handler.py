@@ -6,7 +6,7 @@ Tests for Proposal, ProposalHandler.
 """
 
 import pytest
-from tsukuyomi.agent.proposal_handler import (
+from tsukuyomi.agents.runtime.proposal_handler import (
     ProposalType, ProposalStatus, Proposal, ProposalHandler,
     create_verdict_proposal, tally_votes
 )

@@ -2,7 +2,7 @@ import asyncio
 import logging
 import multiprocessing
 import time
-from tsukuyomi.proto.grpc_server import run_server
+from tsukuyomi.transport.grpc.server import run_server
 from tsukuyomi.guest_sdk import GuestAgent
 
 logging.basicConfig(level=logging.INFO)

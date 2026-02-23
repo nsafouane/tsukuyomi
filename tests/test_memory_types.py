@@ -10,7 +10,7 @@ import sys
 import time
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.brain.memory.memory_types import (
+from tsukuyomi.agents.cognitive.memory.memory_types import (
     MemoryType, MemoryPriority, MemoryContext, MemoryImportance,
     Memory, MemoryAccess,
     create_episodic_memory, create_semantic_memory, create_emotional_memory,

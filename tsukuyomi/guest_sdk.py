@@ -27,9 +27,9 @@ import uuid
 import os
 from typing import Dict, Optional, AsyncIterator
 import grpc
-from tsukuyomi.proto import guest_api_pb2
-from tsukuyomi.proto import guest_api_pb2_grpc
-from tsukuyomi.proto import core_pb2
+from tsukuyomi.transport.proto import guest_api_pb2
+from tsukuyomi.transport.proto import guest_api_pb2_grpc
+from tsukuyomi.transport.proto import core_pb2
 
 logger = logging.getLogger("GuestSDK")
 

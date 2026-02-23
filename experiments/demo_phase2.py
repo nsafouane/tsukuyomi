@@ -14,11 +14,11 @@ import time
 import uuid
 import logging
 
-from tsukuyomi.proto import core_pb2, common_pb2
-from tsukuyomi.proto.fate_engine import FateEngine
-from tsukuyomi.core.spatial_index import SpatialIndex
-from tsukuyomi.core.proposal_window import ProposalWindow, ConflictResolution
-from tsukuyomi.core.affordance import AffordanceValidator
+from tsukuyomi.transport.proto import core_pb2, common_pb2
+from tsukuyomi.environment.core import FateEngine
+from tsukuyomi.environment.spatial import SpatialIndex
+from tsukuyomi.environment.core import ProposalWindow, ConflictResolution
+from tsukuyomi.environment.rules import AffordanceValidator
 
 logging.basicConfig(
     level=logging.INFO,

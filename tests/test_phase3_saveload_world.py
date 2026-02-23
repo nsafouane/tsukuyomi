@@ -27,7 +27,7 @@ import os
 
 
 # Mock proto imports (in real implementation, these would be actual proto imports)
-from tsukuyomi.proto import core_pb2, fate_engine_service_pb2, fate_engine_service_pb2_grpc
+from tsukuyomi.transport.proto import core_pb2, fate_engine_service_pb2, fate_engine_service_pb2_grpc
 
 
 class MockFateEngineService(fate_engine_service_pb2_grpc.FateEngineServiceServicer):

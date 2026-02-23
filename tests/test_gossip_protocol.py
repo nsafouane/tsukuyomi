@@ -9,7 +9,7 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.brain.gossip_protocol import GossipProtocol
+from tsukuyomi.agents.social.gossip_protocol import GossipProtocol
 
 
 class TestGossipProtocol:

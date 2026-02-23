@@ -4,7 +4,7 @@ Unit Tests for Personality-Weighted Persuasion
 """
 
 import pytest
-from tsukuyomi.agent.persuasion import (
+from tsukuyomi.agents.social.persuasion import (
     PersuasionEngine,
     PersuasionStrategy,
     Argument,

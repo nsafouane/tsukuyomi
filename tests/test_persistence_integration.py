@@ -4,8 +4,8 @@ import os
 import uuid
 import time
 import pytest
-from tsukuyomi.proto.fate_engine import FateEngine, create_proposal
-from tsukuyomi.proto.db_manager import DBManager
+from tsukuyomi.environment.core.engine import FateEngine, create_proposal
+from tsukuyomi.services.database.manager import DBManager
 
 @pytest.mark.asyncio
 async def test_persistence_integration():

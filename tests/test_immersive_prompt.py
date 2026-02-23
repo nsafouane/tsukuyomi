@@ -4,19 +4,19 @@ Unit Tests for Immersive Prompt Builder
 """
 
 import pytest
-from tsukuyomi.agent.immersive_prompt import (
+from tsukuyomi.agents.prompts.immersive_prompt import (
     PromptContext,
     ImmersivePromptBuilder,
     create_prompt_context
 )
-from tsukuyomi.agent.identity import (
+from tsukuyomi.agents.core.identity import (
     AgentIdentity,
     CoreValue,
     DefiningMemory,
     PersonalityTraits,
     create_identity
 )
-from tsukuyomi.agent.memory_system import LongTermMemory
+from tsukuyomi.agents.cognitive.memory.memory_system import LongTermMemory
 
 
 class TestPromptContext:
@@ -111,7 +111,7 @@ class TestImmersivePromptBuilder:
             scenario_name="test_scenario"
         )
         
-        assert builder.identity.name == "John Doe"
+        assert builder.agents.core.identity.name == "John Doe"
         assert builder.scenario_name == "test_scenario"
     
     def test_build_full_prompt(self, builder, context):

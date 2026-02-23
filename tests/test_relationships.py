@@ -17,8 +17,10 @@ import logging
 import uuid
 import json
 from typing import Dict
-from tsukuyomi.brain.agent_brain import AgentBrain
-from tsukuyomi.proto import core_pb2, common_pb2, perception_pb2
+from tsukuyomi.agents.runtime.agent_brain import AgentBrain
+from tsukuyomi.transport.proto.core_pb2 import TickState, Actor, WorldState
+from tsukuyomi.transport.proto.common_pb2 import Vector2
+from tsukuyomi.transport.perception_pb2 import Percept
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -76,7 +78,7 @@ async def test_relationship_tracking():
     
     # 3. Test Gossip
     logger.info("--- Testing Gossip Impact ---")
-    from tsukuyomi.brain.gossip_protocol import get_gossip_protocol
+    from tsukuyomi.agents.social.gossip_protocol import get_gossip_protocol
     gossip_protocol = get_gossip_protocol()
     gossip_protocol.base_leakage_probability = 1.0 # Force leakage
     

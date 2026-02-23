@@ -6,7 +6,7 @@ Tests for Decision, DecisionFactor, ReasoningStep, DecisionEngine.
 """
 
 import pytest
-from tsukuyomi.agent.decision_engine import (
+from tsukuyomi.agents.cognitive.decision_engine import (
     DecisionType,
     DecisionPriority,
     DecisionOutcome,

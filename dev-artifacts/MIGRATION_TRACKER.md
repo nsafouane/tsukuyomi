@@ -1,6 +1,6 @@
 # Tsukuyomi Restructuring - Migration Tracker
 
-**Version:** 1.0 | **Date:** 2026-02-21 | **Status:** Ready to Begin
+**Version:** 1.3 | **Date:** 2026-02-23 | **Status:** In Progress
 
 ---
 
@@ -8,142 +8,95 @@
 
 | Phase | Description | Status | Completion |
 |-------|-------------|--------|------------|
-| 1 | Create Directory Structure | ⬜ Not Started | 0% |
-| 2 | Move Files | ⬜ Not Started | 0% |
-| 3 | Refactor Classes | ⬜ Not Started | 0% |
-| 4 | Create Entry Point | ⬜ Not Started | 0% |
-| 5 | Update Tests | ⬜ Not Started | 0% |
+| 1 | Create Directory Structure | ✅ Complete | 100% |
+| 2 | Move Files | ✅ Complete | 100% |
+| 3 | Refactor Classes | ✅ Complete | 100% |
+| 4 | Create Entry Point | ✅ Complete | 100% |
+| 5 | Update Tests | ⏳ In Progress | 75% |
 | 6 | Cleanup | ⬜ Not Started | 0% |
 
 ---
 
-## Phase 1: Shared Utilities (Extract Common Code)
-- [ ] Create shared/ directory structure.
-- [ ] Create shared/config.py and shared/logging.py.
-- [ ] Create shared/exceptions.py.
-- [ ] Move proto/utils.py logic to shared/utils.py.
-- [ ] Extract common 	ypes.py into shared/.
-- [ ] Update imports for shared utilities.
+## File Size Compliance - All Files Under 700 Lines ✅
 
-## Phase 2: Shared Services & Large Splits
-- [ ] Create services/ directory structure.
-- [ ] **Split rain/llm_service.py (825L)** into services/llm/ (provider.py, openai_provider.py, groq_provider.py, service.py, prompts.py).
-- [ ] Move rain/embedding_service.py to services/embedding/service.py.
-- [ ] Move rain/vector_store.py to services/vector/store.py.
-- [ ] Move proto/db_manager.py to services/database/manager.py.
+All files now comply with the 700-line limit. The following files were split:
 
-## Phase 3: Scenarios Integration
-- [ ] Move core/scenarios/scenario_schema.py to scenarios/schema.py.
-- [ ] Move core/scenarios/scenario_loader.py to scenarios/loader.py.
-- [ ] Verify test suite 	est_scenario_loader.py passes with new paths.
-
-## Phase 4: Transport Layer
-- [ ] Create 	ransport/ directory.
-- [ ] Move compiled proto files (*.pb2.py, *.pb2_grpc.py).
-- [ ] Move proto/grpc_client.py to 	ransport/grpc/client.py.
-- [ ] **Split proto/grpc_server.py** into Server core, FateServicer, and GuestServicer.
-- [ ] Move root guest_sdk.py to 	ransport/sdk/guest.py.
-
-## Phase 5: Environment System Untangling
-- [ ] Create nvironment/ directory structure.
-- [ ] **Untangle Fate Engine**: Merge proto/fate_engine.py + tick loop from ate_resolvers.py into nvironment/core/engine.py.
-- [ ] Move resolution logic from ate_resolvers.py to nvironment/core/resolution.py.
-- [ ] Move core/proposal_window.py to nvironment/core/proposal.py.
-- [ ] **Split core/spatial_index.py (857L)** into spatial.py and spatial_query.py.
-- [ ] Move rain/spatial_utils.py (Raycaster) to nvironment/physics/raycasting.py.
-- [ ] Move proto/physics/spatial_logic.py to nvironment/physics/spatial_logic.py.
-- [ ] Move core/world_builder.py and core/affordance.py.
-- [ ] Move proto/action_logic.py.
-
-## Phase 6: Narrative System
-- [ ] Create 
-arrative/ directory structure.
-- [ ] Move rain/drama_director.py to 
-arrative/core/director.py.
-- [ ] Move rain/catalyst_system.py to 
-arrative/core/catalyst.py.
-- [ ] Move core/drama/event_library.py to 
-arrative/events/library.py.
-- [ ] Move core/drama/branch_manager.py to 
-arrative/flow/branching.py.
-- [ ] Move core/drama/context_aware_director.py to 
-arrative/context/context_aware.py.
-
-## Phase 7: Agent System
-- [ ] Create gents/ structure (core, cognitive, internal, social, 
-untime, prompts).
-- [ ] Move gent/universal_agent.py to gents/runtime/standalone_agent.py.
-- [ ] **Split core/emotion/unified.py (1426L)** into 4 files in gents/internal/.
-- [ ] **Move core/belief/** to `agents/internal/beliefs/` and **split system.py (956L)** into 2 files.
-- [ ] **Split brain/memory/retrieval.py (763L)** into 2 files in `agents/cognitive/.`
-- [ ] **Split rain/perception_channels.py (~800L)** into 2 files in gents/cognitive/.
-- [ ] **Split rain/reasoning/reasoning_validator.py (~870L)** into 2 files.
-- [ ] **Split rain/personality/drift_monitor.py (~850L)** into 2 files.
-- [ ] Copy entire contents of rain/memory/, rain/personality/, and rain/reasoning/ to corresponding cognitive/ and internal/ folders.
-- [ ] Populate gents/social/: Move rain/gossip_protocol.py, proto/conversation_manager.py, gent/persuasion.py, gent/influence.py.
-- [ ] Refactor rain/agent_brain.py (God Class) into gents/runtime/simulation_agent.py and delegate out responsibilities.
-- [ ] Move remaining gent/ modules (ehavior.py, proposal_handler.py, context_manager.py, identity.py).
-
-## Phase 8: Final Integration & Tests
-- [ ] Create server.py entry point at project root.
-- [ ] Fix all 57 tests in 	ests/ to use new import structures.
-- [ ] Verify pytest tests/ has 100% pass rate (note: 9 collection errors existed prior to restructuring, verify they are resolved).
-- [ ] Delete rain/, gent/, core/, proto/ old directories after confirming they are empty.
-- [ ] Update final documentation.
-
-## Rollback Procedure
-
-If migration fails at any phase:
-
-1. **Preserve Progress:**
-   ```bash
-   git add -A
-   git commit -m "Migration checkpoint: Phase X"
-   ```
-
-2. **If Complete Rollback Needed:**
-   ```bash
-   git checkout backup-pre-migration
-   ```
-
-3. **If Partial Rollback:**
-   - Identify failing component
-   - Revert specific files
-   - Keep completed phases
+| Original File | Lines | Split Into |
+|---------------|-------|------------|
+| `agents/social/persuasion.py` | 947 | persuasion.py (576) + persuasion_types.py (209) |
+| `agents/internal/personality/drift_monitor.py` | 919 | drift_monitor.py (449) + drift_types.py (53) + evolution_manager.py (154) |
+| `agents/cognitive/reasoning/reasoning_validator.py` | 901 | reasoning_validator.py (543) + validation_types.py (160) |
+| `agents/cognitive/memory/retrieval.py` | 763 | retrieval.py (252) + retrieval_types.py (81) + memory_store.py (132) |
 
 ---
 
-## Notes
+## Test Suite Status
 
-### Dependencies to Install (if needed)
-```
-# No new dependencies required for restructuring
-# Existing requirements.txt should suffice
-```
+**Current Results:** 525 passed / 139 failed / 39 skipped (74.8% pass rate)
 
-### Environment Variables
-```
-LLM_PROVIDER=groq
-LLM_API_KEY=your_key
-LLM_MODEL=llama-3.3-70b-versatile
-```
+### ✅ Async Event Loop Issues - FIXED (2026-02-23)
+- Updated `conftest.py` with proper event loop fixture for Python 3.10+
+- All async tests now pass (test_grpc.py: 14/14 passing)
 
-### Quick Validation Commands
+### Test Files by Status:
+
+| Status | Test File | Issue |
+|--------|-----------|-------|
+| ✅ | test_grpc.py | All 14 tests passing |
+| ✅ | test_proposal_window.py | Migrated |
+| ✅ | test_working_memory.py | Migrated |
+| ⚠️ | test_emotional_expression.py | API signature changes (22 failures) |
+| ⚠️ | test_emotional_integration.py | Missing methods (18 failures) |
+| ⚠️ | test_drama_enhancements.py | API mismatch (12 failures) |
+| ⚠️ | test_belief_plasticity.py | Missing methods (11 failures) |
+| ⚠️ | test_statemanager.py | PersonalityBaseline.ANGRY_MAN removed |
+
+---
+
+## Package Exports Updated (2026-02-23):
+
+### `tsukuyomi/__init__.py`
+- Updated docstring with correct import paths
+- Changed version to "0.1.0" (MVP)
+
+### `tsukuyomi/services/__init__.py`
+- Added exports: LLMService, EmbeddingService, VectorStore, DBManager
+
+### `tsukuyomi/agents/__init__.py`
+- Simplified to avoid circular imports
+- Uses submodule imports pattern
+
+### `tsukuyomi/agents/internal/personality/__init__.py`
+- Added: BehaviorSnapshot, DriftReport, PersonalityEvolutionEvent, PersonalityEvolutionManager
+
+### `tsukuyomi/agents/cognitive/reasoning/__init__.py`
+- Added: ReasoningViolation, ViolationType, ViolationSeverity
+
+### `tsukuyomi/agents/cognitive/memory/__init__.py`
+- Added: RetrievalMode, RetrievalContext, RetrievalWeights, ScoredMemory, MemoryStore
+
+---
+
+## Remaining Work:
+
+1. **Update experiment imports** (27 old import paths in experiments/)
+2. **Fix test API mismatches** (~139 failing tests)
+3. **Add PersonalityBaseline.ANGRY_MAN** or update tests
+
+---
+
+## Quick Validation Commands
 ```bash
-# Check import structure
-python -c "from tsukuyomi.agents.core import BaseAgent"
-python -c "from tsukuyomi.environment.core import EnvironmentEngine"
-python -c "from tsukuyomi.narrative.core import NarrativeDirector"
-python -c "from tsukuyomi.services.llm import LLMProvider"
-
-# Run tests
-pytest tests/ -v --tb=short
+# Test imports
+python -c "from tsukuyomi.agents.cognitive.memory import MemoryRetrieval; print('OK')"
 
 # Check file sizes
-find tsukuyomi -name "*.py" -exec wc -l {} \; | sort -rn | head -20
+find tsukuyomi -name "*.py" -exec wc -l {} \; | sort -rn | head -10
+
+# Run tests
+python -m pytest tests/ --tb=no -q
 ```
 
 ---
 
-**Last Updated:** 2026-02-21  
-**Next Review:** After Phase 1 completion
+**Last Updated:** 2026-02-23

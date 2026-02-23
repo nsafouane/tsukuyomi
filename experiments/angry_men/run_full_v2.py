@@ -23,15 +23,15 @@ from tsukuyomi.core.belief.unified import (
     Belief,
     BeliefType
 )
-from tsukuyomi.agent.persuasion import (
+from tsukuyomi.agents.social import (
     PersuasionEngine,
     PersuasionStrategy,
     Argument
 )
-from tsukuyomi.agent.context_manager import (
+from tsukuyomi.agents.runtime import (
     ContextManager
 )
-from tsukuyomi.agent.identity import (
+from tsukuyomi.agents.core import (
     AgentIdentity
 )
 

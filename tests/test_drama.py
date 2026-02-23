@@ -9,9 +9,9 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.core.drama import (
-    Event, EventCategory, EventLibrary, BranchManager, ContextAwareDramaDirector
-)
+from tsukuyomi.narrative.events.library import EventLibrary, Event, EventCategory
+from tsukuyomi.narrative.flow.branching import BranchManager
+from tsukuyomi.narrative.context.context_aware import ContextAwareDramaDirector
 
 
 class TestEvent:

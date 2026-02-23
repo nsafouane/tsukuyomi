@@ -4,7 +4,7 @@ Unit Tests for Emotional Expression
 """
 
 import pytest
-from tsukuyomi.proto.emotional_expression import (
+from tsukuyomi.agents.internal.emotional_expression import (
     EmotionalExpression,
     ToneModifiers,
     EmotionalTone,
@@ -33,7 +33,7 @@ class TestEmotionalExpression:
         
         assert expr.pad_state["valence"] == 0.5
         assert expr.pad_state["arousal"] == 0.8
-        assert expr.personality["extraversion"] == 0.7
+        assert expr.agents.internal.personality["extraversion"] == 0.7
     
     def test_update_pad(self):
         """Test updating PAD state."""
@@ -248,7 +248,7 @@ class TestCreateEmotionalExpression:
         )
         
         assert expr.pad_state["valence"] == -0.5
-        assert expr.personality["extraversion"] == 0.8
+        assert expr.agents.internal.personality["extraversion"] == 0.8
 
 
 class TestPadFromBaseline:

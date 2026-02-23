@@ -15,12 +15,12 @@ import time
 from unittest.mock import MagicMock, patch
 
 # Import the modules under test
-from tsukuyomi.proto import common_pb2
-from tsukuyomi.proto import core_pb2
-from tsukuyomi.proto import fate_engine_service_pb2
-from tsukuyomi.proto.fate_engine import FateEngine, _to_pb_timestamp
-from tsukuyomi.proto.grpc_server import FateEngineServicer, GrpcServer
-from tsukuyomi.proto.grpc_client import FateEngineClient
+from tsukuyomi.transport.proto import common_pb2
+from tsukuyomi.transport.proto import core_pb2
+from tsukuyomi.transport.proto import fate_engine_service_pb2
+from tsukuyomi.environment.core.engine import FateEngine, to_pb_timestamp
+from tsukuyomi.transport.grpc.server import FateEngineServicer, GrpcServer
+from tsukuyomi.transport.grpc.client import FateEngineClient
 
 
 # ============================================================================
@@ -52,7 +52,7 @@ class TestFateEngineServicer:
             actor_id=actor_id,
             action=core_pb2.ActionType.MOVE,
             parameters={"destination": "tavern"},
-            timestamp=_to_pb_timestamp(time.time())
+            timestamp=to_pb_timestamp(time.time())
         )
         
         # Mock context
@@ -176,7 +176,7 @@ class TestGrpcIntegration:
             actor_id=actor_id,
             action=core_pb2.ActionType.MOVE,
             parameters={"destination": "tavern"},
-            timestamp=_to_pb_timestamp(time.time())
+            timestamp=to_pb_timestamp(time.time())
         )
         
         # Submit to engine
@@ -204,7 +204,7 @@ class TestGrpcIntegration:
                 actor_id=actor_id,
                 action=core_pb2.ActionType.MOVE,
                 parameters={"destination": dest},
-                timestamp=_to_pb_timestamp(time.time())
+                timestamp=to_pb_timestamp(time.time())
             )
             await engine.submit_proposal(proposal)
         
@@ -239,7 +239,7 @@ class TestProtocolBuffers:
     def test_timestamp_conversion(self):
         """Test timestamp conversion to/from protobuf."""
         original_time = time.time()
-        pb_timestamp = _to_pb_timestamp(original_time)
+        pb_timestamp = to_pb_timestamp(original_time)
         
         assert pb_timestamp.seconds == int(original_time)
         assert pb_timestamp.nanos >= 0
@@ -252,7 +252,7 @@ class TestProtocolBuffers:
             actor_id=str(uuid.uuid4()),
             action=core_pb2.ActionType.MOVE,
             parameters={"destination": "tavern", "speed": "fast"},
-            timestamp=_to_pb_timestamp(time.time())
+            timestamp=to_pb_timestamp(time.time())
         )
         
         # Serialize

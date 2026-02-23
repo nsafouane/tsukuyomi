@@ -14,7 +14,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
 
 
-from tsukuyomi.agent.memory import ConversationMemory, Utterance
+from tsukuyomi.agents.cognitive.memory.memory import ConversationMemory, Utterance
 
 
 class TestUtterance:

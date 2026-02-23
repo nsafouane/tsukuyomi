@@ -14,7 +14,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
 
 
-from tsukuyomi.agent.behavior import (
+from tsukuyomi.agents.cognitive.behavior import (
     BehavioralTraits, BehavioralDecider, create_behavior_from_traits
 )
 
@@ -179,7 +179,7 @@ class TestBehaviorPresets:
     
     def test_leader_preset(self):
         """Leader preset has correct traits."""
-        from tsukuyomi.agent.behavior import get_behavior_preset
+        from tsukuyomi.agents.cognitive.behavior import get_behavior_preset
         
         leader = get_behavior_preset("leader")
         
@@ -188,7 +188,7 @@ class TestBehaviorPresets:
     
     def test_listener_preset(self):
         """Listener preset has correct traits."""
-        from tsukuyomi.agent.behavior import get_behavior_preset
+        from tsukuyomi.agents.cognitive.behavior import get_behavior_preset
         
         listener = get_behavior_preset("listener")
         

@@ -26,13 +26,13 @@ current_dir = Path(__file__).parent
 project_root = current_dir.parent.parent
 sys.path.insert(0, str(project_root))
 
-from tsukuyomi.proto.fate_engine import FateEngine
+from tsukuyomi.environment.core import FateEngine
 from tsukuyomi.brain.agent_brain import AgentBrain
-from tsukuyomi.proto.grpc_server import run_server
+from tsukuyomi.transport.grpc.server import run_server
 from tsukuyomi.guest_sdk import GuestAgent
-from tsukuyomi.brain.memory_manager import MemoryManager
+from tsukuyomi.agents.cognitive.memory import MemoryManager
 from tsukuyomi.core.belief.unified import BeliefManager, PersonalityBias
-from tsukuyomi.core.emotion.unified import StateManager, PersonalityBaseline, EmotionalState
+from tsukuyomi.agents.internal.emotion import StateManager, PersonalityBaseline, EmotionalState
 from tsukuyomi.brain.relationship_manager import RelationshipManager
 from tsukuyomi.brain.memory.memory_types import Memory, MemoryType
 

@@ -9,8 +9,8 @@ import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from tsukuyomi.proto.action_logic import ActionResolver
-from tsukuyomi.proto import core_pb2
+from tsukuyomi.environment.rules.action_logic import ActionResolver
+from tsukuyomi.transport.proto import core_pb2
 
 
 class TestActionResolver:

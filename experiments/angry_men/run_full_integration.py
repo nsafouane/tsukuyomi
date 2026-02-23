@@ -44,22 +44,22 @@ from tsukuyomi.core.belief.unified import (
     BeliefType,
     EvidenceStrength
 )
-from tsukuyomi.agent.persuasion import (
+from tsukuyomi.agents.social import (
     PersuasionEngine,
     PersuasionStrategy,
     PersuasionAttempt,
     Argument
 )
-from tsukuyomi.agent.context_manager import (
+from tsukuyomi.agents.runtime import (
     ContextManager
 )
-from tsukuyomi.agent.proposal_handler import (
+from tsukuyomi.agents.runtime import (
     ProposalHandler,
     Proposal,
     ProposalStatus,
     ProposalType
 )
-from tsukuyomi.agent.identity import (
+from tsukuyomi.agents.core import (
     AgentIdentity,
     PersonalityTraits
 )
@@ -70,7 +70,7 @@ from tsukuyomi.agent import (
 
 from tsukuyomi.brain.deliberation import DeliberationEngine
 from tsukuyomi.proto.emotional_expression import EmotionalExpression
-from tsukuyomi.proto.conversation_manager import ConversationManager, TurnContext, TurnDecision
+from tsukuyomi.agents.social import ConversationManager, TurnContext, TurnDecision
 
 # V1 imports
 sys.path.insert(0, str(current_dir))

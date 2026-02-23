@@ -3,8 +3,16 @@
 import asyncio
 import uuid
 import pytest
-from tsukuyomi.proto import core_pb2, common_pb2
-from tsukuyomi.proto.fate_engine import FateEngine, create_proposal
+from tsukuyomi.transport.proto import core_pb2, common_pb2
+from tsukuyomi.environment.core.engine import FateEngine
+
+def create_proposal(actor_id: str, action: str, **kwargs):
+    """Create a proposal for testing."""
+    proposal = core_pb2.Proposal()
+    proposal.proposal_id = str(uuid.uuid4())
+    proposal.actor_id = actor_id
+    proposal.action = action
+    return proposal
 
 # Skip these tests - failing due to core logic issues in FateEngine
 pytestmark = pytest.mark.skip(reason="FateEngine resolution phase not returning expected results")

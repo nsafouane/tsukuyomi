@@ -7,7 +7,7 @@ import pytest
 import asyncio
 from unittest.mock import Mock, AsyncMock, patch
 
-from tsukuyomi.brain.deliberation import (
+from tsukuyomi.agents.cognitive.deliberation import (
     DeliberationEngine,
     DeliberationResult,
     DeliberationType,
@@ -29,7 +29,7 @@ class TestDeliberationEngine:
 
         assert engine.agent_id == "test_agent"
         assert engine.emotional_state["valence"] == 0.2
-        assert engine.deliberation_history == []
+        assert engine.agents.cognitive.deliberation_history == []
 
     def test_update_emotional_state(self):
         """Test updating emotional state."""
@@ -105,7 +105,7 @@ class TestDeliberationEngine:
 
         # Add some mock deliberations
         for i in range(3):
-            engine.deliberation_history.append(
+            engine.agents.cognitive.deliberation_history.append(
                 DeliberationResult(
                     deliberation_type=DeliberationType.EVALUATION,
                     content=f"Thought {i}",
@@ -127,7 +127,7 @@ class TestDeliberationEngine:
         )
 
         # Add some history
-        engine.deliberation_history.append(
+        engine.agents.cognitive.deliberation_history.append(
             DeliberationResult(
                 deliberation_type=DeliberationType.REFLECTION,
                 content="Test deliberation",
@@ -157,7 +157,7 @@ class TestDeliberationEngine:
         result = await engine.deliberate(context, tick=100)
 
         assert isinstance(result, DeliberationResult)
-        assert result.deliberation_type == DeliberationType.EVALUATION
+        assert result.agents.cognitive.deliberation_type == DeliberationType.EVALUATION
         mock_llm.assert_called_once()
 
     @pytest.mark.asyncio
@@ -202,7 +202,7 @@ class TestCreateDeliberationEngine:
 
         assert engine.agent_id == "custom"
         assert engine.emotional_state["valence"] == 0.5
-        assert engine.personality["extraversion"] == 0.7
+        assert engine.agents.internal.personality["extraversion"] == 0.7
 
 
 if __name__ == "__main__":

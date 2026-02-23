@@ -6,7 +6,7 @@ Tests for Argument, PersuasionProfile, PersuasionEngine.
 """
 
 import pytest
-from tsukuyomi.agent.persuasion import (
+from tsukuyomi.agents.social.persuasion import (
     PersuasionStrategy,
     ArgumentStrength,
     Argument,
@@ -123,7 +123,7 @@ class TestPersuasionProfile:
         profile.successful_persuasions = 7
         profile.failed_persuasions = 3
         
-        assert abs(profile.persuasion_success_rate - 0.7) < 0.001
+        assert abs(profile.agents.social.persuasion_success_rate - 0.7) < 0.001
     
     def test_resistance_rate(self):
         """Test resistance rate."""
