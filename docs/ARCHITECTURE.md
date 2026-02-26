@@ -415,18 +415,3 @@ Agents run independently without central server:
 | Local | Ollama, LM Studio | ✅ Supported |
 
 ---
-
-## Version History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2026-02-22 | Initial restructured architecture (MVP v0.1) |
-
----
-
-**See Also:**
-- [API Reference](API.md)
-- [Migration Guide](MIGRATION_GUIDE.md)
-- [Agent System Documentation](agents/README.md)
-- [Environment System Documentation](environment/README.md)
-- [Narrative System Documentation](narrative/README.md)
